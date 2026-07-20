@@ -1,0 +1,20 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/finix-payments-openapi-original.yml
+docs: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/api-keys
+detail: >-
+  Finix authenticates every request with HTTP Basic Authentication (RFC 7617). The username is the API Key
+  id (e.g. USxxxxxxxx) and the password is the API Key secret; combine as "username:password", Base64-encode,
+  and send as Authorization: Basic <base64>. API Keys are created in the Finix Dashboard and are environment
+  scoped — Sandbox keys cannot be used in Live and vice-versa. There is no OAuth2/OIDC surface.
+summary:
+  types:
+  - http
+  http_schemes:
+  - basic
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/finix-payments-openapi-original.yml
