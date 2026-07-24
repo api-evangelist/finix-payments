@@ -1,0 +1,752 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Compliance Forms API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Compliance Forms
+  description:
+    $ref: api-descriptions/tags/compliance-forms.md
+paths:
+  /compliance_forms/{compliance_forms_id}:
+    parameters:
+    - schema:
+        type: string
+      name: compliance_forms_id
+      in: path
+      required: true
+      description: ID of the `compliance_form`.
+    get:
+      summary: Fetch a Compliance Form
+      tags:
+      - Compliance Forms
+      responses:
+        '200':
+          $ref: '#/components/responses/ComplianceForm'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: get
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/compliance-forms/fetch-compliance-form.md
+      description: 'A webhook notifies you when Finix creates a `compliance_form`.
+
+
+        Use the ID in the webhook to fetch the `compliance_form` resource from the `/compliance_forms/:COMPLIANCE_FORM_ID:` endpoint.'
+      x-python-method-name: get
+    put:
+      summary: Complete a Compliance Form
+      operationId: updateComplianceForms
+      responses:
+        '200':
+          $ref: '#/components/responses/ComplianceForm'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      description: 'As part of onboarding your users, you''ll need to build a UI experience that allows users to complete the PCI `compliance_form` and download the form as a PDF if requested.
+
+
+        For more information, see [Managing Compliance Forms](/guides/security-and-compliance/pci-dss-compliance/managing-pci-compliance/#completing-compliance-forms).'
+      tags:
+      - Compliance Forms
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateComplianceForm'
+      x-java-method-name: update
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/compliance-forms/complete-compliance-form.md
+      x-python-method-name: update
+  /compliance_forms:
+    get:
+      summary: List Compliance Forms
+      tags:
+      - Compliance Forms
+      responses:
+        '200':
+          $ref: '#/components/responses/ComplianceFormList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: listComplianceForms
+      x-java-method-name: list
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/compliance-forms/list-compliance-forms.md
+      description: Retrieves a list of `Compliance Forms`.
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - INCOMPLETE
+          - COMPLETE
+        in: query
+        name: state
+        description: Filter by the `state` of the `Compliance Form`.
+      x-python-method-name: list
+      x-returns-list: true
+components:
+  schemas:
+    ComplianceForm:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+          description: ID of the `compliance_form`.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        application_id:
+          description: The ID of the `Application` the `compliance_form` was created under.
+          type: string
+          example: APdoThHn4jjYUSxQf76txAgg
+        compliance_form_template:
+          type: string
+          description: Template linked to this `compliance_form`.
+        due_at:
+          type: string
+          description: Timestamp of when the `compliance_form` must be completed by.
+          format: date-time
+        files:
+          type: object
+          description: Details about the `File` resoruce where the `compliance_form` was uploaded.
+          properties:
+            signed_file:
+              type: string
+              description: '<ul><li>Autofills to <strong>null</strong>.</li>
+
+                <li>When a <kbd>compliance_form</kbd> is attested, <kbd>signed_file</kbd> will contain a <kbd>File</kbd> corresponding to the signed version of the form.</li></ul>'
+              nullable: true
+            unsigned_file:
+              type: string
+              description: ID of the `File` resource that has the `compliance_form`.
+        linked_to:
+          type: string
+          description: The ID of the `merchant` linked to the `compliance_form`.
+        linked_type:
+          type: string
+          description: The type of resource this `compliance_form` is linked to.
+        pci_saq_a:
+          type: object
+          description: Details used to fille out the PCI Self-Assessment Questionnaire (SAQ).
+          properties:
+            ip_address:
+              type: string
+              description: IP address of the person attesting to this `compliance_form`.
+              nullable: true
+            is_accepted:
+              type: boolean
+              description: If all `pci_saq_a` fields are all submitted, `is_accepted` updates to **true**.
+              nullable: true
+            name:
+              type: string
+              description: Name of the person completing (aka attesting to) the `compliance_form`.
+              nullable: true
+            signed_at:
+              type: string
+              description: Timestamp of the person attesting to this `compliance_form`.
+              nullable: true
+            title:
+              type: string
+              description: Title or role of the person completing (aka attesting to) the `compliance_form`.
+              nullable: true
+            user_agent:
+              type: string
+              description: User agent of the person attesting to this `compliance_form`.
+              nullable: true
+        state:
+          type: string
+          description: The state of the `compliance_form`.
+          enum:
+          - PENDING
+          - COMPLETE
+          - INVALID
+          - INCOMPLETE
+          example: INCOMPLETE
+        tags:
+          $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          description: 'Type of `compliance_form`. There is one available value: **PCI_SAQ_A**.'
+          enum:
+          - PCI_SAQ_A
+        valid_from:
+          type: string
+          description: Timestamp of when the `compliance_form` becomes active and valid.
+          format: date-time
+        valid_until:
+          type: string
+          description: Timestamp of when the `compliance_form` is no longer active and valid.
+        version:
+          type: string
+          description: Details the version of the SAQ form. When `compliance_forms` are created, Finix automatically provides the most up-to-date SAQ form that's available.
+      title: ''
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdateComplianceFormRequest:
+      type: object
+      x-examples: {}
+      properties:
+        pci_saq_a:
+          type: object
+          description: Details used to fille out the PCI Self-Assessment Questionnaire.
+          properties:
+            ip_address:
+              type: string
+              description: IP address of the person attesting to this `compliance_form`.
+            name:
+              type: string
+              description: Name of the person completing (aka attesting to) the `compliance_form`.
+            signed_at:
+              type: string
+              description: Timestamp of the person attesting to this `compliance_form`.
+            title:
+              type: string
+              description: "Title or role of the person completing (aka attesting to)\n                the `compliance_form`."
+            user_agent:
+              type: string
+              description: User agent of the person attesting to this `compliance_form`.
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Error422InvalidFieldList:
+      type: object
+      description: Invalid field
+      title: ''
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - INVALID_FIELD
+                  field:
+                    type: string
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    ComplianceFormList:
+      type: object
+      x-examples:
+        example-1:
+          _embedded:
+            payout_profiles:
+            - id: PO6UbajkQrbFd5nAvs57dwyn
+              created_at: '2022-10-24T21:38:23.72Z'
+              updated_at: '2022-10-24T21:38:23.72Z'
+              tags: {}
+              linked_id: MU6TXYpA37uM9H4GwitQr8E3
+              linked_type: MERCHANT
+              type: GROSS
+              gross:
+                payouts:
+                  frequency: DAILY
+                  submission_delay_days: 1
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: STANDARD
+                fees:
+                  frequency: MONTHLY
+                  day_of_month: 1
+                  submission_delay_days: 3
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: STANDARD
+              _links:
+                self:
+                  href: https://finix.sandbox-payments-api.com/payout_profiles/PO6UbajkQrbFd5nAvs57dwyn
+            - id: POf5rP3c3XyRX7M6PuCvmgxf
+              created_at: '2022-10-20T19:43:18.02Z'
+              updated_at: '2022-10-20T19:43:18.02Z'
+              tags: {}
+              linked_id: MUfbbKm7vRmBX2bP92pKw9zZ
+              linked_type: MERCHANT
+              type: CUSTOM
+              custom: {}
+              _links:
+                self:
+                  href: https://finix.sandbox-payments-api.com/payout_profiles/POf5rP3c3XyRX7M6PuCvmgxf
+          _links:
+            self:
+              href: https://finix.sandbox-payments-api.com/payout_profiles
+            next:
+              href: https://finix.sandbox-payments-api.com/payout_profiles?after_cursor=POf5rP3c3XyRX7M6PuCvmgxf
+          page:
+            limit: 100
+            next_cursor: POf5rP3c3XyRX7M6PuCvmgxf
+      description: List of `Payout Profiles`.
+      x-stoplight:
+        id: 11d3f3351214e
+      properties:
+        _embedded:
+          type: object
+          description: List of `Payout Profiles`.
+          properties:
+            compliance_forms:
+              type: array
+              description: '`Payout Profile` objects.'
+              items:
+                $ref: '#/components/schemas/ComplianceForm'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+        page:
+          $ref: '#/components/schemas/PageCursor'
+  responses:
+    Error422InvalidField:
+      description: Invalid field
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error422InvalidFieldList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ComplianceForm:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ComplianceForm'
+          examples:
+            Blank Compliance Form:
+              value:
+                id: cf_fEojUGLjwUiqNTBp68JWq8
+                created_at: '2022-06-22T01:20:12.439149Z'
+                updated_at: '2022-07-06T17:32:00.328699Z'
+                application_id: APdoThHn4jjYUSxQf76txAgg
+                compliance_form_template: cft_wua8ua1yLAcHRK9mx2mF9K
+                due_at: '2022-09-20T01:20:12.430835Z'
+                files:
+                  signed_file: null
+                  unsigned_file: FILE_fFGMCY4sxGYTqpjnXh54kC
+                linked_to: MUfnskvHiiDgP7x3TVL2LkG3
+                linked_type: MERCHANT
+                pci_saq_a:
+                  ip_address: null
+                  is_accepted: false
+                  name: null
+                  signed_at: null
+                  title: null
+                  user_agent: null
+                state: INCOMPLETE
+                tags: {}
+                type: PCI_SAQ_A
+                valid_from: '2022-06-22T01:20:12.978825Z'
+                valid_until: '2023-06-22T01:20:12.97883Z'
+                version: '2018.5'
+            Complete Compliance Form:
+              value:
+                id: cf_pqJFvPD3DXAnut1w6iNFK
+                created_at: '2023-07-06T22:18:19.806288Z'
+                updated_at: '2023-07-06T22:26:41.003926Z'
+                linked_to: MUqXc76t2KiqtikLni1zrMmW
+                linked_type: MERCHANT
+                application: APgix2NcQ9ETSPpVoqwSYUHx
+                type: PCI_SAQ_A
+                version: '2018.10'
+                valid_from: '2023-07-06T22:18:25.775726Z'
+                valid_until: '2024-07-05T22:18:25.77573Z'
+                tags: {}
+                pci_saq_a:
+                  name: John Smith
+                  signed_at: '2022-03-18T16:42:55Z'
+                  user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
+                  ip_address: 42.1.1.113
+                  is_accepted: true
+                  title: CTO
+                due_at: '2023-10-04T22:18:19.790434Z'
+                compliance_form_template: cft_k6o6W33fdwnMXNxNhe4nfN
+                files:
+                  unsigned_file: FILE_AwHMYuDX7w2d8hobjkxKD
+                  signed_file: FILE_6E9ZpgGZJGmLcj2PiZzXHB
+                state: COMPLETE
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ComplianceFormList:
+      description: List of `Compliance Form` objects.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ComplianceFormList'
+          examples:
+            List of Compliance Forms:
+              value:
+                _embedded:
+                  compliance_forms:
+                  - id: cf_pqJFvPD3DXAnut1w6iNFK
+                    created_at: '2023-07-06T22:18:19.806288Z'
+                    updated_at: '2023-07-06T22:26:41.003926Z'
+                    linked_to: MUqXc76t2KiqtikLni1zrMmW
+                    linked_type: MERCHANT
+                    application: APgix2NcQ9ETSPpVoqwSYUHx
+                    type: PCI_SAQ_A
+                    version: '2018.10'
+                    valid_from: '2023-07-06T22:18:25.775726Z'
+                    valid_until: '2024-07-05T22:18:25.77573Z'
+                    tags: {}
+                    pci_saq_a:
+                      name: John Smith
+                      signed_at: '2022-03-18T16:42:55Z'
+                      user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
+                      ip_address: 42.1.1.113
+                      is_accepted: true
+                      title: CTO
+                    due_at: '2023-10-04T22:18:19.790434Z'
+                    compliance_form_template: cft_k6o6W33fdwnMXNxNhe4nfN
+                    files:
+                      unsigned_file: FILE_AwHMYuDX7w2d8hobjkxKD
+                      signed_file: FILE_6E9ZpgGZJGmLcj2PiZzXHB
+                    state: COMPLETE
+                page:
+                  next_cursor: null
+                  limit: 10
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  requestBodies:
+    UpdateComplianceForm:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateComplianceFormRequest'
+          examples:
+            Complete Compliance Form:
+              value:
+                pci_saq_a:
+                  ip_address: 42.1.1.113
+                  name: John Smith
+                  signed_at: '2022-03-18T16:42:55Z'
+                  title: CTO
+                  user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

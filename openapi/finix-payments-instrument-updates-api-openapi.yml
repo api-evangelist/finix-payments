@@ -1,0 +1,506 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Instrument Updates API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Instrument Updates
+  description:
+    $ref: api-descriptions/tags/instrument-updates.md
+paths:
+  /instrument_updates:
+    post:
+      summary: Create Instrument Updates
+      operationId: createPaymentInstrumentUpdate
+      responses:
+        '200':
+          $ref: '#/components/responses/InstrumentUpdate'
+        '400':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      description: To update the card details of your customers, create an `instrument_updates` resource. Include the `Payment Instrument` IDs you want to update in a CSV.
+      requestBody:
+        $ref: '#/components/requestBodies/CreateInstrumentUpdateRequest'
+      tags:
+      - Instrument Updates
+      x-java-method-name: create
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/instrument-updates/create-instrument-updates.md
+      x-python-method-name: create
+  /instrument_updates/{instrument_updates_id}/download:
+    parameters:
+    - schema:
+        type: string
+      name: instrument_updates_id
+      in: path
+      required: true
+      description: The ID of the `instrument_updates` resource. This ID was returned when initially creating the `instrument_updates` object.
+    get:
+      summary: Download Instrument Updates
+      tags:
+      - Instrument Updates
+      responses:
+        '200':
+          description: "The updated `Payment Instruments` will be returned in the following comma seperated format:\n\npayment\\_instrument\\_original,\t| payment\\_instrument_new, |result\n--------------------------- | ---------------------- | -----\nPIlkNdfZibF8a7Prd2teGB1 | PI3aQGaCM5nDMjqyTXcbUJzR| CARD\\_EXPIRATION_UPDATED\nPIJPXW0HZ9lpO1nb6sog5DiX  | PIdBHpy7BBSxd2z81VdKpVbT | CARD\\_NOT\\_FOUND\nPI0ovZAS9yfEtgDrZnMaiLvi   | PIhXS0jXNTmklyVk91EsohuZ | CONTACT\\_CARDHOLDER\nPInOrrKY3G1U33hGYTQJ8cIY |  | CLOSED\\_ACCOUNT\nPIlkAOt5kTVhuuxxbmOi9qn |  | INVALID\\_CARD\nPIiRLbbG4i5daypWNzIrq2xD   |  | NO\\_CHANGE\\_FOUND\nPIy5llZGt6VxlDqbcTgATqeH     | \t  | UNKNOWN"
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Instrument Update:
+                  value: payment_instrument_original,payment_instrument_new,result PIlkNdfZibF8a7Prd2teGB1,PI3aQGaCM5nDMjqyTXcbUJzR,CARD_EXPIRATION_UPDATED PIJPXW0HZ9lpO1nb6sog5DiX,PIdBHpy7BBSxd2z81VdKpVbT,CARD_NOT_FOUND PIiRLbbG4i5daypWNzIrq2xD,,NO_CHANGE_FOUND PIy5llZGt6VxlDqbcTgATqeH,,UNKNOWN
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: downloadInstrumentUpdate
+      description: "Fetch a previously created `instrument_updates` resource as a CSV. \n\nTo fetch the `instrument_updates` resource in JSON, add `?format=json` to the request endpoint."
+      parameters:
+      - $ref: '#/components/parameters/QueryFormat'
+      x-group-parameters: true
+      x-java-method-name: download
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/instrument_updates/IUd2Wzs6jxPJjteva3n19Amu/download\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: download
+  /instrument_updates/{instrument_updates_id}:
+    parameters:
+    - schema:
+        type: string
+      description: The ID of the `instrument_update`.
+      name: instrument_updates_id
+      in: path
+      required: true
+    get:
+      summary: Fetch an Instrument Update
+      tags:
+      - Instrument Updates
+      responses:
+        '200':
+          $ref: '#/components/responses/InstrumentUpdate'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: getInstrumentUpdate
+      description: Fetch a specific `instrument_update` from an `instrument_updates` resource.
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/instrument_updates/IUp9oSWhWUF31DPrJ8CojQeQ/\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: get
+components:
+  schemas:
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    InstrumentUpdate:
+      title: InstrumentUpdates
+      x-stoplight:
+        id: si3taxhzmp9fu
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the `instrument_updates` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        idempotency_id:
+          type: string
+          description: A randomly generated value that will be associated with this `instrument_update` resource.
+        merchant:
+          type: string
+          description: The `Merchant` ID associated with the `instrument_updates`.
+        state:
+          type: string
+          description: The status of the `instrument_updates` resource and update request.
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            payment_instrument:
+              type: object
+              description: Link to the payment instrument.
+              properties:
+                href:
+                  type: string
+            application:
+              type: object
+              description: Link to the application.
+              properties:
+                href:
+                  type: string
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    CreateInstrumentUpdateRequest:
+      type: object
+      x-examples: {}
+      title: ''
+      properties:
+        file:
+          type: string
+          description: The binary contents of the file.
+          format: binary
+        request:
+          type: string
+          description: 'A JSON string of your request. The JSON object needs to contain the following two fields:
+
+            - `merchant`: ID of the `Merchant` object that you want to associate with the Account Updater batch for your own accounting purposes. You can only associate one `Merchant` to each.
+
+            - `idemopotency_id`: A randomly generated value that will be associated with this `instrument_update` resource.'
+          example: '{"merchant":"MUucec6fHeaWo3VHYoSkUySM",  "idempotency_id":"123xyz" }'
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+  responses:
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    InstrumentUpdate:
+      description: Single instrument_update object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InstrumentUpdate'
+          examples:
+            Instrument Updates:
+              value:
+                id: IUp9oSWhWUF31DPrJ8CojQeQ
+                created_at: '2020-12-02T03:44:42.77Z'
+                updated_at: '2020-12-02T03:44:42.81Z'
+                idempotency_id: F2022-08-12 15:05:19.211366
+                merchant: MUvQQt3RKe7FBZ6j9eMYoo3H
+                state: PENDING
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_intrument_updates/IUp9oSWhWUF31DPrJ8CojQeQ
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  requestBodies:
+    CreateInstrumentUpdateRequest:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/CreateInstrumentUpdateRequest'
+          examples:
+            Instrument Update Request:
+              value:
+                request: '{"merchant": "MUucec6fHeaWo3VHYoSkUySM","idempotency_id": "123xyz testing"}'
+      description: ''
+  parameters:
+    QueryFormat:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        example: /download?format=json
+      description: Specify the format you'd like to download the response in (JSON is the only other format available for download).
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

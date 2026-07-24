@@ -1,0 +1,901 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Payout Profiles API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Payout Profiles
+  description:
+    $ref: api-descriptions/tags/payout-profiles.md
+paths:
+  /payout_profiles:
+    get:
+      summary: List Payout Profiles
+      responses:
+        '200':
+          $ref: '#/components/responses/PayoutProfilesList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          description: Not Acceptable
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      operationId: listPayoutprofiles
+      description: List all `Payout Profiles`.
+      x-java-method-name: list
+      x-group-parameters: true
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/payout_profiles\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u US4UKYcdgmg3CKPxDRyV3FtA:88214476-3d56-4708-adc2-a7f001b0d5a1\n"
+      tags:
+      - Payout Profiles
+      parameters:
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      - $ref: '#/components/parameters/QueryLimit'
+      x-python-method-name: list
+      x-returns-list: true
+  /payout_profiles/{payout_profile_id}:
+    parameters:
+    - schema:
+        type: string
+      name: payout_profile_id
+      in: path
+      required: true
+      description: ID of the `Payout Profile`.
+    get:
+      summary: Fetch a Payout Profile
+      responses:
+        '200':
+          $ref: '#/components/responses/PayoutProfile'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      operationId: getPayoutprofile
+      description: Retrieve the details of a previously created `Payout Profile`.
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/payout_profiles/POf5rP3c3XyRX7M6PuCvmgxf\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u US4UKYcdgmg3CKPxDRyV3FtA:88214476-3d56-4708-adc2-a7f001b0d5a1\n"
+      tags:
+      - Payout Profiles
+      x-python-method-name: get
+    put:
+      summary: Update a Payout Profile
+      operationId: updatePayoutProfileRequest
+      responses:
+        '200':
+          $ref: '#/components/responses/PayoutProfile'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      description: 'Update a `Payout Profile` to configure how fees and payouts get calculated, credited, and debited.
+
+
+        By default, `Merchants` get configured with daily net settlements. Payouts get submitted using the **Next-Day ACH** `rail`. Contact [Finix Support](/guides/getting-started/support-at-finix/) to configure payouts on a custom schedule.'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdatePayoutProfileRequest'
+      tags:
+      - Payout Profiles
+      x-java-method-name: update
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/payout-profile/update-payout-profile.md
+      x-python-method-name: update
+  /merchants/{merchant_id}/payout_profile:
+    parameters:
+    - schema:
+        type: string
+      name: merchant_id
+      in: path
+      required: true
+      description: ID of the `Merchant`.
+    get:
+      summary: Fetch Payout Profile by Merchant
+      responses:
+        '200':
+          $ref: '#/components/responses/PayoutProfile'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      operationId: fetchPayoutProfilesbyMerchant
+      description: Fetch the the `Payout Profile` createrd for a specific `Merchant`.
+      x-java-method-name: getByMerchantId
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/merchants/MUfbbKm7vRmBX2bP92pKw9zZ/payout_profile\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u US4UKYcdgmg3CKPxDRyV3FtA:88214476-3d56-4708-adc2-a7f001b0d5a1\n"
+      tags:
+      - Payout Profiles
+      x-python-method-name: get_by_merchant_id
+components:
+  responses:
+    Error422InvalidField:
+      description: Invalid field
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error422InvalidFieldList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    PayoutProfile:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PayoutProfile'
+          examples:
+            Payout Profile - Gross:
+              value:
+                id: POmhJeq1AsfwetG8LwhA4S9U
+                created_at: '2022-10-25T16:54:08.20Z'
+                updated_at: '2022-10-25T16:54:08.20Z'
+                linked_id: MU6TXYpA37uM9H4GwitQr8E3
+                linked_type: MERCHANT
+                gross:
+                  payouts:
+                    frequency: DAILY
+                    submission_delay_days: 1
+                    payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                    rail: SAME_DAY_ACH
+                  fees:
+                    frequency: MONTHLY
+                    day_of_month: 1
+                    submission_delay_days: 3
+                    payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                    rail: SAME_DAY_ACH
+                tags: {}
+                type: GROSS
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payout_profiles/POmhJeq1AsfwetG8LwhA4S9U
+            Payout Profile - Net:
+              value:
+                id: POhiPobG6PoUteNVKpUauWVP
+                created_at: '2022-10-25T07:20:34.37Z'
+                updated_at: '2022-10-25T07:20:34.37Z'
+                linked_id: MU6TXYpA37uM9H4GwitQr8E3
+                linked_type: MERCHANT
+                net:
+                  frequency: CONTINUOUS
+                  submission_delay_days: 1
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: STANDARD
+                tags: {}
+                type: NET
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payout_profiles/POhiPobG6PoUteNVKpUauWVP
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    PayoutProfilesList:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PayoutProfilesList'
+          examples:
+            List of Payout Profiles:
+              value:
+                _embedded:
+                  payout_profiles:
+                  - id: PO6UbajkQrbFd5nAvs57dwyn
+                    created_at: '2022-10-24T21:38:23.72Z'
+                    updated_at: '2022-10-24T21:38:23.72Z'
+                    tags: {}
+                    linked_id: MU6TXYpA37uM9H4GwitQr8E3
+                    linked_type: MERCHANT
+                    type: GROSS
+                    gross:
+                      payouts:
+                        frequency: DAILY
+                        submission_delay_days: 1
+                        payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                        rail: SAME_DAY_ACH
+                      fees:
+                        frequency: MONTHLY
+                        day_of_month: 1
+                        submission_delay_days: 3
+                        payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                        rail: NEXT_DAY_ACH
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/payout_profiles/PO6UbajkQrbFd5nAvs57dwyn
+                  - id: POf5rP3c3XyRX7M6PuCvmgxf
+                    created_at: '2022-10-20T19:43:18.02Z'
+                    updated_at: '2022-10-20T19:43:18.02Z'
+                    tags: {}
+                    linked_id: MUfbbKm7vRmBX2bP92pKw9zZ
+                    linked_type: MERCHANT
+                    type: CUSTOM
+                    custom: {}
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/payout_profiles/POf5rP3c3XyRX7M6PuCvmgxf
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payout_profiles
+                  next:
+                    href: https://finix.sandbox-payments-api.com/payout_profiles?after_cursor=POf5rP3c3XyRX7M6PuCvmgxf
+                page:
+                  limit: 100
+                  next_cursor: POf5rP3c3XyRX7M6PuCvmgxf
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+  schemas:
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    PayoutProfilesList:
+      type: object
+      x-examples:
+        example-1:
+          _embedded:
+            payout_profiles:
+            - id: PO6UbajkQrbFd5nAvs57dwyn
+              created_at: '2022-10-24T21:38:23.72Z'
+              updated_at: '2022-10-24T21:38:23.72Z'
+              tags: {}
+              linked_id: MU6TXYpA37uM9H4GwitQr8E3
+              linked_type: MERCHANT
+              type: GROSS
+              gross:
+                payouts:
+                  frequency: DAILY
+                  submission_delay_days: 1
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: STANDARD
+                fees:
+                  frequency: MONTHLY
+                  day_of_month: 1
+                  submission_delay_days: 3
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: STANDARD
+              _links:
+                self:
+                  href: https://finix.sandbox-payments-api.com/payout_profiles/PO6UbajkQrbFd5nAvs57dwyn
+            - id: POf5rP3c3XyRX7M6PuCvmgxf
+              created_at: '2022-10-20T19:43:18.02Z'
+              updated_at: '2022-10-20T19:43:18.02Z'
+              tags: {}
+              linked_id: MUfbbKm7vRmBX2bP92pKw9zZ
+              linked_type: MERCHANT
+              type: CUSTOM
+              custom: {}
+              _links:
+                self:
+                  href: https://finix.sandbox-payments-api.com/payout_profiles/POf5rP3c3XyRX7M6PuCvmgxf
+          _links:
+            self:
+              href: https://finix.sandbox-payments-api.com/payout_profiles
+            next:
+              href: https://finix.sandbox-payments-api.com/payout_profiles?after_cursor=POf5rP3c3XyRX7M6PuCvmgxf
+          page:
+            limit: 100
+            next_cursor: POf5rP3c3XyRX7M6PuCvmgxf
+      description: List of `Payout Profiles`.
+      properties:
+        _embedded:
+          type: object
+          description: List of `Payout Profiles`.
+          properties:
+            payout_profiles:
+              type: array
+              description: '`Payout Profile` objects.'
+              items:
+                $ref: '#/components/schemas/PayoutProfile'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+        page:
+          $ref: '#/components/schemas/PageCursor'
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    PayoutProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the `Payout Profile` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        gross:
+          type: object
+          description: Details how `Payout Profiles` with type **GROSS** are configured.
+          nullable: true
+          properties:
+            fees:
+              type: object
+              description: Configures and details how fees get debited.
+              properties:
+                day_of_month:
+                  type: integer
+                  description: Day of the month fees get debited. Required when `frequency` is set to **MONTHLY**.
+                frequency:
+                  type: string
+                  description: Configures how frequentyly *fees* get debited. To configure a **CUSTOM** `frequency` [contact Finix Support](/guides/payouts/).
+                  enum:
+                  - DAILY
+                  - MONTHLY
+                  - CONTINUOUS
+                  - CUSTOM
+                payment_instrument_id:
+                  type: string
+                  description: The `id` of the `Payment Instrument` that *fees* get debited from.
+                rail:
+                  type: string
+                  description: Configures how quickly and which payment `rail` will be used to debit *fees*.
+                  enum:
+                  - NEXT_DAY_ACH
+                  - SAME_DAY_ACH
+                submission_delay_days:
+                  type: integer
+                  description: Include a number of `submission_delay_days` to delay when `funding_transfers` for *fees* will get submitted to debit (in days) the `payment_instrument_id`.
+            payouts:
+              type: object
+              description: Configures and details how payouts get paid and credited.
+              properties:
+                frequency:
+                  type: string
+                  description: Configures how frequentyly *payouts* get credited. To configure a **CUSTOM** `frequency` [contact Finix Support](/guides/payouts/).
+                  enum:
+                  - DAILY
+                  - MONTHLY
+                  - CONTINUOUS
+                  - CUSTOM
+                payment_instrument_id:
+                  type: string
+                  description: The `id` of the `Payment Instrument`that *payouts* will get credited to.
+                rail:
+                  type: string
+                  description: Configures how quickly and which payment `rail` will be used to credit *payouts*.
+                  enum:
+                  - NEXT_DAY_ACH
+                  - SAME_DAY_ACH
+                submission_delay_days:
+                  type: integer
+                  description: Include a number of `submission_delay_days` to delay when `funding_transfers` for *payouts* will get submitted to credit (in days) the `payment_instrument_id`.
+        linked_id:
+          type: string
+          description: ID of the resource linked to the `Payout Profile`.
+        linked_type:
+          type: string
+          description: The type of resource the `Payout Profile` is linked to.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          description: Configures how fees are calculated and billed from payouts. For more infromation, see [Payout Types](/guides/payouts/#payout-types).
+          enum:
+          - CUSTOM
+          - GROSS
+          - NET
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+        net:
+          type: object
+          description: Details how `Payout Profiles` with type **NET** are configured.
+          nullable: true
+          properties:
+            frequency:
+              type: string
+              description: Configures how frequentyly fees and payouts get credited. To configure a **CUSTOM** `frequency` [contact Finix Support](/guides/payouts/).
+              enum:
+              - DAILY
+              - MONTHLY
+              - CONTINUOUS
+              - CUSTOM
+            payment_instrument_id:
+              type: string
+              description: The `id` of the `Payment Instrument` that payouts and fees get credited to and debited from.
+            rail:
+              type: string
+              description: Configures how quickly and which payment `rail` will be used to debit fees and credit payouts.
+              enum:
+              - NEXT_DAY_ACH
+              - SAME_DAY_ACH
+            submission_delay_days:
+              type: integer
+              description: Include a number of `submission_delay_days` to delay when `funding_transfers` for both payouts and fees will get submitted (in days) to debit/credit the `payment_instrument_id`.
+        custom:
+          type: object
+          description: Details how `Payout Profiles` with type **CUSTOM** are configured. `Payout Profiles` with type **CUSTOM** can be setup with more specific configurations. To configure a **CUSTOM** `Payout Profile` [contact Finix Support](/guides/payouts/#payout-types).
+          nullable: true
+    Error422InvalidFieldList:
+      type: object
+      description: Invalid field
+      title: ''
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - INVALID_FIELD
+                  field:
+                    type: string
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    UpdatePayoutProfileRequest:
+      type: object
+      properties:
+        gross:
+          type: object
+          description: Configure how `Payout Profiles` with type **GROSS** are setup.
+          nullable: true
+          properties:
+            fees:
+              type: object
+              description: Configures the details of how fees get debited.
+              properties:
+                day_of_month:
+                  type: integer
+                  description: Day of the month fees get debited. Required when `frequency` is set to **MONTHLY**.
+                frequency:
+                  type: string
+                  description: Configures how frequentyly **fees** get debited. To configure a **CUSTOM** `frequency` [contact Finix Support](/guides/payouts/).
+                  enum:
+                  - DAILY
+                  - MONTHLY
+                  - CONTINUOUS
+                  - CUSTOM
+                payment_instrument_id:
+                  type: string
+                  description: The `id` of the `Payment Instrument`that **fees** get debited from.
+                rail:
+                  type: string
+                  description: Configures how quickly and which payment `rail` will be used to debit **fees**.
+                  enum:
+                  - NEXT_DAY_ACH
+                  - SAME_DAY_ACH
+                submission_delay_days:
+                  type: integer
+                  description: Include a number of `submission_delay_days` to delay when `funding_transfers` for `fees` will get submitted to debit (in days) the `payment_instrument_id`.
+            payouts:
+              type: object
+              description: Configures the details of how payouts get paid and credited.
+              properties:
+                frequency:
+                  type: string
+                  description: Configures how frequentyly **payouts** get credited. To configure a **CUSTOM** `frequency` [contact Finix Support](/guides/payouts/).
+                  enum:
+                  - DAILY
+                  - MONTHLY
+                  - CONTINUOUS
+                  - CUSTOM
+                payment_instrument_id:
+                  type: string
+                  description: The `id` of the `Payment Instrument`that payouts will get credited to.
+                rail:
+                  type: string
+                  description: Configures how quickly and which payment `rail` will be used to credit **payouts**.
+                submission_delay_days:
+                  type: integer
+                  description: Include a number of `submission_delay_days` to delay when `funding_transfers` for `payouts` will get submitted to credit (in days) the `payment_instrument_id`.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          description: Configures how fees are calculated and billed from payouts. For more infromation, see [Payout Types](/guides/payouts/#payout-types).
+          enum:
+          - CUSTOM
+          - GROSS
+          - NET
+        net:
+          type: object
+          description: Configure how `Payout Profiles` with type **NET** are setup.
+          nullable: true
+          properties:
+            frequency:
+              type: string
+              description: Configures how frequentyly fees *and* payouts get credited.
+              enum:
+              - DAILY
+              - MONTHLY
+              - CONTINUOUS
+              - CUSTOM
+            payment_instrument_id:
+              type: string
+              description: The `id` of the `Payment Instrument` that payouts *and* fees get credited to and debited from.
+            rail:
+              type: string
+              enum:
+              - NEXT_DAY_ACH
+              - SAME_DAY_ACH
+              description: Configures how quickly and which payment `rail` will be used to debit fees *and* credit payouts.
+            submission_delay_days:
+              type: integer
+              description: Include a number of `submission_delay_days` to delay when `funding_transfers` for both payouts *and* fees get submitted (in days) to debit/credit the `payment_instrument_id`.
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  parameters:
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+  requestBodies:
+    UpdatePayoutProfileRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdatePayoutProfileRequest'
+          examples:
+            Payout Profile - Gross:
+              value:
+                type: GROSS
+                gross:
+                  payouts:
+                    frequency: DAILY
+                    submission_delay_days: '1'
+                    payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                    rail: SAME_DAY_ACH
+                  fees:
+                    frequency: MONTHLY
+                    day_of_month: '1'
+                    submission_delay_days: '3'
+                    payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                    rail: SAME_DAY_ACH
+            Payout Profile - Net:
+              value:
+                type: NET
+                net:
+                  frequency: CONTINUOUS
+                  submission_delay_days: '1'
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: SAME_DAY_ACH
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

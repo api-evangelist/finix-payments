@@ -1,0 +1,845 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Webhooks API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Webhooks
+  description:
+    $ref: api-descriptions/tags/webhooks.md
+paths:
+  /webhooks:
+    post:
+      tags:
+      - Webhooks
+      description: Create a `Webhook` to specify an endpoint where Finix can send events.
+      summary: Create a Webhook
+      operationId: createWebhook
+      requestBody:
+        $ref: '#/components/requestBodies/CreateWebhookRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Webhook'
+        '400':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      x-java-method-name: create
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: create
+    get:
+      tags:
+      - Webhooks
+      description: Retrieve a list of `Webhooks`.
+      summary: List Webhooks
+      operationId: listWebhooks
+      parameters:
+      - $ref: '#/components/parameters/QueryLimit'
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      - $ref: '#/components/parameters/QueryBeforeCursor'
+      responses:
+        '200':
+          $ref: '#/components/responses/WebhooksList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: list
+      x-group-parameters: true
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/webhooks\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: list
+      x-returns-list: true
+  /webhooks/{webhook_id}:
+    parameters:
+    - description: ID of `Webhook` object.
+      required: true
+      in: path
+      name: webhook_id
+      schema:
+        type: string
+    get:
+      tags:
+      - Webhooks
+      description: Retrieve the details of a `Webhook`.
+      summary: Fetch a Webhook
+      operationId: getWebhook
+      responses:
+        '200':
+          $ref: '#/components/responses/Webhook'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/webhooks/WHN6HuqRqTV3mDCxoFLrRvP\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: get
+    put:
+      tags:
+      - Webhooks
+      description: 'Update an existing `Webhook`to:
+
+        - Disable or enable an endpoint URL to recieve webhook events.
+
+        - Add [authentication to a `Webhook`](/guides/developers/webhooks/#authenticating-webhooks).
+
+        - Filter the [webhook events sent to an endpoint URL](/guides/developers/webhooks/#webhook-event-filtering).'
+      summary: Update a Webhook
+      operationId: updateWebhook
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateWebhookRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Webhook'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: update
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: update
+components:
+  responses:
+    Error422InvalidField:
+      description: Invalid field
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error422InvalidFieldList'
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    Webhook:
+      description: Single Webhook object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhook'
+          examples:
+            Webhook:
+              value:
+                id: WHg3ocwoCz9PgF4ncZTyArFJ
+                created_at: '2022-10-10T03:56:10.15Z'
+                updated_at: '2022-10-10T03:56:10.15Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                authentication:
+                  type: NONE
+                enabled: true
+                enabled_events: []
+                previous_secret_expires_at: null
+                secret_signing_key: 3afb49c98ac08a67a58efa5580b24e5984bc36d7ebd404e875234f107deed108
+                url: https://eohzjuj2prziycz.m.pipedream.net
+                _links:
+                  self:
+                    href: http://finix.sandbox-payments-api.com/webhooks/WHg3ocwoCz9PgF4ncZTyArFJ
+                  application:
+                    href: http://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+            Filter Webhook Events:
+              value:
+                id: WHtPXJnAjmusyobzpmQZeHvJ
+                created_at: '2022-06-05T23:29:07.99Z'
+                updated_at: '2022-10-10T04:36:45.88Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                authentication:
+                  type: NONE
+                enabled: false
+                enabled_events:
+                - entity: merchant
+                  types:
+                  - created
+                  - underwritten
+                - entity: transfer
+                  types:
+                  - created
+                previous_secret_expires_at: null
+                url: https://eohzjuj2prziycz.m.pipedream.net
+                _links:
+                  self:
+                    href: http://finix.sandbox-payments-api.com/webhooks/WHtPXJnAjmusyobzpmQZeHvJ
+                  application:
+                    href: http://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    WebhooksList:
+      description: List of Webhook objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WebhooksList'
+          examples:
+            List of Webhooks:
+              value:
+                _embedded:
+                  webhooks:
+                  - id: WHtbmULb3Y68oGfKWc9TLJnJ
+                    created_at: '2022-09-27T18:40:29.20Z'
+                    updated_at: '2022-09-27T18:40:29.39Z'
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    authentication:
+                      type: NONE
+                    enabled: false
+                    enabled_events: []
+                    previous_secret_expires_at: null
+                    url: https://example.com/
+                    _links:
+                      self:
+                        href: http://finix.sandbox-payments-api.com/webhooks/WHtbmULb3Y68oGfKWc9TLJnJ
+                      application:
+                        href: http://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  - id: WHmnVdiaimgD8aRTVvwuTZaj
+                    created_at: '2022-09-27T18:38:56.81Z'
+                    updated_at: '2022-09-27T18:38:57.03Z'
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    authentication:
+                      type: NONE
+                    enabled: false
+                    enabled_events: []
+                    previous_secret_expires_at: null
+                    url: https://example.com/
+                    _links:
+                      self:
+                        href: http://finix.sandbox-payments-api.com/webhooks/WHmnVdiaimgD8aRTVvwuTZaj
+                      application:
+                        href: http://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                _links:
+                  self:
+                    href: http://finix.sandbox-payments-api.com/notification/webhooks?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                  next:
+                    href: http://finix.sandbox-payments-api.com/notification/webhooks?offset=20&limit=20&sort=created_at,desc&sort=id,desc
+                  last:
+                    href: http://finix.sandbox-payments-api.com/notification/webhooks?offset=1360&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  offset: 0
+                  limit: 20
+                  count: 1197
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+  schemas:
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    WebhookEnabledEvents:
+      title: WebhookEnabledEvents
+      x-stoplight:
+        id: ux7v2p72v0shw
+      type: array
+      description: A list of events the [webhook is explicitly enabled for](/guides/developers/webhooks/#webhook-event-filtering).
+      items:
+        type: object
+        properties:
+          entity:
+            type: string
+            description: The entity type for the enabled event. There can only be one enabled event object for a given entity.
+          types:
+            type: array
+            description: A list of event types you want to receive for the specified `entity`.
+            items:
+              type: string
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdateWebhookRequest:
+      title: UpdateWebhookRequest
+      x-stoplight:
+        id: 0jkq54c782t1w
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Set to false to disable `Webhooks`. Default value when created is true.
+        enabled_events:
+          $ref: '#/components/schemas/WebhookEnabledEvents'
+        url:
+          type: string
+          description: The HTTP or HTTPS url where the callbacks will be sent via POST request (max 120 characters).
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    WebhooksList:
+      type: object
+      description: '`Webhook` resource.'
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `Webhook` objects.
+          properties:
+            webhooks:
+              type: array
+              minItems: 0
+              uniqueItems: true
+              description: '`Webhook` objects.'
+              items:
+                $ref: '#/components/schemas/Webhook'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+          example: WHxxxxxxxxxxxxxxxxxx
+          description: The ID of the `Webhook` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        application:
+          type: string
+          description: The ID of the `Application` resource the `Webhook` was created under.
+        authentication:
+          type: object
+          description: The [authentication settings](/guides/developers/webhooks/#authenticating-webhooks) that are used to send webhook events.
+          properties:
+            type:
+              type: string
+              enum:
+              - NONE
+              - BASIC
+              - BEARER
+              description: 'The type of authentication the webhook will use:
+
+                - NONE: No authentication will be used.
+
+                - BASIC: Basic authentication.
+
+                - BEARER: Oauth2''s Bearer Token.'
+        enabled:
+          type: boolean
+          description: 'Details if the `Webhook` is enabled:<ul><li><strong>true</strong>: Events are being sent to the `url`.<li><strong>false</strong>: Events are not being sent.'
+        enabled_events:
+          $ref: '#/components/schemas/WebhookEnabledEvents'
+        previous_secret_expires_at:
+          type: string
+          description: The time when the previous `secret_signing_key` will expire. This is **null** when the webhook is initially created.
+          nullable: true
+        secret_signing_key:
+          type: string
+          description: The secret signing key that gets used to verify webhook events.
+          nullable: true
+        url:
+          type: string
+          description: The HTTP or HTTPS URL where callbacks (i.e. events) will be sent via POST request (max 120 characters).
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            application:
+              type: object
+              description: Link to the `Application` the resource was created under.
+              properties:
+                href:
+                  type: string
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Error422InvalidFieldList:
+      type: object
+      description: Invalid field
+      title: ''
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - INVALID_FIELD
+                  field:
+                    type: string
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    CreateWebhookRequest:
+      title: WebhookCreate
+      type: object
+      properties:
+        authentication:
+          type: object
+          description: The [authentication settings](/guides/developers/webhooks/#authenticating-webhooks) that are used to send webhook events.
+          properties:
+            basic:
+              type: object
+              description: The basic authentication configuration. Null if basic is not being used.
+              properties:
+                username:
+                  type: string
+                  description: The username that will be used for basic authentication
+                password:
+                  type: string
+                  description: The password to be used for basic authentication.
+            bearer:
+              type: object
+              description: The bearer authentication configuration. Null if bearer is not being used.
+              properties:
+                token:
+                  type: string
+                  description: The string that Finix will send as the bearer token.
+            type:
+              type: string
+              enum:
+              - NONE
+              - BASIC
+              - BEARER
+              description: 'The type of authentication the webhook will use:
+
+                - **NONE**: No authentication will be used.
+
+                - **BASIC**: Basic authentication.
+
+                - **BEARER**: Oauth2''s Bearer Token.'
+        enabled:
+          type: boolean
+          description: Set to false to disable Webhooks. Default value when created is true.
+        enabled_events:
+          $ref: '#/components/schemas/WebhookEnabledEvents'
+        url:
+          type: string
+          description: The HTTP or HTTPS URL where callbacks (i.e. events) will be sent via POST request (max 120 characters).
+          maxLength: 120
+          example: https://example.com/event_handler
+      required:
+      - url
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  parameters:
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+  requestBodies:
+    UpdateWebhookRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateWebhookRequest'
+          examples:
+            Update Webhook:
+              value:
+                enabled: true
+                url: https://eohzjuj2prziycz.m.pipedream.net
+            Filter Webhook Events:
+              value:
+                enabled_events:
+                - entity: merchant
+                  types:
+                  - created
+                  - underwritten
+                - entity: transfer
+                  types:
+                  - created
+    CreateWebhookRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateWebhookRequest'
+          examples:
+            Webhook:
+              value:
+                authentication:
+                  type: NONE
+                url: https://example.com/event_handler
+            Webhook - Basic Authentication:
+              value:
+                authentication:
+                  type: BASIC
+                  basic:
+                    username: basic-auth-username
+                    password: basic-auth-password
+                url: https://example.com/event_handler
+            Webhook - Bearer Token Authentication:
+              value:
+                authentication:
+                  type: BEARER
+                  bearer:
+                    token: U3VwZXIgc2VjcmV0IGVuY29kZWQgdG9rZW4=
+                enabled: true
+                url: https://example.com/event_handler
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

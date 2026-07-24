@@ -1,0 +1,1165 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Fee Profiles API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Fee Profiles
+  description:
+    $ref: api-descriptions/tags/fee-profiles.md
+paths:
+  /fee_profiles:
+    get:
+      description: List all `Fee Profiles`.
+      summary: List Fee Profiles
+      operationId: listFeeProfiles
+      responses:
+        '200':
+          $ref: '#/components/responses/FeeProfilesList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: list
+      x-group-parameters: true
+      parameters:
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      - $ref: '#/components/parameters/QueryBeforeCursor'
+      - $ref: '#/components/parameters/QueryLimit'
+      tags:
+      - Fee Profiles
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/fee_profiles\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: list
+      x-returns-list: true
+    post:
+      description: Create a `fee_profile`.
+      summary: Create a Fee Profile
+      operationId: createFeeProfile
+      requestBody:
+        $ref: '#/components/requestBodies/CreateFeeProfileRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/FeeProfile'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      x-java-method-name: create
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/fee-profiles/create-fee-profile.md
+      tags:
+      - Fee Profiles
+      x-python-method-name: create
+  /fee_profiles/{fee_profile_id}:
+    parameters:
+    - required: true
+      in: path
+      name: fee_profile_id
+      schema:
+        type: string
+      description: The ID of the `fee_profile`.
+    get:
+      description: Get a `fee_profile`.
+      summary: Fetch a Fee Profile
+      operationId: getFeeProfile
+      responses:
+        '200':
+          $ref: '#/components/responses/FeeProfile'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: get
+      tags:
+      - Fee Profiles
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/fee_profiles/FPq6PQ9pHsab66fKMmjQ7jb5\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: get
+components:
+  responses:
+    Error422InvalidField:
+      description: Invalid field
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error422InvalidFieldList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    FeeProfile:
+      description: Fee profile
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FeeProfile'
+          examples:
+            Fee Profile:
+              value:
+                id: FPq6PQ9pHsab66fKMmjQ7jb5
+                created_at: '2022-01-27T07:37:38.66Z'
+                updated_at: '2022-01-27T07:37:38.66Z'
+                ach_basis_points: 300
+                ach_credit_return_fixed_fee: null
+                ach_debit_return_fixed_fee: null
+                ach_fixed_fee: 30
+                american_express_assessment_basis_points: null
+                american_express_basis_points: null
+                american_express_charge_interchange: null
+                american_express_externally_funded_basis_points: null
+                american_express_externally_funded_fixed_fee: null
+                american_express_fixed_fee: null
+                ancillary_fixed_fee_primary: null
+                ancillary_fixed_fee_secondary: null
+                application: APgPDQrLD52TYvqazjHJJchM
+                basis_points: 200
+                charge_interchange: false
+                diners_club_basis_points: null
+                diners_club_charge_interchange: null
+                diners_club_fixed_fee: null
+                discover_assessments_basis_points: null
+                discover_basis_points: null
+                discover_charge_interchange: null
+                discover_data_usage_fixed_fee: null
+                discover_externally_funded_basis_points: null
+                discover_externally_funded_fixed_fee: null
+                discover_fixed_fee: null
+                discover_network_authorization_fixed_fee: null
+                dispute_fixed_fee: null
+                dispute_inquiry_fixed_fee: null
+                externally_funded_basis_points: null
+                externally_funded_fixed_fee: null
+                fixed_fee: 100
+                jcb_basis_points: null
+                jcb_charge_interchange: null
+                jcb_fixed_fee: null
+                mastercard_acquirer_fees_basis_points: null
+                mastercard_assessments_over1k_basis_points: null
+                mastercard_assessments_under1k_basis_points: null
+                mastercard_basis_points: null
+                mastercard_charge_interchange: null
+                mastercard_fixed_fee: null
+                qualified_tiers: null
+                rounding_mode: TRANSACTION
+                tags: {}
+                visa_acquirer_processing_fixed_fee: null
+                visa_assessments_basis_points: null
+                visa_base_II_credit_voucher_fixed_fee: null
+                visa_base_II_system_file_transmission_fixed_fee: null
+                visa_basis_points: null
+                visa_charge_interchange: null
+                visa_credit_voucher_fixed_fee: null
+                visa_fixed_fee: null
+                visa_kilobyte_access_fixed_fee: null
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/fee_profiles/FPq6PQ9pHsab66fKMmjQ7jb5
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    FeeProfilesList:
+      description: List of fee profiles
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FeeProfilesList'
+          examples:
+            List of Fee Profiles:
+              value:
+                _embedded:
+                  fee_profiles:
+                  - id: FPq6PQ9pHsab66fKMmjQ7jb5
+                    created_at: '2022-01-27T07:37:38.66Z'
+                    updated_at: '2022-01-27T07:37:38.66Z'
+                    ach_basis_points: 300
+                    ach_credit_return_fixed_fee: null
+                    ach_debit_return_fixed_fee: null
+                    ach_fixed_fee: 30
+                    american_express_assessment_basis_points: null
+                    american_express_basis_points: null
+                    american_express_charge_interchange: null
+                    american_express_externally_funded_basis_points: null
+                    american_express_externally_funded_fixed_fee: null
+                    american_express_fixed_fee: null
+                    ancillary_fixed_fee_primary: null
+                    ancillary_fixed_fee_secondary: null
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    basis_points: 200
+                    charge_interchange: false
+                    diners_club_basis_points: null
+                    diners_club_charge_interchange: null
+                    diners_club_fixed_fee: null
+                    discover_assessments_basis_points: null
+                    discover_basis_points: null
+                    discover_charge_interchange: null
+                    discover_data_usage_fixed_fee: null
+                    discover_externally_funded_basis_points: null
+                    discover_externally_funded_fixed_fee: null
+                    discover_fixed_fee: null
+                    discover_network_authorization_fixed_fee: null
+                    dispute_fixed_fee: null
+                    dispute_inquiry_fixed_fee: null
+                    externally_funded_basis_points: null
+                    externally_funded_fixed_fee: null
+                    fixed_fee: 100
+                    jcb_basis_points: null
+                    jcb_charge_interchange: null
+                    jcb_fixed_fee: null
+                    mastercard_acquirer_fees_basis_points: null
+                    mastercard_assessments_over1k_basis_points: null
+                    mastercard_assessments_under1k_basis_points: null
+                    mastercard_basis_points: null
+                    mastercard_charge_interchange: null
+                    mastercard_fixed_fee: null
+                    qualified_tiers: null
+                    rounding_mode: TRANSACTION
+                    tags: {}
+                    visa_acquirer_processing_fixed_fee: null
+                    visa_assessments_basis_points: null
+                    visa_base_II_credit_voucher_fixed_fee: null
+                    visa_base_II_system_file_transmission_fixed_fee: null
+                    visa_basis_points: null
+                    visa_charge_interchange: null
+                    visa_credit_voucher_fixed_fee: null
+                    visa_fixed_fee: null
+                    visa_kilobyte_access_fixed_fee: null
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPq6PQ9pHsab66fKMmjQ7jb5
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  - id: FPvCQUcnsueN3Bc3zR1qCBG8
+                    created_at: '2022-01-27T07:37:36.69Z'
+                    updated_at: '2022-01-27T07:37:36.69Z'
+                    ach_basis_points: 300
+                    ach_credit_return_fixed_fee: null
+                    ach_debit_return_fixed_fee: null
+                    ach_fixed_fee: 30
+                    american_express_assessment_basis_points: null
+                    american_express_basis_points: null
+                    american_express_charge_interchange: null
+                    american_express_externally_funded_basis_points: null
+                    american_express_externally_funded_fixed_fee: null
+                    american_express_fixed_fee: null
+                    ancillary_fixed_fee_primary: null
+                    ancillary_fixed_fee_secondary: null
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    basis_points: 200
+                    charge_interchange: false
+                    diners_club_basis_points: null
+                    diners_club_charge_interchange: null
+                    diners_club_fixed_fee: null
+                    discover_assessments_basis_points: null
+                    discover_basis_points: null
+                    discover_charge_interchange: null
+                    discover_data_usage_fixed_fee: null
+                    discover_externally_funded_basis_points: null
+                    discover_externally_funded_fixed_fee: null
+                    discover_fixed_fee: null
+                    discover_network_authorization_fixed_fee: null
+                    dispute_fixed_fee: null
+                    dispute_inquiry_fixed_fee: null
+                    externally_funded_basis_points: null
+                    externally_funded_fixed_fee: null
+                    fixed_fee: 100
+                    jcb_basis_points: null
+                    jcb_charge_interchange: null
+                    jcb_fixed_fee: null
+                    mastercard_acquirer_fees_basis_points: null
+                    mastercard_assessments_over1k_basis_points: null
+                    mastercard_assessments_under1k_basis_points: null
+                    mastercard_basis_points: null
+                    mastercard_charge_interchange: null
+                    mastercard_fixed_fee: null
+                    qualified_tiers: null
+                    rounding_mode: TRANSACTION
+                    tags: {}
+                    visa_acquirer_processing_fixed_fee: null
+                    visa_assessments_basis_points: null
+                    visa_base_II_credit_voucher_fixed_fee: null
+                    visa_base_II_system_file_transmission_fixed_fee: null
+                    visa_basis_points: null
+                    visa_charge_interchange: null
+                    visa_credit_voucher_fixed_fee: null
+                    visa_fixed_fee: null
+                    visa_kilobyte_access_fixed_fee: null
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/fee_profiles?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  offset: 0
+                  limit: 20
+                  count: 2
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+  schemas:
+    FeeProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          example: FPxxxxxxxxxxxxxxxxxx
+          description: The ID of the `Fee Profile` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        ach_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of an eCheck (also called ACH payments). Calculated as one hundredth of one percent (1 basis point = .0001 or .01%)
+        ach_credit_return_fixed_fee:
+          type: integer
+          description: A fixed amount in cents that will be charged to the seller for processing an echeck (also called ACH payments) credit return.
+          nullable: true
+        ach_debit_return_fixed_fee:
+          type: integer
+          description: A fixed amount in cents that will be charged to the seller for processing an echeck (also called ACH payment) debit return.
+          nullable: true
+        ach_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual `Transfer`.
+        american_express_assessment_basis_points:
+          type: integer
+          description: Applies to gross American Express card volume.
+          nullable: true
+        american_express_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each American Express `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%)
+          nullable: true
+        american_express_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for American Express `Transfers`.
+          nullable: true
+        american_express_externally_funded_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each American Express externally funded `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%)
+          nullable: true
+        american_express_externally_funded_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual American Express externally funded `Transfer`.
+          nullable: true
+        american_express_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual American Express `Transfer`.
+          nullable: true
+        ancillary_fixed_fee_primary:
+          type: integer
+          description: An additional fixed fee that can be charged per `Transfer`.
+          nullable: true
+        ancillary_fixed_fee_secondary:
+          type: integer
+          description: An additional fixed fee that can be charged per `Transfer` if `ancillary_fixed_fee_primary` is included.
+          nullable: true
+        application:
+          type: string
+          description: The ID of the `Application` associated with the  `Fee Profile`.
+        basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each card-based `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%)
+        card_cross_border_basis_points:
+          type: integer
+          description: Percentage-based fee charged against the full amount of every `Transfer` that includes non-US cards. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        card_cross_border_fixed_fee:
+          type: integer
+          description: Fee in cents charged against every `Transfer` that includes non-US cards.
+          nullable: true
+        charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for card-based `Transfers`.
+        diners_club_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each Diners `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        diners_club_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for Diners `Transfers`.
+          nullable: true
+        diners_club_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual Diners `Transfer`.
+          nullable: true
+        discover_assessments_basis_points:
+          type: integer
+          description: Assessment applies to gross Discover card transaction volume.
+          nullable: true
+        discover_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each Discover `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%)
+          nullable: true
+        discover_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for Discover `Transfers`.
+          nullable: true
+        discover_data_usage_fixed_fee:
+          type: integer
+          description: Applies to all U.S.-based `authorization` transactions.
+          nullable: true
+        discover_externally_funded_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each Discover externally funded `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        discover_externally_funded_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual Discover externally funded `Transfer`.
+          nullable: true
+        discover_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual Discover `Transfer`.
+          nullable: true
+        discover_network_authorization_fixed_fee:
+          type: integer
+          description: This fee applies to all Discover network `authorizations` and replaces the previously assessed Data Transmission.
+          nullable: true
+        dispute_fixed_fee:
+          type: integer
+          description: Applied when a `dispute` is created or updated to a **PENDING** state.
+          nullable: true
+        dispute_inquiry_fixed_fee:
+          type: integer
+          description: Applied when a `dispute` is created or updated to a **INQUIRY** state.
+          nullable: true
+        externally_funded_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each `Transfer` that's card-based and externally funded. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        externally_funded_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual `Transfer` that's card-based and externally funded.
+          nullable: true
+        fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual card-based `Transfer`.
+        jcb_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each JCB `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%)
+          nullable: true
+        jcb_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for JCB Transfers.
+          nullable: true
+        jcb_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual JCB `Transfer`.
+          nullable: true
+        mastercard_acquirer_fees_basis_points:
+          type: integer
+          description: The fee is assessed on a business’s gross MasterCard processing volume. This fee varies per acquirer based on MasterCard’s assessed charge as it’s distributed across the acquirer’s portfolio of merchants. Generally, this fee is a fraction of a basis point. For example, 0.0045%, 0.0075%, etc. are examples of a likely fee.
+          nullable: true
+        mastercard_assessments_over1k_basis_points:
+          type: integer
+          description: Fee applied to Mastercard credit sale transactions greater than $1,000.
+          nullable: true
+        mastercard_assessments_under1k_basis_points:
+          type: integer
+          description: Fee applied to Mastercard transactions less than or equal to $1,000.
+          nullable: true
+        mastercard_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each MasterCard `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%)
+          nullable: true
+        mastercard_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for MasterCard `Transfers`.
+          nullable: true
+        mastercard_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual MasterCard `Transfer`.
+          nullable: true
+        qualified_tiers:
+          type: object
+          description: The top of the qualified tier tree.
+          nullable: true
+        rounding_mode:
+          type: string
+          enum:
+          - TRANSACTION
+          - AGGREGATE
+          description: <ul><li>Include <strong>AGGREGATE</strong> if you want to round after the settlement calculation.<li>By default, rounding happens before the sum of the settlement calculation (i.e. round each fee transfer)</ul>
+        visa_acquirer_processing_fixed_fee:
+          type: integer
+          description: Applied to all U.S.-based credit card authorizations acquired in the U.S. regardless of where the issuer/cardholder is located. If your business is based in the U.S., the acquirer processing fee will apply to all Visa credit card authorizations
+          nullable: true
+        visa_assessments_basis_points:
+          type: integer
+          description: Applies to all Visa credit transactions.
+          nullable: true
+        visa_base_II_credit_voucher_fixed_fee:
+          type: integer
+          description: Applies to all U.S.-based refunds.
+          nullable: true
+        visa_base_II_system_file_transmission_fixed_fee:
+          type: integer
+          description: Applies to all Visa transactions and is charged in addition to other transaction-based assessments.
+          nullable: true
+        visa_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each Visa `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%)
+          nullable: true
+        visa_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for Visa `Transfers`.
+          nullable: true
+        visa_credit_voucher_fixed_fee:
+          type: integer
+          description: Applies to Visa refunds.
+          nullable: true
+        visa_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual Visa `Transfer`.
+          nullable: true
+        visa_kilobyte_access_fixed_fee:
+          type: integer
+          description: Charged on each authorization transaction submitted to Visa’s network for settlement.
+          nullable: true
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            application:
+              type: object
+              description: Link to the `Application` the resource was created under.
+              properties:
+                href:
+                  type: string
+            owner_identity:
+              type: object
+              properties:
+                href:
+                  type: string
+            processors:
+              type: object
+              properties:
+                href:
+                  type: string
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            users:
+              type: object
+              properties:
+                href:
+                  type: string
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    FeeProfilesList:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `fee_profile` objects.
+          properties:
+            fee_profiles:
+              type: array
+              minItems: 0
+              uniqueItems: true
+              description: '`fee_profile` objects.'
+              items:
+                $ref: '#/components/schemas/FeeProfile'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Error422InvalidFieldList:
+      type: object
+      description: Invalid field
+      title: ''
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - INVALID_FIELD
+                  field:
+                    type: string
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    CreateFeeProfileRequest:
+      title: FeeProfileCreate
+      type: object
+      properties:
+        ach_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of an eCheck (also called ACH payments). Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+        ach_credit_return_fixed_fee:
+          type: integer
+          description: A fixed amount in cents that will be charged to the merchant for processing an echeck (also called ACH payments) credit return.
+          nullable: true
+        ach_debit_return_fixed_fee:
+          type: integer
+          description: A fixed amount in cents that will be charged to the merchant for processing an echeck (also called ACH payment) debit return.
+          nullable: true
+        ach_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual `Transfer`.
+        american_express_assessment_basis_points:
+          type: integer
+          description: Applies to gross American Express card volume.
+          nullable: true
+        american_express_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each American Express `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        american_express_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for American Express `Transfers`.
+          nullable: true
+        american_express_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual American Express `Transfer`.
+          nullable: true
+        american_express_externally_funded_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each American Express externally funded `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        american_express_externally_funded_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual American Express externally funded `Transfer`.
+          nullable: true
+        ancillary_fixed_fee_primary:
+          type: integer
+          description: An additional fixed fee that can be charged per `Transfer`.
+          nullable: true
+        ancillary_fixed_fee_secondary:
+          type: integer
+          description: An additional fixed fee that can be charged per `Transfer` if `ancillary_fixed_fee_primary` is included.
+          nullable: true
+        application:
+          type: string
+          description: The ID of the `Application` associated with the  `Fee Profile`.
+        basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each card-based `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+        card_cross_border_basis_points:
+          type: integer
+          description: Percentage-based fee charged against the full amount of every `Transfer` that includes non-US cards. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        card_cross_border_fixed_fee:
+          type: integer
+          description: Fee in cents charged against every `Transfer` that includes non-US cards.
+          nullable: true
+        charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for card-based `Transfers`.
+        diners_club_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each Diners `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        diners_club_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for Diners `Transfers`.
+          nullable: true
+        diners_club_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual Diners `Transfer`.
+          nullable: true
+        discover_assessments_basis_points:
+          type: integer
+          description: Assessment applies to gross Discover card transaction volume.
+          nullable: true
+        discover_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each Discover `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        discover_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for Discover `Transfers`.
+          nullable: true
+        discover_data_usage_fixed_fee:
+          type: integer
+          description: Applies to all U.S.-based `Authorization` transactions.
+          nullable: true
+        discover_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual Discover `Transfer`.
+          nullable: true
+        discover_externally_funded_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each Discover externally funded `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        discover_externally_funded_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual Discover externally funded `Transfer`.
+          nullable: true
+        discover_network_authorization_fixed_fee:
+          type: integer
+          description: This fee applies to all Discover network `authorizations` and replaces the previously assessed Data Transmission.
+          nullable: true
+        dispute_fixed_fee:
+          type: integer
+          description: Applied when a `dispute` is created or updated to a **PENDING** state.
+          nullable: true
+        dispute_inquiry_fixed_fee:
+          type: integer
+          description: Applied when a `dispute` is created or updated to a **INQUIRY** state.
+          nullable: true
+        externally_funded_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each `Transfer` that's card-based and externally funded. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        externally_funded_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual `Transfer` that's card-based and externally funded.
+          nullable: true
+        fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual card-based `Transfer`.
+        jcb_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each JCB `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        jcb_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for JCB Transfers.
+          nullable: true
+        jcb_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual JCB `Transfer`.
+          nullable: true
+        mastercard_acquirer_fees_basis_points:
+          type: integer
+          description: The fee is assessed on a business’s gross MasterCard processing volume. This fee varies per acquirer based on MasterCard’s assessed charge as it’s distributed across the acquirer’s portfolio of merchants. Generally, this fee is a fraction of a basis point. For example, 0.0045%, 0.0075%, etc. are examples of a likely fee.
+          nullable: true
+        mastercard_assessments_over1k_basis_points:
+          type: integer
+          description: Fee applied to Mastercard credit sale transactions greater than $1,000.
+          nullable: true
+        mastercard_assessments_under1k_basis_points:
+          type: integer
+          description: Fee applied to Mastercard transactions less than or equal to $1,000.
+          nullable: true
+        mastercard_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each MasterCard `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        mastercard_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for MasterCard `Transfers`.
+          nullable: true
+        mastercard_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual MasterCard `Transfer`.
+          nullable: true
+        qualified_tiers:
+          type: object
+          description: The top of the qualified tier tree.
+          nullable: true
+        rounding_mode:
+          type: string
+          enum:
+          - TRANSACTION
+          - AGGREGATE
+          description: <ul><li>Include <strong>AGGREGATE</strong> if you want to round after the settlement calculation.<li>By default, rounding happens before the sum of the settlement calculation (i.e. round each fee transfer)</ul>
+        visa_acquirer_processing_fixed_fee:
+          type: integer
+          description: Applied to all U.S.-based credit card authorizations acquired in the U.S. regardless of where the issuer/cardholder is located. If your business is based in the U.S., the acquirer processing fee will apply to all Visa credit card authorizations.
+          nullable: true
+        visa_assessments_basis_points:
+          type: integer
+          description: Applies to all Visa credit transactions.
+          nullable: true
+        visa_base_II_credit_voucher_fixed_fee:
+          type: integer
+          description: Applies to all U.S.-based refunds.
+          nullable: true
+        visa_base_II_system_file_transmission_fixed_fee:
+          type: integer
+          description: Applies to all Visa transactions and is charged in addition to other transaction-based assessments.
+          nullable: true
+        visa_basis_points:
+          type: integer
+          description: Percentage-based fee incurred against the full amount of each Visa `Transfer`. Calculated as one hundredth of one percent (1 basis point = .0001 or .01%).
+          nullable: true
+        visa_charge_interchange:
+          type: boolean
+          description: Set to **True** to incur interchange fees for Visa `Transfers`.
+          nullable: true
+        visa_credit_voucher_fixed_fee:
+          type: integer
+          description: Applies to Visa refunds.
+          nullable: true
+        visa_fixed_fee:
+          type: integer
+          description: Fee in cents incurred for each individual Visa `Transfer`.
+          nullable: true
+        visa_kilobyte_access_fixed_fee:
+          type: integer
+          description: Charged on each authorization transaction submitted to Visa’s network for settlement.
+          nullable: true
+      required:
+      - application
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  requestBodies:
+    CreateFeeProfileRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateFeeProfileRequest'
+          examples:
+            Create a Fee Profile:
+              value:
+                ach_basis_points: 300
+                ach_fixed_fee: 30
+                application: APmuwPBaW8pVcwb4vCTHQH32
+                basis_points: 200
+                card_cross_border_basis_points: 300
+                card_cross_border_fixed_fee: 400
+                charge_interchange: false
+                fixed_fee: 100
+                tags:
+                  app pricing: sample
+  parameters:
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

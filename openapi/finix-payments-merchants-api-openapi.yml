@@ -1,0 +1,2052 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Merchants API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Merchants
+  description:
+    $ref: api-descriptions/tags/merchants.md
+paths:
+  /identities/{identity_id}/merchants:
+    parameters:
+    - description: ID of `Identity` to fetch.
+      required: true
+      in: path
+      name: identity_id
+      schema:
+        type: string
+    post:
+      description: 'Create a `Merchant` to start the underwriting (also called provisioning) process for your seller. `Merchants` must be created under an [`Identity`](/api/tag/Identities).
+
+
+        A bank account must be associated with the previously created `Identity` before a `Merchant` can be successfully onboarded and verified.'
+      summary: Create a Merchant
+      operationId: createMerchant
+      requestBody:
+        $ref: '#/components/requestBodies/CreateMerchantUnderwritingRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Merchant'
+        '400':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+      tags:
+      - Merchants
+      x-java-method-name: create
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: create
+  /merchants:
+    get:
+      tags:
+      - Merchants
+      description: 'Retrieve a list of `Merchants`. '
+      summary: List Merchants
+      operationId: listMerchants
+      parameters:
+      - $ref: '#/components/parameters/QueryIdFilter'
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      - $ref: '#/components/parameters/QueryBeforeCursor'
+      - $ref: '#/components/parameters/QueryCreatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryCreatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryLimit'
+      - $ref: '#/components/parameters/QueryUpdatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryUpdatedAtLteFilter'
+      responses:
+        '200':
+          $ref: '#/components/responses/MerchantsList'
+        '400':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: list
+      x-group-parameters: true
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/merchants\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: list
+      x-returns-list: true
+  /merchants/{merchant_id}:
+    parameters:
+    - description: ID of `Merchant`.
+      required: true
+      in: path
+      name: merchant_id
+      schema:
+        type: string
+    get:
+      tags:
+      - Merchants
+      description: Retrieve the details of a `Merchant`.
+      summary: Fetch a Merchant
+      operationId: getMerchant
+      responses:
+        '200':
+          $ref: '#/components/responses/Merchant'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/merchants/MUmUL7aBsHkxVLQawJxEXw6N\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: get
+    put:
+      tags:
+      - Merchants
+      description: "Update a `Merchant` to: \n- Change the `Identity` information saved with the underlying processor\n- [Enable Level 2/3 processing](/guides/payments/making-a-payment/level-2-and-level-3-processing/)\n- Enable [buyer charges](/guides/payments/making-a-payment/buyer-charges/)\n- Disable a `Merchant` so the seller can't create new `Transfers` and `Authorizations`."
+      summary: Update a Merchant
+      operationId: updateMerchant
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateMerchantRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MerchantUpdated'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: update
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: update
+  /merchants/{merchant_id}/verifications:
+    parameters:
+    - description: ID of `Merchant` object.
+      required: true
+      in: path
+      name: merchant_id
+      schema:
+        type: string
+    post:
+      tags:
+      - Merchants
+      description: 'Verify a `Merchant` if the `onboarding_state` for a `Merchant` returns **FAILED**, or if the correct the seller needs to update the saved in their information `Identity`.
+
+
+        Related Guides: [Onboarding Process](/guides/onboarding/onboarding-process/#reverify-a-merchant)'
+      summary: Verify a Merchant
+      operationId: createMerchantVerification
+      requestBody:
+        $ref: '#/components/requestBodies/CreateVerificationRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Verification'
+        '400':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: create_merchant_verification
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: create_merchant_verification
+components:
+  responses:
+    Merchant:
+      description: Single Merchant object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Merchant'
+          examples:
+            Merchant:
+              value:
+                id: MUucec6fHeaWo3VHYoSkUySM
+                created_at: '2022-01-27T07:36:58.19Z'
+                updated_at: '2022-10-06T20:25:24.06Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                card_cvv_required: false
+                card_expiration_date_required: true
+                convenience_charges_enabled: false
+                creating_transfer_from_report_enabled: true
+                default_partial_authorization_enabled: false
+                fee_ready_to_settle_upon: RECONCILIATION
+                gross_settlement_enabled: false
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                level_two_level_three_data_enabled: false
+                mcc: '4900'
+                merchant_name: Bobs Burgers
+                merchant_profile: MPzW2oRPtkLxK3fymcMACFi
+                mid: FNXh6htoPnfwmgGdvaG4L67Q1
+                onboarding_state: APPROVED
+                processing_enabled: true
+                processor: DUMMY_V1
+                processor_details:
+                  mid: FNXh6htoPnfwmgGdvaG4L67Q1
+                  api_key: secretValue
+                ready_to_settle_upon: RECONCILIATION
+                rent_surcharges_enabled: false
+                settlement_enabled: true
+                settlement_funding_identifier: UNSET
+                surcharges_enabled: false
+                tags:
+                  key_2: value_2
+                verification: VIxfDrRKZZzkCDDbeCT15oDN
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUht1bsAEcihT9HA55Tet5dk
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDoZy2xjNQyWCkN5nKZbVp6x
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUht1bsAEcihT9HA55Tet5dk/verifications
+                  merchant_profile:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MPh4vD8hWCtqHeJ8JgG4Tsva
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  verification:
+                    href: https://finix.sandbox-payments-api.com/verifications/VIr27e4C5AWxgvLnyGJmdZQe
+            Merchant - Card Present Enabled:
+              value:
+                id: MUu56ZGx3Xb6U9gAqKfgNisd
+                created_at: '2019-03-01T01:57:19.95Z'
+                updated_at: '2019-05-15T18:10:03.00Z'
+                application: APeUbTUjvYb1CdPXvNcwW1wP
+                card_cvv_required: false
+                card_expiration_date_required: true
+                convenience_charges_enabled: false
+                creating_transfer_from_report_enabled: false
+                default_partial_authorization_enabled: false
+                fee_ready_to_settle_upon: RECONCILIATION
+                gross_settlement_enabled: false
+                identity: IDsbTBawhnLBAVeinRb84vFR
+                level_two_level_three_data_enabled: false
+                mcc: '4900'
+                merchant_name: Finix Flowers
+                merchant_profile: MPcMKhfF9rhWT2JWeUKzQVy2
+                mid: '4445029863321'
+                onboarding_state: REJECTED
+                processing_enabled: true
+                processor: VANTIV_V1
+                processor_details:
+                  acceptor_id: '874767464'
+                  default_terminal_id: X6600507601
+                  mid: '4445029863321'
+                  account_token: 811D0B76DEC8CCD1903D2772B68DA0CACA84BF56B5A6EE61EC05FE126EA63EF1B979A401
+                  account_id: '1056772'
+                  merchant_ident_string: '4445029863321'
+                  id: '193448212'
+                  vantiv_merchant_id: '4445029863321'
+                ready_to_settle_upon: RECONCILIATION
+                rent_surcharges_enabled: false
+                settlement_enabled: true
+                settlement_funding_identifier: UNSET
+                surcharges_enabled: false
+                tags:
+                  key_2: value_2
+                verification: VImHURoSqEvAf9haPD6zeHJx
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDsbTBawhnLBAVeinRb84vFR
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd/verifications
+                  merchant_profile:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MPcMKhfF9rhWT2JWeUKzQVy2
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APeUbTUjvYb1CdPXvNcwW1wP
+                  verification:
+                    href: https://finix.sandbox-payments-api.com/verifications/VImHURoSqEvAf9haPD6zeHJx
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    Verification:
+      description: Single Verification object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Verification'
+          examples:
+            Payment Instrument - Verify a Card’s CVV:
+              value:
+                id: VIvZKP8XKzxyJaxJsfAEHbw6
+                created_at: '2022-10-11T00:46:48.68Z'
+                updated_at: '2022-10-11T00:46:48.72Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                identity: null
+                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
+                merchant_identity: ID2CGJmjqyYaQAu6qyuvGeWK
+                messages: []
+                payment_instrument: PIwWisLuZNwPBoLbCgQVTCoY
+                payment_instrument_verification_details:
+                  push_to_card_domestic: NOT_SUPPORTED
+                  push_to_card_cross_border: NOT_SUPPORTED
+                  card_type: CREDIT
+                  billing_currency: USD
+                  issuer_country: USA
+                processor: DUMMY_V1
+                raw: RawDummyMerchantUnderwriteResult
+                state: SUCCEEDED
+                tags:
+                  card_name: Personal Card
+                trace_id: a7355d05-95b0-4b44-938d-bf0a99f19c17
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/verifications/VIvZKP8XKzxyJaxJsfAEHbw6
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUgWbPVvtKbzjKNNGKqdQYV7
+            Payment Instrument - Verify a Card’s Address:
+              value:
+                id: VI46ua15as1tnsWgZCFmdF9F
+                created_at: '2023-02-25T20:00:33.94Z'
+                updated_at: '2023-02-25T20:01:22.34Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                identity: null
+                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
+                merchant_identity: ID2CGJmjqyYaQAu6qyuvGeWK
+                messages: []
+                payment_instrument: PIwWisLuZNwPBoLbCgQVTCoY
+                payment_instrument_verification_details:
+                  push_to_card_domestic: NOT_SUPPORTED
+                  push_to_card_cross_border: NOT_SUPPORTED
+                  card_type: CREDIT
+                  billing_currency: USD
+                  issuer_country: USA
+                processor: DUMMY_V1
+                raw: RawDummyMerchantUnderwriteResult
+                state: SUCCEEDED
+                tags:
+                  card_name: Personal Card
+                trace_id: 3374bc71-d43b-4af4-b1f8-7719a2a9e320
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/verifications/VI46ua15as1tnsWgZCFmdF9F
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUgWbPVvtKbzjKNNGKqdQYV7
+            Payment Instrument - Verify Push-to-Card Eligibility:
+              value:
+                id: VI8fgzLc9BnY1A996vPcWnu1
+                created_at: '2023-01-01T10:51:06.18Z'
+                updated_at: '2023-01-01T10:52:15.97Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                identity: null
+                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
+                merchant_identity: ID2CGJmjqyYaQAu6qyuvGeWK
+                messages: []
+                payment_instrument: PIwWisLuZNwPBoLbCgQVTCoY
+                payment_instrument_verification_details:
+                  push_to_card_domestic: FAST_FUNDS
+                  push_to_card_cross_border: NOT_SUPPORTED
+                  card_type: CREDIT
+                  billing_currency: USD
+                  issuer_country: USA
+                processor: DUMMY_V1
+                raw: RawDummyMerchantUnderwriteResult
+                state: SUCCEEDED
+                tags:
+                  card_name: Personal Card
+                trace_id: 05886388-bcb3-479f-ac31-e5404a92e1ab
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/verifications/VI8fgzLc9BnY1A996vPcWnu1
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUgWbPVvtKbzjKNNGKqdQYV7
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    MerchantUpdated:
+      description: Single Merchant object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Merchant'
+          examples:
+            Merchant - Level 2/3 Processing:
+              value:
+                id: MUeDVrf2ahuKc9Eg5TeZugvs
+                created_at: '2022-01-27T07:37:04.03Z'
+                updated_at: '2022-01-27T07:37:06.12Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                card_cvv_required: false
+                card_expiration_date_required: true
+                convenience_charges_enabled: true
+                creating_transfer_from_report_enabled: true
+                default_partial_authorization_enabled: false
+                fee_ready_to_settle_upon: SUCCESSFUL_CAPTURE
+                gross_settlement_enabled: false
+                identity: IDuqZpDw28f2KK6YuDk4jNLg
+                level_two_level_three_data_enabled: true
+                mcc: '4900'
+                merchant_name: Finix Flowers
+                merchant_profile: MP7tbAZ1RpjFycrfBVo6z4Ky
+                mid: FNXw5a7pBKHsCSgCAyQvU2soL
+                onboarding_state: APPROVED
+                processing_enabled: true
+                processor: DUMMY_V1
+                processor_details:
+                  mid: FNXw5a7pBKHsCSgCAyQvU2soL
+                  api_key: secretValue
+                ready_to_settle_upon: SUCCESSFUL_CAPTURE
+                rent_surcharges_enabled: false
+                settlement_enabled: false
+                settlement_funding_identifier: UNSET
+                surcharges_enabled: false
+                tags:
+                  key_2: value_2
+                verification: VI5DBvVQ3ye5PcnUCSSvj84d
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUeDVrf2ahuKc9Eg5TeZugvs
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUeDVrf2ahuKc9Eg5TeZugvs/verifications
+                  merchant_profile:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MP7tbAZ1RpjFycrfBVo6z4Ky
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  verification:
+                    href: https://finix.sandbox-payments-api.com/verifications/VI5DBvVQ3ye5PcnUCSSvj84d
+            Merchant - Buyer Charges:
+              value:
+                id: MUeDVrf2ahuKc9Eg5TeZugvs
+                created_at: '2022-01-27T07:37:04.03Z'
+                updated_at: '2022-01-27T07:37:06.12Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                card_cvv_required: false
+                card_expiration_date_required: true
+                convenience_charges_enabled: true
+                creating_transfer_from_report_enabled: true
+                default_partial_authorization_enabled: false
+                fee_ready_to_settle_upon: SUCCESSFUL_CAPTURE
+                gross_settlement_enabled: false
+                identity: IDuqZpDw28f2KK6YuDk4jNLg
+                level_two_level_three_data_enabled: true
+                mcc: '4900'
+                merchant_name: Finix Flowers
+                merchant_profile: MP7tbAZ1RpjFycrfBVo6z4Ky
+                mid: FNXw5a7pBKHsCSgCAyQvU2soL
+                onboarding_state: APPROVED
+                processing_enabled: true
+                processor: DUMMY_V1
+                processor_details:
+                  mid: FNXw5a7pBKHsCSgCAyQvU2soL
+                  api_key: secretValue
+                ready_to_settle_upon: SUCCESSFUL_CAPTURE
+                rent_surcharges_enabled: true
+                settlement_enabled: true
+                settlement_funding_identifier: UNSET
+                surcharges_enabled: true
+                tags:
+                  key_2: value_2
+                verification: VI5DBvVQ3ye5PcnUCSSvj84d
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUeDVrf2ahuKc9Eg5TeZugvs
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUeDVrf2ahuKc9Eg5TeZugvs/verifications
+                  merchant_profile:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MP7tbAZ1RpjFycrfBVo6z4Ky
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  verification:
+                    href: https://finix.sandbox-payments-api.com/verifications/VI5DBvVQ3ye5PcnUCSSvj84d
+            Merchant - Disable a Merchant:
+              value:
+                id: MUeDVrf2ahuKc9Eg5TeZugvs
+                created_at: '2022-01-27T07:37:04.03Z'
+                updated_at: '2022-01-27T07:37:06.12Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                card_cvv_required: false
+                card_expiration_date_required: true
+                convenience_charges_enabled: true
+                creating_transfer_from_report_enabled: true
+                default_partial_authorization_enabled: false
+                fee_ready_to_settle_upon: SUCCESSFUL_CAPTURE
+                gateway: null
+                gross_settlement_enabled: false
+                identity: IDuqZpDw28f2KK6YuDk4jNLg
+                level_two_level_three_data_enabled: true
+                mcc: '4900'
+                merchant_name: Finix Flowers
+                merchant_profile: MP7tbAZ1RpjFycrfBVo6z4Ky
+                mid: FNXw5a7pBKHsCSgCAyQvU2soL
+                onboarding_state: APPROVED
+                processing_enabled: false
+                processor: DUMMY_V1
+                processor_details:
+                  mid: FNXw5a7pBKHsCSgCAyQvU2soL
+                  api_key: secretValue
+                ready_to_settle_upon: SUCCESSFUL_CAPTURE
+                rent_surcharges_enabled: true
+                settlement_enabled: true
+                settlement_funding_identifier: UNSET
+                surcharges_enabled: false
+                tags:
+                  key_2: value_2
+                verification: VI5DBvVQ3ye5PcnUCSSvj84d
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUeDVrf2ahuKc9Eg5TeZugvs
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUeDVrf2ahuKc9Eg5TeZugvs/verifications
+                  merchant_profile:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MP7tbAZ1RpjFycrfBVo6z4Ky
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  verification:
+                    href: https://finix.sandbox-payments-api.com/verifications/VI5DBvVQ3ye5PcnUCSSvj84d
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    MerchantsList:
+      description: List of Merchants objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MerchantsList'
+          examples:
+            List of Merchants:
+              value:
+                _embedded:
+                  merchants:
+                  - id: MUk3936kZweevCrjyHLN1vsu
+                    created_at: '2022-10-10T05:20:18.12Z'
+                    updated_at: '2022-10-10T05:21:01.42Z'
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    card_cvv_required: false
+                    card_expiration_date_required: true
+                    convenience_charges_enabled: false
+                    creating_transfer_from_report_enabled: true
+                    default_partial_authorization_enabled: false
+                    fee_ready_to_settle_upon: RECONCILIATION
+                    gross_settlement_enabled: false
+                    identity: IDx2ZETjYiWkbitkYdFt1yLF
+                    level_two_level_three_data_enabled: false
+                    mcc: '4900'
+                    merchant_name: Finix Flowers
+                    merchant_profile: MPnXB4UBGtSUfxwA41z2Hqid
+                    mid: FNXqeJt93ojP2cn1VUYtXANCF
+                    onboarding_state: APPROVED
+                    processing_enabled: true
+                    processor: DUMMY_V1
+                    processor_details:
+                      mid: FNXqeJt93ojP2cn1VUYtXANCF
+                      api_key: secretValue
+                    ready_to_settle_upon: RECONCILIATION
+                    rent_surcharges_enabled: false
+                    settlement_enabled: true
+                    settlement_funding_identifier: UNSET
+                    surcharges_enabled: false
+                    tags:
+                      key_2: value_2
+                    verification: VItUgbe9V8vpgSaJAriLDxER
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/merchants/MUk3936kZweevCrjyHLN1vsu
+                      identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDx2ZETjYiWkbitkYdFt1yLF
+                      verifications:
+                        href: https://finix.sandbox-payments-api.com/merchants/MUk3936kZweevCrjyHLN1vsu/verifications
+                      merchant_profile:
+                        href: https://finix.sandbox-payments-api.com/merchant_profiles/MPnXB4UBGtSUfxwA41z2Hqid
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      verification:
+                        href: https://finix.sandbox-payments-api.com/verifications/VItUgbe9V8vpgSaJAriLDxER
+                  - id: MU951dfkbH7nqVm4G91yb2au
+                    created_at: '2022-09-21T17:46:06.29Z'
+                    updated_at: '2022-09-21T17:46:09.45Z'
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    card_cvv_required: false
+                    card_expiration_date_required: true
+                    convenience_charges_enabled: false
+                    creating_transfer_from_report_enabled: true
+                    default_partial_authorization_enabled: false
+                    fee_ready_to_settle_upon: RECONCILIATION
+                    gross_settlement_enabled: false
+                    identity: ID4YPdRriet29ZhaiVa6qhJ5
+                    level_two_level_three_data_enabled: false
+                    mcc: '4900'
+                    merchant_name: Petes Coffee
+                    merchant_profile: MPo85BavSYVrkDn57BLh1JTs
+                    mid: FNXkitpwdmgMJ8Vz9FxKBCSza
+                    onboarding_state: APPROVED
+                    processing_enabled: true
+                    processor: DUMMY_V1
+                    processor_details:
+                      mid: FNXkitpwdmgMJ8Vz9FxKBCSza
+                      api_key: secretValue
+                    ready_to_settle_upon: RECONCILIATION
+                    rent_surcharges_enabled: false
+                    settlement_enabled: true
+                    settlement_funding_identifier: UNSET
+                    surcharges_enabled: false
+                    tags:
+                      key: value_2
+                    verification: VIrjCZHf8v8arhbgPTikKmpp
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/merchants/MU951dfkbH7nqVm4G91yb2au
+                      identity:
+                        href: https://finix.sandbox-payments-api.com/identities/ID4YPdRriet29ZhaiVa6qhJ5
+                      verifications:
+                        href: https://finix.sandbox-payments-api.com/merchants/MU951dfkbH7nqVm4G91yb2au/verifications
+                      merchant_profile:
+                        href: https://finix.sandbox-payments-api.com/merchant_profiles/MPo85BavSYVrkDn57BLh1JTs
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      verification:
+                        href: https://finix.sandbox-payments-api.com/verifications/VIrjCZHf8v8arhbgPTikKmpp
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchants?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                  next:
+                    href: https://finix.sandbox-payments-api.com/merchants?offset=20&limit=20&sort=created_at,desc&sort=id,desc
+                  last:
+                    href: https://finix.sandbox-payments-api.com/merchants?offset=1660&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  offset: 0
+                  limit: 20
+                  count: 1669
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+  schemas:
+    MerchantsList:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `Merchant` objects.
+          properties:
+            merchants:
+              type: array
+              minItems: 0
+              uniqueItems: true
+              description: '`Merchant` objects.'
+              items:
+                $ref: '#/components/schemas/Merchant'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    Address:
+      title: Address
+      type: object
+      description: Address of the account owner.
+      nullable: true
+      properties:
+        city:
+          type: string
+          description: City (max 20 characters).
+          nullable: true
+        country:
+          $ref: '#/components/schemas/Country'
+        line1:
+          type: string
+          description: First line of the address (max 35 characters).
+          nullable: true
+        line2:
+          type: string
+          description: Second line of the address (max 35 characters).
+          nullable: true
+        postal_code:
+          type: string
+          description: Zip or Postal code (max 7 characters).
+          nullable: true
+        region:
+          type: string
+          description: 2-letter State code.
+          nullable: true
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    Country:
+      title: Country
+      type: string
+      enum:
+      - ABW
+      - AFG
+      - AGO
+      - AIA
+      - ALA
+      - ALB
+      - AND
+      - ARE
+      - ARG
+      - ARM
+      - ASM
+      - ATA
+      - ATF
+      - ATG
+      - AUS
+      - AUT
+      - AZE
+      - BDI
+      - BEL
+      - BEN
+      - BES
+      - BFA
+      - BGD
+      - BGR
+      - BHR
+      - BHS
+      - BIH
+      - BLM
+      - BLR
+      - BLZ
+      - BMU
+      - BOL
+      - BRA
+      - BRB
+      - BRN
+      - BTN
+      - BVT
+      - BWA
+      - CAF
+      - CAN
+      - CCK
+      - CHE
+      - CHL
+      - CHN
+      - CIV
+      - CMR
+      - COD
+      - COG
+      - COK
+      - COL
+      - COM
+      - CPV
+      - CRI
+      - CUB
+      - CUW
+      - CXR
+      - CYM
+      - CYP
+      - CZE
+      - DEU
+      - DJI
+      - DMA
+      - DNK
+      - DOM
+      - DZA
+      - ECU
+      - EGY
+      - ERI
+      - ESH
+      - ESP
+      - EST
+      - ETH
+      - FIN
+      - FJI
+      - FLK
+      - FRA
+      - FRO
+      - FSM
+      - GAB
+      - GBR
+      - GEO
+      - GGY
+      - GHA
+      - GIB
+      - GIN
+      - GLP
+      - GMB
+      - GNB
+      - GNQ
+      - GRC
+      - GRD
+      - GRL
+      - GTM
+      - GUF
+      - GUM
+      - GUY
+      - HKG
+      - HMD
+      - HND
+      - HRV
+      - HTI
+      - HUN
+      - IDN
+      - IMN
+      - IND
+      - IOT
+      - IRL
+      - IRN
+      - IRQ
+      - ISL
+      - ISR
+      - ITA
+      - JAM
+      - JEY
+      - JOR
+      - JPN
+      - KAZ
+      - KEN
+      - KGZ
+      - KHM
+      - KIR
+      - KNA
+      - KOR
+      - KWT
+      - LAO
+      - LBN
+      - LBR
+      - LBY
+      - LCA
+      - LIE
+      - LKA
+      - LSO
+      - LTU
+      - LUX
+      - LVA
+      - MAC
+      - MAF
+      - MAR
+      - MCO
+      - MDA
+      - MDG
+      - MDV
+      - MEX
+      - MHL
+      - MKD
+      - MLI
+      - MLT
+      - MMR
+      - MNE
+      - MNG
+      - MNP
+      - MRT
+      - MSR
+      - MTQ
+      - MUS
+      - MWI
+      - MYS
+      - MYT
+      - NAM
+      - NCL
+      - NER
+      - NFK
+      - NGA
+      - NIC
+      - NIU
+      - NLD
+      - NOR
+      - NPL
+      - NRU
+      - NZL
+      - OMN
+      - PAK
+      - PAN
+      - PCN
+      - PER
+      - PHL
+      - PLW
+      - PNG
+      - POL
+      - PRI
+      - PRK
+      - PRT
+      - PRY
+      - PSE
+      - PYF
+      - QAT
+      - REU
+      - ROU
+      - RUS
+      - RWA
+      - SAU
+      - SDN
+      - SEN
+      - SGP
+      - SGS
+      - SHN
+      - SJM
+      - SLB
+      - SLE
+      - SLV
+      - SMR
+      - SOM
+      - SPM
+      - SRB
+      - SSD
+      - STP
+      - SUR
+      - SVK
+      - SVN
+      - SWE
+      - SWZ
+      - SXM
+      - SYC
+      - SYR
+      - TCA
+      - TCD
+      - TGO
+      - THA
+      - TJK
+      - TKL
+      - TKM
+      - TLS
+      - TON
+      - TTO
+      - TUN
+      - TUR
+      - TUV
+      - TWN
+      - TZA
+      - UGA
+      - UKR
+      - UMI
+      - URY
+      - USA
+      - UZB
+      - VAT
+      - VCT
+      - VEN
+      - VGB
+      - VIR
+      - VNM
+      - VUT
+      - WLF
+      - WSM
+      - XKX
+      - YEM
+      - ZAF
+      - ZMB
+      - ZWE
+      description: The sender’s country.
+      nullable: true
+    Raw:
+      title: Raw
+      description: Raw response from the processor.
+      x-examples: {}
+      type: object
+      nullable: true
+    Currency:
+      type: string
+      description: ISO 4217 3 letter currency code.
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    CreateMerchantUnderwritingRequest:
+      type: object
+      title: MerchantUnderwritingCreate
+      properties:
+        gateway:
+          type: string
+          enum:
+          - TRIPOS_CLOUD_V1
+          - TRIPOS_MOBILE_V1
+          - DATACAP_V1
+          description: Name of the gateway that processes the `Merchant's` card present transactions. Use `gateway` only to enable a merchant to accept card present transactions.
+        processor:
+          $ref: '#/components/schemas/ProcessorRequest'
+        tags:
+          $ref: '#/components/schemas/Tags'
+      required:
+      - processor
+    ProcessorRequest:
+      description: 'Set the acquiring processor. Avalible values include: <ul><li><strong>DUMMY_V1</strong></li><li><strong>LITLE_V1</strong></li><li><strong>MASTERCARD_V1</strong></li><li><strong>VISA_V1</strong></li><li><strong>NMI_V1</strong></li><li><strong>VANTIV_V1</strong></li></ul>Use <strong>DUMMY_V1</strong> or  <strong>null</strong> to use your sandbox. For more details on which processor to use, reach out to your Finix point of contact or email <a href="/guides/getting-started/support-at-finix/">Finix Support</a>.'
+      type: string
+      x-examples: {}
+      title: ''
+      nullable: true
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Verification:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the `Verification` attempt (begins with `VIXXX`).
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        application:
+          type: string
+          description: ID of the `Application` the `Merchant` was created under.
+        identity:
+          type: string
+          description: ID of the `Identity` that created the `Merchant`.
+          nullable: true
+        merchant:
+          type: string
+          description: ID of the `Merchant` resource.
+          nullable: true
+        merchant_identity:
+          type: string
+          description: ID of the `Identity` associated with the `Merchant`.
+          nullable: true
+        messages:
+          type: array
+          description: Provides additional details about the verification (e.g why it failed). This field is usually **null**.
+          items:
+            type: object
+        payment_instrument:
+          type: string
+          description: The `Payment Instrument` that's used to settle the `Merchant's` processed funds.
+          nullable: true
+        payment_instrument_verification_details:
+          type: object
+          description: Details the verification results of `Payment Instruments`.
+          properties:
+            push_to_card_domestic:
+              type: string
+              description: Details if the `Payment Instrument` supports push and pull from card, domestically. For more details, see [Push to Card](/guides/push-pull/).
+              enum:
+              - FAST_FUNDS
+              - NON_FAST_FUNDS
+              - NOT_SUPPORTED
+              - UNKNOWN
+            push_to_card_cross_border:
+              type: string
+              description: Details if the `Payment Instrument` supports push and pull from card, cross-border. For more details, see [Push to Card](/guides/push-pull/).
+              enum:
+              - FAST_FUNDS
+              - NON_FAST_FUNDS
+              - NOT_SUPPORTED
+              - UNKNOWN
+            card_type:
+              type: string
+              description: The type of card. Same value as `Payment Instrument#type`.
+              enum:
+              - CREDIT
+              - DEBIT
+              - HSA_FSA
+              - NON_RELOADABLE_PREPAID
+              - RELOADABLE_PREPAID
+              - UNKNOWN
+            billing_currency:
+              $ref: '#/components/schemas/Currency'
+            issuer_country:
+              $ref: '#/components/schemas/Country'
+        processor:
+          type: string
+          description: Name of the verification processor.
+        raw:
+          $ref: '#/components/schemas/Raw'
+        state:
+          type: string
+          description: The status of the `Verification` request.
+          enum:
+          - PENDING
+          - SUCCEEDED
+          - FAILED
+        tags:
+          $ref: '#/components/schemas/Tags'
+        trace_id:
+          type: string
+          description: Trace ID of the `Verification`. The processor sends back the `trace_id` so you can track the verification end-to-end.
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            merchant:
+              type: object
+              description: Link to the `Merchant` that was used in the request.
+              properties:
+                href:
+                  type: string
+            application:
+              type: object
+              description: Link to the `Application` that was used in the request.
+              properties:
+                href:
+                  type: string
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    Merchant:
+      type: object
+      x-examples:
+        example-1:
+          id: MUucec6fHeaWo3VHYoSkUySM
+          application: APgPDQrLD52TYvqazjHJJchM
+          identity: IDpYDM7J9n57q849o9E9yNrG
+          verification: VIdikDHXv7x8nWyJg8JZemGx
+          merchant_profile: MPzW2oRPtkLxK3fymcMACFi
+          processor: DUMMY_V1
+          processing_enabled: true
+          settlement_enabled: true
+          gross_settlement_enabled: false
+          creating_transfer_from_report_enabled: true
+          card_expiration_date_required: true
+          card_cvv_required: false
+          tags:
+            key_2: value_2
+          mcc: '4900'
+          mid: FNX7CwmebftudY7i5mA4qF6XT
+          merchant_name: Petes Coffee
+          settlement_funding_identifier: UNSET
+          ready_to_settle_upon: RECONCILIATION
+          fee_ready_to_settle_upon: RECONCILIATION
+          level_two_level_three_data_enabled: false
+          created_at: '2022-01-27T07:36:58.19Z'
+          updated_at: '2022-01-27T07:36:58.46Z'
+          onboarding_state: APPROVED
+          processor_details:
+            mid: FNX7CwmebftudY7i5mA4qF6XT
+            api_key: secretValue
+          _links:
+            self:
+              href: https://finix.sandbox-payments-api.com/merchants/MUucec6fHeaWo3VHYoSkUySM
+            identity:
+              href: https://finix.sandbox-payments-api.com/identities/IDpYDM7J9n57q849o9E9yNrG
+            verifications:
+              href: https://finix.sandbox-payments-api.com/merchants/MUucec6fHeaWo3VHYoSkUySM/verifications
+            merchant_profile:
+              href: https://finix.sandbox-payments-api.com/merchant_profiles/MPzW2oRPtkLxK3fymcMACFi
+            application:
+              href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+            verification:
+              href: https://finix.sandbox-payments-api.com/verifications/VIdikDHXv7x8nWyJg8JZemGx
+      title: Merchant
+      properties:
+        id:
+          type: string
+          description: The ID of the `Merchant` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        application:
+          type: string
+          description: ID of the `Application` the `Merchant` was created under.
+        card_cvv_required:
+          type: boolean
+          description: Set to **true** to require the card's CVV code.
+        card_expiration_date_required:
+          type: boolean
+          description: Set to **true** to require the card's expiration date.
+        creating_transfer_from_report_enabled:
+          type: boolean
+          description: Set to **true** to automatically create `Transfers` once settlement reports get generated.
+        convenience_charges_enabled:
+          type: boolean
+          description: Set to **true** if you want to enable the `Merchant` to accept convenience fees and/or service fees.
+        fee_ready_to_settle_upon:
+          type: string
+          description: Details how the `Merchant` settles fees.
+        gateway:
+          type: string
+          description: Name of the gateway that routes the `Merchant's` transactions to the processor.
+          enum:
+          - TRIPOS_MOBILE_V1
+          - TRIPOS_CLOUD_V1
+          - DATACAP_V1
+          nullable: true
+        gross_settlement_enabled:
+          type: boolean
+          description: Set to **true** to enable gross settlements.
+        identity:
+          type: string
+          description: The ID of the `Identity` resource associated with the `Merchant`.
+        level_two_level_three_data_enabled:
+          type: boolean
+          description: Set to **true** to enable the `Merchant` for Level 2 and Level 3 processing. Default value is **false**.
+        mcc:
+          type: string
+          description: The Merchant Category Code ([MCC](http://www.dm.usda.gov/procurement/card/card\_x/mcc.pdf)) that this merchant will be classified under. For a list of approved MCCs, see [Approved Merchant Category Codes.](/docs/guides/business/security-and-compliance/approved-merchants/)
+          nullable: true
+        merchant_name:
+          type: string
+          description: The legal name saved in the `Merchant` resource.
+        merchant_profile:
+          type: string
+          description: Details if a merchant's info was submitted to third-party processors for provisioning.
+        mid:
+          type: string
+          description: MID of the `Merchant`.
+          nullable: true
+        onboarding_state:
+          type: string
+          enum:
+          - PROVISIONING
+          - APPROVED
+          - REJECTED
+          description: Details the state of the `Merchant's` onboarding.
+        processor:
+          type: string
+          description: Name of the transaction processor.
+        processor_details:
+          type: object
+          description: Additional details specific to the processor.
+          properties:
+            api_key:
+              type: string
+            mid:
+              type: string
+        processing_enabled:
+          type: boolean
+          description: Details if transaction processing is enabled for the `Merchant`.
+        ready_to_settle_upon:
+          type: string
+          description: Details how transactions captured by the `Merchant` are settled.
+          enum:
+          - RECONCILIATION
+          - SUCCESSFUL_CAPTURE
+          - PROCESSOR_WINDOW
+        rent_surcharges_enabled:
+          type: boolean
+          description: Set to **true** if you want to enable a `Merchant` to accept rent charges.
+        settlement_enabled:
+          type: boolean
+          description: Details if settlement processing is enabled for the `Merchant`.
+        settlement_funding_identifier:
+          type: string
+          description: 'Includes additional information (like the MID or `Merchant` name) when submitting funding `Transfers` to processors.
+
+            - **UNSET**: No additional details get provided to the processor.
+
+            - **MID_AND_DATE**: The `MID` of the `Merchant` and the date the funding `Transfer` was submitted (Date is in UTC). e.g **MID:12345678-20220225**
+
+            - **MID_AND_MERCHANT_NAME**: The `MID` of the `Merchant` and the `Merchant#name` (white spaces will be removed). e.g. **MID:12345678-NameOfMerchant**
+
+
+            These details appear alongside the seller''s payout in their bank account as a description of the deposit.'
+          enum:
+          - UNSET
+          - MID_AND_DATE
+          - MID_AND_MERCHANT_NAME
+          default: UNSET
+        surcharges_enabled:
+          type: boolean
+          default: false
+          description: Set to **true** if you want to enable a `Merchant` to accept surcharge fees. For more details, see [Buyer Charges](/guides/payments/modify/buyer-charges/).
+        tags:
+          $ref: '#/components/schemas/Tags'
+        verification:
+          type: string
+          description: ID of the `Verification` that was submitted to verify the `Merchant`.
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            identity:
+              type: object
+              description: Link to the `Identity` the request was made under.
+              properties:
+                href:
+                  type: string
+            verifications:
+              type: object
+              description: Link to the `Verification` that was used to verify the `Merchant` that the request was made under.
+              properties:
+                href:
+                  type: string
+            merchant_profile:
+              type: object
+              description: Link to the `merchant_profile` the request was made under.
+              properties:
+                href:
+                  type: string
+            application:
+              type: object
+              description: Link to the `Application` the request was made under.
+              properties:
+                href:
+                  type: string
+            verification:
+              type: object
+              description: Link to the `Verification` that was used to verify the `Identity` that the request was made under.
+              properties:
+                href:
+                  type: string
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    CreateVerificationRequest:
+      type: object
+      properties:
+        merchant:
+          type: string
+          description: '- The ID of the `Merchant`.
+
+            - Must be included when `verify_payment_card` is set to **true**.'
+        processor:
+          type: string
+          enum:
+          - DUMMY_V1
+          - MASTERCARD_V1
+          - VISA_V1
+          default: DUMMY_V1
+          description: 'Set the acquiring processor. Avalible values include: <ul><li><strong>DUMMY_V1</strong></li><li><strong>MASTERCARD_V1</strong></li><li><strong>VISA_V1</strong></li></ul>Use <strong>DUMMY_V1</strong> or  <strong>null</strong> to use your sandbox. For more details on which processor to use, reach out to your Finix point of contact or email <a href="/guides/getting-started/support-at-finix/">Finix Support</a>.'
+        security_code:
+          type: string
+          description: The ID of the `Merchant`.
+        verify_payment_card:
+          type: boolean
+          description: '- Set to **true** to verify card details with the card issuer.
+
+            - Must be set to **true** to update the CVV or security code of a card.
+
+            - When set to **true**, `merchant` must also be included with your request.'
+        tags:
+          $ref: '#/components/schemas/Tags'
+        address:
+          $ref: '#/components/schemas/Address'
+        identity:
+          type: string
+          description: ID of the `Identity` resource associated with the `Merchant`.
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    UpdateMerchantRequest:
+      type: object
+      properties:
+        card_cvv_required:
+          type: boolean
+          description: Set to **true** to require the card's CVV code.
+        card_expiration_date_required:
+          type: boolean
+          description: Set to **true** to require the card's expiration date.
+        convenience_charges_enabled:
+          type: boolean
+          description: Set to **true** if you want to enable the `Merchant` to accept convenience fees and/or service fees.
+        creating_transfer_from_report_enabled:
+          type: boolean
+          description: Set to **true** to automatically create `Transfers` once settlement reports get generated.
+        fee_ready_to_settle_upon:
+          type: string
+          description: Details how the `Merchant` settles fees.
+        gross_settlement_enabled:
+          type: boolean
+          description: Set to **true** to enable gross settlements.
+        level_two_level_three_data_enabled:
+          type: boolean
+          description: Set to **true** to enable the `Merchant` for Level 2 and Level 3 processing. Default value is **false**.
+        merchant_name:
+          type: string
+          description: The legal name saved in the `Merchant` resource.
+        processing_enabled:
+          type: boolean
+          description: Details if transaction processing is enabled for the `Merchant`.
+        ready_to_settle_upon:
+          type: string
+          description: Details how transactions captured by the `Merchant` are settled.
+        rent_surcharges_enabled:
+          type: boolean
+          description: Set to **true** if you want to enable a `Merchant` to accept rent charges.
+        settlement_enabled:
+          type: boolean
+          description: Details if settlement processing is enabled for the `Merchant`.
+        settlement_funding_identifier:
+          type: string
+          enum:
+          - MID_AND_DATE
+          - MID_AND_MERCHANT_NAME
+          - UNSET
+          default: UNSET
+          description: 'Includes additional information (like the MID or `Merchant` name) when submitting funding `Transfers` to processors.
+
+            - **UNSET**: No additional details get provided to the processor.
+
+            - **MID_AND_DATE**: The `MID` of the `Merchant` and the date the funding `Transfer` was submitted (Date is in UTC). e.g **MID:12345678-20220225**
+
+            - **MID_AND_MERCHANT_NAME**: The `MID` of the `Merchant` and the `Merchant#name` (white spaces will be removed). e.g. **MID:12345678-NameOfMerchant**
+
+
+            These details appear alongside the seller''s payout in their bank account as a description of the deposit.'
+        tags:
+          $ref: '#/components/schemas/Tags'
+        surcharge_fees_enabled:
+          type: boolean
+          description: Set to **true** if you want to enable a `Merchant` to accept surcharge fees.
+  parameters:
+    QueryUpdatedAtGteFilter:
+      description: Filter where `updated_at` is after the given date.
+      in: query
+      name: updated_at.gte
+      schema:
+        type: string
+      style: form
+    QueryIdFilter:
+      description: Filter by `id`.
+      in: query
+      name: id
+      schema:
+        type: string
+      style: form
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
+    QueryCreatedAtGteFilter:
+      description: Filter where `created_at` is after the given date.
+      in: query
+      name: created_at.gte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryUpdatedAtLteFilter:
+      description: Filter where `updated_at` is before the given date.
+      in: query
+      name: updated_at.lte
+      schema:
+        type: string
+      style: form
+    QueryCreatedAtLteFilter:
+      description: Filter where `created_at` is before the given date.
+      in: query
+      name: created_at.lte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  requestBodies:
+    UpdateMerchantRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateMerchantRequest'
+          examples:
+            Merchant - Level 2/3 Processing:
+              value:
+                level_two_level_three_data_enabled: true
+            Merchant - Buyer Charges:
+              value:
+                convenience_charges_enabled: true
+                rent_surcharges_enabled: true
+            Merchant - Disable a Merchant:
+              value:
+                processing_enabled: false
+    CreateVerificationRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateVerificationRequest'
+          examples:
+            Payment Instrument - Verify a Card’s CVV:
+              value:
+                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
+                security_code: '123'
+                verify_payment_card: true
+            Payment Instrument - Verify a Card’s Address:
+              value:
+                address:
+                  city: San Francisco
+                  country: USA
+                  line1: 900 Metro Center Blv
+                  postal_code: '94404'
+                  region: CA
+                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
+                verify_payment_card: true
+            Payment Instrument - Verify Push-to-Card Eligibility:
+              value:
+                identity: ID2CGJmjqyYaQAu6qyuvGeWK
+                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
+                tags:
+                  card_name: Business_Card
+    CreateMerchantUnderwritingRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateMerchantUnderwritingRequest'
+          examples:
+            Merchant:
+              value:
+                processor: DUMMY_V1
+                tags:
+                  key_2: value_2
+            Merchant - Card Present Enabled:
+              value:
+                gateway: TRIPOS_CLOUD_V1
+                processor: VANTIV_V1
+                tags:
+                  key_2: value_2
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

@@ -1,0 +1,2737 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Authorizations
+  description:
+    $ref: api-descriptions/tags/authorizations.md
+paths:
+  /authorizations:
+    post:
+      tags:
+      - Authorizations
+      description: 'Create an `Authorization` to process a transaction.
+
+
+        Related Guides: [Creating and Capturing an Authorization](/guides/payments/making-a-payment/creating-and-capturing-an-authorization/), [Level 2 and 3 Processing](/guides/payments/making-a-payment/level-2-and-level-3-processing/), [In-Person Cloud Payments](/guides/payments/in-person-payments/cloud/in-person-cloud-payments/), [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/)'
+      summary: Create an Authorization
+      operationId: createAuthorization
+      requestBody:
+        $ref: '#/components/requestBodies/CreateAuthorizationRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Authorization'
+        '400':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '402':
+          $ref: '#/components/responses/ErrorPaymentRequired'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      x-java-method-name: create
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: create
+    get:
+      tags:
+      - Authorizations
+      description: 'Retrieve a list of `Authorizations`. '
+      summary: List Authorizations
+      operationId: listAuthorizations
+      parameters:
+      - $ref: '#/components/parameters/QueryAmountFilter'
+      - $ref: '#/components/parameters/QueryAmountGtFilter'
+      - $ref: '#/components/parameters/QueryAmountGteFilter'
+      - $ref: '#/components/parameters/QueryAmountLtFilter'
+      - $ref: '#/components/parameters/QueryAmountLteFilter'
+      - $ref: '#/components/parameters/QueryBeforeCursor'
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      - $ref: '#/components/parameters/QueryCreatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryCreatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryIdempotencyIdFilter'
+      - $ref: '#/components/parameters/QueryLimit'
+      - $ref: '#/components/parameters/TagsKey'
+      - $ref: '#/components/parameters/TagsValue'
+      - in: query
+        name: state
+        description: Filter by Transaction state.
+        schema:
+          enum:
+          - SUCCEEDED
+          - FAILED
+          - PENDING
+          - CANCELED
+      - $ref: '#/components/parameters/QueryUpdatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryUpdatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryTraceIdFilter'
+      - $ref: '#/components/parameters/QueryVoidFilter'
+      - in: query
+        name: instrument_bin
+        description: Filter by Bank Identification Number (BIN). The BIN is the first 6 digits of the masked number.
+        schema:
+          type: string
+      - schema:
+          type: string
+        in: query
+        name: instrument_account_last4
+        description: "Filter Transactions by the last 4 digits of the bank account. The bank account last 4 are the last 4 digits of the masked number\tinstrument_account_last4=9444 BIN."
+      - schema:
+          type: string
+        in: query
+        name: instrument_brand_type
+        description: Filter by card brand. Available card brand types can be found in the drop-down.
+      - schema:
+          type: string
+        in: query
+        name: merchant_identity_id
+        description: Filter by `Identity` ID.
+      - schema:
+          type: string
+        in: query
+        name: merchant_identity_name
+        description: Filter Transactions by `Identity` name. The name is not case-sensitive.
+      - schema:
+          type: string
+        in: query
+        name: instrument_name
+        description: Filter Transactions by `Payment Instrument` name.
+      - schema:
+          type: string
+        in: query
+        name: instrument_type
+        description: 'Filter Transactions by `Payment Instrument` type. Available instrument types include: Bank Account or Payment Card.'
+      - schema:
+          type: string
+        in: query
+        name: merchant_id
+        description: Filter by `Merchant` ID.
+      - schema:
+          type: string
+        in: query
+        name: merchant_mid
+        description: Filter by Merchant Identification Number (MID).
+      - schema:
+          type: string
+        in: query
+        name: instrument_card_last4
+        description: Filter by the payment card last 4 digits.
+      - schema:
+          type: string
+        in: query
+        name: merchant_processor_id
+        description: Filter by `Processor` ID.
+      - schema:
+          type: string
+        in: query
+        name: type
+        description: Type of the `Authorization`.
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      responses:
+        '200':
+          $ref: '#/components/responses/AuthorizationsList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: list
+      x-group-parameters: true
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/authorizations\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: list
+      x-returns-list: true
+  /authorizations/{authorization_id}:
+    parameters:
+    - $ref: '#/components/parameters/AuthorizationId'
+    get:
+      tags:
+      - Authorizations
+      description: Retrieve the details of a previously created `Authorization`.
+      summary: Fetch an Authorization
+      operationId: getAuthorization
+      responses:
+        '200':
+          $ref: '#/components/responses/Authorization'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/authorizations/AUsCN6f7qTLzxUD3Bp6iXQMQ\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: get
+    put:
+      tags:
+      - Authorizations
+      description: 'Use a PUT request to capture an `Authorization`. If captured successfully, the `transfer` field of the `Authorization` will contain the ID of the `Transfer` resource that moves funds.
+
+
+        Related Guides: [Creating and Capturing an Authorization](/guides/payments/making-a-payment/creating-and-capturing-an-authorization/), [Level 2 and 3 Processing](/guides/payments/making-a-payment/level-2-and-level-3-processing/), [In-Person Cloud Payments](/guides/payments/in-person-payments/cloud/in-person-cloud-payments/), [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/)'
+      summary: Capture an Authorization
+      operationId: captureAuthorization
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateAuthorizationRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/AuthorizationUpdated'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      x-internal: false
+      x-java-method-name: update
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: update
+  /authorizations/{authorization_id_void_to}:
+    parameters:
+    - schema:
+        type: string
+      name: authorization_id_void_to
+      in: path
+      required: true
+    put:
+      tags:
+      - Authorizations
+      description: 'Use a PUT request to void an `Authorization`. If voided successfully, funds get released and the transaction stops from completing. Additionally, voided `Authorization` can no longer be captured.
+
+
+        Related Guides: [Creating and Capturing an Authorization](/guides/payments/making-a-payment/creating-and-capturing-an-authorization/), [Level 2 and 3 Processing](/guides/payments/making-a-payment/level-2-and-level-3-processing/), [In-Person Cloud Payments](/guides/payments/in-person-payments/cloud/in-person-cloud-payments/), [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/)'
+      summary: Void an Authorization
+      operationId: voidAuthorization
+      requestBody:
+        $ref: '#/components/requestBodies/VoidAuthorizationRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/AuthorizationUpdated'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      x-internal: false
+      x-java-method-name: update_authorization_void
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: update_authorization_void
+components:
+  responses:
+    Error422InvalidField:
+      description: Invalid field
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error422InvalidFieldList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    Authorization:
+      description: Single Authorization object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Authorization'
+          examples:
+            Authorization:
+              value:
+                id: AUvZbBaTJkFCbiAMrGtc66ko
+                created_at: '2022-10-11T02:27:39.10Z'
+                updated_at: '2022-10-11T02:27:39.48Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 100
+                amount_requested: 100
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-18T02:27:39.10Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  order_number: 21DFASJSAKAS
+                trace_id: e1a10287-4909-4aa7-9cb7-abd069a3b833
+                transfer: null
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUvZbBaTJkFCbiAMrGtc66ko
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Authorization - 3D Secure:
+              value:
+                id: AUtmuV1dapVdEe16ivUEUhSE
+                created_at: '2022-10-11T02:28:28.50Z'
+                updated_at: '2022-10-11T02:28:28.66Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 100
+                amount_requested: 100
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-18T02:28:28.50Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  order_number: 21DFASJSAKAS
+                trace_id: 20374045-2f90-48f4-80e0-7edf32b9e626
+                transfer: null
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUtmuV1dapVdEe16ivUEUhSE
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Authorization - Level 2 Processing:
+              value:
+                id: AUpkH5f8YoLe2DBNKgqCua4N
+                created_at: '2022-10-11T02:28:59.99Z'
+                updated_at: '2022-10-11T02:29:00.47Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 1000
+                amount_requested: 1000
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-18T02:28:59.99Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  order_number: 21DFASJSAKAS
+                trace_id: 595ef280-35b9-4566-8884-7333739245f9
+                transfer: null
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUpkH5f8YoLe2DBNKgqCua4N
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Authorization - Level 3 Processing:
+              value:
+                id: AUeNCQ37HbQgVQtToJiUtxpd
+                created_at: '2022-10-11T02:29:36.07Z'
+                updated_at: '2022-10-11T02:29:36.24Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 1000
+                amount_requested: 1000
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-18T02:29:36.07Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  order_number: 21DFASJSAKAS
+                trace_id: 3ce1a866-6a38-4a3b-b993-6ac9529afa53
+                transfer: null
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUeNCQ37HbQgVQtToJiUtxpd
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Voided Authorization:
+              value:
+                id: AUeYYckKJTrBVu1j8FYLzJ3W
+                created_at: '2022-10-07T18:25:23.30Z'
+                updated_at: '2022-10-07T18:29:59.38Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 100
+                amount_requested: 100
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-14T18:25:23.30Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: true
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  order_number: 21DFASJSAKAS
+                trace_id: 560e44af-5d22-4af2-801e-03d2dad69dc7
+                transfer: null
+                void_state: SUCCEEDED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUeYYckKJTrBVu1j8FYLzJ3W
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Card Present Authorization - EMV Card:
+              value:
+                id: AUarp7Pz21Low4u2Urw5Ub4W
+                created_at: '2019-04-29T20:44:00.13Z'
+                updated_at: '2022-10-10T05:59:17.59Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: null
+                amount: 3138
+                amount_requested: 3138
+                application: APeUbTUjvYb1CdPXvNcwW1wP
+                card_present_details:
+                  emv_data:
+                    application_identifier: A0000001523010
+                    application_label: DISCOVER
+                    application_preferred_name: null
+                    application_transaction_counter: '0005'
+                    cryptogram: ARCQ F666F8891F870D33
+                    issuer_code_table_index: null
+                    pin_verified: false
+                    tags: null
+                  masked_account_number: '************0059'
+                  name: Test Card 05
+                  brand: DISCOVER
+                  entry_mode: CHIP_ENTRY
+                  payment_type: CREDIT
+                  approval_code: 004839
+                currency: USD
+                device: DVfKLD9GZtsjcJxLtc2yCcfd
+                expires_at: '2019-05-06T20:44:00.13Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MU4LYrniAvqVKUBqcATb7Y7p
+                merchant_identity: IDsbTBawhnLBAVeinRb84vFR
+                messages: []
+                raw: null
+                security_code_verification: null
+                source: PImTHaz7XVPx4M7mhu9x8gkU
+                state: SUCCEEDED
+                tags:
+                  TicketNumber: '45878'
+                trace_id: FNX35FSuraeKKJr65wkGVFJni
+                transfer: TRqQCAX7nYHUnkE5YPFTknqd
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUarp7Pz21Low4u2Urw5Ub4W
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APeUbTUjvYb1CdPXvNcwW1wP
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRqQCAX7nYHUnkE5YPFTknqd
+                  device:
+                    href: https://finix.sandbox-payments-api.com/devices/DVfKLD9GZtsjcJxLtc2yCcfd
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDsbTBawhnLBAVeinRb84vFR
+            Card Present Authorization - Non-EMV Card:
+              value:
+                id: AUarp7Pz21Low4u2Urw5Ub4W
+                created_at: '2019-04-29T20:44:00.13Z'
+                updated_at: '2022-10-10T05:59:17.59Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: null
+                amount: 3138
+                amount_requested: 3138
+                application: APeUbTUjvYb1CdPXvNcwW1wP
+                card_present_details:
+                  emv_data:
+                    application_identifier: A0000001523010
+                    application_label: DISCOVER
+                    application_preferred_name: null
+                    application_transaction_counter: '0005'
+                    cryptogram: ARCQ F666F8891F870D33
+                    issuer_code_table_index: null
+                    pin_verified: false
+                    tags: null
+                  masked_account_number: '************0059'
+                  name: Test Card 05
+                  brand: DISCOVER
+                  entry_mode: CHIP_ENTRY
+                  payment_type: CREDIT
+                  approval_code: 004839
+                currency: USD
+                device: DVfKLD9GZtsjcJxLtc2yCcfd
+                expires_at: '2019-05-06T20:44:00.13Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MU4LYrniAvqVKUBqcATb7Y7p
+                merchant_identity: IDsbTBawhnLBAVeinRb84vFR
+                messages: []
+                raw: null
+                security_code_verification: null
+                source: PImTHaz7XVPx4M7mhu9x8gkU
+                state: SUCCEEDED
+                tags:
+                  TicketNumber: '45878'
+                trace_id: FNX35FSuraeKKJr65wkGVFJni
+                transfer: TRqQCAX7nYHUnkE5YPFTknqd
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUarp7Pz21Low4u2Urw5Ub4W
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APeUbTUjvYb1CdPXvNcwW1wP
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRqQCAX7nYHUnkE5YPFTknqd
+                  device:
+                    href: https://finix.sandbox-payments-api.com/devices/DVfKLD9GZtsjcJxLtc2yCcfd
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDsbTBawhnLBAVeinRb84vFR
+            Authorization - Buyer Charges:
+              value:
+                id: AUmoNHYYU26opc8gEqAYEaGj
+                created_at: '2022-10-11T02:31:28.42Z'
+                updated_at: '2022-10-11T02:31:28.81Z'
+                3ds_redirect_url: null
+                additional_buyer_charges:
+                  convenience_amount: 0
+                  rent_surcharge_amount: 200
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 5000
+                amount_requested: 5000
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-18T02:31:28.42Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  test: sale
+                trace_id: a885a132-bf11-48fd-9eed-10d29909c068
+                transfer: null
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUmoNHYYU26opc8gEqAYEaGj
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Authorization - HSA or FSA Card:
+              value:
+                id: AUo8BiLgvzZzT41KBB7C8GQo
+                created_at: '2022-10-10T06:32:17.04Z'
+                updated_at: '2022-10-10T06:32:17.30Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 950
+                amount_requested: 950
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-17T06:32:17.04Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  order_number: 21DFASJSAKAS
+                trace_id: f702ed93-d38d-430d-8924-a09d946e037c
+                transfer: null
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUo8BiLgvzZzT41KBB7C8GQo
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Authorization - Authorization with CVV:
+              value:
+                id: AUg5fBP1vDXcFtSdiL3e4vzp
+                created_at: '2022-10-11T02:32:54.64Z'
+                updated_at: '2022-10-11T02:32:55.05Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 100
+                amount_requested: 100
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-18T02:32:54.64Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PI6QyMT6W6c62u5bY8Y17TBj
+                state: SUCCEEDED
+                tags: {}
+                trace_id: 526f28d0-73eb-46d6-b78c-aad6ab891dba
+                transfer: null
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUg5fBP1vDXcFtSdiL3e4vzp
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorPaymentRequired:
+      description: Payment Required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    AuthorizationsList:
+      description: List of Authorization objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthorizationsList'
+          examples:
+            List of Authorizations:
+              value:
+                _embedded:
+                  authorizations:
+                  - id: AUoCse3evsJWctBbh6hSEsZj
+                    created_at: '2022-10-10T06:14:57.84Z'
+                    updated_at: '2022-10-10T06:14:58.28Z'
+                    3ds_redirect_url: null
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 150
+                    amount_requested: 150
+                    application: APeUbTUjvYb1CdPXvNcwW1wP
+                    card_present_details:
+                      emv_data: null
+                      masked_account_number: null
+                      name: null
+                      brand: null
+                      entry_mode: null
+                      payment_type: NONE
+                      approval_code: null
+                    currency: USD
+                    device: DVsEanpBtsAVvCHbNXkFaH6f
+                    expires_at: '2022-10-17T06:14:57.84Z'
+                    failure_code: null
+                    failure_message: null
+                    idempotency_id: null
+                    is_void: false
+                    merchant_identity: IDsbTBawhnLBAVeinRb84vFR
+                    messages:
+                    - LaneID 1 does not exist.
+                    - 'Authorization AUoCse3evsJWctBbh6hSEsZj could not be submitted. Cause: LaneID 1 does not exist.'
+                    - DECLINED
+                    raw:
+                      approved_amount: 0
+                      convenience_fee_amount: 0
+                      currency_code: None
+                      is_approved: false
+                      is_offline: false
+                      payment_type: None
+                      pin_verified: false
+                      status_code: None
+                      sub_total_amount: 0
+                      tip_amount: 0
+                      total_amount: 0
+                      order_id: FNXhDjLCPDzR33zk8jjTicZv2
+                      lane_id: 1
+                      _errors:
+                      - developer_message: "ERROR:POST error\r\nEXCEPTION: LaneID 1 does not exist.\r\n"
+                        error_type: ''
+                        exception_message: LaneID 1 does not exist.
+                        exception_type_full_name: TriPos.Shared.Exceptions.PinPadNotFoundException
+                        exception_type_short_name: PinPadNotFoundException
+                        user_message: ''
+                      _links: []
+                      _processor:
+                        logs:
+                        - LaneID 1 does not exist.
+                        processor_logs:
+                        - LaneID 1 does not exist.
+                        processor_request_failed: false
+                        processor_request_was_approved: false
+                        processor_response_code: Unknown
+                      _type: authorizationResponse
+                      _warnings: []
+                    security_code_verification: null
+                    source: PIg2q5tVAPcHpUpbJBNe4Vus
+                    state: FAILED
+                    tags:
+                      order_number: chris123transfer
+                    trace_id: FNXhDjLCPDzR33zk8jjTicZv2
+                    transfer: null
+                    void_state: UNATTEMPTED
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/authorizations/AUoCse3evsJWctBbh6hSEsZj
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APeUbTUjvYb1CdPXvNcwW1wP
+                      device:
+                        href: https://finix.sandbox-payments-api.com/devices/DVsEanpBtsAVvCHbNXkFaH6f
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDsbTBawhnLBAVeinRb84vFR
+                  - id: AUuRnfhaBm84RhHyonkHAUrt
+                    created_at: '2022-08-01T22:14:13.31Z'
+                    updated_at: '2022-08-01T22:14:13.44Z'
+                    3ds_redirect_url: null
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: POSTAL_CODE_AND_STREET_MATCH
+                    amount: 100
+                    amount_requested: 100
+                    application: AP3AB2itAWrrrPVS6spvrGYp
+                    currency: USD
+                    expires_at: '2022-08-08T22:14:13.31Z'
+                    failure_code: null
+                    failure_message: null
+                    idempotency_id: null
+                    is_void: false
+                    merchant_identity: IDsArLxCm9QGbi2QfhaFrTED
+                    messages: []
+                    raw:
+                      additional_large_number: 9223372036854776000
+                      value: 100
+                      order_id: e770db75-fbf6-4efb-afe7-57aedd7ac40d
+                    security_code_verification: MATCHED
+                    source: PIbDnouV59En1yKfYUNLTpG9
+                    state: SUCCEEDED
+                    tags: {}
+                    trace_id: e770db75-fbf6-4efb-afe7-57aedd7ac40d
+                    transfer: null
+                    void_state: UNATTEMPTED
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/authorizations/AUuRnfhaBm84RhHyonkHAUrt
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/AP3AB2itAWrrrPVS6spvrGYp
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDsArLxCm9QGbi2QfhaFrTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                  next:
+                    href: https://finix.sandbox-payments-api.com/authorizations?offset=20&limit=20&sort=created_at,desc&sort=id,desc
+                  last:
+                    href: https://finix.sandbox-payments-api.com/authorizations?offset=633380&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  offset: 0
+                  limit: 20
+                  count: 633397
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    AuthorizationUpdated:
+      description: Single captured Authorization object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthorizationCaptured'
+          examples:
+            Capture Authorization:
+              value:
+                id: AUbrumLihwhdLixtbU1mfMiF
+                created_at: '2022-10-06T20:22:42.25Z'
+                updated_at: '2022-10-07T17:09:22.85Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 118
+                amount_requested: 118
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-13T20:22:42.25Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  test_key_101: test_val_101
+                trace_id: 2724719e-6cc4-4cba-a859-2e6ac0bffb9b
+                transfer: TRs6APHuUAvSYq2FfTDkb5d8
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUbrumLihwhdLixtbU1mfMiF
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRs6APHuUAvSYq2FfTDkb5d8
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Capture Authorization - Level 2 Processing:
+              value:
+                id: AUj9xCyjoNMxcJjaQw2GW7GZ
+                created_at: '2022-10-06T20:22:43.39Z'
+                updated_at: '2022-10-07T17:07:46.24Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 108
+                amount_requested: 108
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-13T20:22:43.39Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  test_key_100: test_val_100
+                trace_id: 20fb8474-1b04-433e-9573-d58e6fcc1586
+                transfer: TRmGcgUgKxqpTVC2UVKngFsv
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUj9xCyjoNMxcJjaQw2GW7GZ
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRmGcgUgKxqpTVC2UVKngFsv
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Capture Authorization - Level 3 Processing:
+              value:
+                id: AUxgS2JLMnicqNYBpsViNQUp
+                created_at: '2022-09-28T19:07:52.44Z'
+                updated_at: '2022-10-10T06:43:53.74Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 100
+                amount_requested: 100
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-05T19:07:52.44Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  order_number: 21DFASJSAKAS
+                trace_id: 99df414c-7afb-4d97-b3cd-3592a37eefa8
+                transfer: TRskeVxUegfhhffGLFX4TEUa
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUxgS2JLMnicqNYBpsViNQUp
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRskeVxUegfhhffGLFX4TEUa
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Void Authorization:
+              value:
+                id: AUeYYckKJTrBVu1j8FYLzJ3W
+                created_at: '2022-10-07T18:25:23.30Z'
+                updated_at: '2022-10-07T18:29:59.38Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 100
+                amount_requested: 100
+                application: APgPDQrLD52TYvqazjHJJchM
+                currency: USD
+                expires_at: '2022-10-14T18:25:23.30Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: true
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                state: SUCCEEDED
+                tags:
+                  order_number: 21DFASJSAKAS
+                trace_id: 560e44af-5d22-4af2-801e-03d2dad69dc7
+                transfer: null
+                void_state: SUCCEEDED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUeYYckKJTrBVu1j8FYLzJ3W
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+            Capture Card Present Authorization - EMV Card:
+              value:
+                id: AUuCfRve8QG6G1wnPCReiLma
+                created_at: '2022-10-06T20:22:42.25Z'
+                updated_at: '2022-10-07T17:09:22.85Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: POSTAL_CODE_AND_STREET_MATCH
+                amount: 150
+                amount_requested: 118
+                application: APeUbTUjvYb1CdPXvNcwW1wP
+                card_present_details: null
+                currency: USD
+                device: DVsEanpBtsAVvCHbNXkFaH6f
+                expires_at: '2022-10-13T20:22:42.25Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDsbTBawhnLBAVeinRb84vFR
+                messages: []
+                raw: null
+                security_code_verification: MATCHED
+                source: PIjnHHLBZvRu6GPEZdFt7E2q
+                state: SUCCEEDED
+                tags:
+                  order_number: chris123transfer
+                trace_id: 957ce193-b4e4-4a39-88e2-d88a019982d2
+                transfer: TRjiUo5CXLmaJp4k9PL7iP8z
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUuCfRve8QG6G1wnPCReiLma
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APeUbTUjvYb1CdPXvNcwW1wP
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRjiUo5CXLmaJp4k9PL7iP8z
+                  device:
+                    href: https://finix.sandbox-payments-api.com/devices/DVsEanpBtsAVvCHbNXkFaH6f
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDsbTBawhnLBAVeinRb84vFR
+            Capture Card Present Authorization - Non-EMV Card:
+              value:
+                id: AUarp7Pz21Low4u2Urw5Ub4W
+                created_at: '2019-04-29T20:44:00.13Z'
+                updated_at: '2022-10-10T05:59:17.59Z'
+                3ds_redirect_url: null
+                additional_buyer_charges: null
+                additional_healthcare_data: null
+                address_verification: null
+                amount: 3138
+                amount_requested: 3138
+                application: APeUbTUjvYb1CdPXvNcwW1wP
+                capture_amount: 150
+                card_present_details:
+                  emv_data:
+                    application_identifier: A0000001523010
+                    application_label: DISCOVER
+                    application_preferred_name: null
+                    application_transaction_counter: '0005'
+                    cryptogram: ARCQ F666F8891F870D33
+                    issuer_code_table_index: null
+                    pin_verified: false
+                    tags: null
+                  masked_account_number: '************0059'
+                  name: Test Card 05
+                  brand: DISCOVER
+                  entry_mode: CHIP_ENTRY
+                  payment_type: CREDIT
+                  approval_code: 004839
+                currency: USD
+                device: DVfKLD9GZtsjcJxLtc2yCcfd
+                expires_at: '2019-05-06T20:44:00.13Z'
+                failure_code: null
+                failure_message: null
+                idempotency_id: null
+                is_void: false
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                merchant_identity: IDsbTBawhnLBAVeinRb84vFR
+                messages: []
+                raw: null
+                security_code_verification: null
+                source: PImTHaz7XVPx4M7mhu9x8gkU
+                state: SUCCEEDED
+                tags:
+                  TicketNumber: '45878'
+                trace_id: FNX35FSuraeKKJr65wkGVFJni
+                transfer: TRqQCAX7nYHUnkE5YPFTknqd
+                void_state: UNATTEMPTED
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/authorizations/AUarp7Pz21Low4u2Urw5Ub4W
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APeUbTUjvYb1CdPXvNcwW1wP
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRqQCAX7nYHUnkE5YPFTknqd
+                  device:
+                    href: https://finix.sandbox-payments-api.com/devices/DVfKLD9GZtsjcJxLtc2yCcfd
+                  merchant_identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDsbTBawhnLBAVeinRb84vFR
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+  schemas:
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    AdditionalHealthcareData:
+      title: AdditionalHealthcareData
+      x-stoplight:
+        id: ibznc087ymmit
+      type: object
+      description: Optional object detailing [specific healthcare amounts](/guides/making-a-payment/hsa-fsa/).
+      nullable: true
+      properties:
+        clinic_amount:
+          type: integer
+          description: The amount used for clinic and office visits such as a copay amount.
+          nullable: true
+        dental_amount:
+          type: integer
+          description: The amount used for dental related expenses.
+          nullable: true
+        prescription_amount:
+          type: integer
+          description: The amount used to purchase perscriptions and medications.
+          nullable: true
+        vision_amount:
+          type: integer
+          description: The amount used for vision related expenses.
+          nullable: true
+    Raw:
+      title: Raw
+      description: Raw response from the processor.
+      x-examples: {}
+      type: object
+      nullable: true
+    CreateAuthorizationRequest:
+      type: object
+      properties:
+        additional_buyer_charges:
+          $ref: '#/components/schemas/AdditionalBuyerCharges'
+        additional_purchase_data:
+          $ref: '#/components/schemas/AdditionalPurchaseData'
+        amount:
+          format: int64
+          type: integer
+          description: The total amount that will be debited in cents (e.g. 100 cents to debit $1.00).
+        currency:
+          $ref: '#/components/schemas/Currency'
+        device:
+          type: string
+          description: The ID of the `Device` that the `Authorization` was created under.
+        fraud_session_id:
+          $ref: '#/components/schemas/FraudSessionID'
+        hsa_fsa_payment:
+          $ref: '#/components/schemas/HSAFSAPayment'
+        idempotency_id:
+          type: string
+          description: A randomly generated value that gets tied with the request.
+          nullable: true
+        merchant:
+          type: string
+          description: The ID of the `Merchant` that the `Authorization` was created under.
+        operation_key:
+          $ref: '#/components/schemas/OperationKey'
+        security_code:
+          type: string
+          description: The 3-4 digit security code for the card (i.e. CVV code). Include the CVV code of the card to include [Card Verification Checks](/guides/payments/making-a-payment/card-verification-checks/) with the created `Authorization`.
+        source:
+          type: string
+          description: The ID of the `Payment Instrument` that will be debited and performing the `Authorization`.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        3d_secure_authentication:
+          type: object
+          description: The 3D secure information required to create a 3D secure `Authorization.`
+          nullable: true
+          properties:
+            cardholder_authentication:
+              type: string
+              description: Provides evidence that the cardholder authentication occurred or that the merchant attempted authentication. This is unique for each authentication transaction.
+            cardholder_ip_address:
+              type: string
+              description: Only required for **American Express** cards.
+              example: 189.1.126.240
+            electronic_commerce_indicator:
+              type: string
+              description: '- **AUTHENTICATED**: Approved by 3D Secure Vendor.
+
+                - **ATTEMPTED**: Issuer or cardholder doesn''t support 3D Secure.'
+            transaction_id:
+              type: string
+              description: Only required for **Visa** cards.
+          required:
+          - cardholder_authentication
+          - electronic_commerce_indicator
+        'additional_purchase_data ':
+          $ref: '#/components/schemas/L3AdditionalPurchaseData'
+    AuthorizationCaptured:
+      type: object
+      title: AuthorizationCaptured
+      description: A captured authorization
+      properties:
+        id:
+          type: string
+          example: AUxxxxxxxxxxxxxxxxxx
+          description: The ID of the `Authorization` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        3ds_redirect_url:
+          type: string
+          description: The redirect URL used for 3DS transactions (if supported by the processor).
+          nullable: true
+        additional_buyer_charges:
+          $ref: '#/components/schemas/AdditionalBuyerCharges'
+        amount:
+          type: integer
+          minimum: 0
+          description: The total amount that will be debited in cents (e.g. 100 cents to debit $1.00).
+        application:
+          type: string
+          description: The ID of the `Application` resource the `Authorization` was created under.
+        card_present_details:
+          $ref: '#/components/schemas/CardPresentDetails'
+        capture_amount:
+          type: integer
+          format: int64
+          description: The amount of the  `Authorization`  you would like to capture in cents. Must be less than or equal to the `amount` of the `Authorization`.
+        currency:
+          $ref: '#/components/schemas/Currency'
+        device:
+          type: string
+          example: DVxxxxxxxxxxxxxxxxxx
+          description: The ID of the activated device.
+          nullable: true
+        expires_at:
+          type: string
+          description: Authorization expiration time.
+          format: date-time
+        external_responses:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              body:
+                type: string
+              content_type:
+                type: string
+        failure_code:
+          $ref: '#/components/schemas/FailureCode'
+        failure_message:
+          $ref: '#/components/schemas/FailureMessage'
+        idempotency_id:
+          type: string
+          description: A randomly generated value that gets tied with the request.
+          nullable: true
+        is_void:
+          type: boolean
+          description: Details if the `Authorization` is void.
+        merchant:
+          type: string
+          description: The ID of the `Merchant` resource the `Authorization` was created under.
+          example: MUxxxxxxxxxxxxxxxxx
+        merchant_identity:
+          type: string
+          description: The ID of `Identity` resource used by the `Merchant` the `Authorization` was created under.
+          example: IDxxxxxxxxxxxxxxxxx
+        messages:
+          type: array
+          description: Message field that provides additional details. This field is typically **null**.
+          items:
+            type: string
+        raw:
+          $ref: '#/components/schemas/Raw'
+        source:
+          type: string
+          example: PIxxxxxxxxxxxxxxxxxx
+          description: ID of the `Payment Instrument` where funds get debited.
+        state:
+          type: string
+          enum:
+          - CANCELED
+          - PENDING
+          - FAILED
+          - SUCCEEDED
+          - UNKNOWN
+          description: The state of the `Transfer`.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        trace_id:
+          type: string
+          description: Trace ID of the `Authorization`. The processor sends back the `trace_id` so you can track the authorization end-to-end.
+        transfer:
+          type: string
+          example: TRxxxxxxxxxxxxxxxxxx
+          description: The ID of the `transfer` resource that gets created when the `Authorization` moves to **SUCCEEDED**.
+          nullable: true
+        void_state:
+          type: string
+          description: Details if the `Authorization` has been voided.
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            application:
+              type: object
+              description: Link to the `Application` the resource was created under.
+              properties:
+                href:
+                  type: string
+            device:
+              type: object
+              description: Link to the `Device` the request was made under.
+              properties:
+                href:
+                  type: string
+            merchant_identity:
+              type: object
+              description: Link to the `Identity` the `Merchant` was created under and the `Transfer` was submitted with.
+              properties:
+                href:
+                  type: string
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            transfer:
+              type: object
+              description: Link to the `Transfers` realted to the `Authorization`.
+              properties:
+                href:
+                  type: string
+    Currency:
+      type: string
+      description: ISO 4217 3 letter currency code.
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    L3AdditionalPurchaseData:
+      title: L3AdditionalPurchaseData
+      x-stoplight:
+        id: 7xbmc1d9p49or
+      type: object
+      description: Additional information about the purchase. Used for [Level 2 and Level 3 Processing](/guides/payments/modify/level-2-and-level-3-processing/).
+      properties:
+        customer_reference_number:
+          type: string
+          description: The customer reference for the purchase (max 17 characters).
+          maxLength: 17
+        customs_duty_amount:
+          type: integer
+          description: The duty in cents on the total purchase amount for the order
+        destination_country_code:
+          type: string
+          description: The ISO country code of the order destination.
+        destination_postal_code:
+          type: string
+          description: The postal code of the order destination (10 characters)
+          maxLength: 10
+        discount_amount:
+          type: integer
+          description: The amount in cents of the discount for the order.
+        invoice_reference_number:
+          type: string
+          description: The order's invoice number (max 15 characters)
+          maxLength: 15
+        item_data:
+          type: array
+          description: Additional information about the transaction. Used for Level 2 and Level 3 Processing.
+          items:
+            type: object
+            properties:
+              amount_excluding_sales_tax:
+                type: integer
+                description: '- Total cost of the line item in cents, excluding tax.
+
+                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
+              amount_including_sales_tax:
+                type: integer
+                description: '- Total cost of the line item in cents, including tax.
+
+                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
+              commodity_code:
+                type: string
+                description: A commodity code is a numeric code representing a particular product or service as defined by the National Institute of Governmental Purchasing. The code can be 3, 5, 7, or 11 digits in length. The longer the code the more granular the description of the product/service. (max 12 characters).
+                maxLength: 12
+              cost_per_unit:
+                type: integer
+                description: The price in cents of one unit of the item purchased
+              item_description:
+                type: string
+                description: Required when `item_data` is supplied (max 25 characters)
+                maxLength: 25
+              item_discount_amount:
+                type: integer
+                description: 'Item discount amount in cents
+
+                  '
+              merchant_product_code:
+                type: string
+                description: Merchant defined product code (max 12 characters).
+                maxLength: 12
+              quantity:
+                type: integer
+                description: The number of items purchased. Must be greater than 0.
+                minimum: 1
+                maximum: 99
+              unit_of_measure:
+                type: string
+                description: The unit of measure of the purchased item (max 3 characters).
+                maxLength: 3
+            required:
+            - amount_excluding_sales_tax
+            - amount_including_sales_tax
+            - commodity_code
+            - cost_per_unit
+            - item_description
+            - item_discount_amount
+            - merchant_product_code
+            - quantity
+            - unit_of_measure
+        order_date:
+          type: object
+          properties:
+            day:
+              type: integer
+              description: Day of purchase (between 1 and 31)
+            month:
+              type: integer
+              description: Month of purchase (between 1 and 12)
+            year:
+              type: integer
+              description: Year of purchase (4-digit)
+              minimum: 1990
+        sales_tax:
+          type: integer
+          description: "- Total aggregate tax amount in cents for the entire purchase. Field is automatically calculated if you pass in the itemized tax amounts. \n- For non-taxable transactions either set `sales_tax` to 0 or omit from payload and also set `tax_exempt` to **True**.\n- Request must align so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.e**."
+        ship_from_postal_code:
+          type: string
+          description: The postal code from where order is shipped (10 characters)
+          maxLength: 10
+        shipping_amount:
+          type: integer
+          description: 'The shipping cost in cents for the order.
+
+            '
+        tax_exempt:
+          type: boolean
+          description: '- For tax exempt purchases set to **True**.
+
+            - If set to **True**, request can''t include `sales_tax`.'
+      required:
+      - customer_reference_number
+      - customs_duty_amount
+      - discount_amount
+      - item_data
+      - sales_tax
+      - shipping_amount
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    HSAFSAPayment:
+      title: HSAFSAPayment
+      x-stoplight:
+        id: qo360ogzirm07
+      type: boolean
+      description: Set to to **true** to process a payment using a `Payment Instrument` [created from a health savings account (HSA) or flexible spending account (FSA)](/guides/making-a-payment/hsa-fsa/).
+      nullable: true
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    AdditionalPurchaseData:
+      title: AdditionalPurchaseData
+      x-stoplight:
+        id: e98e7635f242c
+      type: object
+      description: Additional information about the purchase. Used for [Level 2 and Level 3 Processing](/guides/payments/modify/level-2-and-level-3-processing/).
+      properties:
+        customer_reference_number:
+          type: string
+          description: The customer reference for the purchase (max 17 characters).
+          maxLength: 17
+        customs_duty_amount:
+          type: integer
+          description: The duty in cents on the total purchase amount for the order
+        destination_country_code:
+          type: string
+          description: The ISO country code of the order destination.
+        destination_postal_code:
+          type: string
+          description: The postal code of the order destination (10 characters)
+          maxLength: 10
+        discount_amount:
+          type: integer
+          description: The amount in cents of the discount for the order.
+        invoice_reference_number:
+          type: string
+          description: The order's invoice number (max 15 characters)
+          maxLength: 15
+        item_data:
+          type: array
+          description: Additional information about the transaction. Used for Level 2 and Level 3 Processing.
+          items:
+            type: object
+            properties:
+              amount_excluding_sales_tax:
+                type: integer
+                description: '- Total cost of the line item in cents, excluding tax.
+
+                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
+              amount_including_sales_tax:
+                type: integer
+                description: '- Total cost of the line item in cents, including tax.
+
+                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
+              commodity_code:
+                type: string
+                description: A commodity code is a numeric code representing a particular product or service as defined by the National Institute of Governmental Purchasing. The code can be 3, 5, 7, or 11 digits in length. The longer the code the more granular the description of the product/service. (max 12 characters).
+                maxLength: 12
+              cost_per_unit:
+                type: integer
+                description: The price in cents of one unit of the item purchased
+              item_description:
+                type: string
+                description: Required when `item_data` is supplied (max 25 characters)
+                maxLength: 25
+              item_discount_amount:
+                type: integer
+                description: 'Item discount amount in cents
+
+                  '
+              merchant_product_code:
+                type: string
+                description: Merchant defined product code (max 12 characters).
+                maxLength: 12
+              quantity:
+                type: integer
+                description: The number of items purchased. Must be greater than 0.
+                minimum: 1
+                maximum: 99
+              unit_of_measure:
+                type: string
+                description: The unit of measure of the purchased item (max 3 characters).
+                maxLength: 3
+        order_date:
+          type: object
+          properties:
+            day:
+              type: integer
+              description: Day of purchase (between 1 and 31)
+            month:
+              type: integer
+              description: Month of purchase (between 1 and 12)
+            year:
+              type: integer
+              description: Year of purchase (4-digit)
+              minimum: 1990
+        sales_tax:
+          type: integer
+          description: "- Total aggregate tax amount in cents for the entire purchase. Field is automatically calculated if you pass in the itemized tax amounts. \n- For non-taxable transactions either set `sales_tax` to 0 or omit from payload and also set `tax_exempt` to **True**.\n- Request must align so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`."
+        ship_from_postal_code:
+          type: string
+          description: The postal code from where order is shipped (10 characters)
+          maxLength: 10
+        shipping_amount:
+          type: integer
+          description: 'The shipping cost in cents for the order.
+
+            '
+        tax_exempt:
+          type: boolean
+          description: '- For tax exempt purchases set to **True**.
+
+            - If set to **True**, request can''t include `sales_tax`.'
+      required:
+      - customer_reference_number
+      - sales_tax
+    FailureCode:
+      title: FailureCode
+      x-stoplight:
+        id: lo8jqmipa7376
+      type: string
+      description: The code of the failure so the decline can be handled programmatically. For more info on how to handle the failure, see [Failure Codes](/guides/developers/errors/#failure-codes).
+      nullable: true
+    UpdateAuthorizationRequest:
+      title: AuthorizationUpdate
+      type: object
+      properties:
+        additional_purchase_data:
+          $ref: '#/components/schemas/AdditionalPurchaseData'
+        capture_amount:
+          type: integer
+          format: int64
+          description: The amount of the  `Authorization`  you would like to capture in cents. Must be less than or equal to the `amount` of the `Authorization`.
+        fee:
+          type: integer
+          format: int64
+          description: "The minimum amount of the `Authorization` you'd like to collect as your fee in cents. Defaults to zero (must be less than or equal to the `amount`).\n- If the fees applied by the 'Fee Profile' are ***higher*** than the value passed in 'fee', 'fee' will not be applied and have no effect.\n- If the fees applied by the 'Fee Profile' are ***lower*** than the value passed in 'fee', an additional fee is be applied, in addition to the fees generated by the `Fee Profile`.\n    - The additional fee is equal to the difference between the value passed in 'fee' and the fees generated by the `Fee Profile`."
+        tags:
+          $ref: '#/components/schemas/Tags'
+        void_me:
+          type: boolean
+          description: Set to **True** to void the `Authorization`.
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    AuthorizationsList:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `Authroization` objects.
+          properties:
+            authorizations:
+              type: array
+              minItems: 0
+              uniqueItems: true
+              description: '`Authorization` objects.'
+              items:
+                $ref: '#/components/schemas/Authorization'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    FailureMessage:
+      title: FailureMessage
+      x-stoplight:
+        id: cgilf858039yi
+      type: string
+      description: A human-readable description of why the transaction was declined. This will also include a suggestion on how to complete the payment.
+      nullable: true
+    VoidAuthorization:
+      type: object
+      x-examples:
+        Void Authorization:
+          void_me: true
+      x-stoplight:
+        id: aa39354e659aa
+      properties:
+        tags:
+          $ref: '#/components/schemas/Tags'
+        void_me:
+          type: boolean
+          description: Set to **True** to void the `Authorization`.
+    OperationKey:
+      type: string
+      title: OperationKey
+      x-stoplight:
+        id: mkamr5b4a6hd5
+      enum:
+      - PUSH_TO_CARD
+      - PULL_FROM_CARD
+      - CARD_PRESENT_DEBIT
+      - CARD_PRESENT_UNREFERENCED_REFUND
+      - SALE
+      - UNREFERENCED_REFUND
+      - MERCHANT_CREDIT_ADJUSTMENT
+      - MERCHANT_DEBIT_ADJUSTMENT
+      - CARD_PRESENT_AUTHORIZATION
+      description: Details the operation that's performed in the transaction (Card present transactions only) .
+      nullable: true
+    AdditionalBuyerCharges:
+      title: AdditionalBuyerCharges
+      x-stoplight:
+        id: 8t8auxc19wmuw
+      type: object
+      description: Object detailing any [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/) that got included in the `Authorization`.
+      nullable: true
+      properties:
+        convenience_amount:
+          type: number
+          description: Include the convenience fee the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`.
+          nullable: true
+        rent_surcharge_amount:
+          type: number
+          description: Include the rent surcharge the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`.
+          nullable: true
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Authorization:
+      type: object
+      title: Authorization
+      description: A charge authorization
+      properties:
+        id:
+          type: string
+          example: AUxxxxxxxxxxxxxxxxxx
+          description: The ID of the `Authorization` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        3ds_redirect_url:
+          type: string
+          description: The redirect URL used for 3DS transactions (if supported by the processor).
+          nullable: true
+        address_verification:
+          type: string
+          description: Details the results of the Address Verification checks.
+          nullable: true
+        additional_buyer_charges:
+          $ref: '#/components/schemas/AdditionalBuyerCharges'
+        additional_healthcare_data:
+          $ref: '#/components/schemas/AdditionalHealthcareData'
+        additional_purchase_data:
+          $ref: '#/components/schemas/AdditionalPurchaseData'
+        amount:
+          type: integer
+          minimum: 0
+          description: The total amount that will be debited in cents (e.g. 100 cents to debit $1.00).
+        application:
+          type: string
+          description: The ID of the `Application` resource the `Authorization` was created under.
+        card_present_details:
+          $ref: '#/components/schemas/CardPresentDetails'
+        capture_amount:
+          type: integer
+          format: int64
+          description: The amount of the  `Authorization`  you would like to capture in cents. Must be less than or equal to the `amount` of the `Authorization`.
+        currency:
+          $ref: '#/components/schemas/Currency'
+        device:
+          type: string
+          example: DVxxxxxxxxxxxxxxxxxx
+          description: The ID of the activated device.
+          nullable: true
+        expires_at:
+          type: string
+          description: '`Authorization` expiration time.'
+          format: date-time
+        failure_code:
+          $ref: '#/components/schemas/FailureCode'
+        failure_message:
+          $ref: '#/components/schemas/FailureMessage'
+        security_code_checks:
+          type: string
+          description: Details the results of the Security Code Verification checks.
+          nullable: true
+        is_void:
+          type: boolean
+          description: Details if the `Authorization` is void.
+        merchant:
+          type: string
+          example: MUxxxxxxxxxxxxxxxxxxxxxx
+          description: The ID of the `Merchant` resource the `Authorization` was created under.
+        merchant_identity:
+          type: string
+          example: IDxxxxxxxxxxxxxxxxxxxxxx
+          description: The ID of the `Identity` resource used by the `Merchant` the `Authorization` was processed under.
+        messages:
+          type: array
+          description: Message field that provides additional details. This field is typically **null**.
+          nullable: true
+          items:
+            type: string
+        raw:
+          $ref: '#/components/schemas/Raw'
+        security_code_verification:
+          type: string
+          description: Details the results of the Security Code Verification che
+          nullable: true
+        source:
+          type: string
+          example: PIxxxxxxxxxxxxxxxxxx
+          description: ID of the `Payment Instrument` where funds get debited.
+        state:
+          type: string
+          enum:
+          - CANCELED
+          - PENDING
+          - FAILED
+          - SUCCEEDED
+          - UNKNOWN
+          description: The state of the `Authorization`.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        trace_id:
+          type: string
+          description: Trace ID of the `Authorization`. The processor sends back the `trace_id` so you can track the authorization end-to-end.
+        transfer:
+          type: string
+          example: TRxxxxxxxxxxxxxxxxxx
+          description: The ID of the `transfer` resource that gets created when the `Authorization` moves to **SUCCEEDED**.
+          nullable: true
+        void_state:
+          type: string
+          description: Details if the `Authorization` has been voided.
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            application:
+              type: object
+              description: Link to the `Application` the resource was created under.
+              properties:
+                href:
+                  type: string
+            device:
+              type: object
+              description: Link to the `Device` the request was made under.
+              properties:
+                href:
+                  type: string
+            merchant_identity:
+              type: object
+              description: Link to the `Identity` the `Merchant` was created under and the `Transfer` was submitted with.
+              properties:
+                href:
+                  type: string
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            transfer:
+              type: object
+              description: Link to the `Transfers` realted to the `Authorization`.
+              properties:
+                href:
+                  type: string
+    Error422InvalidFieldList:
+      type: object
+      description: Invalid field
+      title: ''
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - INVALID_FIELD
+                  field:
+                    type: string
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    FraudSessionID:
+      title: FraudSessionID
+      x-stoplight:
+        id: x00www7a3mlv6
+      type: string
+      description: The `fraud_session_session` ID you want to review for fraud. For more info, see [Fraud Detection](/guides/payments/fraud-detection/).
+    CardPresentDetails:
+      title: CardPresentDetails
+      x-stoplight:
+        id: jbenxkas8ukf2
+      type: object
+      description: Details needed to process card present transactions.
+      nullable: true
+      properties:
+        approval_code:
+          type: string
+          description: Unique ID used to identify the approval of the `Transfer`.
+          nullable: true
+        brand:
+          type: string
+          description: The brand of the card saved in the `Payment Instrument`.
+          nullable: true
+        emv_data:
+          type: object
+          description: Encrypted card data used to process the transaction.
+          nullable: true
+          properties:
+            application_identifier:
+              type: string
+              description: ID of the EMV application processing the transaction.
+            application_label:
+              type: string
+              description: EMV card label.
+            application_preferred_name:
+              type: string
+              description: Alternate EMV application name (if provided).
+              nullable: true
+            application_transaction_counter:
+              type: string
+              description: Transaction number for the EMV application.
+            cryptogram:
+              type: string
+              description: Encrypted card infromation used to process the transaction.
+            issuer_code_table_index:
+              type: string
+              description: The alphabet code table (according to ISO 8859) used by the EMV application (if provided).
+              nullable: true
+            pin_verified:
+              type: boolean
+              description: Details if the cardholder's PIN number was verified.
+            tags:
+              $ref: '#/components/schemas/Tags'
+        entry_mode:
+          type: string
+          description: Details how the card was entered to process the transaction.
+          nullable: true
+        masked_account_number:
+          type: string
+          description: Last four digits of the bank account number.
+          nullable: true
+        name:
+          type: string
+          description: The name of the bank account or card owner.
+          nullable: true
+        payment_type:
+          type: string
+          description: The type of `Payment Instrument` used in the transaction (or the original payment).
+  parameters:
+    QueryAmountLteFilter:
+      description: Filter by an amount less than or equal.
+      in: query
+      name: amount.lte
+      schema:
+        type: integer
+      style: form
+    TagsValue:
+      name: tags.value
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags).
+    QueryUpdatedAtGteFilter:
+      description: Filter where `updated_at` is after the given date.
+      in: query
+      name: updated_at.gte
+      schema:
+        type: string
+      style: form
+    QueryTraceIdFilter:
+      description: Filter by `trace_id`.
+      in: query
+      name: trace_id
+      schema:
+        type: string
+      style: form
+    TagsKey:
+      name: tags.key
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by the [`key` of a `Tag`](/api/overview/#section/Tags).
+    QueryAmountGtFilter:
+      description: Filter by an amount greater than.
+      in: query
+      name: amount.gt
+      schema:
+        type: integer
+      style: form
+    QueryIdempotencyIdFilter:
+      description: Filter by `idempotency_id`.
+      in: query
+      name: idempotency_id
+      schema:
+        type: string
+      style: form
+    QueryAmountLtFilter:
+      description: Filter by an amount less than.
+      in: query
+      name: amount.lt
+      schema:
+        type: integer
+      style: form
+    QueryAmountGteFilter:
+      description: Filter by an amount greater than or equal.
+      in: query
+      name: amount.gte
+      schema:
+        type: integer
+      style: form
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
+    QueryCreatedAtGteFilter:
+      description: Filter where `created_at` is after the given date.
+      in: query
+      name: created_at.gte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryUpdatedAtLteFilter:
+      description: Filter where `updated_at` is before the given date.
+      in: query
+      name: updated_at.lte
+      schema:
+        type: string
+      style: form
+    QueryCreatedAtLteFilter:
+      description: Filter where `created_at` is before the given date.
+      in: query
+      name: created_at.lte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryAmountFilter:
+      description: Filter by an amount equal to the given value.
+      in: query
+      name: amount
+      schema:
+        type: integer
+      style: form
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+    QueryVoidFilter:
+      description: Filter by `idempotency_id`.
+      in: query
+      name: is_void
+      schema:
+        type: string
+      style: form
+    AuthorizationId:
+      description: ID of `Authorization` to fetch.
+      required: true
+      in: path
+      name: authorization_id
+      schema:
+        type: string
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  requestBodies:
+    CreateAuthorizationRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateAuthorizationRequest'
+          examples:
+            Authorization:
+              value:
+                amount: 100
+                currency: USD
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                tags:
+                  order_number: 21DFASJSAKAS
+            Authorization - 3D Secure:
+              value:
+                3d_secure_authentication:
+                  cardholder_authentication: BwABBJQ1AgAAAAAgJDUCAAAAAAA=
+                  electronic_commerce_indicator: AUTHENTICATED
+                  transaction_id: EaOMucALHQqLAEGAgk
+                amount: 100
+                currency: USD
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                tags:
+                  order_number: 21DFASJSAKAS
+            Authorization - Level 2 Processing:
+              value:
+                additional_purchase_data:
+                  customer_reference_number: 321xyz
+                  sales_tax: 200
+                amount: 1000
+                currency: USD
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                tags:
+                  order_number: 21DFASJSAKAS
+            Authorization - Level 3 Processing:
+              value:
+                additional_purchase_data:
+                  customer_reference_number: 321xyz
+                  customs_duty_amount: 10
+                  discount_amount: 100
+                  item_data:
+                  - amount_excluding_sales_tax: 400
+                    amount_including_sales_tax: 500
+                    commodity_code: 175-62-20
+                    cost_per_unit: 500
+                    item_description: printing paper
+                    item_discount_amount: 100
+                    merchant_product_code: '1149611'
+                    quantity: 1
+                    unit_of_measure: BX
+                  - amount_excluding_sales_tax: 400
+                    amount_including_sales_tax: 500
+                    commodity_code: 207-72-54
+                    cost_per_unit: 500
+                    item_description: printing ink
+                    item_discount_amount: 0
+                    merchant_product_code: '2149612'
+                    quantity: 1
+                    unit_of_measure: CTN
+                  shipping_amount: 100
+                amount: 1000
+                currency: USD
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                tags:
+                  order_number: 21DFASJSAKAS
+            Card Present Authorization - EMV Card:
+              value:
+                amount: 150
+                currency: USD
+                device: DVsEanpBtsAVvCHbNXkFaH6f
+                operation_key: CARD_PRESENT_AUTHORIZATION
+                tags:
+                  order_number: test123transfer
+            Card Present Authorization - Non-EMV Card:
+              value:
+                amount: 150
+                currency: USD
+                device: DVsEanpBtsAVvCHbNXkFaH6f
+                operation_key: CARD_PRESENT_DEBIT
+                tags:
+                  order_number: chris123transfer
+            Authorization - Buyer Charges:
+              value:
+                additional_buyer_charges:
+                  rent_surcharge_amount: 150
+                amount: 5200
+                currency: USD
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                tags:
+                  test: sale
+            Authorization - HSA or FSA Card:
+              value:
+                amount: 950
+                currency: USD
+                hsa_fsa_payment: true
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                source: PIe2YvpcjvoVJ6PzoRPBK137
+                tags:
+                  order_number: 21DFASJSAKAS
+            Authorization - Authorization with CVV:
+              value:
+                amount: 100
+                currency: USD
+                merchant: MUeDVrf2ahuKc9Eg5TeZugvs
+                security_code: '022'
+                source: PI6QyMT6W6c62u5bY8Y17TBj
+    VoidAuthorizationRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VoidAuthorization'
+          examples:
+            Void Authorization:
+              value:
+                void_me: true
+    UpdateAuthorizationRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateAuthorizationRequest'
+          examples:
+            Capture Authorization:
+              value:
+                capture_amount: 100
+                fee: 0
+            Capture Authorization - Level 2/3 Processing:
+              value:
+                additional_purchase_data:
+                  item_data:
+                  - amount_excluding_sales_tax: 400
+                    amount_including_sales_tax: 500
+                    commodity_code: 175-62-20
+                    cost_per_unit: 500
+                    item_description: printing paper
+                    item_discount_amount: 100
+                    merchant_product_code: '1149611'
+                    quantity: 1
+                    unit_of_measure: BX
+                  - amount_excluding_sales_tax: 400
+                    amount_including_sales_tax: 500
+                    commodity_code: 207-72-54
+                    cost_per_unit: 500
+                    item_description: printing ink
+                    item_discount_amount: 0
+                    merchant_product_code: '2149612'
+                    quantity: 1
+                    unit_of_measure: CTN
+                  customer_reference_number: 321xyz
+                  customs_duty_amount: 10
+                  discount_amount: 100
+                  shipping_amount: 100
+                capture_amount: 100
+                fee: 0
+            Void Authorization:
+              value:
+                void_me: true
+            Capture Card Present Authorization:
+              value:
+                capture_amount: 150
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

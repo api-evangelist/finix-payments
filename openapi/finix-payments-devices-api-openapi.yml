@@ -1,0 +1,958 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Devices API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Devices
+  description:
+    $ref: api-descriptions/tags/devices.md
+paths:
+  /devices/{device_id}:
+    parameters:
+    - description: ID of the `Device`.
+      required: true
+      in: path
+      name: device_id
+      schema:
+        type: string
+    put:
+      description: 'Initiate an action on a `Device`. Actions that are available include:
+
+        - Activating the `Device`
+
+        - Rebooting the `Device`
+
+        - Setting an idle message
+
+        - Deactivating the `Device`
+
+
+        You can also use a PUT request to update the `configuration_details`, `description`, `name`, and `serial_number` of the `Device`.'
+      summary: Initiate Action on Device
+      operationId: updateDevice
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateDeviceRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Device'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: update
+      tags:
+      - Devices
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: update
+    get:
+      description: Retrieve the details of an existing `Device`.
+      summary: Fetch a Device
+      operationId: getDevice
+      responses:
+        '200':
+          $ref: '#/components/responses/Device'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: get
+      parameters:
+      - schema:
+          type: boolean
+        in: query
+        name: include_connection
+        description: Specifies whether the connection information should be included.
+      x-group-parameters: true
+      tags:
+      - Devices
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/devices/DVsEanpBtsAVvCHbNXkFaH6f\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USjHFGYvecE4LBitYG8KDE2g:b698f403-d9b7-4157-82d8-162cea8c8cc3\n"
+      x-python-method-name: get
+  /devices/{device_id_connection}:
+    parameters:
+    - schema:
+        type: string
+      name: device_id_connection
+      in: path
+      required: true
+    get:
+      description: To check the connection of the `Device`, include `?include_connection\=true\` at the end of the request endpoint.
+      summary: Check Device Connection
+      operationId: getDeviceConnection
+      responses:
+        '200':
+          $ref: '#/components/responses/Device'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: get_device_connection
+      parameters:
+      - schema:
+          type: boolean
+        in: query
+        name: include_connection
+        description: Specifies whether the connection information should be included.
+        required: true
+      x-group-parameters: true
+      tags:
+      - Devices
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/devices/DVsEanpBtsAVvCHbNXkFaH6f?include_connection=true\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USjHFGYvecE4LBitYG8KDE2g:b698f403-d9b7-4157-82d8-162cea8c8cc3\n"
+      x-python-method-name: get_device_connection
+  /merchants/{merchant_id}/devices:
+    parameters:
+    - description: ID of the `Merchant` object.
+      required: true
+      in: path
+      name: merchant_id
+      schema:
+        type: string
+    post:
+      description: Create a `Device` under a `Merchant`.
+      summary: Create a Device
+      operationId: createMerchantDevice
+      responses:
+        '200':
+          $ref: '#/components/responses/Device'
+        '400':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-internal: false
+      tags:
+      - Devices
+      requestBody:
+        $ref: '#/components/requestBodies/CreateDeviceRequest'
+      x-java-method-name: create
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/devices/create-device.md
+      x-python-method-name: create
+components:
+  schemas:
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    CreateDevice:
+      type: object
+      title: CreateDevice
+      description: ''
+      properties:
+        configuration:
+          $ref: '#/components/schemas/ConfigurationDetails'
+        description:
+          type: string
+          description: Additional information about device (e.g. self serving terminal).
+        model:
+          type: string
+          enum:
+          - BBPOS
+          - DESK_3500
+          - DESK_5000
+          - IPP320
+          - IPP350
+          - ISC250
+          - ISC480
+          - ISMP4
+          - LANE_3000
+          - LANE_5000
+          - LANE_7000
+          - LANE_8000
+          - LINK_2500
+          - MOVE_5000
+          - MX915
+          - MX925
+          - PAX_A30
+          - PAX_A35
+          - PAX_A60
+          - PAX_A77
+          - PAX_A920PRO
+          - PAX_ARIES6
+          - PAX_ARIES8
+          - PAX_IM30
+          description: The model type of the device.
+        name:
+          type: string
+          description: Name of the `Device`.
+        tags:
+          $ref: '#/components/schemas/Tags'
+      required:
+      - model
+      - name
+      x-examples:
+        example-1:
+          name: 'Finix  triPOS #1'
+          model: MX915
+          description: John Smith
+          configuration:
+            allow_debit: true
+            prompt_signature: NEVER
+            bypass_device_on_capture: true
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    UpdateDeviceRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - ACTIVATE
+          - CREATE_IDLE_MESSAGE
+          - DEACTIVATE
+          - REBOOT
+          description: The action you want to perform on the device. Use **DEACTIVATE** to deactivate the device.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        activation_code:
+          type: string
+          description: Used when `action` is **ACTIVATE**. Provide the input code that shows up on the device screen.
+        idle_message:
+          type: string
+          description: Message to display on the idle screen.
+        configuration_details:
+          $ref: '#/components/schemas/ConfigurationDetails'
+        description:
+          type: string
+          description: Additional information about device (e.g. self serving terminal).
+        name:
+          type: string
+          description: Name of the `Device`.
+        serial_number:
+          type: string
+          description: Serial number of the `device`.
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    ConfigurationDetails:
+      title: ConfigurationDetails
+      x-stoplight:
+        id: czqjwiv5qz0zl
+      type: object
+      description: Configure the details of the activated device.
+      properties:
+        allow_debit:
+          type: boolean
+          description: Allow transaction to be processed on Debit rails. If `false`, Debit card transactions will be processed on Credit rails.
+        bypass_device_on_capture:
+          type: boolean
+          description: Sets whether the device will be used to capture `Authorizations`. The device is required to be connected if `bypass_device_on_capture` is set to false. (defaults to true).
+        check_for_duplicate_transactions:
+          type: boolean
+          description: Sets whether the device will check for duplicate transactions.
+        prompt_amount_confirmation:
+          type: boolean
+          description: Sets if the card holder needs to confirm the amount they will pay (defaults to **true**).
+        prompt_manual_entry:
+          type: boolean
+          description: Sets if the device defaults to manual entry as the default card input method. (defaults to **false**).
+        prompt_signature:
+          type: string
+          description: 'Sets if the device will prompt the card holder for a signature by default. Available values include:<ul><li><strong>ALWAYS</strong><li><strong>NEVER</strong><li><strong>AMOUNT</strong>: Used in conjunction with `signature_threshold_amount` so when the threshold is reached the signature form appears on the device.'
+        signature_threshold_amount:
+          type: integer
+          description: The threshold to prompt a signature when `prompt_signature` is set to **AMOUNT** (defaults to 0).
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Device:
+      type: object
+      title: Device
+      description: '`Device` resource.'
+      properties:
+        id:
+          type: string
+          description: The ID of the activated `Device`.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        configuration_details:
+          type: object
+          title: DeviceConfigDetails
+          description: Information used to configure how the `Device` handles transactions.
+          nullable: true
+          properties:
+            allow_debit:
+              type: boolean
+              description: Allow transaction to be processed on Debit rails. If **false**, Debit card transactions will be processed on Credit rails.
+            bypass_device_on_capture:
+              type: boolean
+              description: Sets whether or not the device will be used to capture transactions. This field must be set to **true** (defaults to **false**).
+              nullable: true
+            check_for_duplicate_transactions:
+              type: boolean
+              description: Sets whether the `Device` will check for duplicate transactions.
+            prompt_amount_confirmation:
+              type: boolean
+              description: Sets if the card holder needs to confirm the amount they will pay (defaults to **true**).
+            prompt_manual_entry:
+              type: boolean
+              description: Sets if the device defaults to manual entry as the default card input method. (defaults to **false**).
+            prompt_signature:
+              type: string
+              description: 'Sets if the device will prompt the card holder for a signature by default. Available values include: <ul><li><strong>ALWAYS</strong><li><strong>NEVER</strong><li><strong>AMOUNT</strong>: Used in conjunction with `signature_threshold_amount` so when the threshold is reached the signature form appears on the device.'
+            signature_threshold_amount:
+              type: integer
+              format: int64
+              description: The threshold to prompt a signature when `prompt_signature` is set to **AMOUNT** (defaults to 0).
+        connection:
+          type: string
+          description: Details if the `Device` is connected and online. Only returned when `include_connection parameter` provided.
+          enum:
+          - OPEN
+          - CLOSED
+        description:
+          type: string
+          description: Additional information about device (e.g. self serving terminal).
+          nullable: true
+        enabled:
+          type: boolean
+          description: Details if the `Device` resource is enabled. Set to **false** to disable the `Device`.
+        idle_message:
+          type: string
+          description: The message that diplays on the device after a period of inactivity.
+          nullable: true
+        merchant:
+          type: string
+          example: MUxxxxxxxxxxxxxxxxxx
+          description: ID of the `Merchant` resource.
+        model:
+          type: string
+          description: Details the model of the card reader.
+        name:
+          type: string
+          description: Name of the `Device`.
+        serial_number:
+          type: string
+          description: Serial number of the device.
+          nullable: true
+        tags:
+          $ref: '#/components/schemas/Tags'
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            authorizations:
+              type: object
+              properties:
+                href:
+                  type: string
+            merchant:
+              type: object
+              description: Link to the `Merhcant` resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            transfers:
+              type: object
+              properties:
+                href:
+                  type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+  responses:
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    Device:
+      description: Single Device object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Device'
+          examples:
+            Device:
+              value:
+                id: DVsEanpBtsAVvCHbNXkFaH6f
+                created_at: '2019-03-01T02:27:20.366Z'
+                updated_at: '2022-04-05T18:48:40.383Z'
+                configuration_details:
+                  allow_debit: true
+                  check_for_duplicate_transactions: true
+                  prompt_amount_confirmation: false
+                  prompt_manual_entry: true
+                  prompt_signature: AMOUNT
+                  signature_threshold_amount: 10
+                  bypass_device_on_capture: false
+                connection: OPEN
+                description: Mike Jones
+                enabled: false
+                idle_message: null
+                merchant: MUu56ZGx3Xb6U9gAqKfgNisd
+                model: MX915
+                name: Johnnys Juice Shop
+                serial_number: '343434343'
+                tags: {}
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/devices/DVsEanpBtsAVvCHbNXkFaH6f
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/transfers
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/authorizations
+            Device - Activated (DATACAP_V1):
+              value:
+                id: DV8EVnpCwHwB9Dk3xTysgt5d
+                created_at: '2022-06-06T03:59:42.415Z'
+                updated_at: '2022-06-06T03:59:42.420647Z'
+                configuration_details:
+                  allow_debit: true
+                  check_for_duplicate_transactions: true
+                  prompt_amount_confirmation: true
+                  prompt_manual_entry: false
+                  prompt_signature: NEVER
+                  signature_threshold_amount: 0
+                  bypass_device_on_capture: false
+                connection: OPEN
+                description: John Smith
+                enabled: true
+                idle_message: null
+                merchant: MUu56ZGx3Xb6U9gAqKfgNisd
+                model: MX915
+                name: 'Finix  triPOS #1'
+                serial_number: '111023985764'
+                tags: {}
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/devices/DV8EVnpCwHwB9Dk3xTysgt5d
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/transfers
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/authorizations
+            Device - Activated (TRIPOS_CLOUD_V1):
+              value:
+                id: DV8EVnpCwHwB9Dk3xTysgt5d
+                created_at: '2022-06-06T03:59:42.415Z'
+                updated_at: '2022-06-06T03:59:42.420647Z'
+                configuration_details:
+                  allow_debit: true
+                  check_for_duplicate_transactions: true
+                  prompt_amount_confirmation: true
+                  prompt_manual_entry: false
+                  prompt_signature: NEVER
+                  signature_threshold_amount: 0
+                  bypass_device_on_capture: false
+                connection: OPEN
+                description: John Smith
+                enabled: true
+                idle_message: null
+                merchant: MUu56ZGx3Xb6U9gAqKfgNisd
+                model: MX915
+                name: 'Finix  triPOS #1'
+                serial_number: null
+                tags: {}
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/devices/DV8EVnpCwHwB9Dk3xTysgt5d
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/transfers
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/authorizations
+            Device - Idle Message Set:
+              value:
+                id: DV8EVnpCwHwB9Dk3xTysgt5d
+                created_at: '2022-06-06T03:59:42.415Z'
+                updated_at: '2022-06-06T03:59:42.420647Z'
+                configuration_details:
+                  allow_debit: true
+                  check_for_duplicate_transactions: true
+                  prompt_amount_confirmation: true
+                  prompt_manual_entry: false
+                  prompt_signature: NEVER
+                  signature_threshold_amount: 0
+                  bypass_device_on_capture: false
+                connection: OPEN
+                description: John Smith
+                enabled: false
+                idle_message: Finix Flowers
+                merchant: MUu56ZGx3Xb6U9gAqKfgNisd
+                model: MX915
+                name: 'Finix  triPOS #1'
+                serial_number: null
+                tags: {}
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/devices/DV8EVnpCwHwB9Dk3xTysgt5d
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/transfers
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/authorizations
+            Device - Connection Check:
+              value:
+                id: DV8EVnpCwHwB9Dk3xTysgt5d
+                created_at: '2022-06-06T03:59:42.415Z'
+                updated_at: '2022-06-06T03:59:42.420647Z'
+                configuration_details:
+                  allow_debit: true
+                  check_for_duplicate_transactions: true
+                  prompt_amount_confirmation: true
+                  prompt_manual_entry: false
+                  prompt_signature: NEVER
+                  signature_threshold_amount: 0
+                  bypass_device_on_capture: false
+                connection: OPEN
+                description: John Smith
+                enabled: false
+                idle_message: null
+                merchant: MUu56ZGx3Xb6U9gAqKfgNisd
+                model: MX915
+                name: 'Finix  triPOS #1'
+                serial_number: null
+                tags: {}
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/devices/DV8EVnpCwHwB9Dk3xTysgt5d
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/transfers
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/authorizations
+            Device - Deactivated:
+              value:
+                id: DV8EVnpCwHwB9Dk3xTysgt5d
+                created_at: '2022-06-06T03:59:42.415Z'
+                updated_at: '2022-06-06T03:59:42.420647Z'
+                configuration_details:
+                  allow_debit: true
+                  check_for_duplicate_transactions: true
+                  prompt_amount_confirmation: true
+                  prompt_manual_entry: false
+                  prompt_signature: NEVER
+                  signature_threshold_amount: 0
+                  bypass_device_on_capture: false
+                connection: OPEN
+                description: John Smith
+                enabled: false
+                idle_message: null
+                merchant: MUu56ZGx3Xb6U9gAqKfgNisd
+                model: MX915
+                name: 'Finix  triPOS #1'
+                serial_number: null
+                tags: {}
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/devices/DV8EVnpCwHwB9Dk3xTysgt5d
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/transfers
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/authorizations
+            Device - Update Details:
+              value:
+                id: DVsEanpBtsAVvCHbNXkFaH6f
+                created_at: '2019-03-01T02:27:20.366Z'
+                updated_at: '2022-04-05T18:48:40.383Z'
+                configuration_details:
+                  allow_debit: true
+                  check_for_duplicate_transactions: true
+                  prompt_amount_confirmation: false
+                  prompt_manual_entry: true
+                  prompt_signature: NEVER
+                  signature_threshold_amount: 10
+                  bypass_device_on_capture: true
+                connection: OPEN
+                description: Flowers
+                enabled: false
+                idle_message: null
+                merchant: MUu56ZGx3Xb6U9gAqKfgNisd
+                model: MX915
+                name: Finix Flowers - triPOS
+                serial_number: '343434343'
+                tags: {}
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/devices/DVsEanpBtsAVvCHbNXkFaH6f
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/transfers
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/authorizations
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+  requestBodies:
+    UpdateDeviceRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateDeviceRequest'
+          examples:
+            Device - Activated (DATACAP_V1):
+              value:
+                action: ACTIVATE
+            Device - Activated (TRIPOS_CLOUD_V1):
+              value:
+                action: ACTIVATE
+                activation_code: '609732'
+            Reboot Device:
+              value:
+                action: REBOOT
+            Device - Idle Message Set:
+              value:
+                action: CREATE_IDLE_MESSAGE
+                idle_message: Finix Flowers
+            Device - Deactivated:
+              value:
+                action: DEACTIVATE
+            Device - Update Details:
+              value:
+                configuration:
+                  allow_debit: true
+                  bypass_device_on_capture: true
+                  prompt_signature: NEVER
+                description: Flowers
+                name: Finix Flowers - triPOS
+    CreateDeviceRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateDevice'
+          examples:
+            Create a Device:
+              value:
+                configuration:
+                  allow_debit: true
+                  bypass_device_on_capture: true
+                  prompt_signature: NEVER
+                description: John Smith
+                model: MX915
+                name: 'Finix  triPOS #1'
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

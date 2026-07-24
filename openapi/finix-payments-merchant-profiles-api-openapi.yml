@@ -1,0 +1,625 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Merchant Profiles API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Merchant Profiles
+  description:
+    $ref: api-descriptions/tags/merchant-profiles.md
+paths:
+  /merchant_profiles:
+    get:
+      tags:
+      - Merchant Profiles
+      description: Retireve a list of all `merchant_profiles`.
+      summary: List Merchant Profiles
+      operationId: listMerchantProfiles
+      parameters:
+      - $ref: '#/components/parameters/QueryIdFilter'
+      - $ref: '#/components/parameters/QueryBeforeCursor'
+      - $ref: '#/components/parameters/QueryLimit'
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      responses:
+        '200':
+          $ref: '#/components/responses/MerchantProfilesList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: list
+      x-group-parameters: true
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/merchant_profiles\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: list
+      x-returns-list: true
+  /merchant_profiles/{merchant_profile_id}:
+    parameters:
+    - description: ID of `merchant_profile`.
+      required: true
+      in: path
+      name: merchant_profile_id
+      schema:
+        type: string
+    get:
+      tags:
+      - Merchant Profiles
+      description: Retrieve the details of a previosuly created `merchant_profile`.
+      summary: Fetch a Merchant Profile
+      operationId: getMerchantProfile
+      responses:
+        '200':
+          $ref: '#/components/responses/MerchantProfile'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/merchant_profiles/MPsdo8WPP5erWzfPwMjYjVy3\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: get
+    put:
+      tags:
+      - Merchant Profiles
+      description: Update a `merchant_profile`.
+      summary: Update a Merchant Profile
+      operationId: updateMerchantProfile
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateMerchantProfileRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MerchantProfile'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: update
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/merchant-profiles/update-merchant-profile.md
+      x-internal: false
+      x-python-method-name: update
+components:
+  schemas:
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    MerchantProfile:
+      type: object
+      description: ''
+      properties:
+        id:
+          type: string
+          description: The ID of the `Merchant Profile` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        application:
+          type: string
+          description: The ID of the `Application` associated with the  `Merchant Profile`.
+        fee_profile:
+          type: string
+          description: The ID of the `Fee Profile` associated with the `Merchant Profile` resource.
+          nullable: true
+        payout_profile:
+          type: string
+          description: The ID of the `Payout Profile` associated with the `Merchant Profile` resource.
+          nullable: true
+        risk_profile:
+          type: string
+          description: The ID of the `Risk Profile` associated with the `Merchant Profile` resource.
+          nullable: true
+        tags:
+          $ref: '#/components/schemas/Tags'
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            application:
+              type: object
+              description: Link to the `Application` the resource was created under.
+              properties:
+                href:
+                  type: string
+            fee_profile:
+              type: object
+              properties:
+                href:
+                  type: string
+            owner_identity:
+              type: object
+              properties:
+                href:
+                  type: string
+            processors:
+              type: object
+              properties:
+                href:
+                  type: string
+            reserve_profile:
+              type: object
+              properties:
+                href:
+                  type: string
+            risk_profile:
+              type: object
+              properties:
+                href:
+                  type: string
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            users:
+              type: object
+              properties:
+                href:
+                  type: string
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    UpdateMerchantProfileRequest:
+      title: UpdateMerchantProfileRequest
+      x-stoplight:
+        id: 9cuj94a54fwqp
+      type: object
+      properties:
+        fee_profile:
+          type: string
+          description: ID of the `fee_profile`.
+        payout_profile:
+          type: string
+          description: ID of the `payout_profile`.
+        risk_profile:
+          type: string
+          description: ID of the `risk_profile`.
+        tags:
+          $ref: '#/components/schemas/Tags'
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    MerchantProfilesList:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `merchant_profile` objects.
+          properties:
+            merchant_profiles:
+              type: array
+              description: '`merchant_profile` objects.'
+              items:
+                $ref: '#/components/schemas/MerchantProfile'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+  responses:
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    MerchantProfile:
+      description: Single merchant profile object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MerchantProfile'
+          examples:
+            Merchant Profile:
+              value:
+                id: MPsdo8WPP5erWzfPwMjYjVy3
+                created_at: '2022-08-15T21:37:47.26Z'
+                updated_at: '2022-08-15T21:38:24.02Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                fee_profile: null
+                payout_profile: null
+                risk_profile: RPwAziDZginXDWuuiDSaA3wr
+                tags: {}
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MPsdo8WPP5erWzfPwMjYjVy3
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  risk_profile:
+                    href: https://finix.sandbox-payments-api.com/risk_profiles/RPwAziDZginXDWuuiDSaA3wr
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    MerchantProfilesList:
+      description: Single merchant profile object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MerchantProfilesList'
+          examples:
+            List of Merchant Profiles:
+              value:
+                _embedded:
+                  merchant_profiles:
+                  - id: MPnXB4UBGtSUfxwA41z2Hqid
+                    created_at: '2022-10-10T05:20:18.12Z'
+                    updated_at: '2022-10-10T05:21:01.42Z'
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    fee_profile: null
+                    payout_profile: PO8ki51uFGkLYaWyBVJ7oyAt
+                    risk_profile: RPqzvQLoHk37r74aE6NZ4aXt
+                    tags: {}
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/merchant_profiles/MPnXB4UBGtSUfxwA41z2Hqid
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      risk_profile:
+                        href: https://finix.sandbox-payments-api.com/risk_profiles/RPqzvQLoHk37r74aE6NZ4aXt
+                  - id: MPo85BavSYVrkDn57BLh1JTs
+                    created_at: '2022-09-21T17:46:06.29Z'
+                    updated_at: '2022-09-21T17:46:07.75Z'
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    fee_profile: null
+                    payout_profile: PO9AtdBb4FUQqbMm3SAyoX3z
+                    risk_profile: RP5PUJVynFoHibX6eHtfebV3
+                    tags: {}
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/merchant_profiles/MPo85BavSYVrkDn57BLh1JTs
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      risk_profile:
+                        href: https://finix.sandbox-payments-api.com/risk_profiles/RP5PUJVynFoHibX6eHtfebV3
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                  next:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles?offset=20&limit=20&sort=created_at,desc&sort=id,desc
+                  last:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles?offset=1660&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  offset: 0
+                  limit: 20
+                  count: 1671
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+  parameters:
+    QueryIdFilter:
+      description: Filter by `id`.
+      in: query
+      name: id
+      schema:
+        type: string
+      style: form
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  requestBodies:
+    UpdateMerchantProfileRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateMerchantProfileRequest'
+          examples:
+            Update the Fee Profile for a Merchant Profile:
+              value:
+                fee_profile: FP4xXhxyFRiRePKBQXmueVTh
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

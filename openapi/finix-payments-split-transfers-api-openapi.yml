@@ -1,0 +1,1856 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Split Transfers API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Split Transfers
+  description:
+    $ref: api-descriptions/tags/split-transfers.md
+paths:
+  /split_transfers/{split_transfer_id}:
+    parameters:
+    - schema:
+        type: string
+      name: split_transfer_id
+      in: path
+      required: true
+    get:
+      summary: Fetch a Split Transfer
+      responses:
+        '200':
+          $ref: '#/components/responses/SplitTransfer'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: getSplitTransfer
+      description: 'Fetch a `split_transfer` that was created from a split transaction.
+
+
+        For more information, see [Split a Transaction](/docs/guides/payments/modify/split-transactions/).'
+      x-jave-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: 'curl "https://finix.sandbox-payments-api.com/split_transfers/split_transfer_7i2gxncPcfkN5rJwuhrb3q" \
+
+          -H "Finix-Version: 2022-02-01" \
+
+          -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e
+
+          '
+      tags:
+      - Split Transfers
+      parameters: []
+      x-python-method-name: get_split_transfer
+  /split_transfers/{split_transfer_id}/fees:
+    parameters:
+    - schema:
+        type: string
+      name: split_transfer_id
+      in: path
+      required: true
+    get:
+      summary: Fetch Split Transfer Fees
+      responses:
+        '200':
+          $ref: '#/components/responses/TransfersList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: getSplitTransferFees
+      description: 'Fetch the fees associated with a `split_transfer`.
+
+
+
+        For more information, see [Split a Transaction](/docs/guides/payments/modify/split-transactions/).'
+      x-jave-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: 'curl "https://finix.sandbox-payments-api.com/split_transfers/split_transfer_7i2gxncPcfkN5rJwuhrb3q/fees" \
+
+          -H "Finix-Version: 2022-02-01" \
+
+          -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e
+
+          '
+      tags:
+      - Split Transfers
+      parameters: []
+      x-python-method-name: get_split_transfer_fees
+  /split_transfers:
+    parameters: []
+    get:
+      summary: List Split Transfers
+      responses:
+        '200':
+          $ref: '#/components/responses/SplitTransfersList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: listSplitTransfer
+      description: 'Retireve a list of `split_transfers` created for a specifc split `Transfer`.
+
+
+        For more information, see [Split a Transaction](/docs/guides/payments/modify/split-transactions/).'
+      x-jave-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: 'curl "https://finix.sandbox-payments-api.com/split_transfers/split_transfers?parent_transfer_id=TRvQN3v5mhA2Ttc78hzjLV3j" \
+
+          -H "Content-Type: application/json" \
+
+          -H "Finix-Version: 2022-02-01" \
+
+          -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e
+
+          '
+      parameters:
+      - schema:
+          type: string
+          example: TRvQN3v5mhA2Ttc78hzjLV3j
+          pattern: TRxxxxxxxxxxxxxxxxxxxxxx
+        in: query
+        name: parent_transfer_id
+        description: '**ID** of the parent `Transfer` that was split.'
+        required: true
+      tags:
+      - Split Transfers
+      x-python-method-name: list_split_transfer
+      x-returns-list: true
+components:
+  schemas:
+    SplitTransfer:
+      type: object
+      x-examples:
+        Example 1:
+          id: split_transfer_7i2gxncPcfkN5rJwuhrb3q
+          created_at: '2023-07-19T02:30:17.10Z'
+          updated_at: '2023-07-19T02:30:17.10Z'
+          amount: 600
+          fee: 0
+          currency: USD
+          parent_transfer_id: TR7h8NxhCDHunLFdJ1HCLp4r
+          ready_to_settle_at: '2023-07-19T02:30:18.04Z'
+          type: DEBIT
+          merchant_id: MU4jpoNGRkAyjBxumZhGa6Hc
+          identity_id: IDhCtMvcteDx37eD9m4rmdKd
+          fee_profile_id: FPbDSnEPtaT8Nttxj9NJk7eC
+          application_id: APgPDQrLD52TYvqazjHJJchM
+          tags:
+            key: value
+      properties:
+        id:
+          type: string
+          description: The ID of the `split_transfer` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        amount:
+          $ref: '#/components/schemas/Amount'
+        fee:
+          type: integer
+          description: "The minimum amount of the `Transfer` you'd like to collect as your fee in cents. Defaults to zero (must be less than or equal to the `amount`).\n- If the fees applied by the 'Fee Profile' are ***higher*** than the value passed in 'fee', 'fee' will not be applied and have no effect.\n- If the fees applied by the 'Fee Profile' are ***lower*** than the value passed in 'fee', an additional fee is be applied, in addition to the fees generated by the `Fee Profile`.\n    - The additional fee is equal to the difference between the value passed in 'fee' and the fees generated by the `Fee Profile`.\nfraud_session_id:"
+          format: int64
+        currency:
+          $ref: '#/components/schemas/Currency'
+        parent_transfer_id:
+          type: string
+          description: '**ID** of the original parent `Transfer` where the split was defined.'
+          example: TR7h8NxhCDHunLFdJ1HCLp4r
+          pattern: TRxxxxxxxxxxxxxxxxxxxxxx
+        ready_to_settle_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the `Transfer` is ready to be settled at.
+          nullable: true
+        type:
+          type: string
+          description: Type of `split_transfer`.
+        merchant_id:
+          type: string
+          description: The ID of the `Merchant` resource the `split_transfer` was created for and will settle under.
+        identity_id:
+          type: string
+          description: The ID of `Identity` resource used by the `Merchant` the `split_transfer` was created for.
+        fee_profile_id:
+          type: string
+          description: The `fee_profile` associated to this `split_transfer`.
+        application_id:
+          type: string
+          description: The `application_id` associated to this `split_transfer`.
+        tags:
+          type: object
+          properties:
+            key:
+              type: string
+      description: The `split_transfer` resource that was created from a split transacion.
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    AdditionalHealthcareData:
+      title: AdditionalHealthcareData
+      x-stoplight:
+        id: ibznc087ymmit
+      type: object
+      description: Optional object detailing [specific healthcare amounts](/guides/making-a-payment/hsa-fsa/).
+      nullable: true
+      properties:
+        clinic_amount:
+          type: integer
+          description: The amount used for clinic and office visits such as a copay amount.
+          nullable: true
+        dental_amount:
+          type: integer
+          description: The amount used for dental related expenses.
+          nullable: true
+        prescription_amount:
+          type: integer
+          description: The amount used to purchase perscriptions and medications.
+          nullable: true
+        vision_amount:
+          type: integer
+          description: The amount used for vision related expenses.
+          nullable: true
+    SplitTransfersList:
+      type: object
+      x-examples:
+        example-1:
+          _embedded:
+            payout_profiles:
+            - id: PO6UbajkQrbFd5nAvs57dwyn
+              created_at: '2022-10-24T21:38:23.72Z'
+              updated_at: '2022-10-24T21:38:23.72Z'
+              tags: {}
+              linked_id: MU6TXYpA37uM9H4GwitQr8E3
+              linked_type: MERCHANT
+              type: GROSS
+              gross:
+                payouts:
+                  frequency: DAILY
+                  submission_delay_days: 1
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: STANDARD
+                fees:
+                  frequency: MONTHLY
+                  day_of_month: 1
+                  submission_delay_days: 3
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: STANDARD
+              _links:
+                self:
+                  href: https://finix.sandbox-payments-api.com/payout_profiles/PO6UbajkQrbFd5nAvs57dwyn
+            - id: POf5rP3c3XyRX7M6PuCvmgxf
+              created_at: '2022-10-20T19:43:18.02Z'
+              updated_at: '2022-10-20T19:43:18.02Z'
+              tags: {}
+              linked_id: MUfbbKm7vRmBX2bP92pKw9zZ
+              linked_type: MERCHANT
+              type: CUSTOM
+              custom: {}
+              _links:
+                self:
+                  href: https://finix.sandbox-payments-api.com/payout_profiles/POf5rP3c3XyRX7M6PuCvmgxf
+          _links:
+            self:
+              href: https://finix.sandbox-payments-api.com/payout_profiles
+            next:
+              href: https://finix.sandbox-payments-api.com/payout_profiles?after_cursor=POf5rP3c3XyRX7M6PuCvmgxf
+          page:
+            limit: 100
+            next_cursor: POf5rP3c3XyRX7M6PuCvmgxf
+      description: List of `Split Transferss` created for a split `Transfer`.
+      x-stoplight:
+        id: 11d3f3351214e
+      properties:
+        _embedded:
+          type: object
+          description: List of `Payout Profiles`.
+          properties:
+            split_transfers:
+              type: array
+              description: '`Payout Profile` objects.'
+              items:
+                $ref: '#/components/schemas/SplitTransfersList'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+        page:
+          $ref: '#/components/schemas/PageCursor'
+    Raw:
+      title: Raw
+      description: Raw response from the processor.
+      x-examples: {}
+      type: object
+      nullable: true
+    Currency:
+      type: string
+      description: ISO 4217 3 letter currency code.
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    TransfersList:
+      type: object
+      description: ''
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `Transfer` objects.
+          properties:
+            transfers:
+              type: array
+              minItems: 0
+              uniqueItems: true
+              description: '`Transfer` objects.'
+              items:
+                $ref: '#/components/schemas/Transfer'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    Amount:
+      type: integer
+      title: Amount
+      description: The total amount that will be debited in cents (e.g. 100 cents to debit $1.00).
+      format: int64
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    AdditionalPurchaseData:
+      title: AdditionalPurchaseData
+      x-stoplight:
+        id: e98e7635f242c
+      type: object
+      description: Additional information about the purchase. Used for [Level 2 and Level 3 Processing](/guides/payments/modify/level-2-and-level-3-processing/).
+      properties:
+        customer_reference_number:
+          type: string
+          description: The customer reference for the purchase (max 17 characters).
+          maxLength: 17
+        customs_duty_amount:
+          type: integer
+          description: The duty in cents on the total purchase amount for the order
+        destination_country_code:
+          type: string
+          description: The ISO country code of the order destination.
+        destination_postal_code:
+          type: string
+          description: The postal code of the order destination (10 characters)
+          maxLength: 10
+        discount_amount:
+          type: integer
+          description: The amount in cents of the discount for the order.
+        invoice_reference_number:
+          type: string
+          description: The order's invoice number (max 15 characters)
+          maxLength: 15
+        item_data:
+          type: array
+          description: Additional information about the transaction. Used for Level 2 and Level 3 Processing.
+          items:
+            type: object
+            properties:
+              amount_excluding_sales_tax:
+                type: integer
+                description: '- Total cost of the line item in cents, excluding tax.
+
+                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
+              amount_including_sales_tax:
+                type: integer
+                description: '- Total cost of the line item in cents, including tax.
+
+                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
+              commodity_code:
+                type: string
+                description: A commodity code is a numeric code representing a particular product or service as defined by the National Institute of Governmental Purchasing. The code can be 3, 5, 7, or 11 digits in length. The longer the code the more granular the description of the product/service. (max 12 characters).
+                maxLength: 12
+              cost_per_unit:
+                type: integer
+                description: The price in cents of one unit of the item purchased
+              item_description:
+                type: string
+                description: Required when `item_data` is supplied (max 25 characters)
+                maxLength: 25
+              item_discount_amount:
+                type: integer
+                description: 'Item discount amount in cents
+
+                  '
+              merchant_product_code:
+                type: string
+                description: Merchant defined product code (max 12 characters).
+                maxLength: 12
+              quantity:
+                type: integer
+                description: The number of items purchased. Must be greater than 0.
+                minimum: 1
+                maximum: 99
+              unit_of_measure:
+                type: string
+                description: The unit of measure of the purchased item (max 3 characters).
+                maxLength: 3
+        order_date:
+          type: object
+          properties:
+            day:
+              type: integer
+              description: Day of purchase (between 1 and 31)
+            month:
+              type: integer
+              description: Month of purchase (between 1 and 12)
+            year:
+              type: integer
+              description: Year of purchase (4-digit)
+              minimum: 1990
+        sales_tax:
+          type: integer
+          description: "- Total aggregate tax amount in cents for the entire purchase. Field is automatically calculated if you pass in the itemized tax amounts. \n- For non-taxable transactions either set `sales_tax` to 0 or omit from payload and also set `tax_exempt` to **True**.\n- Request must align so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`."
+        ship_from_postal_code:
+          type: string
+          description: The postal code from where order is shipped (10 characters)
+          maxLength: 10
+        shipping_amount:
+          type: integer
+          description: 'The shipping cost in cents for the order.
+
+            '
+        tax_exempt:
+          type: boolean
+          description: '- For tax exempt purchases set to **True**.
+
+            - If set to **True**, request can''t include `sales_tax`.'
+      required:
+      - customer_reference_number
+      - sales_tax
+    FailureCode:
+      title: FailureCode
+      x-stoplight:
+        id: lo8jqmipa7376
+      type: string
+      description: The code of the failure so the decline can be handled programmatically. For more info on how to handle the failure, see [Failure Codes](/guides/developers/errors/#failure-codes).
+      nullable: true
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    FailureMessage:
+      title: FailureMessage
+      x-stoplight:
+        id: cgilf858039yi
+      type: string
+      description: A human-readable description of why the transaction was declined. This will also include a suggestion on how to complete the payment.
+      nullable: true
+    AdditionalBuyerCharges:
+      title: AdditionalBuyerCharges
+      x-stoplight:
+        id: 8t8auxc19wmuw
+      type: object
+      description: Object detailing any [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/) that got included in the `Authorization`.
+      nullable: true
+      properties:
+        convenience_amount:
+          type: number
+          description: Include the convenience fee the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`.
+          nullable: true
+        rent_surcharge_amount:
+          type: number
+          description: Include the rent surcharge the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`.
+          nullable: true
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    IdempotencyId:
+      title: IdempotencyId
+      type: string
+      description: Pass any randomly generated or internal ID to [idempotently](/api/overview/#section/Idempotency-Requests) identify `Transfers`, `Authorizations`, and refund requests.
+      nullable: true
+    Transfer:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+          description: The ID of the `Transfer` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        additional_buyer_charges:
+          $ref: '#/components/schemas/AdditionalBuyerCharges'
+        additional_healthcare_data:
+          $ref: '#/components/schemas/AdditionalHealthcareData'
+        additional_purchase_data:
+          $ref: '#/components/schemas/AdditionalPurchaseData'
+        address_verification:
+          type: string
+          description: Details the results of the Address Verification checks.
+          nullable: true
+        amount:
+          $ref: '#/components/schemas/Amount'
+        amount_requested:
+          type: integer
+          description: Details the `amount` that was requested to get debited from the `source` when the transaction was created.
+        application:
+          type: string
+          description: The ID of the `Application` the `Transfer` was created under.
+        card_present_details:
+          $ref: '#/components/schemas/CardPresentDetails'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        destination:
+          type: string
+          description: The ID of the destination.
+          nullable: true
+        device:
+          type: string
+          description: The ID of the `Device` resource the `Transfer` was created under.
+        externally_funded:
+          type: string
+          description: Details if the `Transfer` will be settled externally by card processors.
+        failure_code:
+          $ref: '#/components/schemas/FailureCode'
+        failure_message:
+          $ref: '#/components/schemas/FailureMessage'
+        fee:
+          type: integer
+          format: int64
+          description: "The minimum amount of the `Transfer` you'd like to collect as your fee in cents. Defaults to zero (must be less than or equal to the `amount`).\n- If the fees applied by the 'Fee Profile' are ***higher*** than the value passed in 'fee', 'fee' will not be applied and have no effect.\n- If the fees applied by the 'Fee Profile' are ***lower*** than the value passed in 'fee', an additional fee is be applied, in addition to the fees generated by the `Fee Profile`.\n    - The additional fee is equal to the difference between the value passed in 'fee' and the fees generated by the `Fee Profile`.\nfraud_session_id:"
+        fee_type:
+          $ref: '#/components/schemas/FeeType'
+        idempotency_id:
+          $ref: '#/components/schemas/IdempotencyId'
+        merchant:
+          type: string
+          description: The ID of the `Merchant` resource the `Transfer` was created under.
+          example: MUxxxxxxxxxxxxxxxxxxxxxxx
+        merchant_identity:
+          type: string
+          example: IDxxxxxxxxxxxxxxxxxxxxxxxx
+          description: The ID of `Identity` resource used by the `Merchant` the `Transfer` was created under.
+        parent_transfer:
+          type: string
+          description: '- ID of the original parent `Transfer` where the transaction occurred.
+
+            - Only appears for `Transfers:type` **REVERSAL** and **FEE**.'
+          nullable: true
+        parent_transfer_trace_id:
+          type: string
+          description: '- `trace_id` of the original parent `Transfer` where the transaction occurred.
+
+            - Only appears for `Transfers:type` **REVERSAL** and **FEE**.'
+          nullable: true
+        messages:
+          $ref: '#/components/schemas/Messages'
+        raw:
+          $ref: '#/components/schemas/Raw'
+        ready_to_settle_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the `Transfer` is ready to be settled at.
+          nullable: true
+        security_code_verification:
+          type: string
+          description: Details the results of the Security Code Verification checks.
+          nullable: true
+        source:
+          type: string
+          description: The ID of the `Payment Instrument` that will be debited and performing the `Transfer`.
+          nullable: true
+        split_transfers:
+          type: string
+          description: '- The ID of the `split_transfer` resources moving funds from the primary `Transfer` to the specified `Merchants.`
+
+            - Only used for Split Transactions. For more information, see [Split Transactions](/docs/guides/payments/modify/split-transactions/).'
+          nullable: true
+        state:
+          type: string
+          enum:
+          - CANCELED
+          - PENDING
+          - FAILED
+          - SUCCEEDED
+          - UNKNOWN
+          description: The stauts of the `Transfer`.
+        statement_descriptor:
+          type: string
+          description: <li>The description of the seller that appears on the buyer's bank or card statement.</li><li><kbd>statement_descriptors</kbd> for `Transfers` in <strong>live</strong> enviroments will have a <kbd>FI *</kbd> prefix.
+          nullable: true
+        subtype:
+          type: string
+          enum:
+          - API
+          - APPLICATION_FEE
+          - DISPUTE
+          - MERCHANT_CREDIT
+          - MERCHANT_CREDIT_ADJUSTMENT
+          - MERCHANT_DEBIT
+          - MERCHANT_DEBIT_ADJUSTMENT
+          - PLATFORM_CREDIT
+          - PLATFORM_CREDIT_ADJUSTMENT
+          - PLATFORM_DEBIT
+          - PLATFORM_DEBIT_ADJUSTMENT
+          - PLATFORM_FEE
+          - SETTLEMENT_MERCHANT
+          - SETTLEMENT_NOOP
+          - SETTLEMENT_PARTNER
+          - SETTLEMENT_PLATFORM
+          - SPLIT_PAYOUT
+          - SPLIT_PAYOUT_ADJUSTMENT
+          - SYSTEM
+          description: Additional information describing the `payment_type`.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        trace_id:
+          type: string
+          description: Trace ID of the `Transfer`. The processor sends back the `trace_id` so you can track the `Transfer` end-to-end.
+          nullable: true
+        type:
+          type: string
+          enum:
+          - DEBIT
+          - CREDIT
+          - REVERSAL
+          - FEE
+          - ADJUSTMENT
+          - DISPUTE
+          - RESERVE
+          - SETTLEMENT
+          - UNKNOWN
+          description: Type of `Transfer`.
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            application:
+              type: object
+              description: Link to the `Application` the resource was created under.
+              properties:
+                href:
+                  type: string
+            destination:
+              type: object
+              description: Link to the `Payment Instrument` where funds are getting sent.
+              properties:
+                href:
+                  type: string
+            device:
+              type: object
+              description: Link to the `Device` the request was made under.
+              properties:
+                href:
+                  type: string
+            disputes:
+              type: object
+              description: Link to the `Dispute` the request was made under.
+              properties:
+                href:
+                  type: string
+            fee_profile:
+              type: object
+              description: Link to the `fee_profile` the request was made under.
+              properties:
+                href:
+                  type: string
+            fees:
+              type: object
+              description: Link to the `fees` the request is associated with.
+              properties:
+                href:
+                  type: string
+            merchant_identity:
+              type: object
+              description: Link to the `Identity` the `Merchant` was created under and the `Transfer` was submitted with.
+              properties:
+                href:
+                  type: string
+            payment_instruments:
+              type: object
+              description: Link to the `Payment Instrument` associated with the Transfer.
+              properties:
+                href:
+                  type: string
+            disputed_transfer:
+              type: object
+              description: Link to the `Transfer` the `Dispute` is about.
+              properties:
+                href:
+                  type: string
+            reversals:
+              type: object
+              description: Link to the `reversals` associated with the `Transfer`.
+              properties:
+                href:
+                  type: string
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            parent:
+              type: object
+              description: Link to the original resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            source:
+              type: object
+              description: Link to the `Payment Instrument` the `Transfer` was created under.
+              properties:
+                href:
+                  type: string
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Messages:
+      title: Messages
+      type: array
+      description: Message field that provides additional details. This field is typically **null**.
+      nullable: true
+      items:
+        type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    CardPresentDetails:
+      title: CardPresentDetails
+      x-stoplight:
+        id: jbenxkas8ukf2
+      type: object
+      description: Details needed to process card present transactions.
+      nullable: true
+      properties:
+        approval_code:
+          type: string
+          description: Unique ID used to identify the approval of the `Transfer`.
+          nullable: true
+        brand:
+          type: string
+          description: The brand of the card saved in the `Payment Instrument`.
+          nullable: true
+        emv_data:
+          type: object
+          description: Encrypted card data used to process the transaction.
+          nullable: true
+          properties:
+            application_identifier:
+              type: string
+              description: ID of the EMV application processing the transaction.
+            application_label:
+              type: string
+              description: EMV card label.
+            application_preferred_name:
+              type: string
+              description: Alternate EMV application name (if provided).
+              nullable: true
+            application_transaction_counter:
+              type: string
+              description: Transaction number for the EMV application.
+            cryptogram:
+              type: string
+              description: Encrypted card infromation used to process the transaction.
+            issuer_code_table_index:
+              type: string
+              description: The alphabet code table (according to ISO 8859) used by the EMV application (if provided).
+              nullable: true
+            pin_verified:
+              type: boolean
+              description: Details if the cardholder's PIN number was verified.
+            tags:
+              $ref: '#/components/schemas/Tags'
+        entry_mode:
+          type: string
+          description: Details how the card was entered to process the transaction.
+          nullable: true
+        masked_account_number:
+          type: string
+          description: Last four digits of the bank account number.
+          nullable: true
+        name:
+          type: string
+          description: The name of the bank account or card owner.
+          nullable: true
+        payment_type:
+          type: string
+          description: The type of `Payment Instrument` used in the transaction (or the original payment).
+    FeeType:
+      title: FeeType
+      type: string
+      enum:
+      - APPLICATION_FEE
+      - ACH_BASIS_POINTS
+      - ACH_FIXED
+      - CARD_BASIS_POINTS
+      - CARD_FIXED
+      - CARD_INTERCHANGE
+      - VISA_BASIS_POINTS
+      - VISA_FIXED
+      - VISA_INTERCHANGE
+      - VISA_ASSESSMENT_BASIS_POINTS
+      - VISA_ACQUIRER_PROCESSING_FIXED
+      - VISA_CREDIT_VOUCHER_FIXED
+      - VISA_BASE_II_SYSTEM_FILE_TRANSMISSION_FIXED
+      - VISA_BASE_II_CREDIT_VOUCHER_FIXED
+      - VISA_KILOBYTE_ACCESS_FIXED
+      - DISCOVER_BASIS_POINTS
+      - DISCOVER_FIXED
+      - DISCOVER_INTERCHANGE
+      - DISCOVER_ASSESSMENT_BASIS_POINTS
+      - DISCOVER_DATA_USAGE_FIXED
+      - DISCOVER_NETWORK_AUTHORIZATION_FIXED
+      - DINERS_CLUB_BASIS_POINTS
+      - DINERS_CLUB_FIXED
+      - DINERS_CLUB_INTERCHANGE
+      - MASTERCARD_BASIS_POINTS
+      - MASTERCARD_FIXED
+      - MASTERCARD_INTERCHANGE
+      - MASTERCARD_ASSESSMENT_UNDER_1K_BASIS_POINTS
+      - MASTERCARD_ASSESSMENT_OVER_1K_BASIS_POINTS
+      - MASTERCARD_ACQUIRER_FEE_BASIS_POINTS
+      - JCB_BASIS_POINTS
+      - JCB_FIXED
+      - JCB_INTERCHANGE
+      - AMERICAN_EXPRESS_BASIS_POINTS
+      - AMERICAN_EXPRESS_FIXED
+      - AMERICAN_EXPRESS_INTERCHANGE
+      - AMERICAN_EXPRESS_ASSESSMENT_BASIS_POINTS
+      - DISPUTE_INQUIRY_FIXED_FEE
+      - DISPUTE_FIXED_FEE
+      - QUALIFIED_TIER_BASIS_POINTS_FEE
+      - QUALIFIED_TIER_FIXED_FEE
+      - CUSTOM
+      - ACH_DEBIT_RETURN_FIXED_FEE
+      - ACH_CREDIT_RETURN_FIXED_FEE
+      - ANCILLARY_FIXED_FEE_PRIMARY
+      - ANCILLARY_FIXED_FEE_SECONDARY
+      - SETTLEMENT_V2_TRANSFER
+      description: Details the type of fee if the `Transfer` includes a `fee`.
+  responses:
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    TransfersList:
+      description: List of Transfer objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransfersList'
+          examples:
+            List of Transfers:
+              value:
+                _embedded:
+                  transfers:
+                  - id: TRvQN3v5mhA2Ttc78hzjLV3j
+                    created_at: '2022-10-11T03:25:04.79Z'
+                    updated_at: '2022-10-11T03:25:04.79Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 13243
+                    amount_requested: 13243
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: null
+                    externally_funded: 'FALSE'
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    fee_type: CARD_BASIS_POINTS
+                    idempotency_id: null
+                    merchant_identity: IDddHpRqwf2VsH2XB1fmLfhM
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: '2022-10-11T03:25:05.32Z'
+                    security_code_verification: null
+                    source: null
+                    state: SUCCEEDED
+                    statement_descriptor: null
+                    subtype: PLATFORM_FEE
+                    tags: {}
+                    trace_id: 611dcc5f-0622-4ec7-8c8b-b08896456d62
+                    type: FEE
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRvQN3v5mhA2Ttc78hzjLV3j
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDddHpRqwf2VsH2XB1fmLfhM
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRvQN3v5mhA2Ttc78hzjLV3j/payment_instruments
+                      parent:
+                        href: https://finix.sandbox-payments-api.com/transfers/TR61nQ89c8U5i7uAvwmSuLnv
+                      fee_profile:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8
+                  - id: TR34MdY6eagpEqhtTaP8EBCR
+                    created_at: '2022-10-10T06:32:04.58Z'
+                    updated_at: '2022-10-10T06:32:04.58Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 19
+                    amount_requested: 19
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: null
+                    externally_funded: 'FALSE'
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    fee_type: CARD_BASIS_POINTS
+                    idempotency_id: null
+                    merchant_identity: IDddHpRqwf2VsH2XB1fmLfhM
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: '2022-10-10T06:32:05.05Z'
+                    security_code_verification: null
+                    source: null
+                    state: SUCCEEDED
+                    statement_descriptor: null
+                    subtype: PLATFORM_FEE
+                    tags: {}
+                    trace_id: a79105c7-8b93-4c36-8734-83f02ca0686c
+                    type: FEE
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TR34MdY6eagpEqhtTaP8EBCR
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDddHpRqwf2VsH2XB1fmLfhM
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TR34MdY6eagpEqhtTaP8EBCR/payment_instruments
+                      parent:
+                        href: https://finix.sandbox-payments-api.com/transfers/TR8bRJ22SBReMehVQMVAbRpr
+                      fee_profile:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/transfers?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                  next:
+                    href: https://finix.sandbox-payments-api.com/transfers?offset=20&limit=20&sort=created_at,desc&sort=id,desc
+                  last:
+                    href: https://finix.sandbox-payments-api.com/transfers?offset=23980&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  limit: 100
+                  next_cursor: TRvynw5NU1Uo6TB5USyhbzCx
+            List of Settlement Funding Transfers:
+              value:
+                _embedded:
+                  transfers:
+                  - id: TRkwxPhCf3qChKFEVGhDjr76
+                    created_at: '2022-08-12T21:46:12.97Z'
+                    updated_at: '2022-08-12T21:47:06.65Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 102
+                    amount_requested: 102
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: PIrFpayBAQcqK35HMQgRfaqD
+                    externally_funded: UNKNOWN
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    idempotency_id: null
+                    merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: null
+                    security_code_verification: null
+                    source: null
+                    state: FAILED
+                    statement_descriptor: null
+                    subtype: SETTLEMENT_PLATFORM
+                    tags: {}
+                    trace_id: d4a6df17-f581-42d0-ac70-ad6770acd5c4
+                    type: CREDIT
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRkwxPhCf3qChKFEVGhDjr76
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRkwxPhCf3qChKFEVGhDjr76/payment_instruments
+                      reversals:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRkwxPhCf3qChKFEVGhDjr76/reversals
+                      fees:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRkwxPhCf3qChKFEVGhDjr76/fees
+                      disputes:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRkwxPhCf3qChKFEVGhDjr76/disputes
+                      destination:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PIrFpayBAQcqK35HMQgRfaqD
+                  - id: TRxb61dJ6PvGcvyS2L2B9SZE
+                    created_at: '2022-08-12T21:46:12.98Z'
+                    updated_at: '2022-08-12T21:47:05.26Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 2
+                    amount_requested: 2
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: null
+                    externally_funded: UNKNOWN
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    idempotency_id: null
+                    merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: null
+                    security_code_verification: null
+                    source: PIm8mdyYcEnYAZLLyw8g59Pw
+                    state: SUCCEEDED
+                    statement_descriptor: null
+                    subtype: SETTLEMENT_MERCHANT
+                    tags: {}
+                    trace_id: e192bc39-0909-4da9-b4c2-022a84ae3984
+                    type: DEBIT
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRxb61dJ6PvGcvyS2L2B9SZE
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRxb61dJ6PvGcvyS2L2B9SZE/payment_instruments
+                      reversals:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRxb61dJ6PvGcvyS2L2B9SZE/reversals
+                      fees:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRxb61dJ6PvGcvyS2L2B9SZE/fees
+                      disputes:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRxb61dJ6PvGcvyS2L2B9SZE/disputes
+                      source:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PIm8mdyYcEnYAZLLyw8g59Pw
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/settlements/STivxR2KrnVdD75TQtitnsG8/funding_transfers?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  limit: 100
+                  next_cursor: TRvynw5NU1Uo6TB5USyhbzCx
+            List of Settlement Transfers:
+              value:
+                _embedded:
+                  transfers:
+                  - id: TR8yiKY6ju988aUZhfqJFjag
+                    created_at: '2022-08-12T16:56:01.90Z'
+                    updated_at: '2022-08-12T16:56:01.90Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 100
+                    amount_requested: 100
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: null
+                    externally_funded: 'FALSE'
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    fee_type: CARD_FIXED
+                    idempotency_id: null
+                    merchant_identity: IDddHpRqwf2VsH2XB1fmLfhM
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: '2022-08-12T22:15:02.69Z'
+                    security_code_verification: null
+                    source: null
+                    state: SUCCEEDED
+                    statement_descriptor: null
+                    subtype: PLATFORM_FEE
+                    tags: {}
+                    trace_id: 272fe816-2dd1-46ed-a7e7-9041d7a8f0ff
+                    type: FEE
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TR8yiKY6ju988aUZhfqJFjag
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDddHpRqwf2VsH2XB1fmLfhM
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TR8yiKY6ju988aUZhfqJFjag/payment_instruments
+                      parent:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRm9ppvqX43CbwmNzhckf2gb
+                      fee_profile:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8
+                  - id: TRm9ppvqX43CbwmNzhckf2gb
+                    created_at: '2022-08-12T16:55:47.66Z'
+                    updated_at: '2022-08-12T16:56:02.19Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 100
+                    amount_requested: 100
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: null
+                    externally_funded: 'FALSE'
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    idempotency_id: null
+                    merchant_identity: IDuqZpDw28f2KK6YuDk4jNLg
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: '2022-08-12T04:00:00.00Z'
+                    security_code_verification: null
+                    source: PIe2YvpcjvoVJ6PzoRPBK137
+                    state: SUCCEEDED
+                    statement_descriptor: FNX*DUNDER MIFFLIN
+                    subtype: API
+                    tags: {}
+                    trace_id: 381f1f6f-492b-4101-9a57-40001a59813a
+                    type: DEBIT
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRm9ppvqX43CbwmNzhckf2gb
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRm9ppvqX43CbwmNzhckf2gb/payment_instruments
+                      reversals:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRm9ppvqX43CbwmNzhckf2gb/reversals
+                      fees:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRm9ppvqX43CbwmNzhckf2gb/fees
+                      disputes:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRm9ppvqX43CbwmNzhckf2gb/disputes
+                      source:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PIe2YvpcjvoVJ6PzoRPBK137
+                      fee_profile:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8
+                  - id: TRwgubpxAJWbaDZE1kKP6SSi
+                    created_at: '2022-08-12T16:56:01.90Z'
+                    updated_at: '2022-08-12T16:56:01.90Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 2
+                    amount_requested: 2
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: null
+                    externally_funded: 'FALSE'
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    fee_type: CARD_BASIS_POINTS
+                    idempotency_id: null
+                    merchant_identity: IDddHpRqwf2VsH2XB1fmLfhM
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: '2022-08-12T22:15:02.69Z'
+                    security_code_verification: null
+                    source: null
+                    state: SUCCEEDED
+                    statement_descriptor: null
+                    subtype: PLATFORM_FEE
+                    tags: {}
+                    trace_id: 5e2dbd9c-1ad1-4e36-8d16-cfedd3bce385
+                    type: FEE
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRwgubpxAJWbaDZE1kKP6SSi
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDddHpRqwf2VsH2XB1fmLfhM
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRwgubpxAJWbaDZE1kKP6SSi/payment_instruments
+                      parent:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRm9ppvqX43CbwmNzhckf2gb
+                      fee_profile:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/settlements/STivxR2KrnVdD75TQtitnsG8/transfers?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  limit: 100
+                  next_cursor: TRvynw5NU1Uo6TB5USyhbzCx
+            List of Split Transfer Fees:
+              value:
+                _embedded:
+                  transfers:
+                  - id: TRf75ZVCM1M4eVojmVYGUnuQ
+                    created_at: '2023-07-19T02:30:17.43Z'
+                    updated_at: '2023-07-19T02:30:17.43Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 30
+                    amount_requested: 30
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: null
+                    externally_funded: 'FALSE'
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    fee_type: CARD_FIXED
+                    idempotency_id: null
+                    merchant: MU4jpoNGRkAyjBxumZhGa6Hc
+                    merchant_identity: IDhCtMvcteDx37eD9m4rmdKd
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: '2023-07-19T07:30:01.27Z'
+                    receipt_last_printed_at: null
+                    security_code_verification: null
+                    source: null
+                    split_transfers: null
+                    state: SUCCEEDED
+                    statement_descriptor: null
+                    subtype: PLATFORM_FEE
+                    tags: {}
+                    trace_id: 2c56f4f0-1f48-451c-9498-199daaff2e39
+                    type: FEE
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRf75ZVCM1M4eVojmVYGUnuQ
+                      parent:
+                        href: https://finix.sandbox-payments-api.com/split_transfers/split_transfer_7i2gxncPcfkN5rJwuhrb3q
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDhCtMvcteDx37eD9m4rmdKd
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRf75ZVCM1M4eVojmVYGUnuQ/payment_instruments
+                      fee_profile:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPbDSnEPtaT8Nttxj9NJk7eC
+                  - id: TR4AyjeiKwML2rZ6fWyVaQST
+                    created_at: '2023-07-19T02:30:17.43Z'
+                    updated_at: '2023-07-19T02:30:17.43Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 17
+                    amount_requested: 17
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: null
+                    externally_funded: 'FALSE'
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    fee_type: CARD_BASIS_POINTS
+                    idempotency_id: null
+                    merchant: MU4jpoNGRkAyjBxumZhGa6Hc
+                    merchant_identity: IDhCtMvcteDx37eD9m4rmdKd
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: '2023-07-19T07:30:01.27Z'
+                    receipt_last_printed_at: null
+                    security_code_verification: null
+                    source: null
+                    split_transfers: null
+                    state: SUCCEEDED
+                    statement_descriptor: null
+                    subtype: PLATFORM_FEE
+                    tags: {}
+                    trace_id: 48a6fa39-5639-4e2c-b316-fad2db170954
+                    type: FEE
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TR4AyjeiKwML2rZ6fWyVaQST
+                      parent:
+                        href: https://finix.sandbox-payments-api.com/split_transfers/split_transfer_7i2gxncPcfkN5rJwuhrb3q
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDhCtMvcteDx37eD9m4rmdKd
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TR4AyjeiKwML2rZ6fWyVaQST/payment_instruments
+                      fee_profile:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPbDSnEPtaT8Nttxj9NJk7eC
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/split_transfers/split_transfer_7i2gxncPcfkN5rJwuhrb3q/fees
+                page:
+                  limit: 100
+                  next_cursor: TR4AyjeiKwML2rZ6fWyVaQST
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    SplitTransfer:
+      description: The `split_transfer` resource that was created from a split transacion.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SplitTransfer'
+          examples:
+            Split Transfer:
+              value:
+                id: split_transfer_7i2gxncPcfkN5rJwuhrb3q
+                created_at: '2023-07-19T02:30:17.10Z'
+                updated_at: '2023-07-19T02:30:17.10Z'
+                amount: 600
+                fee: 0
+                currency: USD
+                parent_transfer_id: TR7h8NxhCDHunLFdJ1HCLp4r
+                ready_to_settle_at: '2023-07-19T02:30:18.04Z'
+                type: DEBIT
+                merchant_id: MU4jpoNGRkAyjBxumZhGa6Hc
+                identity_id: IDhCtMvcteDx37eD9m4rmdKd
+                fee_profile_id: FPbDSnEPtaT8Nttxj9NJk7eC
+                application_id: APgPDQrLD52TYvqazjHJJchM
+                tags:
+                  key: value
+            Split Transfer - Refund:
+              value:
+                id: split_transfer_m7Y8kgx4nunsrVbuMdedDo
+                created_at: '2023-07-19T03:02:03.11Z'
+                updated_at: '2023-07-19T03:02:03.11Z'
+                amount: 600
+                fee: 0
+                currency: USD
+                parent_transfer_id: TRm23kdc4SCxYyva47RyiZv
+                ready_to_settle_at: '2023-07-19T03:03:03.21Z'
+                type: CREDIT
+                merchant_id: MU4jpoNGRkAyjBxumZhGa6Hc
+                identity_id: IDhCtMvcteDx37eD9m4rmdKd
+                fee_profile_id: FPbDSnEPtaT8Nttxj9NJk7eC
+                application_id: APgPDQrLD52TYvqazjHJJchM
+                tags:
+                  key: value
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    SplitTransfersList:
+      description: List of `split_transfers` created for a split `Transfer`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SplitTransfersList'
+          examples:
+            List of Split Transfers:
+              value:
+                _embedded:
+                  split_transfers:
+                  - id: split_transfer_DQrLD52TYvqazjHJJchM
+                    created_at: '2022-10-11T03:25:04.79Z'
+                    updated_at: '2022-10-11T03:25:04.79Z'
+                    amount: 600
+                    application_id: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    identity_id: IDxxx"
+                    merchant_id: MUxxxx1
+                    parent_transfer_id: TRvQN3v5mhA2Ttc78hzjLV3j
+                    ready_to_settle_at: '2022-10-11T03:25:05.32Z'
+                    type: DEBIT
+                    fee: null
+                  - id: split_transfer_4MdY6eagpEqhtTaP8EBCR
+                    created_at: '2022-10-11T03:25:04.79Z'
+                    updated_at: '2022-10-11T03:25:04.79Z'
+                    amount: 300
+                    application_id: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    identity_id: IDxxx"
+                    merchant_id: MUxxxx1
+                    parent_transfer_id: TRvQN3v5mhA2Ttc78hzjLV3j
+                    ready_to_settle_at: '2022-10-11T03:25:05.32Z'
+                    type: DEBIT
+                    fee: null
+                  - id: split_transfer_4MdY6eagpEqhtTaP8EBCR
+                    created_at: '2022-10-11T03:25:04.79Z'
+                    updated_at: '2022-10-11T03:25:04.79Z'
+                    amount: 100
+                    application_id: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    identity_id: IDxxx"
+                    merchant_id: MUxxxx1
+                    parent_transfer_id: TRvQN3v5mhA2Ttc78hzjLV3j
+                    ready_to_settle_at: '2022-10-11T03:25:05.32Z'
+                    type: DEBIT
+                    fee: null
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/split_transfers?parent_transfer_id=TRvQN3v5mhA2Ttc78hzjLV3j
+                  next:
+                    href: https://finix.sandbox-payments-api.com/transfers?limit=3&after_cursor=split_transfer_xxx
+                page:
+                  limit: 3
+                  next_cursor: split_transfer_xxx
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

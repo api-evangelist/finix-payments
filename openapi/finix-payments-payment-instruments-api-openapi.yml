@@ -1,0 +1,2151 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Payment Instruments API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Payment Instruments
+  description:
+    $ref: api-descriptions/tags/payment-instruments.md
+paths:
+  /payment_instruments:
+    post:
+      tags:
+      - Payment Instruments
+      description: 'Create a `Payment Instrument` resource using a card or bank account.
+
+
+        - The creation of `Payment Instruments` directly via Finix''s API should only be done for testing purposes. You must use [our hosted fields](/guides/payments/making-a-payment/using-hosted-fields/) or the javascript client to remain out of PCI scope.'
+      summary: Create a Payment Instrument
+      operationId: createPaymentInstrument
+      requestBody:
+        $ref: '#/components/requestBodies/CreatePaymentInstrumentRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/PaymentInstrument'
+        '400':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: create
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: create
+    get:
+      tags:
+      - Payment Instruments
+      description: Retrieve a list of `Payment Instruments`.
+      summary: List Payment Instruments
+      operationId: listPaymentInstruments
+      parameters:
+      - $ref: '#/components/parameters/QueryAccountLastFour'
+      - $ref: '#/components/parameters/QueryAccountRoutingNumber'
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      - $ref: '#/components/parameters/QueryApplicationFilter'
+      - $ref: '#/components/parameters/QueryBeforeCursor'
+      - $ref: '#/components/parameters/QueryBin'
+      - $ref: '#/components/parameters/QueryCreatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryCreatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryExpirationMonth'
+      - $ref: '#/components/parameters/QueryExpirationYear'
+      - $ref: '#/components/parameters/QueryLastFour'
+      - $ref: '#/components/parameters/QueryLimit'
+      - $ref: '#/components/parameters/QueryName'
+      - $ref: '#/components/parameters/QueryOwnerIdentity'
+      - $ref: '#/components/parameters/QueryPaymentInstrumentType'
+      - $ref: '#/components/parameters/TagsKey'
+      - $ref: '#/components/parameters/TagsValue'
+      responses:
+        '200':
+          $ref: '#/components/responses/PaymentInstrumentsList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: list
+      x-group-parameters: true
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/payment_instruments\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: list
+      x-returns-list: true
+  /payment_instruments/{payment_instrument_id}:
+    parameters:
+    - description: ID of object
+      required: true
+      in: path
+      name: payment_instrument_id
+      schema:
+        type: string
+    get:
+      tags:
+      - Payment Instruments
+      description: Retrieve the details of a `Payment Instrument`.
+      summary: Fetch a Payment Instrument
+      operationId: getPaymentInstrument
+      responses:
+        '200':
+          $ref: '#/components/responses/PaymentInstrument'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/Error422InvalidField'
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/payment_instruments/PIwWisLuZNwPBoLbCgQVTCoY\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: get
+    put:
+      tags:
+      - Payment Instruments
+      description: 'Update a `Payment Instrument` to:
+
+        - Change the **billing address** in case the account holder moved (`instrument_type`:**PAYMENT_CARD** only).
+
+        - Disable the `Payment Instrument` resource so it can''t be used in requests.
+
+        - Update the `name` on the `Payment Instrument`.
+
+        - Change the `tags`.'
+      summary: Update a Payment Instrument
+      operationId: updatePaymentInstrument
+      requestBody:
+        $ref: '#/components/requestBodies/UpdatePaymentInstrumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/PaymentInstrument'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: update
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: update
+  /apple_pay_sessions:
+    post:
+      summary: Create an Apple Pay Session
+      operationId: createApplePaySession
+      responses:
+        '200':
+          $ref: '#/components/responses/ApplePaySession'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      tags:
+      - Payment Instruments
+      x-java-method-name: createApplePaySession
+      requestBody:
+        $ref: '#/components/requestBodies/CreateApplePaySessionRequest'
+      description: 'Create an `apple_pay_session` to process Apple Pay transactions on the web.
+
+
+        To create an Apple Pay Session, pass the unique `validation_url` (provided by Apple) while creating an `apple_pay_sessions` resource. Finix returns a `merchantSession` object that you can use to create a payment. For more information, see [Apple Pay](/guides/payments/alternative-payment-methods/apple-pay/).'
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/payment-instruments/createapplepay.md
+      x-python-method-name: create_apple_pay_session
+components:
+  responses:
+    Error422InvalidField:
+      description: Invalid field
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error422InvalidFieldList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ApplePaySession:
+      description: Single apple_pay_session object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApplePaySession'
+          examples:
+            Apple Pay Session:
+              value:
+                id: APPLEPAYSESSION_xxx
+                created_at: '2021-11-22T23:58:19.50Z'
+                updated_at: '2021-11-22T23:58:19.50Z'
+                session_details: '{"epochTimestamp":1640213041060,"expiresAt":1640216641060,"merchantSessionIdentifier":"SSH1524BA9006A944B8B9B8FB60227D9990_916523AAED1343F5BC5815E12BEE9250AFFDC1A17C46B0DE5A943F0F94927C24","nonce":"a5ee8554","merchantIdentifier":"23D5E1F154400B277E14CC8361878AA0AAFD46B2DF74003C7587B256269102BD","domainName":"tj.ngrok.io","displayName":"Christmas Shopping","signature":"...","operationalAnalyticsIdentifier":"Christmas Shopping:23D5E1F154400B277E14CC8361878AA0AAFD46B2DF74003C7587B256269102BD","retries":0}'
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/apple_pay_sessions/APPLEPAYSESSION_xxx
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    PaymentInstrumentsList:
+      description: List of Payment Instrument objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PaymentInstrumentsList'
+          examples:
+            List of Payment Instruments:
+              value:
+                _embedded:
+                  payment_instruments:
+                  - id: PI3AbkuRR1JbT5kPiGQCXvD9
+                    created_at: '2022-10-11T01:42:53.29Z'
+                    updated_at: '2022-10-11T01:42:53.29Z'
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    created_via: API
+                    currency: USD
+                    enabled: true
+                    fingerprint: FPRd5moHxL3Ltuvk4cczxetCg
+                    identity: IDpYDM7J9n57q849o9E9yNrG
+                    instrument_type: BANK_ACCOUNT
+                    account_type: SAVINGS
+                    bank_account_validation_check: NOT_ATTEMPTED
+                    bank_code: '123123123'
+                    country: USA
+                    masked_account_number: XXXXX3123
+                    name: John
+                    tags:
+                      Bank Account: Company Account
+                    type: BANK_ACCOUNT
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9
+                      authorizations:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9/authorizations
+                      transfers:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9/transfers
+                      verifications:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9/verifications
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDpYDM7J9n57q849o9E9yNrG
+                  - id: PIrb1DcGz1qjThotDJ5KURpv
+                    created_at: '2022-10-06T20:23:38.74Z'
+                    updated_at: '2022-10-06T20:23:38.74Z'
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    created_via: API
+                    currency: USD
+                    enabled: true
+                    fingerprint: FPRtvYkgcwLUdjq7B4AgxKfmr
+                    identity: IDpYDM7J9n57q849o9E9yNrG
+                    instrument_type: BANK_ACCOUNT
+                    account_type: SAVINGS
+                    bank_account_validation_check: NOT_ATTEMPTED
+                    bank_code: '666666666'
+                    country: USA
+                    masked_account_number: XXXXX3123
+                    name: test_python
+                    tags:
+                      bank_account: Test Python Account
+                    type: BANK_ACCOUNT
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PIrb1DcGz1qjThotDJ5KURpv
+                      authorizations:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PIrb1DcGz1qjThotDJ5KURpv/authorizations
+                      transfers:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PIrb1DcGz1qjThotDJ5KURpv/transfers
+                      verifications:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PIrb1DcGz1qjThotDJ5KURpv/verifications
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDpYDM7J9n57q849o9E9yNrG
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                  next:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments?offset=20&limit=20&sort=created_at,desc&sort=id,desc
+                  last:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments?offset=14660&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  offset: 0
+                  limit: 20
+                  count: 14679
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    PaymentInstrument:
+      description: Single Payment Instrument object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PaymentInstrument'
+            descriminator:
+              propertyName: type
+          examples:
+            Payment Instrument - Card:
+              value:
+                id: PI8uU6wfi6hqBoWmzm9L4F2b
+                created_at: '2022-10-11T01:42:22.32Z'
+                updated_at: '2022-10-11T01:42:22.32Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                created_via: API
+                currency: USD
+                enabled: true
+                fingerprint: FPRiCenDk2SoRng7WjQTr7RJY
+                identity: IDgWxBhfGYLLdkhxx2ddYf9K
+                instrument_type: PAYMENT_CARD
+                address:
+                  line1: 900 Metro Center Blv
+                  line2: null
+                  city: San Francisco
+                  region: CA
+                  postal_code: '94404'
+                  country: USA
+                address_verification: UNKNOWN
+                bin: '520082'
+                brand: MASTERCARD
+                card_type: DEBIT
+                expiration_month: 12
+                expiration_year: 2029
+                issuer_country: NON_USA
+                last_four: '8210'
+                name: John Smith
+                security_code_verification: UNKNOWN
+                tags:
+                  card_name: Business Card
+                type: PAYMENT_CARD
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/transfers
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/verifications
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDgWxBhfGYLLdkhxx2ddYf9K
+                  updates:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/updates
+            Payment Instrument - Bank Account:
+              value:
+                id: PI3AbkuRR1JbT5kPiGQCXvD9
+                created_at: '2022-10-11T01:42:53.29Z'
+                updated_at: '2022-10-11T01:42:53.29Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                created_via: API
+                currency: USD
+                enabled: true
+                fingerprint: FPRd5moHxL3Ltuvk4cczxetCg
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                instrument_type: BANK_ACCOUNT
+                account_type: SAVINGS
+                bank_account_validation_check: NOT_ATTEMPTED
+                bank_code: '123123123'
+                country: USA
+                masked_account_number: XXXXX3123
+                name: John
+                tags:
+                  Bank Account: Company Account
+                type: BANK_ACCOUNT
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9/transfers
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9/verifications
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpYDM7J9n57q849o9E9yNrG
+            Payment Instrument - Token:
+              value:
+                id: PImmCg3Po7oNi7jaZcXhfkEu
+                created_at: '2022-10-10T05:32:17.78Z'
+                updated_at: '2022-10-10T05:32:17.78Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                created_via: API
+                currency: USD
+                enabled: true
+                fingerprint: FPRiCenDk2SoRng7WjQTr7RJY
+                identity: IDgWxBhfGYLLdkhxx2ddYf9K
+                instrument_type: PAYMENT_CARD
+                address:
+                  line1: 900 Metro Center Blv
+                  line2: null
+                  city: San Francisco
+                  region: CA
+                  postal_code: '94404'
+                  country: USA
+                address_verification: UNKNOWN
+                bin: '520082'
+                brand: MASTERCARD
+                card_type: DEBIT
+                expiration_month: 12
+                expiration_year: 2029
+                issuer_country: NON_USA
+                last_four: '8210'
+                name: Amy White
+                security_code_verification: UNKNOWN
+                tags:
+                  card_name: Business Card
+                type: PAYMENT_CARD
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PImmCg3Po7oNi7jaZcXhfkEu
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PImmCg3Po7oNi7jaZcXhfkEu/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PImmCg3Po7oNi7jaZcXhfkEu/transfers
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PImmCg3Po7oNi7jaZcXhfkEu/verifications
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDgWxBhfGYLLdkhxx2ddYf9K
+                  updates:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PImmCg3Po7oNi7jaZcXhfkEu/updates
+            Payment Instrument - Apple Pay:
+              value:
+                id: PImE5ZhGZJNFy14DtX8wX6f6
+                created_at: '2022-10-10T05:36:55.27Z'
+                updated_at: '2022-10-10T05:36:55.27Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                created_via: API
+                currency: USD
+                enabled: true
+                fingerprint: FPR88YBDbK4TqYMUNU8t8fbeQ
+                identity: IDgWxBhfGYLLdkhxx2ddYf9K
+                instrument_type: APPLE_PAY
+                bin: '370382'
+                brand: AMERICAN_EXPRESS
+                card_type: UNKNOWN
+                expiration_month: 11
+                expiration_year: 2024
+                issuer_country: UNKNOWN
+                last_four: '8576'
+                name: John Smith
+                tags: {}
+                type: APPLE_PAY
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PImE5ZhGZJNFy14DtX8wX6f6
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PImE5ZhGZJNFy14DtX8wX6f6/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PImE5ZhGZJNFy14DtX8wX6f6/transfers
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PImE5ZhGZJNFy14DtX8wX6f6/verifications
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDgWxBhfGYLLdkhxx2ddYf9K
+            Payment Instrument - Google Pay:
+              value:
+                id: PIf8dyFFcEGBqPhaG22hPyYs
+                created_at: '2022-10-10T05:36:55.27Z'
+                updated_at: '2022-10-10T05:36:55.27Z'
+                application: APeUfzF5qdNkBCtdgcf3333n
+                created_via: API
+                currency: USD
+                enabled: true
+                fingerprint: FPRrcobjtdU98gr4sjiqYR1Qg
+                identity: ID78Fh8mcnnzukVzbdoyex5y
+                instrument_type: GOOGLE_PAY
+                bin: '411111'
+                brand: VISA
+                card_type: UNKNOWN
+                expiration_month: 12
+                expiration_year: 2027
+                issuer_country: UNKNOWN
+                last_four: '1111'
+                name: Finix Sandbox
+                tags: {}
+                type: GOOGLE_PAY
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIf8dyFFcEGBqPhaG22hPyYs
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIf8dyFFcEGBqPhaG22hPyYs/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIf8dyFFcEGBqPhaG22hPyYs/transfers
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIf8dyFFcEGBqPhaG22hPyYs/verifications
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APeUfzF5qdNkBCtdgcf3333n
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/ID78Fh8mcnnzukVzbdoyex5y
+            Payment Instrument - Update a Card's Address:
+              value:
+                id: PIwWisLuZNwPBoLbCgQVTCoY
+                created_at: '2022-08-15T23:13:06.13Z'
+                updated_at: '2023-02-28T21:12:29.72Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                created_via: API
+                currency: USD
+                disabled_code: null
+                disabled_message: null
+                enabled: true
+                fingerprint: FPRmYp7ejhA3yDjSor4A5Ji2D
+                identity: IDgWxBhfGYLLdkhxx2ddYf9K
+                instrument_type: PAYMENT_CARD
+                address:
+                  line1: 900 Metro Center Blv
+                  line2: Suite 200
+                  city: Los Angeles
+                  region: CA
+                  postal_code: '94404'
+                  country: USA
+                address_verification: UNKNOWN
+                bin: '400000'
+                brand: VISA
+                card_type: UNKNOWN
+                expiration_month: 12
+                expiration_year: 2029
+                issuer_country: UNKNOWN
+                last_four: '9979'
+                name: Amy White
+                security_code_verification: UNMATCHED
+                tags:
+                  card_name: Business Card
+                  custom_key: custome value
+                type: PAYMENT_CARD
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwWisLuZNwPBoLbCgQVTCoY
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwWisLuZNwPBoLbCgQVTCoY/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwWisLuZNwPBoLbCgQVTCoY/transfers
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwWisLuZNwPBoLbCgQVTCoY/verifications
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDgWxBhfGYLLdkhxx2ddYf9K
+                  updates:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwWisLuZNwPBoLbCgQVTCoY/updates
+            Payment Instrument - Disable a Payment Instrument:
+              value:
+                id: PIwbvcQGrEP33HShmYM7BR8o
+                created_at: '2023-02-28T19:05:56.24Z'
+                updated_at: '2023-02-28T21:16:18.80Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                created_via: API
+                currency: USD
+                disabled_code: USER_INITIATED
+                disabled_message: The card has been disabled by a user.
+                enabled: false
+                fingerprint: FPRd5moHxL3Ltuvk4cczxetCg
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                instrument_type: BANK_ACCOUNT
+                account_type: SAVINGS
+                bank_account_validation_check: NOT_ATTEMPTED
+                bank_code: '123123123'
+                country: USA
+                masked_account_number: XXXXX3123
+                name: null
+                tags:
+                  card_name: Personal Card
+                type: BANK_ACCOUNT
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwbvcQGrEP33HShmYM7BR8o
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwbvcQGrEP33HShmYM7BR8o/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwbvcQGrEP33HShmYM7BR8o/transfers
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwbvcQGrEP33HShmYM7BR8o/verifications
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpYDM7J9n57q849o9E9yNrG
+            Payment Instrument - Bank Account Validation Check:
+              value:
+                id: PIpU66orYpdrPSs91fqRJd66
+                created_at: '2023-03-13T23:28:34.10Z'
+                updated_at: '2023-03-13T23:28:34.10Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                created_via: API
+                currency: USD
+                disabled_code: null
+                disabled_message: null
+                enabled: true
+                fingerprint: FPRd5moHxL3Ltuvk4cczxetCg
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                instrument_type: BANK_ACCOUNT
+                account_type: SAVINGS
+                bank_account_validation_check: VALID
+                bank_code: '123123123'
+                country: USA
+                masked_account_number: XXXXX3123
+                name: null
+                tags: {}
+                type: BANK_ACCOUNT
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIpU66orYpdrPSs91fqRJd66
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIpU66orYpdrPSs91fqRJd66/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIpU66orYpdrPSs91fqRJd66/transfers
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIpU66orYpdrPSs91fqRJd66/verifications
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpYDM7J9n57q849o9E9yNrG
+            Payment Instrument - Update Payment Instrument Tags:
+              value:
+                id: PIwbvcQGrEP33HShmYM7BR8o
+                created_at: '2023-02-28T19:05:56.24Z'
+                updated_at: '2023-02-28T21:18:24.79Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                created_via: API
+                currency: USD
+                disabled_code: null
+                disabled_message: null
+                enabled: true
+                fingerprint: FPRd5moHxL3Ltuvk4cczxetCg
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                instrument_type: BANK_ACCOUNT
+                account_type: SAVINGS
+                bank_account_validation_check: NOT_ATTEMPTED
+                bank_code: '123123123'
+                country: USA
+                masked_account_number: XXXXX3123
+                name: null
+                tags:
+                  card_name: Personal Card
+                type: BANK_ACCOUNT
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwbvcQGrEP33HShmYM7BR8o
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwbvcQGrEP33HShmYM7BR8o/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwbvcQGrEP33HShmYM7BR8o/transfers
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/payment_instruments/PIwbvcQGrEP33HShmYM7BR8o/verifications
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpYDM7J9n57q849o9E9yNrG
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+  schemas:
+    Address:
+      title: Address
+      type: object
+      description: Address of the account owner.
+      nullable: true
+      properties:
+        city:
+          type: string
+          description: City (max 20 characters).
+          nullable: true
+        country:
+          $ref: '#/components/schemas/Country'
+        line1:
+          type: string
+          description: First line of the address (max 35 characters).
+          nullable: true
+        line2:
+          type: string
+          description: Second line of the address (max 35 characters).
+          nullable: true
+        postal_code:
+          type: string
+          description: Zip or Postal code (max 7 characters).
+          nullable: true
+        region:
+          type: string
+          description: 2-letter State code.
+          nullable: true
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    Country:
+      title: Country
+      type: string
+      enum:
+      - ABW
+      - AFG
+      - AGO
+      - AIA
+      - ALA
+      - ALB
+      - AND
+      - ARE
+      - ARG
+      - ARM
+      - ASM
+      - ATA
+      - ATF
+      - ATG
+      - AUS
+      - AUT
+      - AZE
+      - BDI
+      - BEL
+      - BEN
+      - BES
+      - BFA
+      - BGD
+      - BGR
+      - BHR
+      - BHS
+      - BIH
+      - BLM
+      - BLR
+      - BLZ
+      - BMU
+      - BOL
+      - BRA
+      - BRB
+      - BRN
+      - BTN
+      - BVT
+      - BWA
+      - CAF
+      - CAN
+      - CCK
+      - CHE
+      - CHL
+      - CHN
+      - CIV
+      - CMR
+      - COD
+      - COG
+      - COK
+      - COL
+      - COM
+      - CPV
+      - CRI
+      - CUB
+      - CUW
+      - CXR
+      - CYM
+      - CYP
+      - CZE
+      - DEU
+      - DJI
+      - DMA
+      - DNK
+      - DOM
+      - DZA
+      - ECU
+      - EGY
+      - ERI
+      - ESH
+      - ESP
+      - EST
+      - ETH
+      - FIN
+      - FJI
+      - FLK
+      - FRA
+      - FRO
+      - FSM
+      - GAB
+      - GBR
+      - GEO
+      - GGY
+      - GHA
+      - GIB
+      - GIN
+      - GLP
+      - GMB
+      - GNB
+      - GNQ
+      - GRC
+      - GRD
+      - GRL
+      - GTM
+      - GUF
+      - GUM
+      - GUY
+      - HKG
+      - HMD
+      - HND
+      - HRV
+      - HTI
+      - HUN
+      - IDN
+      - IMN
+      - IND
+      - IOT
+      - IRL
+      - IRN
+      - IRQ
+      - ISL
+      - ISR
+      - ITA
+      - JAM
+      - JEY
+      - JOR
+      - JPN
+      - KAZ
+      - KEN
+      - KGZ
+      - KHM
+      - KIR
+      - KNA
+      - KOR
+      - KWT
+      - LAO
+      - LBN
+      - LBR
+      - LBY
+      - LCA
+      - LIE
+      - LKA
+      - LSO
+      - LTU
+      - LUX
+      - LVA
+      - MAC
+      - MAF
+      - MAR
+      - MCO
+      - MDA
+      - MDG
+      - MDV
+      - MEX
+      - MHL
+      - MKD
+      - MLI
+      - MLT
+      - MMR
+      - MNE
+      - MNG
+      - MNP
+      - MRT
+      - MSR
+      - MTQ
+      - MUS
+      - MWI
+      - MYS
+      - MYT
+      - NAM
+      - NCL
+      - NER
+      - NFK
+      - NGA
+      - NIC
+      - NIU
+      - NLD
+      - NOR
+      - NPL
+      - NRU
+      - NZL
+      - OMN
+      - PAK
+      - PAN
+      - PCN
+      - PER
+      - PHL
+      - PLW
+      - PNG
+      - POL
+      - PRI
+      - PRK
+      - PRT
+      - PRY
+      - PSE
+      - PYF
+      - QAT
+      - REU
+      - ROU
+      - RUS
+      - RWA
+      - SAU
+      - SDN
+      - SEN
+      - SGP
+      - SGS
+      - SHN
+      - SJM
+      - SLB
+      - SLE
+      - SLV
+      - SMR
+      - SOM
+      - SPM
+      - SRB
+      - SSD
+      - STP
+      - SUR
+      - SVK
+      - SVN
+      - SWE
+      - SWZ
+      - SXM
+      - SYC
+      - SYR
+      - TCA
+      - TCD
+      - TGO
+      - THA
+      - TJK
+      - TKL
+      - TKM
+      - TLS
+      - TON
+      - TTO
+      - TUN
+      - TUR
+      - TUV
+      - TWN
+      - TZA
+      - UGA
+      - UKR
+      - UMI
+      - URY
+      - USA
+      - UZB
+      - VAT
+      - VCT
+      - VEN
+      - VGB
+      - VIR
+      - VNM
+      - VUT
+      - WLF
+      - WSM
+      - XKX
+      - YEM
+      - ZAF
+      - ZMB
+      - ZWE
+      description: The sender’s country.
+      nullable: true
+    Currency:
+      type: string
+      description: ISO 4217 3 letter currency code.
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    PaymentInstrumentsList:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `Payment Instrument` objects.
+          properties:
+            payment_instruments:
+              type: array
+              minItems: 0
+              uniqueItems: true
+              description: '`Payment Instrument` objects.'
+              items:
+                $ref: '#/components/schemas/PaymentInstrument'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    CreatePaymentInstrumentRequest:
+      type: object
+      properties:
+        address:
+          type: object
+          description: 'The address of the card owner.
+
+
+            **Note**: Including a postal or zip code when creating a `Payment Instrument` can lower the interchange on credit card transactions.'
+          properties:
+            city:
+              type: string
+              description: City (max 20 characters).
+            region:
+              type: string
+              description: 2-letter State code.
+            postal_code:
+              type: string
+              description: Zip or Postal code (max 7 characters).
+            line1:
+              type: string
+              description: First line of the address (max 35 characters).
+            country:
+              type: string
+              description: 3 Letter country code (e.g. USA).
+        expiration_month:
+          type: integer
+          description: The expiration month of the card (e.g. 12 for December).
+        expiration_year:
+          type: integer
+          description: The 4-digit expiration year of the card.
+        identity:
+          type: string
+          description: The ID of the `Identity` used to create the `Payment Instrument` resource.
+        name:
+          type: string
+          description: The name of the bank account or card owner. This value can get truncated to comply with processor requirements.
+        number:
+          type: string
+          description: The card or bank account number (no dashes in between numbers).
+        security_code:
+          type: string
+          description: The 3-4 digit security code of the card (i.e. CVV code).
+        tags:
+          $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          description: Type of `Payment Instrument`.
+          enum:
+          - APPLE_PAY
+          - BANK_ACCOUNT
+          - GOOGLE_PAY
+          - PAYMENT_CARD
+          - TOKEN
+        third_party_token:
+          type: string
+          description: Stringified token provided by Google. Required to process Google Pay transactions.
+        account_number:
+          type: string
+          description: The bank account number (no dashes in between numbers).
+          minLength: 5
+          maxLength: 17
+        account_type:
+          type: string
+          enum:
+          - BUSINESS_CHECKING
+          - BUSINESS_SAVINGS
+          - PERSONAL_CHECKING
+          - PERSONAL_SAVINGS
+          description: 'The type of bank account. Use the following respective enum when creating a `Payment Instrument` for:<ul><li><strong>PERSONAL_CHECKING: </strong>A personal checking account.</li><li><strong>PERSONAL_SAVINGS: </strong>A personal savings account.</li><li><strong>BUSINESS_CHECKING: </strong>A business checking account.</li><li><strong>BUSINESS_SAVINGS: </strong>A business savings account.</li></ul>'
+        attempt_bank_account_validation_check:
+          type: boolean
+          description: "Verify and validate the `Payment Instrument` to confirm it can be used for [ACH Direct Debits.](/guides/payments/online-payments/getting-started/finix-api/ach-echeck/)\n- Set to **True** to verify the `Payment Instrument` can be used for ACH payments. \n- Only `Payment Instruments` created from bank accounts can be used for ACH payments."
+          default: false
+        bank_code:
+          type: string
+          description: The routing number of the bank account.
+          minLength: 9
+          maxLength: 9
+          example: '123456789'
+        token:
+          type: string
+          description: ID of the `Token` that was returned from the tokenization client or hosted fields
+        merchant_identity:
+          type: string
+          description: The `id` of the identity used when registering the business with Google Pay through our registration API.
+    UpdatePaymentInstrumentRequest:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        merchant:
+          default: false
+          type: string
+          description: The ID of the `Merchant` that the `Payment Instrument` will be created under.
+        verify_payment_card:
+          type: boolean
+          description: '- Set to **true** to verify card details with the card issuer.
+
+            - Must be set to **true** to update the CVV or security code of a card.
+
+            - When set to **true**, `merchant` must also be included with your request.'
+          default: false
+        tags:
+          $ref: '#/components/schemas/Tags'
+        enabled:
+          type: boolean
+          description: Details if the `Payment Instrument` resource is enabled. Default value is **true**; set to **false** to disable the `Payment Instrument`.
+        name:
+          type: string
+          default: false
+          description: The name of the bank account or card owner. This value can get truncated to comply with processor requirements.
+        attempt_bank_account_validation_check:
+          type: boolean
+          default: false
+          description: "Verify and validate the `Payment Instrument` to confirm it can be used for [ACH Direct Debits.](/guides/payments/online-payments/getting-started/finix-api/ach-echeck/)\n- Set to **True** to verify the `Payment Instrument` can be used for ACH payments. \n- Only `Payment Instruments` created from bank accounts can be used for ACH payments."
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    PaymentInstrument:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the `Payment Instrument`.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        address:
+          $ref: '#/components/schemas/Address'
+        address_verification:
+          type: string
+          enum:
+          - NOT_SUPPORTED
+          - NO_ADDRESS
+          - NO_MATCH
+          - POSTAL_CODE_AND_STREET_MATCH
+          - POSTAL_CODE_MATCH
+          - STREET_MATCH
+          - UNKNOWN
+          description: Additional address information that’s required to verify the identity of the merchant.
+        application:
+          type: string
+          description: The ID of the `Application` resource the `Payment Instrument` was created under.
+        bin:
+          type: string
+          description: Bank Identification number for the `Payment Instrument`.
+        brand:
+          type: string
+          enum:
+          - AMERICAN_EXPRESS
+          - CHINA_T_UNION
+          - CHINA_UNION_PAY
+          - DANKORT
+          - DINERS_CLUB
+          - DINERS_CLUB_INTERNATIONAL
+          - DISCOVER
+          - INSTAPAYMENT
+          - INTERPAYMENT
+          - JCB
+          - LANKAPAY
+          - MAESTRO
+          - MASTERCARD
+          - MIR
+          - RUPAY
+          - TROY
+          - UATP
+          - UNKNOWN
+          - VERVE
+          - VISA
+          description: The `brand` of the card saved in the `Payment Instrument`.
+        card_name:
+          type: string
+          description: A custom name you can include to identify the card being used (e.g. **Business Card**).
+          nullable: true
+        card_type:
+          type: string
+          enum:
+          - CREDIT
+          - DEBIT
+          - HSA_FSA
+          - NON_RELOADABLE_PREPAID
+          - RELOADABLE_PREPAID
+          - UNKNOWN
+          description: The type of payment card saved in the `Payment Instrument`.
+        currency:
+          $ref: '#/components/schemas/Currency'
+        enabled:
+          type: boolean
+          description: Details if the `Payment Instrument` resource is enabled. Default value is **true**; set to **false** to disable the `Payment Instrument`.
+        expiration_month:
+          type: integer
+          maximum: 12
+          minimum: 1
+          description: Expiration month (e.g. 12 for December).
+        expiration_year:
+          type: integer
+          minimum: 1
+          description: 4-digit expiration year.
+        fast_funds_indicator:
+          type: string
+          description: Details if Fast Funds is enabled for the card.
+        fingerprint:
+          type: string
+          example: FPRxxxxxxxxxxxxxxxxx
+          description: Unique ID that represents the tokenized card data.
+        identity:
+          type: string
+          description: The ID of the `Identity` used to create the `Payment Instrument` resource.
+        instrument_type:
+          type: string
+          enum:
+          - APPLE_PAY
+          - BANK_ACCOUNT
+          - GOOGLE_PAY
+          - PAYMENT_CARD
+          - PAYMENT_CARD_PRESENT
+          - SWIPED_PAYMENT_CARD
+          - TOKEN
+          - VANTIV_OMNI_TOKEN
+          - VIRTUAL
+          description: The type of `Payment Instrument`.
+        issuer_country:
+          type: string
+          enum:
+          - NON_USA
+          - UNKNOWN
+          - USA
+          description: 'Details what country the card was issued in:<li><strong>USA</strong>: The card was issued inside the United States.<li><strong>NON_USA</strong>: The card was issued outside of the United States.<li><strong>UNKNOWN</strong>: Processor did not return an issuer country for this particular BIN.'
+        last_four:
+          type: string
+          description: Last four digits of the card or bank account number.
+        name:
+          type: string
+          description: The name of the bank account or card owner.
+          nullable: true
+        online_gambing_block_indicator:
+          type: string
+          description: Detailes if the card is enabled to receive push-payments for online gambling payouts.
+        payload_type:
+          type: string
+          enum:
+          - DESTINATION
+          - SOURCE
+        push_funds_block_indicator:
+          type: string
+          description: Details if the card is enabled to receive push-to-card disbursements.
+        security_code_verification:
+          type: string
+          enum:
+          - MATCHED
+          - UNKNOWN
+          - UNMATCHED
+          description: Details the results of the Card Verification Code check.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          enum:
+          - APPLE_PAY
+          - BANK_ACCOUNT
+          - GOOGLE_PAY
+          - PAYMENT_CARD
+          - PAYMENT_CARD_PRESENT
+          - SWIPED_PAYMENT_CARD
+          - TOKEN
+          - VANTIV_OMNI_TOKEN
+          - VIRTUAL
+          description: Type of `Payment Instrument`.
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            application:
+              type: object
+              description: Link to the `Application` the request was made under.
+              properties:
+                href:
+                  type: string
+            authorizations:
+              type: object
+              description: Link to the `Authorizations` created under the resource.
+              properties:
+                href:
+                  type: string
+            identity:
+              type: object
+              description: Link to the `Identity` the request was made under.
+              properties:
+                href:
+                  type: string
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            transfers:
+              type: object
+              description: Link to the `Transfers` created under the resource.
+              properties:
+                href:
+                  type: string
+            updates:
+              type: object
+              description: Link to the `Updates` created under the resource.
+              properties:
+                href:
+                  type: string
+            verifications:
+              type: object
+              description: Link to the `Verification` that was used to verify the `Merchant` that the request was made under.
+              properties:
+                href:
+                  type: string
+        account_type:
+          type: string
+          enum:
+          - CHECKING
+          - SAVINGS
+          description: Details what kind of **BANK_ACCOUNT** is being used.
+        bank_account_validation_check:
+          type: string
+          enum:
+          - INCONCLUSIVE
+          - INVALID
+          - NOT_ATTEMPTED
+          - VALID
+          default: NOT_ATTEMPTED
+          description: "Details the results of the bank account validation check if `attempt_bank_account_validation_check` is set to **true** or the `Payment Instrument` gets used to create a `Transfer`.\n- **INCONCLUSIVE**: A verification check was performed, but the bank account couldn't be found or verified with the issuing bank. Reach out to the buyer to verify the details collected or request another method of payment, \n- **INVALID**: The `Payment Instrument` was used in transactions that returned one of the following ACH errors: <ul><li>**Account Does Not Allow ACH Transactions**</li><li>**Account is Closed**</li><li>**Account Funds are Frozen**</li><li>**Deceased Account Holder**</li><li>**Invalid Account Number**</li><li>**Invalid Routing Number**</li><li>**No Account on File**</li></ul>. For more details on the different ACH failure codes, see [ACH Direct Debit.](/guides/payments/online-payments/getting-started/finix-api/ach-echeck/#failed-ach-direct-debits)\n- **NOT_ATTEMPTED**: A verification check wasn't performed and the `Payment Instrument` hasn't been used to create a `Transfer` or `Authorization`.\n- **VALID**: The bank account was verified. The `Payment Instrument` can be used to create [ACH Direct Debits.](/guides/payments/online-payments/getting-started/finix-api/ach-echeck/#failed-ach-direct-debits)"
+        bank_code:
+          type: string
+          description: The routing number of the bank account.
+        country:
+          $ref: '#/components/schemas/Country'
+        masked_account_number:
+          type: string
+          description: The last 4 digits of the account number used to create the `Payment Instrument`.
+          nullable: true
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    ApplePaySession:
+      type: object
+      x-examples:
+        example-1:
+          id: APPLEPAYSESSION_xxx
+          created_at: '2021-11-22T23:58:19.50Z'
+          updated_at: '2021-11-22T23:58:19.50Z'
+          session_details: '{"epochTimestamp":1640213041060,"expiresAt":1640216641060,"merchantSessionIdentifier":"SSH1524BA9006A944B8B9B8FB60227D9990_916523AAED1343F5BC5815E12BEE9250AFFDC1A17C46B0DE5A943F0F94927C24","nonce":"a5ee8554","merchantIdentifier":"23D5E1F154400B277E14CC8361878AA0AAFD46B2DF74003C7587B256269102BD","domainName":"tj.ngrok.io","displayName":"Christmas Shopping","signature":"...","operationalAnalyticsIdentifier":"Christmas Shopping:23D5E1F154400B277E14CC8361878AA0AAFD46B2DF74003C7587B256269102BD","retries":0}'
+          _links:
+            self:
+              href: https://finix.sandbox-payments-api.com/apple_pay_sessions/APPLEPAYSESSION_xxx
+      properties:
+        id:
+          type: string
+          description: The ID of the `apple_pay_session` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        session_details:
+          type: string
+          description: Details about the `apple_pay_session` that was created.
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+      title: ApplePaySession
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    ApplePaySessionRequest:
+      type: object
+      x-examples:
+        example-1:
+          display_name: Finix Test Merchant
+          domain: www.finixtestmerchant.com
+          merchant_identity: IDmULj61C8ke6Y7qQiKENJ7
+          validation_url: https://apple-pay-gateway-cert.apple.com/paymentservices/paymentSession
+      title: ApplePaySessionRequest
+      properties:
+        display_name:
+          type: string
+          description: This will be the merchant name shown to users when making a purchase via Apple Pay.
+        domain:
+          type: string
+          description: The domain (or website) where the buyer is initiating the payment.
+        merchant_identity:
+          type: string
+          description: The `merchant_identity_id` used when registering the business with Apple Pay through our registration API.
+        validation_url:
+          type: string
+          description: A unique validation URL that will be provided by the Apple SDK front-end for every payment.
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Error422InvalidFieldList:
+      type: object
+      description: Invalid field
+      title: ''
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - INVALID_FIELD
+                  field:
+                    type: string
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+  requestBodies:
+    UpdatePaymentInstrumentRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdatePaymentInstrumentRequest'
+          examples:
+            Payment Instrument - Update a Card's Address:
+              value:
+                address:
+                  city: Los Angeles
+                  region: CA
+                  postal_code: '90036'
+                  line1: 270 Lincoln Center Blv
+                  line2: Suite 1A
+                  country: USA
+                merchant: MUjJUJxMKoL24H8MotYNjtZP
+                verify_payment_card: true
+            Payment Instrument - Disable a Payment Instrument:
+              value:
+                enabled: false
+                tags:
+                  card_name: Personal Card
+            Payment Instrument - Bank Account Validation Check:
+              value:
+                attempt_bank_account_validation_check: 'true'
+            Payment Instrument - Update Payment Instrument Tags:
+              value:
+                tags:
+                  card_name: Personal Card
+    CreateApplePaySessionRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApplePaySessionRequest'
+          examples:
+            Create an Apple Pay Session:
+              value:
+                display_name: Finix Test Merchant
+                domain: www.finixtestmerchant.com
+                merchant_identity: IDmULj61C8ke6Y7qQiKENJ7
+                validation_url: https://apple-pay-gateway-cert.apple.com/paymentservices/paymentSession
+    CreatePaymentInstrumentRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreatePaymentInstrumentRequest'
+            descriminator:
+              propertyName: type
+          examples:
+            Payment Instrument - Card:
+              value:
+                address:
+                  city: San Francisco
+                  country: USA
+                  line1: 900 Metro Center Blv
+                  postal_code: '94404'
+                  region: CA
+                expiration_month: 12
+                expiration_year: 2029
+                identity: IDgWxBhfGYLLdkhxx2ddYf9K
+                name: John Smith
+                number: '5200828282828210'
+                security_code: '022'
+                type: PAYMENT_CARD
+            Payment Instrument - Bank Account:
+              value:
+                account_number: '123123123'
+                account_type: SAVINGS
+                bank_code: '123123123'
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                name: John Smith
+                type: BANK_ACCOUNT
+            Payment Instrument - Token:
+              value:
+                token: TKiMxe323RE5Dq3wLVtG8kSW
+                type: TOKEN
+                identity: IDpYDM7J9n57q849o9E9yNrG
+            Payment Instrument - Apple Pay:
+              value:
+                identity: IDgWxBhfGYLLdkhxx2ddYf9K
+                merchant_identity: IDpYDM7J9n57q849o9E9yNrG
+                name: John Smith
+                third_party_token: '{"token":{"paymentMethod":{"network":"barcode","type":"credit","displayName":""},"transactionIdentifier":"AE514ADAA44E9C3A0A862C7E4EDEE43C422556FA4748B045F1764860557E8EE6","paymentData":{"data":"IOg9H5\/hdpccvHZ03ESJwlJXFlmcnI18WXTSOHOPA82ewYoWVyEMiy63HCsdejXsHIR8a+N\/5aR24OeJrkxheck2AAl5o1LLJ7jL+75scnf7Z55uQmtVyKITTkH22LrC6E6SgMnXaefJYOTUcG1Veqb\/dXtpPzqaKACEKDkbVivpDk+A2iX5PLROFTMRgmb9a0HYwHOnVGQzXwiHkX1g6f1R4rILUyMaQ5qLxCplE1t\/guEYmkGBtOb\/v8+GRDTl8YrC1tOe\/cs4aQm4cAKJktFQUTbfAApNFBnKI06mtCM7e7qRna\/YON3gyci035jA7Zq4kBMo7rQB8puGH6dDqB\/KsPS6Ps+w688+rqEKz16YUJ\/LMCOzzBM6bCTOS6eouB1eCh3SJdm\/lmY=","signature":"MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCAMIID4zCCA4igAwIBAgIITDBBSVGdVDYwCgYIKoZIzj0EAwIwejEuMCwGA1UEAwwlQXBwbGUgQXBwbGljYXRpb24gSW50ZWdyYXRpb24gQ0EgLSBHMzEmMCQGA1UECwwdQXBwbGUgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMB4XDTE5MDUxODAxMzI1N1oXDTI0MDUxNjAxMzI1N1owXzElMCMGA1UEAwwcZWNjLXNtcC1icm9rZXItc2lnbl9VQzQtUFJPRDEUMBIGA1UECwwLaU9TIFN5c3RlbXMxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEwhV37evWx7Ihj2jdcJChIY3HsL1vLCg9hGCV2Ur0pUEbg0IO2BHzQH6DMx8cVMP36zIg1rrV1O\/0komJPnwPE6OCAhEwggINMAwGA1UdEwEB\/wQCMAAwHwYDVR0jBBgwFoAUI\/JJxE+T5O8n5sT2KGw\/orv9LkswRQYIKwYBBQUHAQEEOTA3MDUGCCsGAQUFBzABhilodHRwOi8vb2NzcC5hcHBsZS5jb20vb2NzcDA0LWFwcGxlYWljYTMwMjCCAR0GA1UdIASCARQwggEQMIIBDAYJKoZIhvdjZAUBMIH+MIHDBggrBgEFBQcCAjCBtgyBs1JlbGlhbmNlIG9uIHRoaXMgY2VydGlmaWNhdGUgYnkgYW55IHBhcnR5IGFzc3VtZXMgYWNjZXB0YW5jZSBvZiB0aGUgdGhlbiBhcHBsaWNhYmxlIHN0YW5kYXJkIHRlcm1zIGFuZCBjb25kaXRpb25zIG9mIHVzZSwgY2VydGlmaWNhdGUgcG9saWN5IGFuZCBjZXJ0aWZpY2F0aW9uIHByYWN0aWNlIHN0YXRlbWVudHMuMDYGCCsGAQUFBwIBFipodHRwOi8vd3d3LmFwcGxlLmNvbS9jZXJ0aWZpY2F0ZWF1dGhvcml0eS8wNAYDVR0fBC0wKzApoCegJYYjaHR0cDovL2NybC5hcHBsZS5jb20vYXBwbGVhaWNhMy5jcmwwHQYDVR0OBBYEFJRX22\/VdIGGiYl2L35XhQfnm1gkMA4GA1UdDwEB\/wQEAwIHgDAPBgkqhkiG92NkBh0EAgUAMAoGCCqGSM49BAMCA0kAMEYCIQC+CVcf5x4ec1tV5a+stMcv60RfMBhSIsclEAK2Hr1vVQIhANGLNQpd1t1usXRgNbEess6Hz6Pmr2y9g4CJDcgs3apjMIIC7jCCAnWgAwIBAgIISW0vvzqY2pcwCgYIKoZIzj0EAwIwZzEbMBkGA1UEAwwSQXBwbGUgUm9vdCBDQSAtIEczMSYwJAYDVQQLDB1BcHBsZSBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTETMBEGA1UECgwKQXBwbGUgSW5jLjELMAkGA1UEBhMCVVMwHhcNMTQwNTA2MjM0NjMwWhcNMjkwNTA2MjM0NjMwWjB6MS4wLAYDVQQDDCVBcHBsZSBBcHBsaWNhdGlvbiBJbnRlZ3JhdGlvbiBDQSAtIEczMSYwJAYDVQQLDB1BcHBsZSBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTETMBEGA1UECgwKQXBwbGUgSW5jLjELMAkGA1UEBhMCVVMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATwFxGEGddkhdUaXiWBB3bogKLv3nuuTeCN\/EuT4TNW1WZbNa4i0Jd2DSJOe7oI\/XYXzojLdrtmcL7I6CmE\/1RFo4H3MIH0MEYGCCsGAQUFBwEBBDowODA2BggrBgEFBQcwAYYqaHR0cDovL29jc3AuYXBwbGUuY29tL29jc3AwNC1hcHBsZXJvb3RjYWczMB0GA1UdDgQWBBQj8knET5Pk7yfmxPYobD+iu\/0uSzAPBgNVHRMBAf8EBTADAQH\/MB8GA1UdIwQYMBaAFLuw3qFYM4iapIqZ3r6966\/ayySrMDcGA1UdHwQwMC4wLKAqoCiGJmh0dHA6Ly9jcmwuYXBwbGUuY29tL2FwcGxlcm9vdGNhZzMuY3JsMA4GA1UdDwEB\/wQEAwIBBjAQBgoqhkiG92NkBgIOBAIFADAKBggqhkjOPQQDAgNnADBkAjA6z3KDURaZsYb7NcNWymK\/9Bft2Q91TaKOvvGcgV5Ct4n4mPebWZ+Y1UENj53pwv4CMDIt1UQhsKMFd2xd8zg7kGf9F3wsIW2WT8ZyaYISb1T4en0bmcubCYkhYQaZDwmSHQAAMYIBjDCCAYgCAQEwgYYwejEuMCwGA1UEAwwlQXBwbGUgQXBwbGljYXRpb24gSW50ZWdyYXRpb24gQ0EgLSBHMzEmMCQGA1UECwwdQXBwbGUgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTAghMMEFJUZ1UNjANBglghkgBZQMEAgEFAKCBlTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0yMjA0MDExODE2MjJaMCoGCSqGSIb3DQEJNDEdMBswDQYJYIZIAWUDBAIBBQChCgYIKoZIzj0EAwIwLwYJKoZIhvcNAQkEMSIEINpyGxYyGbl1Kj57wU\/3PijxngHUcidFy9jukG9sccOHMAoGCCqGSM49BAMCBEcwRQIhAPHvbeAIDmJKf2YGS5xcCoySSeCeFf6ThUsKE3UIPWBJAiBQIZZu4wTlZn7R16N+2iTfvuvzJKgeSv8rAs3YM6z56AAAAAAAAA==","header":{"publicKeyHash":"eOvce9ya55opFC5EXVWlLwzZRVDEY3Hgakf3+C+0zkc=","ephemeralPublicKey":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE3VnkF5JR9cWuYoeT68dUNp\/2\/jGaOiid19UfCV9rEkcPomrzFWEZw\/dN1uU9RTblnrIQPajFj4R2ZKIpYIlkgA==","transactionId":"ae514adaa44e9c3a0a862c7e4edee43c422556fa4748b045f1764860557e8ee6"},"version":"EC_v1"}}}'
+                type: APPLE_PAY
+            Payment Instrument - Google Pay:
+              value:
+                identity: ID78Fh8mcnnzukVzbdoyex5y
+                merchant_identity: IDwhCCvPwCDEmiFd8Be7pDzN
+                name: Finix Sandbox
+                third_party_token: '{"signature":"MEYCIQCYTkaEMgug7pcjzEEdbIn+R57kYO5yYc2KYj41AQQn9wIhAN1QvylvZ2XydVecfejwi2xYS9y3Y9y/MmDnRnUfNw5H","intermediateSigningKey":{"signedKey":"{\"keyValue\":\"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE4xc3fjeM9SMTjd1TL2GQCPmgqPf2h42aM3akPh/mTUBqWEgOITruK10A02rQ+4YZOvLCpQKQZzLSAd09nctnuA\\u003d\\u003d\",\"keyExpiration\":\"1648843199734\"}","signatures":["MEQCICwCI4s5YCLu4qRCyXwSJ3qG8y3ocFtP1Mque4Uzysl8AiARoD/0qbj5W0Q2PWKpxkEnfcP+nU5kwYS8FyQ9boDTmQ\u003d\u003d"]},"protocolVersion":"ECv2","signedMessage":"{\"encryptedMessage\":\"roD4ikTpZ7Srunq+0zUnp+eiXzcuZBfIFSuZAJu1PQLXcP0RvnGDiGKtoarNCHvn+cnXsHCzIBWXMZSJ9Aglqky9VfP5a+qsXQhf5m5AFUbT2xnihtKwageGQQK6HzyjHSXXSjvuCzeo75ToOgIUxLFASZyaZ89u3Jifqhhc2c4a0Mtlx564BxXiwcxDFdtNkOle7uAIsJzsryk7Rcwgr8ZMJJM//XpvaeE5wNmkVFHUtR2uTqPm0BvkoYkFHCTRo4NHXWpxeLjXWzKGk2ELyTK1diuCa6c9ig0jO3t8BIh1cR63UeP8Ar7u5fh8C9FPPAsgPbTGLfiaRe615e4SxASgcZ4/8uWo5mikEPFqA5s2K2mid9ncXoMNYaHUc3qzJAyxHVYSd5SRNZYXHMkEcWcjnpDx+ErYjR1sMo1LMYXfrfGyZz3M69bQLKPYFe7ChjvgFI9MnfcFTNB4HAdNKMhbZT0EKinfxxGWkT7LVbGnUuqPlHp4toCe4kpbx7fulwXTj3bAFvg/qvxxwGOS38iP0HR/f+4GF0xHspqYVbdWdIJ5iJUdpBG8Nu5P56h2GEDxXMkKSmh+qbvKWlYipNNGoeg8uHc\\u003d\",\"ephemeralPublicKey\":\"BMqIyb1IyXhuZ4YpWm1PiRr74i3tCwDfQqJ1P4OZ3zK4Rq16SuwgJ605fCEvlViwSQuo2Hpv+CcR+2D3+/YrLB8\\u003d\",\"tag\":\"5K4LlTucDK7jAThbIozYtyoxX95hRNd5cJJGfxWAxw8\\u003d\"}"}'
+                type: GOOGLE_PAY
+      description: ''
+  parameters:
+    TagsValue:
+      name: tags.value
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags).
+    QueryAccountLastFour:
+      name: account_last4
+      in: query
+      required: false
+      schema:
+        type: string
+        example: '9444'
+      description: Filter by the last 4 digits of the account if available.
+    TagsKey:
+      name: tags.key
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by the [`key` of a `Tag`](/api/overview/#section/Tags).
+    QueryAccountRoutingNumber:
+      name: account_routing_number
+      in: query
+      required: false
+      schema:
+        type: string
+        example: '9444'
+      description: Filter by the account routing number if available.
+    QueryApplicationFilter:
+      description: Filter by `Application` ID.
+      in: query
+      name: application
+      schema:
+        type: string
+      style: form
+    QueryLastFour:
+      name: last4
+      in: query
+      required: false
+      schema:
+        type: string
+        example: '0454'
+      description: Filter by the last 4 digits of the `Payment Instrument` card. This filter only applies to payment cards.
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
+    QueryPaymentInstrumentType:
+      name: type
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - ALL
+        - BANK_ACCOUNT
+        - PAYMENT_CARD
+        example: BANK_ACCOUNT
+      description: Filter by the `Payment Instrument` type.
+    QueryOwnerIdentity:
+      name: owner_identity_id
+      in: query
+      required: false
+      schema:
+        type: string
+        example: IDcWwprrKrD6cSh225JWPri3
+      description: Filter by the owner id of the associated `Identity`.
+    QueryCreatedAtGteFilter:
+      description: Filter where `created_at` is after the given date.
+      in: query
+      name: created_at.gte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryExpirationMonth:
+      name: expiration_month
+      in: query
+      required: false
+      schema:
+        type: string
+        example: '1'
+      description: Filter by the expiration month associated with the `Payment Instrument` if applicable. This filter only applies to payment cards.
+    QueryBin:
+      name: bin
+      in: query
+      required: false
+      schema:
+        type: string
+        example: '489514'
+      description: Filter by Bank Identification Number (BIN). The BIN is the first 6 digits of the masked number.
+    QueryCreatedAtLteFilter:
+      description: Filter where `created_at` is before the given date.
+      in: query
+      name: created_at.lte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryName:
+      name: name
+      in: query
+      required: false
+      schema:
+        type: string
+        example: john%20smith
+      description: Filter by the name.
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+    QueryExpirationYear:
+      name: expiration_year
+      in: query
+      required: false
+      schema:
+        type: string
+        example: '2022'
+      description: Filter by the 4 digit expiration year associated with the Payment Instrument if applicable. This filter only applies to payment cards.
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

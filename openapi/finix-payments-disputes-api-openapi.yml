@@ -1,0 +1,2521 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Disputes API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Disputes
+  description:
+    $ref: api-descriptions/tags/disputes.md
+paths:
+  /disputes:
+    get:
+      tags:
+      - Disputes
+      description: Retrieve a list of `Disputes`.
+      summary: List Disputes
+      operationId: listDisputes
+      parameters:
+      - $ref: '#/components/parameters/QueryLimit'
+      - $ref: '#/components/parameters/QueryCreatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryCreatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryUpdatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryUpdatedAtLteFilter'
+      - schema:
+          type: string
+        in: query
+        name: transfer_id
+        description: 'Filter by the ID of the `Transfer` that''s being disputed. <br><br>**Note**: If included, all other filter parameters are ignored.'
+      - schema:
+          type: string
+        in: query
+        name: adjustment_transfer_id
+        description: 'Filter by the ID of the adjustment `Transfer`. <br><br>**Note**: If included, all other filter parameters are ignored.'
+      - $ref: '#/components/parameters/QueryAmountFilter'
+      - $ref: '#/components/parameters/QueryAmountGteFilter'
+      - $ref: '#/components/parameters/QueryAmountGtFilter'
+      - $ref: '#/components/parameters/QueryAmountLtFilter'
+      - schema:
+          type: string
+        in: query
+        name: state
+        description: Filter by the state of the `Dispute`.
+      - schema:
+          type: string
+        in: query
+        name: response_state
+        description: Filter by the `response_state` of the `Dispute`.
+      - schema:
+          type: string
+        in: query
+        name: respond_by.lte
+        description: Filter where `respond_by` is before the given date.
+      - schema:
+          type: string
+        in: query
+        name: respond_by.gte
+        description: Filter where `respond_by` is after the given date.
+      - schema:
+          type: string
+        in: query
+        name: instrument_bin
+        description: Filter by the Bank Identification Number (BIN). The BIN is the first 6 digits of the masked account number.
+      - schema:
+          type: string
+        in: query
+        name: instrument_brand_type
+        description: Filter by the card brand used.
+      - in: query
+        name: merchant_identity_id
+        description: Filter by the ID of the `Identity` used by the `Merchant`.
+        schema:
+          type: string
+      - schema:
+          type: string
+        in: query
+        name: merchant_identity_name
+        description: Filter by the name used by the `Merchant`.
+      - schema:
+          type: string
+        in: query
+        name: instrument_name
+        description: Filter by the name of the `Payment Instrument`.
+      - schema:
+          type: string
+        in: query
+        name: instrument_type
+        description: Filter by `Payment Instrument` type.
+      - schema:
+          type: string
+        in: query
+        name: merchant_id
+        description: Filter by the ID of the `Merchant`.
+      - schema:
+          type: string
+        in: query
+        name: merchant_mid
+        description: Filter by the MID of the `Merchant`.
+      - schema:
+          type: string
+        in: query
+        name: instrument_card_last4
+        description: Filter by the last 4 digits of the card used.
+      - schema:
+          type: string
+        in: query
+        name: instrument_card_type
+        description: Filter by the card type.
+      - schema:
+          type: string
+        in: query
+        name: instrument_fingerprint
+        description: Filter by the fingerprint of the `Payment Instrument`.
+      - schema:
+          type: string
+        in: query
+        name: before_cursor
+        description: Returns every `Dispute` created before the cursor value.
+      - $ref: '#/components/parameters/TagsKey'
+      - $ref: '#/components/parameters/TagsValue'
+      responses:
+        '200':
+          $ref: '#/components/responses/DisputesList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: list
+      x-group-parameters: true
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/disputes/\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: list
+      x-returns-list: true
+  /disputes/{dispute_id}:
+    parameters:
+    - description: ID of `Dispute`.
+      required: true
+      in: path
+      name: dispute_id
+      schema:
+        type: string
+    get:
+      tags:
+      - Disputes
+      description: Retrieve the details of a previously created `Dispute`.
+      summary: Fetch a Dispute
+      operationId: getDispute
+      responses:
+        '200':
+          $ref: '#/components/responses/Dispute'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: get
+    put:
+      summary: Update a Dispute
+      operationId: updateDispute
+      responses:
+        '200':
+          $ref: '#/components/responses/Dispute'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      description: Update `tags` on `Disputes`.
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateDisputeEvidence'
+      x-java-method: put
+      tags:
+      - Disputes
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: update_dispute
+  /disputes/{dispute_id}/evidence:
+    parameters:
+    - description: ID of `Dispute` to mange evidence for.
+      required: true
+      in: path
+      name: dispute_id
+      schema:
+        type: string
+    post:
+      tags:
+      - Disputes
+      description: 'Upload a file as evidence for a `Dispute`.
+
+
+        - You can upload up to 8 files; the total size of the uploaded files combined cannot exceed 10 MB.
+
+        - The allowed file formats include JPG, PNG, PDF, or TIFF.
+
+        - Individual PNG and JPEG files can''t exceed 50 KB; PDF and TIFF files can''t exceed 1 MB.'
+      summary: Upload Files as Dispute Evidence
+      operationId: createDisputeEvidence
+      responses:
+        '201':
+          $ref: '#/components/responses/DisputeEvidence'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/disputes/uploadevidence.md
+      requestBody:
+        $ref: '#/components/requestBodies/CreateDisputeEvidenceRequest'
+      x-python-method-name: create_dispute_evidence
+    get:
+      tags:
+      - Disputes
+      description: Retrieve a list of dispute evidence for a `Dispute`.
+      summary: List Dispute Evidence
+      operationId: listDisputeEvidence
+      responses:
+        '200':
+          $ref: '#/components/responses/DisputeEvidenceList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-java-method-name: listDisputeEvidenceByDisputeId
+      x-group-parameters: true
+      parameters:
+      - $ref: '#/components/parameters/QueryLimit'
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      - $ref: '#/components/parameters/QueryBeforeCursor'
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: list_dispute_evidence_by_dispute_id
+      x-returns-list: true
+  /disputes/{dispute_id}/evidence/{evidence_id}:
+    parameters:
+    - description: ID of `Dispute` to fetch evidence for.
+      required: true
+      in: path
+      name: dispute_id
+      schema:
+        type: string
+    - description: ID of `evidence` to fetch.
+      required: true
+      in: path
+      name: evidence_id
+      schema:
+        type: string
+    get:
+      tags:
+      - Disputes
+      description: "Fetch evidence uploaded for a `Dispute`. \n\nIf you don't have the Finix Dashboard available, you can fetch the evidence to review the `status` of the upload to confirm the evidence got sent to the processor."
+      summary: Fetch Dispute Evidence
+      operationId: getDisputeEvidence
+      responses:
+        '200':
+          $ref: '#/components/responses/DisputeEvidence'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence/DF58kdVTa5eMQUjcXH2F7DH4\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: get_dispute_evidence
+    put:
+      summary: Update Dispute Evidence
+      operationId: updateDisputeEvidence
+      responses:
+        '200':
+          $ref: '#/components/responses/DisputeEvidence'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      description: Update tags on `Dispute` evidence.
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateDisputeEvidence'
+      x-java-method: put
+      tags:
+      - Disputes
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: update_dispute_evidence
+  /disputes/{dispute_id}/adjustment_transfers:
+    parameters:
+    - schema:
+        type: string
+      name: dispute_id
+      in: path
+      required: true
+      description: ID of the `Dispute` resource.
+    get:
+      summary: Fetch Dispute Adjustment Transfers
+      tags:
+      - Disputes
+      responses:
+        '200':
+          $ref: '#/components/responses/AdjustmentTransfersList'
+        '401':
+          description: Unauthorized
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: listDisputesAdjustments
+      description: 'List the adjustment `Transfers` for a `Dispute`. Depending on the stage of the `Dispute`, different adjustment `Transfer` subtypes can be applied.
+
+
+        There are four available subtypes for adjustment `Transfers` in `Disputes`: <ul><li><strong>PLATFORM\_CREDIT</strong><li><strong>MERCHANT\_DEBIT</strong><li><strong>MERCHANT\_CREDIT</strong><li><strong>PLATFORM\_DEBIT</strong></ul>'
+      x-group-parameters: true
+      parameters:
+      - $ref: '#/components/parameters/QueryLimit'
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      - $ref: '#/components/parameters/QueryBeforeCursor'
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/adjustment_transfers\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: list_disputes_adjustments
+      x-returns-list: true
+  /disputes/{dispute_id}/submit:
+    parameters:
+    - schema:
+        type: string
+      name: dispute_id
+      in: path
+      required: true
+      description: ID of `Dispute` to move forward and submit evidence.
+    post:
+      summary: Submit Dispute Evidence
+      operationId: submitDisputeEvidence
+      responses:
+        '200':
+          $ref: '#/components/responses/Dispute'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+      tags:
+      - Disputes
+      description: 'You can manually submit evidence to the issuing bank to manually move a dispute forward. Use the `/disputes/DISPUTE_ID/submit` endpoint to submit evidence. Making a POST request lets the issuing bank know the seller has completed submitting evidence and is prepared to move forward with the dispute.
+
+
+        Related guides: [Responding to Disputes](/guides/after-the-payment/disputes/responding-disputes/).'
+      x-java-method-name: post
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/disputes/submit-dispute-evidence.md
+      requestBody:
+        $ref: '#/components/requestBodies/SubmitDisputeEvidence'
+      parameters:
+      - schema:
+          type: string
+          default: '2018-01-01'
+          example: '2022-02-01'
+        in: header
+        name: Finix-Version
+        description: Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)
+      x-python-method-name: post
+  /disputes/{dispute_id}/accept:
+    parameters:
+    - schema:
+        type: string
+      name: dispute_id
+      in: path
+      required: true
+      description: ID of `Dispute` to move forward and submit evidence.
+    post:
+      summary: Accept a Dispute
+      operationId: acceptDispute
+      responses:
+        '200':
+          $ref: '#/components/responses/Dispute'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+        '422':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+      description: 'You can accept a `Dispute` to prevent a long (and potentially expensive) process. When you accept a `Dispute`, you concede that the Dispute is not worth challenging or representing.
+
+
+        Related guides: [Accepting a Dispute](/guides/after-the-payment/disputes/accepting-disputes/)
+
+        '
+      x-java-method-name: post
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/disputes/accept-dispute.md
+      requestBody:
+        $ref: '#/components/requestBodies/AcceptDisputeRequest'
+      tags:
+      - Disputes
+      x-python-method-name: post
+  /disputes/{dispute_id}/evidence/{evidence_id}/download:
+    parameters:
+    - schema:
+        type: string
+        example: DIpCy4sZTx6im6U1ofBBPzdM
+      name: dispute_id
+      in: path
+      required: true
+      description: ID of `Dispute` to download evidence from.
+    - schema:
+        type: string
+        example: DFtiQ1LoNbjBTYiuuxju6tE2
+      name: evidence_id
+      in: path
+      required: true
+      description: ID of `evidence` to download.
+    get:
+      summary: Download Dispute Evidence
+      tags:
+      - Disputes
+      responses:
+        '200':
+          $ref: '#/components/responses/FileDownload'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: downloadDisputeEvidence
+      description: 'Download a file uploaded as `Dispute Evidence`.
+
+
+        **Note**: The file extension included in `output` must match the extension of the original uploaded file.'
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/disputes/DIpCy4sZTx6im6U1ofBBPzdM/evidence/DFtiQ1LoNbjBTYiuuxju6tE2/download\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e \\\n  --output DFtiQ1LoNbjBTYiuuxju6tE2.png\n"
+      parameters: []
+      x-python-method-name: get
+components:
+  schemas:
+    SubmitDisputeEvidence:
+      title: SubmitDisputeEvidence
+      x-stoplight:
+        id: 3ea63d77b21a4
+      type: object
+      properties:
+        note:
+          type: string
+          description: 'Include a note or custom metadata to reference the `Dispute` '
+          example: '"Submitting Dispute Evidence: July 23rd Receipt"'
+      required:
+      - note
+    AcceptDispute:
+      title: AcceptDispute
+      type: object
+      x-stoplight:
+        id: 47d1ecd88c757
+      properties:
+        note:
+          type: string
+          description: 'Include a note or custom metadata to reference the `Dispute`. '
+          example: '"Accepting Dispute: Mistaken Charge"'
+      required:
+      - note
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    AdditionalHealthcareData:
+      title: AdditionalHealthcareData
+      x-stoplight:
+        id: ibznc087ymmit
+      type: object
+      description: Optional object detailing [specific healthcare amounts](/guides/making-a-payment/hsa-fsa/).
+      nullable: true
+      properties:
+        clinic_amount:
+          type: integer
+          description: The amount used for clinic and office visits such as a copay amount.
+          nullable: true
+        dental_amount:
+          type: integer
+          description: The amount used for dental related expenses.
+          nullable: true
+        prescription_amount:
+          type: integer
+          description: The amount used to purchase perscriptions and medications.
+          nullable: true
+        vision_amount:
+          type: integer
+          description: The amount used for vision related expenses.
+          nullable: true
+    Raw:
+      title: Raw
+      description: Raw response from the processor.
+      x-examples: {}
+      type: object
+      nullable: true
+    Currency:
+      type: string
+      description: ISO 4217 3 letter currency code.
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    DisputeEvidenceList:
+      type: object
+      title: ''
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `evidence` created for a `Dispute`.
+          properties:
+            evidences:
+              type: array
+              minItems: 0
+              uniqueItems: true
+              description: '`Evidence` objects.'
+              items:
+                $ref: '#/components/schemas/DisputeEvidence'
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+    UpdateDisputeEvidence:
+      title: UpdateDisputeEvidence
+      x-stoplight:
+        id: 20436cd87ffb5
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/Tags'
+      required:
+      - tags
+    Dispute:
+      type: object
+      title: Dispute
+      description: A `Dispute` objected created for a chargeback or customer disputes.
+      properties:
+        id:
+          type: string
+          example: DIxxxxxxxxxxxxxxxxxx
+          description: The ID of the `Dispute` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        action:
+          type: string
+          description: The next `action` required to move forward with the `Dispute`.
+          nullable: true
+        amount:
+          type: integer
+          description: The total amount of the `Dispute` (in cents).
+          nullable: true
+        application:
+          type: string
+          description: The ID of the `Application` resource that the `Dispute` was created under.
+        dispute_details:
+          description: Details about the `Dispute` received by the `Processor`. Any data from the processor can get included.
+          type: object
+          properties:
+            case_id:
+              type: string
+              description: The case number the `Processor` has given the dispute in their internal database.
+              nullable: true
+            pin_debit_adjustment_number:
+              type: string
+              description: Used by the processor to identify the funds that are getting disputed.
+              nullable: true
+            reason_code:
+              type: string
+              description: Used by the processor and card networks to identify why the dispute got filed.
+              nullable: true
+        evidence_submitted:
+          type: string
+          enum:
+          - CHARGEBACK
+          - NOT_SUPPORTED
+          - NONE
+          - UNKNOWN
+          - INQUIRY
+          description: The status of the uploaded evidence. [See `Dispute#response_details` for the next steps to move the `Dispute` forward](/api/tag/Disputes/#tag/Disputes/operation/getDispute!c=200&path=response_state&t=response).
+        identity:
+          type: string
+          description: '- The ID of the seller''s `Identity` resource.
+
+            - This is the `Identity` resource that was used to create the seller''s `Merchant`.'
+        merchant:
+          type: string
+          description: "- The ID of the seller's `Merchant` resource. \n- This is the `Merchant` account the `Dispute` was filed against."
+        message:
+          type: string
+          description: Message field that provides additional details. This field is typically **null**.
+          nullable: true
+        occurred_at:
+          type: string
+          description: Point in time when the `Transfer` that's getting disputed got created.
+          format: date-time
+          nullable: true
+        reason:
+          type: string
+          enum:
+          - CLERICAL
+          - FRAUD
+          - INQUIRY
+          - QUALITY
+          - TECHNICAL
+          description: The system-defined reason for the `Dispute`. Available values include:<ul><li>**INQUIRY**<li>**QUALITY**<li>**FRAUD**
+        respond_by:
+          type: string
+          format: date-time
+          description: Point in time, the `Merchant` needs to respond to the dispute by.
+          nullable: true
+        response_state:
+          type: string
+          enum:
+          - NEEDS_RESPONSE
+          - RESPONDED
+          - ACCEPTED
+          - NO_RESPONSE_ALLOWED
+          - UNKNOWN
+          description: 'Details the state of the `Dispute` and what action the `Merchant` needs to take.
+
+            - **NEEDS_RESPONSE**: The `Merchant` needs to respond to the `Dispute` by `Dispute#respond_by`. For details on how to respond to a `Dispute`, see [Responding to Disputes](/guides/after-the-payment/disputes/responding-disputes/).
+
+            - **RESPONDED**: The issuing bank has received the evidence and actively reviewing it. No action needed from the `Merchant`.
+
+            - **ACCEPTED**: The `Merchant` has accepted the `Dispute`. When a `Dispute` is accepted, you concede that the dispute is not worth challenging or representing. For details on how to accept a `Dispute`, see [Accepting a Dispute](/guides/after-the-payment/disputes/accepting-disputes/).
+
+            - **NO_RESPONSE_ALLOWED**: The final `Dispute#response_state` when a `Dispute` is either **WON** or **LOST**.
+
+            - **UNKNOWN**: `Dispute` details couldn''t be submitted to the processor. Comes up when testing `Disputes` in sandbox or on the **DUMMY_V1** processor.'
+        state:
+          type: string
+          enum:
+          - INQUIRY
+          - PENDING
+          - WON
+          - LOST
+          description: The current state of the `Dispute`.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        transfer:
+          type: string
+          description: ID of the `Transfer` resource.
+          example: TRxxxxxxxxxxxxxxxxxx
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            adjustment_transfers:
+              type: object
+              properties:
+                href:
+                  type: string
+            application:
+              type: object
+              description: Link to the `Application` the resource was created under.
+              properties:
+                href:
+                  type: string
+            evidence:
+              type: object
+              properties:
+                href:
+                  type: string
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            transfer:
+              type: object
+              description: Link to the `Transfers` realted to the `Dispute`.
+              properties:
+                href:
+                  type: string
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Amount:
+      type: integer
+      title: Amount
+      description: The total amount that will be debited in cents (e.g. 100 cents to debit $1.00).
+      format: int64
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    AdditionalPurchaseData:
+      title: AdditionalPurchaseData
+      x-stoplight:
+        id: e98e7635f242c
+      type: object
+      description: Additional information about the purchase. Used for [Level 2 and Level 3 Processing](/guides/payments/modify/level-2-and-level-3-processing/).
+      properties:
+        customer_reference_number:
+          type: string
+          description: The customer reference for the purchase (max 17 characters).
+          maxLength: 17
+        customs_duty_amount:
+          type: integer
+          description: The duty in cents on the total purchase amount for the order
+        destination_country_code:
+          type: string
+          description: The ISO country code of the order destination.
+        destination_postal_code:
+          type: string
+          description: The postal code of the order destination (10 characters)
+          maxLength: 10
+        discount_amount:
+          type: integer
+          description: The amount in cents of the discount for the order.
+        invoice_reference_number:
+          type: string
+          description: The order's invoice number (max 15 characters)
+          maxLength: 15
+        item_data:
+          type: array
+          description: Additional information about the transaction. Used for Level 2 and Level 3 Processing.
+          items:
+            type: object
+            properties:
+              amount_excluding_sales_tax:
+                type: integer
+                description: '- Total cost of the line item in cents, excluding tax.
+
+                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
+              amount_including_sales_tax:
+                type: integer
+                description: '- Total cost of the line item in cents, including tax.
+
+                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
+              commodity_code:
+                type: string
+                description: A commodity code is a numeric code representing a particular product or service as defined by the National Institute of Governmental Purchasing. The code can be 3, 5, 7, or 11 digits in length. The longer the code the more granular the description of the product/service. (max 12 characters).
+                maxLength: 12
+              cost_per_unit:
+                type: integer
+                description: The price in cents of one unit of the item purchased
+              item_description:
+                type: string
+                description: Required when `item_data` is supplied (max 25 characters)
+                maxLength: 25
+              item_discount_amount:
+                type: integer
+                description: 'Item discount amount in cents
+
+                  '
+              merchant_product_code:
+                type: string
+                description: Merchant defined product code (max 12 characters).
+                maxLength: 12
+              quantity:
+                type: integer
+                description: The number of items purchased. Must be greater than 0.
+                minimum: 1
+                maximum: 99
+              unit_of_measure:
+                type: string
+                description: The unit of measure of the purchased item (max 3 characters).
+                maxLength: 3
+        order_date:
+          type: object
+          properties:
+            day:
+              type: integer
+              description: Day of purchase (between 1 and 31)
+            month:
+              type: integer
+              description: Month of purchase (between 1 and 12)
+            year:
+              type: integer
+              description: Year of purchase (4-digit)
+              minimum: 1990
+        sales_tax:
+          type: integer
+          description: "- Total aggregate tax amount in cents for the entire purchase. Field is automatically calculated if you pass in the itemized tax amounts. \n- For non-taxable transactions either set `sales_tax` to 0 or omit from payload and also set `tax_exempt` to **True**.\n- Request must align so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`."
+        ship_from_postal_code:
+          type: string
+          description: The postal code from where order is shipped (10 characters)
+          maxLength: 10
+        shipping_amount:
+          type: integer
+          description: 'The shipping cost in cents for the order.
+
+            '
+        tax_exempt:
+          type: boolean
+          description: '- For tax exempt purchases set to **True**.
+
+            - If set to **True**, request can''t include `sales_tax`.'
+      required:
+      - customer_reference_number
+      - sales_tax
+    FailureCode:
+      title: FailureCode
+      x-stoplight:
+        id: lo8jqmipa7376
+      type: string
+      description: The code of the failure so the decline can be handled programmatically. For more info on how to handle the failure, see [Failure Codes](/guides/developers/errors/#failure-codes).
+      nullable: true
+    DisputesList:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageOffset'
+        _embedded:
+          type: object
+          description: List of `Dispute` objects.
+          properties:
+            disputes:
+              type: array
+              minItems: 0
+              uniqueItems: true
+              description: '`Dispute` objects.'
+              items:
+                $ref: '#/components/schemas/Dispute'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    FailureMessage:
+      title: FailureMessage
+      x-stoplight:
+        id: cgilf858039yi
+      type: string
+      description: A human-readable description of why the transaction was declined. This will also include a suggestion on how to complete the payment.
+      nullable: true
+    AdjustmentTransfersList:
+      type: object
+      x-examples: {}
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of adjustment `Transfers` created for a `Dispute`.
+          properties:
+            transfers:
+              type: array
+              description: '`Transfer` objects.'
+              items:
+                $ref: '#/components/schemas/Transfer'
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+    AdditionalBuyerCharges:
+      title: AdditionalBuyerCharges
+      x-stoplight:
+        id: 8t8auxc19wmuw
+      type: object
+      description: Object detailing any [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/) that got included in the `Authorization`.
+      nullable: true
+      properties:
+        convenience_amount:
+          type: number
+          description: Include the convenience fee the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`.
+          nullable: true
+        rent_surcharge_amount:
+          type: number
+          description: Include the rent surcharge the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`.
+          nullable: true
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    IdempotencyId:
+      title: IdempotencyId
+      type: string
+      description: Pass any randomly generated or internal ID to [idempotently](/api/overview/#section/Idempotency-Requests) identify `Transfers`, `Authorizations`, and refund requests.
+      nullable: true
+    Transfer:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+          description: The ID of the `Transfer` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        additional_buyer_charges:
+          $ref: '#/components/schemas/AdditionalBuyerCharges'
+        additional_healthcare_data:
+          $ref: '#/components/schemas/AdditionalHealthcareData'
+        additional_purchase_data:
+          $ref: '#/components/schemas/AdditionalPurchaseData'
+        address_verification:
+          type: string
+          description: Details the results of the Address Verification checks.
+          nullable: true
+        amount:
+          $ref: '#/components/schemas/Amount'
+        amount_requested:
+          type: integer
+          description: Details the `amount` that was requested to get debited from the `source` when the transaction was created.
+        application:
+          type: string
+          description: The ID of the `Application` the `Transfer` was created under.
+        card_present_details:
+          $ref: '#/components/schemas/CardPresentDetails'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        destination:
+          type: string
+          description: The ID of the destination.
+          nullable: true
+        device:
+          type: string
+          description: The ID of the `Device` resource the `Transfer` was created under.
+        externally_funded:
+          type: string
+          description: Details if the `Transfer` will be settled externally by card processors.
+        failure_code:
+          $ref: '#/components/schemas/FailureCode'
+        failure_message:
+          $ref: '#/components/schemas/FailureMessage'
+        fee:
+          type: integer
+          format: int64
+          description: "The minimum amount of the `Transfer` you'd like to collect as your fee in cents. Defaults to zero (must be less than or equal to the `amount`).\n- If the fees applied by the 'Fee Profile' are ***higher*** than the value passed in 'fee', 'fee' will not be applied and have no effect.\n- If the fees applied by the 'Fee Profile' are ***lower*** than the value passed in 'fee', an additional fee is be applied, in addition to the fees generated by the `Fee Profile`.\n    - The additional fee is equal to the difference between the value passed in 'fee' and the fees generated by the `Fee Profile`.\nfraud_session_id:"
+        fee_type:
+          $ref: '#/components/schemas/FeeType'
+        idempotency_id:
+          $ref: '#/components/schemas/IdempotencyId'
+        merchant:
+          type: string
+          description: The ID of the `Merchant` resource the `Transfer` was created under.
+          example: MUxxxxxxxxxxxxxxxxxxxxxxx
+        merchant_identity:
+          type: string
+          example: IDxxxxxxxxxxxxxxxxxxxxxxxx
+          description: The ID of `Identity` resource used by the `Merchant` the `Transfer` was created under.
+        parent_transfer:
+          type: string
+          description: '- ID of the original parent `Transfer` where the transaction occurred.
+
+            - Only appears for `Transfers:type` **REVERSAL** and **FEE**.'
+          nullable: true
+        parent_transfer_trace_id:
+          type: string
+          description: '- `trace_id` of the original parent `Transfer` where the transaction occurred.
+
+            - Only appears for `Transfers:type` **REVERSAL** and **FEE**.'
+          nullable: true
+        messages:
+          $ref: '#/components/schemas/Messages'
+        raw:
+          $ref: '#/components/schemas/Raw'
+        ready_to_settle_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the `Transfer` is ready to be settled at.
+          nullable: true
+        security_code_verification:
+          type: string
+          description: Details the results of the Security Code Verification checks.
+          nullable: true
+        source:
+          type: string
+          description: The ID of the `Payment Instrument` that will be debited and performing the `Transfer`.
+          nullable: true
+        split_transfers:
+          type: string
+          description: '- The ID of the `split_transfer` resources moving funds from the primary `Transfer` to the specified `Merchants.`
+
+            - Only used for Split Transactions. For more information, see [Split Transactions](/docs/guides/payments/modify/split-transactions/).'
+          nullable: true
+        state:
+          type: string
+          enum:
+          - CANCELED
+          - PENDING
+          - FAILED
+          - SUCCEEDED
+          - UNKNOWN
+          description: The stauts of the `Transfer`.
+        statement_descriptor:
+          type: string
+          description: <li>The description of the seller that appears on the buyer's bank or card statement.</li><li><kbd>statement_descriptors</kbd> for `Transfers` in <strong>live</strong> enviroments will have a <kbd>FI *</kbd> prefix.
+          nullable: true
+        subtype:
+          type: string
+          enum:
+          - API
+          - APPLICATION_FEE
+          - DISPUTE
+          - MERCHANT_CREDIT
+          - MERCHANT_CREDIT_ADJUSTMENT
+          - MERCHANT_DEBIT
+          - MERCHANT_DEBIT_ADJUSTMENT
+          - PLATFORM_CREDIT
+          - PLATFORM_CREDIT_ADJUSTMENT
+          - PLATFORM_DEBIT
+          - PLATFORM_DEBIT_ADJUSTMENT
+          - PLATFORM_FEE
+          - SETTLEMENT_MERCHANT
+          - SETTLEMENT_NOOP
+          - SETTLEMENT_PARTNER
+          - SETTLEMENT_PLATFORM
+          - SPLIT_PAYOUT
+          - SPLIT_PAYOUT_ADJUSTMENT
+          - SYSTEM
+          description: Additional information describing the `payment_type`.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        trace_id:
+          type: string
+          description: Trace ID of the `Transfer`. The processor sends back the `trace_id` so you can track the `Transfer` end-to-end.
+          nullable: true
+        type:
+          type: string
+          enum:
+          - DEBIT
+          - CREDIT
+          - REVERSAL
+          - FEE
+          - ADJUSTMENT
+          - DISPUTE
+          - RESERVE
+          - SETTLEMENT
+          - UNKNOWN
+          description: Type of `Transfer`.
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            application:
+              type: object
+              description: Link to the `Application` the resource was created under.
+              properties:
+                href:
+                  type: string
+            destination:
+              type: object
+              description: Link to the `Payment Instrument` where funds are getting sent.
+              properties:
+                href:
+                  type: string
+            device:
+              type: object
+              description: Link to the `Device` the request was made under.
+              properties:
+                href:
+                  type: string
+            disputes:
+              type: object
+              description: Link to the `Dispute` the request was made under.
+              properties:
+                href:
+                  type: string
+            fee_profile:
+              type: object
+              description: Link to the `fee_profile` the request was made under.
+              properties:
+                href:
+                  type: string
+            fees:
+              type: object
+              description: Link to the `fees` the request is associated with.
+              properties:
+                href:
+                  type: string
+            merchant_identity:
+              type: object
+              description: Link to the `Identity` the `Merchant` was created under and the `Transfer` was submitted with.
+              properties:
+                href:
+                  type: string
+            payment_instruments:
+              type: object
+              description: Link to the `Payment Instrument` associated with the Transfer.
+              properties:
+                href:
+                  type: string
+            disputed_transfer:
+              type: object
+              description: Link to the `Transfer` the `Dispute` is about.
+              properties:
+                href:
+                  type: string
+            reversals:
+              type: object
+              description: Link to the `reversals` associated with the `Transfer`.
+              properties:
+                href:
+                  type: string
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            parent:
+              type: object
+              description: Link to the original resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            source:
+              type: object
+              description: Link to the `Payment Instrument` the `Transfer` was created under.
+              properties:
+                href:
+                  type: string
+    CreateDisputeEvidenceRequest:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+          description: The binary contents of the file.
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Messages:
+      title: Messages
+      type: array
+      description: Message field that provides additional details. This field is typically **null**.
+      nullable: true
+      items:
+        type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    DisputeEvidence:
+      type: object
+      properties:
+        id:
+          type: string
+          example: DFxxxxxxxxxxxxxxxxxx
+          description: The ID of the `Dispute` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        application:
+          type: string
+          example: APgPDQrLD52TYvqazjHJJchM
+          description: The ID of the `Application` resource that the `Dispute` was created under.
+        dispute:
+          type: string
+          description: The ID of the `Dispute` associated with the evidence.
+        state:
+          type: string
+          enum:
+          - PENDING
+          - SUCCEEDED
+          - CANCELED
+          - FAILED
+          description: "Result of the evidence uploaded.\n- **PENDING**: The evidence file has not yet been submitted to the Processor. No user action is required.\n- **SUCCEEDED**: The evidence file has been successfully sent to the Processor. No further user action is required.\n- **CANCELED**: The evidence file upload was not completed due to user action.\n- **FAILED**: An issue occurred. User action is required**. Any of the following issues could have occurred:\n  - There was an error in the system and the user should retry uploading their evidence file.\n  - There is an issue with the file and the user should retry uploading a different file.\n  - There is an issue and the user should contact Support."
+        identity:
+          type: string
+          example: IDpYDM7J9n57q849o9E9yNrG
+          description: "- The ID of the seller's `Identity` resource. \n- This is the `Identity` resource that was used to create the seller's `Merchant`."
+        merchant:
+          type: string
+          example: MUucec6fHeaWo3VHYoSkUySM
+          description: "- The ID of the seller's `Merchant` resource. \n- This is the `Merchant` account the `Dispute` was filed against."
+        tags:
+          $ref: '#/components/schemas/Tags'
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    CardPresentDetails:
+      title: CardPresentDetails
+      x-stoplight:
+        id: jbenxkas8ukf2
+      type: object
+      description: Details needed to process card present transactions.
+      nullable: true
+      properties:
+        approval_code:
+          type: string
+          description: Unique ID used to identify the approval of the `Transfer`.
+          nullable: true
+        brand:
+          type: string
+          description: The brand of the card saved in the `Payment Instrument`.
+          nullable: true
+        emv_data:
+          type: object
+          description: Encrypted card data used to process the transaction.
+          nullable: true
+          properties:
+            application_identifier:
+              type: string
+              description: ID of the EMV application processing the transaction.
+            application_label:
+              type: string
+              description: EMV card label.
+            application_preferred_name:
+              type: string
+              description: Alternate EMV application name (if provided).
+              nullable: true
+            application_transaction_counter:
+              type: string
+              description: Transaction number for the EMV application.
+            cryptogram:
+              type: string
+              description: Encrypted card infromation used to process the transaction.
+            issuer_code_table_index:
+              type: string
+              description: The alphabet code table (according to ISO 8859) used by the EMV application (if provided).
+              nullable: true
+            pin_verified:
+              type: boolean
+              description: Details if the cardholder's PIN number was verified.
+            tags:
+              $ref: '#/components/schemas/Tags'
+        entry_mode:
+          type: string
+          description: Details how the card was entered to process the transaction.
+          nullable: true
+        masked_account_number:
+          type: string
+          description: Last four digits of the bank account number.
+          nullable: true
+        name:
+          type: string
+          description: The name of the bank account or card owner.
+          nullable: true
+        payment_type:
+          type: string
+          description: The type of `Payment Instrument` used in the transaction (or the original payment).
+    FileDownload:
+      type: string
+      title: FileDownload
+      x-stoplight:
+        id: fylqbqcpw7nuv
+      format: binary
+      description: The file in question will begin to download.
+    PageOffset:
+      title: PageOffset
+      x-stoplight:
+        id: 5l7dajuhlor26
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The number of entries returned.
+        limit:
+          type: integer
+          description: The number of entries to return.
+        offset:
+          type: integer
+          description: The number of items to skip before starting to collect the result set.
+    FeeType:
+      title: FeeType
+      type: string
+      enum:
+      - APPLICATION_FEE
+      - ACH_BASIS_POINTS
+      - ACH_FIXED
+      - CARD_BASIS_POINTS
+      - CARD_FIXED
+      - CARD_INTERCHANGE
+      - VISA_BASIS_POINTS
+      - VISA_FIXED
+      - VISA_INTERCHANGE
+      - VISA_ASSESSMENT_BASIS_POINTS
+      - VISA_ACQUIRER_PROCESSING_FIXED
+      - VISA_CREDIT_VOUCHER_FIXED
+      - VISA_BASE_II_SYSTEM_FILE_TRANSMISSION_FIXED
+      - VISA_BASE_II_CREDIT_VOUCHER_FIXED
+      - VISA_KILOBYTE_ACCESS_FIXED
+      - DISCOVER_BASIS_POINTS
+      - DISCOVER_FIXED
+      - DISCOVER_INTERCHANGE
+      - DISCOVER_ASSESSMENT_BASIS_POINTS
+      - DISCOVER_DATA_USAGE_FIXED
+      - DISCOVER_NETWORK_AUTHORIZATION_FIXED
+      - DINERS_CLUB_BASIS_POINTS
+      - DINERS_CLUB_FIXED
+      - DINERS_CLUB_INTERCHANGE
+      - MASTERCARD_BASIS_POINTS
+      - MASTERCARD_FIXED
+      - MASTERCARD_INTERCHANGE
+      - MASTERCARD_ASSESSMENT_UNDER_1K_BASIS_POINTS
+      - MASTERCARD_ASSESSMENT_OVER_1K_BASIS_POINTS
+      - MASTERCARD_ACQUIRER_FEE_BASIS_POINTS
+      - JCB_BASIS_POINTS
+      - JCB_FIXED
+      - JCB_INTERCHANGE
+      - AMERICAN_EXPRESS_BASIS_POINTS
+      - AMERICAN_EXPRESS_FIXED
+      - AMERICAN_EXPRESS_INTERCHANGE
+      - AMERICAN_EXPRESS_ASSESSMENT_BASIS_POINTS
+      - DISPUTE_INQUIRY_FIXED_FEE
+      - DISPUTE_FIXED_FEE
+      - QUALIFIED_TIER_BASIS_POINTS_FEE
+      - QUALIFIED_TIER_FIXED_FEE
+      - CUSTOM
+      - ACH_DEBIT_RETURN_FIXED_FEE
+      - ACH_CREDIT_RETURN_FIXED_FEE
+      - ANCILLARY_FIXED_FEE_PRIMARY
+      - ANCILLARY_FIXED_FEE_SECONDARY
+      - SETTLEMENT_V2_TRANSFER
+      description: Details the type of fee if the `Transfer` includes a `fee`.
+  parameters:
+    TagsValue:
+      name: tags.value
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags).
+    QueryUpdatedAtGteFilter:
+      description: Filter where `updated_at` is after the given date.
+      in: query
+      name: updated_at.gte
+      schema:
+        type: string
+      style: form
+    TagsKey:
+      name: tags.key
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by the [`key` of a `Tag`](/api/overview/#section/Tags).
+    QueryAmountGtFilter:
+      description: Filter by an amount greater than.
+      in: query
+      name: amount.gt
+      schema:
+        type: integer
+      style: form
+    QueryAmountLtFilter:
+      description: Filter by an amount less than.
+      in: query
+      name: amount.lt
+      schema:
+        type: integer
+      style: form
+    QueryAmountGteFilter:
+      description: Filter by an amount greater than or equal.
+      in: query
+      name: amount.gte
+      schema:
+        type: integer
+      style: form
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
+    QueryCreatedAtGteFilter:
+      description: Filter where `created_at` is after the given date.
+      in: query
+      name: created_at.gte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryUpdatedAtLteFilter:
+      description: Filter where `updated_at` is before the given date.
+      in: query
+      name: updated_at.lte
+      schema:
+        type: string
+      style: form
+    QueryCreatedAtLteFilter:
+      description: Filter where `created_at` is before the given date.
+      in: query
+      name: created_at.lte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryAmountFilter:
+      description: Filter by an amount equal to the given value.
+      in: query
+      name: amount
+      schema:
+        type: integer
+      style: form
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+  responses:
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    DisputesList:
+      description: List of Disputes
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DisputesList'
+          examples:
+            List of Disputes:
+              value:
+                _embedded:
+                  disputes:
+                  - id: DIb72obRhTmPdMG1VxDKFLrb
+                    created_at: '2022-07-14T19:40:06.52Z'
+                    updated_at: '2022-07-14T19:40:06.11Z'
+                    action: null
+                    amount: 888888
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    dispute_details:
+                      arn: '123'
+                    identity: IDuqZpDw28f2KK6YuDk4jNLg
+                    merchant: MUucec6fHeaWo3VHYoSkUySM
+                    message: null
+                    occurred_at: '2022-07-14T19:39:00.77Z'
+                    reason: FRAUD
+                    respond_by: '2022-07-21T19:40:06.51Z'
+                    state: PENDING
+                    tags:
+                      test: sale
+                    transfer: TRkhvS4GfMKxaHyBBdkPSx6g
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIb72obRhTmPdMG1VxDKFLrb
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      transfer:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRkhvS4GfMKxaHyBBdkPSx6g
+                      evidence:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIb72obRhTmPdMG1VxDKFLrb/evidence
+                      adjustment_transfers:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIb72obRhTmPdMG1VxDKFLrb/adjustment_transfers
+                  - id: DIuk8T4ayQdmxewz8EDLHe49
+                    created_at: '2022-06-15T16:14:03.95Z'
+                    updated_at: '2022-06-15T16:14:03.64Z'
+                    action: null
+                    amount: 888888
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    dispute_details:
+                      arn: '123'
+                    identity: IDpYDM7J9n57q849o9E9yNrG
+                    message: null
+                    occurred_at: '2022-06-15T16:13:04.09Z'
+                    reason: FRAUD
+                    respond_by: '2022-06-22T16:14:03.94Z'
+                    state: PENDING
+                    tags:
+                      order_number: 21DFASJSAKAS
+                    transfer: TR27JnLR2pKDXjVVcGBKrjwU
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIuk8T4ayQdmxewz8EDLHe49
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      transfer:
+                        href: https://finix.sandbox-payments-api.com/transfers/TR27JnLR2pKDXjVVcGBKrjwU
+                      evidence:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIuk8T4ayQdmxewz8EDLHe49/evidence
+                      adjustment_transfers:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIuk8T4ayQdmxewz8EDLHe49/adjustment_transfers
+                  - id: DIs7yQRkHDdMYhurzYz72SFk
+                    created_at: '2022-01-27T07:43:03.74Z'
+                    updated_at: '2022-09-16T22:21:54.75Z'
+                    action: null
+                    amount: 888888
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    dispute_details:
+                      arn: '123'
+                    identity: IDpYDM7J9n57q849o9E9yNrG
+                    message: null
+                    occurred_at: '2022-01-27T07:42:48.56Z'
+                    reason: FRAUD
+                    respond_by: '2022-02-03T07:43:03.73Z'
+                    state: WON
+                    tags:
+                      order_number: 21DFASJSAKAS
+                    transfer: TRoTrJ3kqNTFh1P2FJ7A36Ky
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      transfer:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRoTrJ3kqNTFh1P2FJ7A36Ky
+                      evidence:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence
+                      adjustment_transfers:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/adjustment_transfers
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/disputes/?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  limit: 100
+                  next_cursor: DIs7yQRkHDdMYhurzYz72SFk
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    FileDownload:
+      description: Example response
+      content:
+        application/octet-stream:
+          schema:
+            $ref: '#/components/schemas/FileDownload'
+          examples:
+            Download Begins:
+              value: {}
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    Dispute:
+      description: Single Dispute object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Dispute'
+          examples:
+            Dispute:
+              value:
+                id: DIs7yQRkHDdMYhurzYz72SFk
+                created_at: '2022-01-27T07:43:03.74Z'
+                updated_at: '2022-09-16T22:21:54.75Z'
+                action: null
+                amount: 888888
+                application: APgPDQrLD52TYvqazjHJJchM
+                dispute_details:
+                  arn: '123'
+                evidence_submitted: CHARGEBACK
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                merchant: MUucec6fHeaWo3VHYoSkUySM
+                message: null
+                occurred_at: '2022-01-27T07:42:48.56Z'
+                reason: FRAUD
+                respond_by: '2022-02-03T07:43:03.73Z'
+                response_state: ACCEPTED
+                state: WON
+                tags:
+                  order_number: 21DFASJSAKAS
+                transfer: TRoTrJ3kqNTFh1P2FJ7A36Ky
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRoTrJ3kqNTFh1P2FJ7A36Ky
+                  evidence:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence
+                  adjustment_transfers:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/adjustment_transfers
+            Dispute - Inquiry:
+              value:
+                id: DIs7yQRkHDdMYhurzYz72SFk
+                created_at: '2022-01-27T07:43:03.74Z'
+                updated_at: '2022-09-16T22:21:54.75Z'
+                action: null
+                amount: 888888
+                application: APgPDQrLD52TYvqazjHJJchM
+                dispute_details:
+                  arn: '123'
+                evidence_submitted: INQUIRY
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                merchant: MUucec6fHeaWo3VHYoSkUySM
+                message: null
+                occurred_at: '2022-01-27T07:42:48.56Z'
+                reason: FRAUD
+                respond_by: '2022-02-03T07:43:03.73Z'
+                response_state: NEEDS_RESPONSE
+                state: INQUIRY
+                tags:
+                  order_number: 21DFASJSAKAS
+                transfer: TRoTrJ3kqNTFh1P2FJ7A36Ky
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRoTrJ3kqNTFh1P2FJ7A36Ky
+                  evidence:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence
+                  adjustment_transfers:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/adjustment_transfers
+            Dispute - Chargeback:
+              value:
+                id: DIs7yQRkHDdMYhurzYz72SFk
+                created_at: '2022-01-27T07:43:03.74Z'
+                updated_at: '2022-09-16T22:21:54.75Z'
+                action: null
+                amount: 888888
+                application: APgPDQrLD52TYvqazjHJJchM
+                dispute_details:
+                  arn: '123'
+                evidence_submitted: CHARGEBACK
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                merchant: MUucec6fHeaWo3VHYoSkUySM
+                message: null
+                occurred_at: '2022-01-27T07:42:48.56Z'
+                reason: FRAUD
+                respond_by: '2022-02-03T07:43:03.73Z'
+                response_state: RESPONDED
+                state: PENDING
+                tags:
+                  order_number: 21DFASJSAKAS
+                transfer: TRoTrJ3kqNTFh1P2FJ7A36Ky
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRoTrJ3kqNTFh1P2FJ7A36Ky
+                  evidence:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence
+                  adjustment_transfers:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/adjustment_transfers
+            Dispute - Accepted:
+              value:
+                id: DIs7yQRkHDdMYhurzYz72SFk
+                created_at: '2022-01-27T07:43:03.74Z'
+                updated_at: '2022-09-16T22:21:54.75Z'
+                action: null
+                amount: 888888
+                application: APgPDQrLD52TYvqazjHJJchM
+                dispute_details:
+                  arn: '123'
+                evidence_submitted: INQUIRY
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                merchant: MUucec6fHeaWo3VHYoSkUySM
+                message: null
+                occurred_at: '2022-01-27T07:42:48.56Z'
+                reason: FRAUD
+                respond_by: '2022-02-03T07:43:03.73Z'
+                response_state: ACCEPTED
+                state: INQUIRY
+                tags:
+                  order_number: 21DFASJSAKAS
+                transfer: TRoTrJ3kqNTFh1P2FJ7A36Ky
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRoTrJ3kqNTFh1P2FJ7A36Ky
+                  evidence:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence
+                  adjustment_transfers:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/adjustment_transfers
+            Dispute - Tags:
+              value:
+                id: DIs7yQRkHDdMYhurzYz72SFk
+                created_at: '2022-01-27T07:43:03.74Z'
+                updated_at: '2022-09-16T22:21:54.75Z'
+                action: null
+                amount: 888888
+                application: APgPDQrLD52TYvqazjHJJchM
+                dispute_details:
+                  arn: '123'
+                evidence_submitted: CHARGEBACK
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                merchant: MUucec6fHeaWo3VHYoSkUySM
+                message: null
+                occurred_at: '2022-01-27T07:42:48.56Z'
+                reason: FRAUD
+                respond_by: '2022-02-03T07:43:03.73Z'
+                response_state: ACCEPTED
+                state: WON
+                tags:
+                  order_number: 41BFASJSAKAS
+                transfer: TRoTrJ3kqNTFh1P2FJ7A36Ky
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  transfer:
+                    href: https://finix.sandbox-payments-api.com/transfers/TRoTrJ3kqNTFh1P2FJ7A36Ky
+                  evidence:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence
+                  adjustment_transfers:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/adjustment_transfers
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    DisputeEvidence:
+      description: Single Evidence object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DisputeEvidence'
+          examples:
+            Dispute Evidence:
+              value:
+                id: DF58kdVTa5eMQUjcXH2F7DH4
+                created_at: '2022-08-15T21:37:04.41Z'
+                updated_at: '2022-08-15T21:45:00.74Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                dispute: DIs7yQRkHDdMYhurzYz72SFk
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                merchant: MUucec6fHeaWo3VHYoSkUySM
+                state: SUCCEEDED
+                tags:
+                  file-extension: .png
+                  content-type: image/png
+                  file-name: test_file.png
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence/DF58kdVTa5eMQUjcXH2F7DH4
+            Dispute - Tags:
+              value:
+                id: DF58kdVTa5eMQUjcXH2F7DH4
+                created_at: '2022-08-15T21:37:04.41Z'
+                updated_at: '2022-08-15T21:45:00.74Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                dispute: DIs7yQRkHDdMYhurzYz72SFk
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                merchant: MUucec6fHeaWo3VHYoSkUySM
+                state: SUCCEEDED
+                tags:
+                  order_number: 41BFASJSAKAS
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence/DF58kdVTa5eMQUjcXH2F7DH4
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    DisputeEvidenceList:
+      description: List of Evidence objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DisputeEvidenceList'
+          examples:
+            List of Dispute Evidence:
+              value:
+                _embedded:
+                  evidences:
+                  - id: DFcVgoEuDeWn4eSvdZca8Hf
+                    created_at: '2022-10-06T20:22:54.93Z'
+                    updated_at: '2022-10-06T20:30:00.63Z'
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    dispute: DIs7yQRkHDdMYhurzYz72SFk
+                    identity: IDpYDM7J9n57q849o9E9yNrG
+                    merchant: MUucec6fHeaWo3VHYoSkUySM
+                    state: SUCCEEDED
+                    tags:
+                      file-extension: .png
+                      content-type: image/png
+                      file-name: test_file.png
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence/DFcVgoEuDeWn4eSvdZca8Hf
+                  - id: DFx3tddpTC568GjukRFGZpDp
+                    created_at: '2022-09-14T17:36:33.84Z'
+                    updated_at: '2022-09-14T17:45:00.51Z'
+                    dispute: DIs7yQRkHDdMYhurzYz72SFk
+                    state: SUCCEEDED
+                    tags:
+                      file-extension: .png
+                      content-type: image/png
+                      file-name: test_file.png
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence/DFx3tddpTC568GjukRFGZpDp
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                  next:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence?offset=20&limit=20&sort=created_at,desc&sort=id,desc
+                  last:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/evidence?offset=1160&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  limit: 100
+                  next_cursor: DFs7yQRkHDdMYhurzYz72SFk
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    AdjustmentTransfersList:
+      description: List of adjustment_transfer objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AdjustmentTransfersList'
+          examples:
+            List of Adjustment Transfers in a Dispute:
+              value:
+                _embedded:
+                  transfers:
+                  - id: TRrqiR7x5zwUPV5SpPSbKH8B
+                    created_at: '2022-01-27T07:43:03.94Z'
+                    updated_at: '2022-01-27T07:43:03.48Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 888888
+                    amount_requested: 888888
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: null
+                    externally_funded: 'FALSE'
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    idempotency_id: null
+                    merchant_identity: IDddHpRqwf2VsH2XB1fmLfhM
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: '2022-01-27T07:43:03.91Z'
+                    security_code_verification: null
+                    source: null
+                    state: SUCCEEDED
+                    statement_descriptor: null
+                    subtype: PLATFORM_CREDIT
+                    tags: {}
+                    trace_id: c14d481c-60eb-4338-8331-9f34b3445710
+                    type: DISPUTE
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRrqiR7x5zwUPV5SpPSbKH8B
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDddHpRqwf2VsH2XB1fmLfhM
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRrqiR7x5zwUPV5SpPSbKH8B/payment_instruments
+                      disputed_transfer:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRrqiR7x5zwUPV5SpPSbKH8B/disputed_transfer
+                      fee_profile:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8
+                  - id: TRw6U5auHfgKfgT4APKgkh4f
+                    created_at: '2022-09-16T22:21:54.66Z'
+                    updated_at: '2022-09-16T22:21:54.66Z'
+                    additional_buyer_charges: null
+                    additional_healthcare_data: null
+                    address_verification: null
+                    amount: 888888
+                    amount_requested: 888888
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    currency: USD
+                    destination: null
+                    externally_funded: 'FALSE'
+                    failure_code: null
+                    failure_message: null
+                    fee: 0
+                    idempotency_id: null
+                    merchant_identity: IDpYDM7J9n57q849o9E9yNrG
+                    messages: []
+                    raw: null
+                    ready_to_settle_at: '2022-09-16T22:21:54.81Z'
+                    security_code_verification: null
+                    source: PIe2YvpcjvoVJ6PzoRPBK137
+                    state: SUCCEEDED
+                    statement_descriptor: null
+                    subtype: MERCHANT_CREDIT
+                    tags: {}
+                    trace_id: d5416d16-df58-4c9a-9759-076cb28800d5
+                    type: DISPUTE
+                    _links:
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                      self:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRw6U5auHfgKfgT4APKgkh4f
+                      merchant_identity:
+                        href: https://finix.sandbox-payments-api.com/identities/IDpYDM7J9n57q849o9E9yNrG
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRw6U5auHfgKfgT4APKgkh4f/payment_instruments
+                      disputed_transfer:
+                        href: https://finix.sandbox-payments-api.com/transfers/TRw6U5auHfgKfgT4APKgkh4f/disputed_transfer
+                      source:
+                        href: https://finix.sandbox-payments-api.com/payment_instruments/PIe2YvpcjvoVJ6PzoRPBK137
+                      fee_profile:
+                        href: https://finix.sandbox-payments-api.com/fee_profiles/FPq6PQ9pHsab66fKMmjQ7jb5
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/disputes/DIs7yQRkHDdMYhurzYz72SFk/adjustment_transfers?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  offset: 0
+                  limit: 20
+                  count: 4
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  requestBodies:
+    CreateDisputeEvidenceRequest:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/CreateDisputeEvidenceRequest'
+          examples:
+            Upload Dispute Evidence:
+              value:
+                file: '@path/to/local/file'
+    SubmitDisputeEvidence:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SubmitDisputeEvidence'
+          examples:
+            Example 1:
+              value:
+                note: '"Submitting Dispute Evidence: July 23rd Receipt"'
+    AcceptDisputeRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcceptDispute'
+          examples:
+            Dispute Accepted:
+              value:
+                note: 'Accepting Dispute: Valid Reason'
+    UpdateDisputeEvidence:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateDisputeEvidence'
+          examples:
+            Dispute - Tags:
+              value:
+                tags:
+                  order_number: 41BFASJSAKAS
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

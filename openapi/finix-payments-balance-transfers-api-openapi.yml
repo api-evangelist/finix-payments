@@ -1,0 +1,948 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Balance Transfers API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Balance Transfers
+  description:
+    $ref: api-descriptions/tags/balance-transfers.md
+paths:
+  /balance_transfers:
+    post:
+      summary: Create a Balance Transfer
+      operationId: createBalanceTransfer
+      responses:
+        '201':
+          $ref: '#/components/responses/BalanceTransfer'
+        '400':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      description: Create a `balance_transfer`.
+      tags:
+      - Balance Transfers
+      requestBody:
+        $ref: '#/components/requestBodies/CreateBalanceTransferRequest'
+      x-internal: false
+      x-java-method-name: create
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/balance-transfer/create-balance-transfer.md
+      x-python-method-name: create
+    get:
+      summary: List Balance Transfers
+      operationId: listBalanceTransfers
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceTransferList'
+        '400':
+          $ref: '#/components/responses/ErrorUnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          description: Not Found
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      description: Retrieve a list of `balance_transfers`.
+      parameters:
+      - $ref: '#/components/parameters/QueryLimit'
+      - schema:
+          type: integer
+        in: query
+        name: pageNumber
+        description: The page number to list.
+      - schema:
+          type: integer
+        in: query
+        name: pageSize
+        description: The size of the page.
+      - $ref: '#/components/parameters/QueryCreatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryCreatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryUpdatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryUpdatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryIdempotencyIdFilter'
+      - $ref: '#/components/parameters/QueryAmountFilter'
+      - in: query
+        name: description
+        schema:
+          type: string
+        description: Filter by the `Description` value .
+      - schema:
+          type: string
+        in: query
+        name: destination
+        description: Filter by the `Payment Instrument` saved in `Destination`.
+      - schema:
+          type: string
+        in: query
+        name: external_reference_id
+        description: Filter by the value saved in `external_reference_id`.
+      - schema:
+          type: string
+        in: query
+        name: reference_id
+        description: Filter by the value saved in `reference_id`.
+      - schema:
+          type: string
+        in: query
+        description: Filter by the `Payment Instrument` saved in `source`.
+        name: source
+      tags:
+      - Balance Transfers
+      x-internal: false
+      x-java-method-name: list
+      x-group-parameters: true
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/balance_transfers/\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USbkjk46XqUTQHN3i2jaVnc1:ac915962-2757-49ea-aeee-10960a408b99\n"
+      x-python-method-name: list
+      x-returns-list: true
+  /balance_transfers/{balance_transfers_id}:
+    parameters:
+    - schema:
+        type: string
+      name: balance_transfers_id
+      in: path
+      required: true
+      description: ID of the `balance_transfer` resource.
+    get:
+      summary: Fetch a Balance Transfer
+      tags:
+      - Balance Transfers
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceTransfer'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: getBalanceTransfers
+      description: Retrieve the details of a `balance_transfer`.
+      x-internal: false
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/balance_transfers/BT_9SLA5BdQs6Z3xFpmjUoqhM\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USbkjk46XqUTQHN3i2jaVnc1:ac915962-2757-49ea-aeee-10960a408b99\n"
+      x-python-method-name: get
+components:
+  schemas:
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    Currency:
+      type: string
+      description: ISO 4217 3 letter currency code.
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    BalanceTransfer:
+      type: object
+      x-examples: {}
+      description: A `balance_transfer` object.
+      title: Balance Transfer
+      properties:
+        id:
+          type: string
+          description: ID of the `balance_transfer` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        description:
+          type: string
+          description: Additional information about the `balance_transfer` (e.g. **Transferring funds for Holidays**).
+        destination:
+          type: string
+          description: The account where funds get credited. For balance transfers, this is an aliased ID and will have the value of `FOR_BENEFIT_OF_ACCOUNT` or `OPERATING_ACCOUNT`.
+        external_reference_id:
+          type: string
+          description: ID generated by partner and returned to Finix.
+        processor_type:
+          type: string
+          description: Pass **LITLE_V1**; `balance_transfers` are only avalible for platforms with **LITLE_V1** credentials.
+        reference_id:
+          type: string
+          description: ID generated by Finix and sent to the partner.
+        source:
+          type: string
+          description: The account where funds get debited. For balance transfers, this is an aliased ID and will have the value of `FOR_BENEFIT_OF_ACCOUNT` or `OPERATING_ACCOUNT`.
+        state:
+          type: string
+          description: The `state` of the `balance_transfer`.
+          enum:
+          - CREATED
+          - SUBMITTING
+          - SUBMITTED
+          - SUCCEEDED
+          - FAILED
+          - RETURNED
+          - UNKNOWM
+        tags:
+          $ref: '#/components/schemas/Tags'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Amount:
+      type: integer
+      title: Amount
+      description: The total amount that will be debited in cents (e.g. 100 cents to debit $1.00).
+      format: int64
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    BalanceTransferList:
+      title: BalanceTransfersList
+      x-stoplight:
+        id: 0pxsokuo2ricq
+      type: object
+      description: List of `balance_transfer` resources.
+      properties:
+        page:
+          type: object
+          description: Details the page that's returned.
+          properties:
+            count:
+              type: integer
+              description: The number of entries returned.
+            limit:
+              type: integer
+              description: The number of entries to return.
+            offset:
+              type: integer
+              description: The number of items to skip before starting to collect the result set.
+        _embedded:
+          type: object
+          description: List of `balance_transfer` objects.
+          properties:
+            balance_transfers:
+              type: array
+              description: '`balance_transfer` objects.'
+              items:
+                $ref: '#/components/schemas/BalanceTransferList'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    CreateBalanceTransferRequest:
+      title: CreateBalanceTransferRequest
+      x-stoplight:
+        id: h8wur5bbt1lx3
+      type: object
+      description: Create a `balance_transfer` resource.
+      x-examples:
+        example-1:
+          description: string
+          tags:
+            property1: string
+            property2: string
+          destination: FOR_BENEFIT_OF_ACCOUNT
+          currency: AED
+          amount: 0
+          source: OPERATING_ACCOUNT
+          processor_type: LITLE_V1
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        description:
+          type: string
+          description: Additional information about the `balance_transfer` (e.g. **Transferring funds for Holidays**).
+        destination:
+          type: string
+          enum:
+          - FOR_BENEFIT_OF_ACCOUNT
+          - OPERATING_ACCOUNT
+          description: The account where funds get credited. For balance transfers, this is an aliased ID and will have the value of `FOR_BENEFIT_OF_ACCOUNT` or `OPERATING_ACCOUNT`.
+          nullable: true
+        processor_type:
+          type: string
+          example: LITLE_V1
+          description: Pass **LITLE_V1**; `balance_transfers` are only avalible for platforms with **LITLE_V1** credentials.
+        source:
+          type: string
+          description: The account where funds get debited. For balance transfers, this is an aliased ID and will have the value of `FOR_BENEFIT_OF_ACCOUNT` or `OPERATING_ACCOUNT`.
+          enum:
+          - FOR_BENEFIT_OF_ACCOUNT
+          - OPERATING_ACCOUNT
+        tags:
+          $ref: '#/components/schemas/Tags'
+      required:
+      - amount
+      - currency
+      - description
+      - destination
+      - processor_type
+      - source
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+  requestBodies:
+    CreateBalanceTransferRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateBalanceTransferRequest'
+          examples:
+            Create a Balance Transfer:
+              value:
+                amount: 4000
+                currency: USD
+                description: Need to increase buffer given the high number of NSFs on merchant fee debits
+                destination: FOR_BENEFIT_OF_ACCOUNT
+                processor_type: LITLE_V1
+                source: OPERATING_ACCOUNT
+                tags:
+                  example: documentation tag
+  responses:
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    BalanceTransferList:
+      description: List of balance_transfer objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceTransferList'
+          examples:
+            List of Balance Transfers:
+              value:
+                _embedded:
+                  balance_transfers:
+                  - id: BT_jXhKj7AcdQXvCANFfuowWa
+                    created_at: '2022-10-10T08:07:35.69Z'
+                    updated_at: '2022-10-10T08:07:35.92Z'
+                    amount: 22725
+                    currency: USD
+                    description: Test Balance Transfer
+                    destination: FOR_BENEFIT_OF_ACCOUNT
+                    external_reference_id: '84078027639024193'
+                    processor_type: LITLE_V1
+                    reference_id: FNXBHeZiCJ4C4HcgpVGT5sdb
+                    source: OPERATING_ACCOUNT
+                    state: SUCCEEDED
+                    tags: null
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/balance_transfers/BT_jXhKj7AcdQXvCANFfuowWa
+                  - id: BT_qk8PK15fMsoXjZ1dP9YSwf
+                    created_at: '2022-09-28T18:10:01.36Z'
+                    updated_at: '2022-09-28T18:10:01.77Z'
+                    amount: 4000
+                    currency: USD
+                    description: Need to increase buffer given the high number of NSFs on merchant fee debits
+                    destination: FOR_BENEFIT_OF_ACCOUNT
+                    external_reference_id: '83989994584237171'
+                    processor_type: LITLE_V1
+                    reference_id: FNXbECrND95wKrBh61D3Lrq7n
+                    source: OPERATING_ACCOUNT
+                    state: SUCCEEDED
+                    tags:
+                      example: documentation tag
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/balance_transfers/BT_qk8PK15fMsoXjZ1dP9YSwf
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/balance_transfers/?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                  next:
+                    href: https://finix.sandbox-payments-api.com/balance_transfers/?offset=20&limit=20&sort=created_at,desc&sort=id,desc
+                  last:
+                    href: https://finix.sandbox-payments-api.com/balance_transfers/?offset=1280&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  offset: 0
+                  limit: 20
+                  count: 1286
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    BalanceTransfer:
+      description: Single balance_transfer object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceTransfer'
+          examples:
+            Balance Transfer:
+              value:
+                id: BT_9SLA5BdQs6Z3xFpmjUoqhM
+                created_at: '2022-08-18T06:37:50.67Z'
+                updated_at: '2022-08-18T06:37:51.09Z'
+                amount: 101
+                currency: USD
+                description: setup balance transfer for testing
+                destination: OPERATING_ACCOUNT
+                external_reference_id: '84077657260162531'
+                processor_type: LITLE_V1
+                reference_id: FNX5ZJEGdPT5odwtRrvxVrYUn
+                source: FOR_BENEFIT_OF_ACCOUNT
+                state: SUCCEEDED
+                tags:
+                  test_key_101: test_val_101
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/balance_transfers/BT_9SLA5BdQs6Z3xFpmjUoqhM
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+  parameters:
+    QueryUpdatedAtGteFilter:
+      description: Filter where `updated_at` is after the given date.
+      in: query
+      name: updated_at.gte
+      schema:
+        type: string
+      style: form
+    QueryIdempotencyIdFilter:
+      description: Filter by `idempotency_id`.
+      in: query
+      name: idempotency_id
+      schema:
+        type: string
+      style: form
+    QueryCreatedAtGteFilter:
+      description: Filter where `created_at` is after the given date.
+      in: query
+      name: created_at.gte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryUpdatedAtLteFilter:
+      description: Filter where `updated_at` is before the given date.
+      in: query
+      name: updated_at.lte
+      schema:
+        type: string
+      style: form
+    QueryCreatedAtLteFilter:
+      description: Filter where `created_at` is before the given date.
+      in: query
+      name: created_at.lte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryAmountFilter:
+      description: Filter by an amount equal to the given value.
+      in: query
+      name: amount
+      schema:
+        type: integer
+      style: form
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users

@@ -1,0 +1,1057 @@
+openapi: 3.0.2
+info:
+  title: Finix Authorizations Files API
+  description:
+    $ref: api-descriptions/main.md
+  contact:
+    name: Finix
+    url: https://finix.com
+    email: support@finixpayments.com
+  version: '2022-02-01'
+servers:
+- description: Sandbox server to be used for testing and development
+  url: https://finix.sandbox-payments-api.com
+security:
+- BasicAuth: []
+tags:
+- name: Files
+  description:
+    $ref: api-descriptions/tags/files.md
+paths:
+  /files:
+    post:
+      summary: Create a File
+      operationId: createFiles
+      responses:
+        '200':
+          $ref: '#/components/responses/File'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/files/createfile.md
+      description: "Before uploading a file, you need to create a `File` resource. \n\nOnce created, you can [upload](/guides/onboarding/uploading-files-to-finix/#how-to-upload-a-file-to-finix) your file to the new `File` resource."
+      requestBody:
+        $ref: '#/components/requestBodies/CreateFileRequest'
+      tags:
+      - Files
+      x-java-method-name: create
+      x-python-method-name: create
+    get:
+      summary: List All Files
+      tags:
+      - Files
+      responses:
+        '200':
+          $ref: '#/components/responses/FilesList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: listFiles
+      description: List all the `File` resources you've created.
+      parameters:
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      - $ref: '#/components/parameters/QueryLimit'
+      - $ref: '#/components/parameters/QueryIdFilter'
+      - $ref: '#/components/parameters/QueryCreatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryCreatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryUpdatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryUpdatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryBeforeCursor'
+      x-java-method-name: list
+      x-group-parameters: true
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: 'curl "https://finix.sandbox-payments-api.com/files" \
+
+          -H "Finix-Version: 2022-02-01" \
+
+          -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e
+
+          '
+      x-python-method-name: list
+      x-returns-list: true
+  /files/{file_id}:
+    parameters:
+    - schema:
+        type: string
+      name: file_id
+      in: path
+      required: true
+      description: Your `File` ID.
+    get:
+      summary: Fetch a File
+      tags:
+      - Files
+      responses:
+        '200':
+          $ref: '#/components/responses/File'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: getFile
+      description: Retrieve the details of a `File` resource.
+      x-java-method-name: get
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: 'curl "https://finix.sandbox-payments-api.com/files/FILE_abki8bFEjq51eZ5w2pYFik" \
+
+          -H "Finix-Version: 2022-02-01" \
+
+          -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e
+
+          '
+      x-python-method-name: get
+  /files/{file_id}/external_links:
+    parameters:
+    - schema:
+        type: string
+      name: file_id
+      in: path
+      required: true
+      description: Your `File` ID.
+    get:
+      summary: List All External Links
+      tags:
+      - Files
+      responses:
+        '200':
+          $ref: '#/components/responses/ExternalLinksList'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          description: Not Acceptable
+      operationId: listExternalLinks
+      description: List the previously created `external_links` for a `File`.
+      parameters:
+      - $ref: '#/components/parameters/QueryAfterCursor'
+      - $ref: '#/components/parameters/QueryLimit'
+      - $ref: '#/components/parameters/QueryIdFilter'
+      - $ref: '#/components/parameters/QueryCreatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryCreatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryUpdatedAtGteFilter'
+      - $ref: '#/components/parameters/QueryUpdatedAtLteFilter'
+      - $ref: '#/components/parameters/QueryBeforeCursor'
+      x-group-parameters: true
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: 'curl "https://finix.sandbox-payments-api.com/files/FILE_abki8bFEjq51eZ5w2pYFik/external_links" \
+
+          -H "Finix-Version: 2022-02-01" \
+
+          -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e
+
+          '
+      x-python-method-name: list_external_links
+      x-returns-list: true
+    post:
+      summary: Create an External Link
+      operationId: createExternalLink
+      responses:
+        '200':
+          $ref: '#/components/responses/ExternalLink'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/files/external-link.md
+      description: Create an `external_link` resource to share with users so they can upload files directly from their browser. For more info, see [Uploading files to Finix](/guides/onboarding/uploading-files-to-finix/).
+      requestBody:
+        $ref: '#/components/requestBodies/CreateExternalLinkRequest'
+      tags:
+      - Files
+      x-python-method-name: create_external_link
+  /files/{file_id}/upload:
+    parameters:
+    - schema:
+        type: string
+      name: file_id
+      in: path
+      required: true
+      description: The ID of the `File` that was created to upload the file.
+    post:
+      summary: Upload files Directly
+      operationId: uploadFile
+      responses:
+        '200':
+          $ref: '#/components/responses/File'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      description: Upload files directly with a `multipart/form-data` request.
+      parameters: null
+      x-java-method-name: upload
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source:
+          $ref: xcode/curl/files/uploadfile.md
+      tags:
+      - Files
+      requestBody:
+        $ref: '#/components/requestBodies/UploadFileRequest'
+      x-python-method-name: upload
+  /files/{file_id}/download:
+    parameters:
+    - schema:
+        type: string
+      name: file_id
+      in: path
+      required: true
+      description: The ID of the `File` that was created to upload the file.
+    get:
+      summary: Download a File
+      tags:
+      - Files
+      responses:
+        '200':
+          $ref: '#/components/responses/FileDownload'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: downloadFile
+      x-java-method-name: download
+      description: Download a file that was uploaded to a `File` resource.
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/files/FILE_bJecqoRPasStGPVpvKHtgA/download\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+        in: query
+        name: stream
+        description: Stream the contents of the `File` so it's displayed inline in the user's web browser.
+      x-python-method-name: download
+  /files/{file_id}/external_links/{external_link_id}:
+    parameters:
+    - schema:
+        type: string
+      name: file_id
+      in: path
+      required: true
+      description: The ID of the `File` that has the links you want to retrieve.
+    - schema:
+        type: string
+      name: external_link_id
+      in: path
+      required: true
+      description: The ID of the `external_link` that you want to retireve.
+    get:
+      summary: Fetch an External LInk
+      tags:
+      - Files
+      responses:
+        '200':
+          $ref: '#/components/responses/ExternalLink'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '403':
+          $ref: '#/components/responses/ErrorForbidden403'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+        '406':
+          $ref: '#/components/responses/Error406NotAcceptable'
+      operationId: getExternalLink
+      description: Fetch a previously created `external_link` resource.
+      x-codeSamples:
+      - lang: cURL
+        label: curl
+        source: "curl \"https://finix.sandbox-payments-api.com/files/FILE_bJecqoRPasStEPVpvKHtgA/external_links/EL_dh5YS66GePpkeSVyL4VdBL\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
+      x-python-method-name: get_external_link
+components:
+  schemas:
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    File:
+      type: object
+      x-examples: {}
+      title: File
+      properties:
+        id:
+          type: string
+          description: The ID of the `File` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        application_id:
+          type: string
+          description: The ID of the `Application` that the `File` was created under.
+        display_name:
+          type: string
+          description: 'The name of the `File` object. If you don''t provide a name, Finix will name the object with the convention: **FILE_(file_id)**.'
+        extension:
+          description: The extension of the file.
+          type: string
+          nullable: true
+        identity_id:
+          type: string
+          description: ID of the `Identity` that created the `File`.
+          nullable: true
+        linked_to:
+          type: string
+          description: The resource ID the `File` is linked to.
+        linked_type:
+          type: string
+          description: Autofills to **Merchant**.
+        platform_id:
+          type: string
+          description: The ID of the `Platform` that the `File` was created under.
+        status:
+          type: string
+          description: 'The status of the file''s review. The statuses available includes:<br><li><strong>REQUIRES_UPLOAD</strong>: A file still needs to be uploaded to the file object.<br><li><strong>PENDING</strong>: Finix''s underwriting team is still reviewing the uploaded files.<br><li><strong>INVALID</strong>: The file couldn''t be read.<br><li><strong>UPLOADED</strong>: The file has been uploaded to the resource.'
+        tags:
+          $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          description: The type of document.
+    ExternalLink:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+          description: The ID of the `external_Link` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        duration:
+          type: string
+          description: Details how long the `url` will be avalible for users to upload files to.
+          nullable: true
+        expired:
+          type: boolean
+          description: <ul><li>If <strong>TRUE</strong> the link has expired<br><li>If <strong>FALSE</strong>, the link is active and files can still be uploaded or downloaded from the link.
+        expires_at:
+          type: string
+          description: The timestamp that the external link expires at.
+        file_id:
+          type: string
+          description: The `File` ID the `external_link` is related to.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          description: Sets if the link is for uploading or downloading files from Finix.
+        url:
+          type: string
+          description: The URL you can share with merchants to **UPLOAD** or **DOWNLOAD** files depending on the request sent.
+        user_id:
+          type: string
+          description: The ID of the `user` that requested to create this link.
+    FileDownload:
+      type: string
+      title: FileDownload
+      x-stoplight:
+        id: fylqbqcpw7nuv
+      format: binary
+      description: The file in question will begin to download.
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    CreateFileRequest:
+      type: object
+      x-examples: {}
+      properties:
+        display_name:
+          type: string
+          description: The name of the `File` you'll create.
+        linked_to:
+          type: string
+          description: The resource ID that you want linked to the `File` (e.g. Merchant ID).
+        tags:
+          $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          description: 'The type of document. | Available values include: <br>Identity Verification<ul><li> **DRIVERS\_LICENSE\_FRONT**<li>**DRIVERS\_LICENSE\_BACK**<li>**IDENTIFICATION\_CARD\_FRONT**<li>**IDENTIFICATION\_CARD\_BACK**</ul>Bank account validation<ul><li>**BANK\_STATEMENT**</ul>Business Verification<ul><li>**TAX\_DOCUMENT**<li>**BUSINESS\_REGISTRATION**<li>**BUSINESS\_ADDRESS\_VERIFICATION**</ul>Additional<ul><li>**OTHER**<li>**PCI\_DOCUMENT**<li>**PASSPORT**<ul>'
+          enum:
+          - DRIVERS_LICENSE_FRONT
+          - DRIVERS_LICENSE_BACK
+          - IDENTIFICATION_CARD_FRONT
+          - IDENTIFICATION_CARD_BACK
+          - BANK_STATEMENT
+          - TAX_DOCUMENT
+          - BUSINESS_REGISTRATION
+          - BUSINESS_ADDRESS_VERIFICATION
+          - OTHER
+          - PCI_DOCUMENT
+          - PASSPORT
+    UploadFileRequest:
+      title: UploadFileRequest
+      x-stoplight:
+        id: 8f3scdwv78xcg
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+          description: Path to the file you want to upload<br>(e.g. **/Users/Desktop/finix_file.png**).
+    ExternalLinksList:
+      title: ExternalLinksList
+      x-stoplight:
+        id: ls3c9xr95g8nz
+      type: object
+      x-examples: {}
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `external_link` resources.
+          properties:
+            external_links:
+              type: array
+              description: '`external_link` resources.'
+              items:
+                $ref: '#/components/schemas/ExternalLink'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    Tags:
+      type: object
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+      nullable: true
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type: string
+          description: The cursor to use for the next page of results.
+          nullable: true
+      description: Details the page that's returned.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    CreateExternalLinkRequest:
+      type: object
+      x-examples: {}
+      title: CreateExternalLinkRequest
+      properties:
+        duration:
+          type: integer
+          description: Set how long (in minutes) the external link should be active for. The link can be active for up to 7 days in the future.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          description: <ul><li>Set to <strong>UPLOAD</strong> to create a link that can be used to upload files to Finix.<li>Set to <strong>DOWNLOAD</strong> to create a link where the uploaded file can be downloaded from.<li>Set to <strong>VIEW</strong> to create a link that displays the file in browser.
+          enum:
+          - UPLOAD
+          - DOWNLOAD
+          - VIEW
+    FilesList:
+      title: FilesList
+      x-stoplight:
+        id: qg15mhihxira6
+      type: object
+      x-examples: {}
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `File` objects.
+          properties:
+            files:
+              type: array
+              description: '`File` objects.'
+              items:
+                $ref: '#/components/schemas/File'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+  responses:
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    File:
+      description: Single File object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/File'
+          examples:
+            File - Created:
+              value:
+                id: FILE_abki8bFEjq51eZ5w2pYFik
+                created_at: '2022-08-16T18:50:25.770825Z'
+                updated_at: '2022-08-16T18:50:25.807321Z'
+                application_id: APgPDQrLD52TYvqazjHJJchM
+                display_name: license_file
+                extension: null
+                identity_id: null
+                linked_to: MU2n7BSovtwYsWYZF6rBnnzk
+                linked_type: MERCHANT
+                platform_id: PLm5E6FbtCZ5vjpCaKhq5PwN
+                status: REQUIRES_UPLOAD
+                tags:
+                  test_key_100: test_val_100
+                type: DRIVERS_LICENSE_FRONT
+            File - Uploading:
+              value:
+                id: FILE_abki8bFEjq51eZ5w2pYFik
+                created_at: '2022-08-16T18:50:25.770825Z'
+                updated_at: '2022-08-16T18:50:25.807321Z'
+                application_id: APgPDQrLD52TYvqazjHJJchM
+                display_name: license_file
+                extension: png
+                identity_id: null
+                linked_to: MU2n7BSovtwYsWYZF6rBnnzk
+                linked_type: MERCHANT
+                platform_id: PLm5E6FbtCZ5vjpCaKhq5PwN
+                status: PENDING
+                tags:
+                  test_key_100: test_val_100
+                type: DRIVERS_LICENSE_FRONT
+            File - Uploaded:
+              value:
+                id: FILE_abki8bFEjq51eZ5w2pYFik
+                created_at: '2022-08-16T18:50:25.770825Z'
+                updated_at: '2022-08-16T18:50:25.807321Z'
+                application_id: APgPDQrLD52TYvqazjHJJchM
+                display_name: license_file
+                extension: png
+                identity_id: null
+                linked_to: MU2n7BSovtwYsWYZF6rBnnzk
+                linked_type: MERCHANT
+                platform_id: PLm5E6FbtCZ5vjpCaKhq5PwN
+                status: UPLOADED
+                tags:
+                  test_key_100: test_val_100
+                type: DRIVERS_LICENSE_FRONT
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    FileDownload:
+      description: Example response
+      content:
+        application/octet-stream:
+          schema:
+            $ref: '#/components/schemas/FileDownload'
+          examples:
+            Download Begins:
+              value: {}
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ExternalLinksList:
+      description: List of external_link objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExternalLinksList'
+          examples:
+            List of External Links:
+              value:
+                _embedded:
+                  external_links:
+                  - id: EL_sVv61JP93htzDFTtNhbsdd
+                    created_at: '2022-05-24T06:50:51.94704Z'
+                    duration: null
+                    expired: true
+                    expires_at: '2022-05-24T07:05:51.934426Z'
+                    file_id: FILE_bJecqoRPasStEPVpvKHtgA
+                    tags: {}
+                    type: UPLOAD
+                    url: https://finix-file-quarantine-sb.s3.us-east-2.amazonaws.com/MERCHANT/MU2n7BSovtwYsWYZF6rBnnzk/DRIVERS_LICENSE_FRONT/FILE_bJecqoRPasStEPVpvKHtgA/file?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMiJIMEYCIQCRwhQF2A0kHmtOUShU8uI2g1JRbA0fxx%2Bkl5IGtZ6ygwIhAPSKP6KEEHYHhMqD54bqT%2Fzb495zGacrdZBEcGciNfZaKtMECHAQAhoMMzc1NjM1NTcwMDcwIgyA5j6IswvJUsAaiAoqsASHRDILId%2BbaQZiUOu29lOE9FmgXlw8uxpV3IiLMWmn2l4Iq8rTdANxXRVCM%2BWrT53DiBACQrUOSrmokWHfJ0DiizxD%2Fky06kDSbiVrD%2BK9DckqiBlg84N%2F7JKqyNeQUJKrUHtDKoH%2BSM%2FYNTgur%2BaGR07as8NG8qnhO8sJela5yWugYJjw4iJoZp%2BmOn%2BVL0Ry9OjEcoKxXCBDJF8W1ppa%2BRa1zfwpufJGWZYYZUiv31pVleRuCDyVef4p8MejnzRiEHFE4TNgcPYZW%2F97KRjQ9OYWbh7ygDuki9ejVdMICywCHEGLEtP%2Fr5EIU1IjWJUt6pwkjud2hHJ18f8j5U5j%2FFQF7wiTl3FlqqnXrLSHJaVA6fyJWbCTcfR%2B3Hr%2FbTSZWZWctXHO%2ByBYR1D9z9KhD%2FwaO87k0KRBRSggiMjVsgILguTdOeggcg3XyfUg2zRj6GPQF7HfBN%2FtGYoTO7l2IR6NBB7FBiusXzJMQd7IFC8fW%2BbiFlFmZk0IlGIUJcB2cetDEGL3k7McHOx9P7ywsy0f7wGdMTS01JgSOAt9Ic0nlljKj0dItwz1f%2FCIcm1%2FWvCZ2W6g0PbtM9dDEL04j3rIBm7spqqtx8KIj2hZs3cEkp8yr%2Bx%2B%2BZRXbMUnT7zNsEGShQGDVwxKP1sA834ZhF9KkC0RdRZFqvgXnC7Sk02tqSGVIUTzcymCl2jYfgiBfolPVW7cwEoIPOv%2FNEp%2BEHWZ7eJMP%2BiAnyMnXDkaGTCL97GUBjqoAQS5iN2Njmu0X6N5249v6JJ3HaoDqIE3p3A6IjwMK%2Byyx81LLYDkZTLVjo2t9DzPLjUy5TiTGd0mNt0Gp5fJ4vo4V5T2BnRWLTxS3tCrG69lTVWBEZfg9NniNhRwRsRrwW%2B%2BeJGIdt7E7CSciDB6fknhtALrh%2FtNKgqF4ofP8QxZedsz9FICsjt1On3r1BUqBLM9gZKdDvapil9PWDJeiRr24dbivHZfYg%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220524T065051Z&X-Amz-SignedHeaders=host&X-Amz-Expires=899&X-Amz-Credential=ASIAVO5M75WLGNOGWHOG%2F20220524%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=8d360d38a6752dba12fbebb2a83ad5c129b5fc475bf323f169fa826c6bca1b68
+                    user_id: USsRhsHYZGBPnQw8CByJyEQW
+                  - id: EL_dh5YS66GePpkeSVyL4VdBL
+                    created_at: '2022-03-22T01:07:05.074313Z'
+                    duration: null
+                    expired: true
+                    expires_at: '2022-03-22T01:22:05.070415Z'
+                    file_id: FILE_bJecqoRPasStEPVpvKHtgA
+                    tags: {}
+                    type: UPLOAD
+                    url: https://finix-file-quarantine-sb.s3.us-east-2.amazonaws.com/MERCHANT/MU2n7BSovtwYsWYZF6rBnnzk/DRIVERS_LICENSE_FRONT/FILE_bJecqoRPasStEPVpvKHtgA/file?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMiJGMEQCIACy1Tl%2BahJzC4xuMTzdUk%2BdDsFeivMG1EUNFHJKqEImAiAm%2FlrPiF1gybEdzgjEqUoftwBL2qxaMtkitWG8UxKUayr6AwghEAIaDDM3NTYzNTU3MDA3MCIM%2BY%2BRbP5bgBMV0WafKtcD7z6X%2FLEz0mkHWYo45w8MZsJRox%2BS8gvWW0ufEcmC9OcA9%2BZSfBdPb4DstQulQZA5OKJ1I2mkqo5zKGcjhQ8uVzhKCEHfdnEB3Tm06ZY4L8sF9WyOV%2FTFbAQ0JzBQw6KPM0ubC0xaNIOnDXvfdzqt7nDLx6vC7Jxo%2FnIrmD37wkFeshib5YDtuU%2F6bBmPQqXU3PgmUODfWDfNj5Bqy6JhK5dqF0S0%2F09ny86v7jNZX%2BaNHc%2FV21mYUHYNSuwyJJLoeVC001dKebzxkXkfTbrKGAxaXz%2F3gVBX4OPwrwKR1nYxly4BtRay7vF8fWIPoJdHhdxiXEHYTNyJA%2FZbeHAjXlvVvvPximI73GzPYWxDj8K7ns%2BrshCRZboISSP0okwp%2FdgMPSa%2B73Z2pUbWdZILKvblgSRitDoL1baXQLd0S22EOHQS%2FXMLIB3wMPnY5ysuMNB%2FCjGLGO%2B1%2BxldCdzMeLIXacqkDG%2BiWxQV%2FPYTzMJor%2FcjvTbTaHI8IY1OKC17Q8Cms06VF9k8%2B1En5E0qSVJDxMRZy0Hdu8BVN%2FEpZvgLlNvLFkV%2FalCjmN4OHT5AOq%2Fb6V9Am%2FbXa7Eu8Z7%2BDiwv2OGz06UwsyRSb0G5iVx57EMAz0WGMMef5JEGOqYBsiwfoTFGtG9%2Ff2ib21I0VadcpBmX90lkty7tLS8VXaDOZFY3b5KZB%2FBWvkKym2YouCgSJTuxO6P2X15NRIm2tY4v7WhsOWQONcOONhuZCsU60fvEsVJnHV46IXGRAov%2BFHqMeOChYxUHoBaDA7UEG2yoXQdeMvk89c8m47fFFKzQq5jwlL5RTC1xgL1MdUespA32Bw5oalBq6bNAPrWI7yN67T75Ng%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220322T010705Z&X-Amz-SignedHeaders=host&X-Amz-Expires=899&X-Amz-Credential=ASIAVO5M75WLPYNTLOHA%2F20220322%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=1172b039bd7e807c8c111280e3af1bb289cc70560519793a5749d60ab9e57971
+                    user_id: USsRhsHYZGBPnQw8CByJyEQW
+                page:
+                  limit: 10
+                  next_cursor: EL_dh5YS66GePpkeSVyL4VdBL
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ExternalLink:
+      description: Single external_link object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExternalLink'
+          examples:
+            External Link:
+              value:
+                id: EL_dh5YS66GePpkeSVyL4VdBL
+                created_at: '2022-03-22T01:07:05.074313Z'
+                duration: null
+                expired: true
+                expires_at: '2022-03-22T01:22:05.070415Z'
+                file_id: FILE_bJecqoRPasStEPVpvKHtgA
+                tags: {}
+                type: UPLOAD
+                url: https://finix-file-quarantine-sb.s3.us-east-2.amazonaws.com/MERCHANT/MU2n7BSovtwYsWYZF6rBnnzk/DRIVERS_LICENSE_FRONT/FILE_bJecqoRPasStEPVpvKHtgA/file?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMiJGMEQCIACy1Tl%2BahJzC4xuMTzdUk%2BdDsFeivMG1EUNFHJKqEImAiAm%2FlrPiF1gybEdzgjEqUoftwBL2qxaMtkitWG8UxKUayr6AwghEAIaDDM3NTYzNTU3MDA3MCIM%2BY%2BRbP5bgBMV0WafKtcD7z6X%2FLEz0mkHWYo45w8MZsJRox%2BS8gvWW0ufEcmC9OcA9%2BZSfBdPb4DstQulQZA5OKJ1I2mkqo5zKGcjhQ8uVzhKCEHfdnEB3Tm06ZY4L8sF9WyOV%2FTFbAQ0JzBQw6KPM0ubC0xaNIOnDXvfdzqt7nDLx6vC7Jxo%2FnIrmD37wkFeshib5YDtuU%2F6bBmPQqXU3PgmUODfWDfNj5Bqy6JhK5dqF0S0%2F09ny86v7jNZX%2BaNHc%2FV21mYUHYNSuwyJJLoeVC001dKebzxkXkfTbrKGAxaXz%2F3gVBX4OPwrwKR1nYxly4BtRay7vF8fWIPoJdHhdxiXEHYTNyJA%2FZbeHAjXlvVvvPximI73GzPYWxDj8K7ns%2BrshCRZboISSP0okwp%2FdgMPSa%2B73Z2pUbWdZILKvblgSRitDoL1baXQLd0S22EOHQS%2FXMLIB3wMPnY5ysuMNB%2FCjGLGO%2B1%2BxldCdzMeLIXacqkDG%2BiWxQV%2FPYTzMJor%2FcjvTbTaHI8IY1OKC17Q8Cms06VF9k8%2B1En5E0qSVJDxMRZy0Hdu8BVN%2FEpZvgLlNvLFkV%2FalCjmN4OHT5AOq%2Fb6V9Am%2FbXa7Eu8Z7%2BDiwv2OGz06UwsyRSb0G5iVx57EMAz0WGMMef5JEGOqYBsiwfoTFGtG9%2Ff2ib21I0VadcpBmX90lkty7tLS8VXaDOZFY3b5KZB%2FBWvkKym2YouCgSJTuxO6P2X15NRIm2tY4v7WhsOWQONcOONhuZCsU60fvEsVJnHV46IXGRAov%2BFHqMeOChYxUHoBaDA7UEG2yoXQdeMvk89c8m47fFFKzQq5jwlL5RTC1xgL1MdUespA32Bw5oalBq6bNAPrWI7yN67T75Ng%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220322T010705Z&X-Amz-SignedHeaders=host&X-Amz-Expires=899&X-Amz-Credential=ASIAVO5M75WLPYNTLOHA%2F20220322%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=1172b039bd7e807c8c111280e3af1bb289cc70560519793a5749d60ab9e57971
+                user_id: USsRhsHYZGBPnQw8CByJyEQW
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    FilesList:
+      description: List of File objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FilesList'
+          examples:
+            List of Files:
+              value:
+                _embedded:
+                  files:
+                  - id: FILE_abki8bFEjq51eZ5w2pYFik
+                    created_at: '2022-08-16T18:50:25.770825Z'
+                    updated_at: '2022-08-16T18:50:25.807321Z'
+                    application_id: APgPDQrLD52TYvqazjHJJchM
+                    display_name: license_file
+                    extension: png
+                    identity_id: null
+                    linked_to: MU2n7BSovtwYsWYZF6rBnnzk
+                    linked_type: MERCHANT
+                    platform_id: PLm5E6FbtCZ5vjpCaKhq5PwN
+                    status: UPLOADED
+                    tags:
+                      test_key_100: test_val_100
+                    type: DRIVERS_LICENSE_FRONT
+                  - id: FILE_eCecW4LCMMfY7nfnBrKpX8
+                    created_at: '2022-10-11T21:19:46.273063Z'
+                    updated_at: '2022-10-11T21:19:46.296136Z'
+                    application_id: APgPDQrLD52TYvqazjHJJchM
+                    display_name: My Drivers License
+                    extension: null
+                    identity_id: null
+                    linked_to: MU2n7BSovtwYsWYZF6rBnnzk
+                    linked_type: MERCHANT
+                    platform_id: PLm5E6FbtCZ5vjpCaKhq5PwN
+                    status: REQUIRES_UPLOAD
+                    tags:
+                      key_1: value_1
+                    type: DRIVERS_LICENSE_FRONT
+                page:
+                  limit: 10
+                  next_cursor: FILE_abki8bFEjq51eZ5w2pYFik
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+  parameters:
+    QueryUpdatedAtGteFilter:
+      description: Filter where `updated_at` is after the given date.
+      in: query
+      name: updated_at.gte
+      schema:
+        type: string
+      style: form
+    QueryIdFilter:
+      description: Filter by `id`.
+      in: query
+      name: id
+      schema:
+        type: string
+      style: form
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
+    QueryCreatedAtGteFilter:
+      description: Filter where `created_at` is after the given date.
+      in: query
+      name: created_at.gte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryUpdatedAtLteFilter:
+      description: Filter where `updated_at` is before the given date.
+      in: query
+      name: updated_at.lte
+      schema:
+        type: string
+      style: form
+    QueryCreatedAtLteFilter:
+      description: Filter where `created_at` is before the given date.
+      in: query
+      name: created_at.lte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+  requestBodies:
+    CreateFileRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateFileRequest'
+          examples:
+            Create a File:
+              value:
+                display_name: My Drivers License
+                linked_to: MU2n7BSovtwYsWYZF6rBnnzk
+                tags:
+                  key_1: value_1
+                type: DRIVERS_LICENSE_FRONT
+    UploadFileRequest:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/UploadFileRequest'
+    CreateExternalLinkRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateExternalLinkRequest'
+          examples:
+            Create an External Link:
+              value:
+                duration: 15
+                type: UPLOAD
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: ''
+x-stoplight:
+  id: c6861590dda46
+x-ignoredHeaderParameters:
+- Accept
+- finix-apiuser-role
+- date
+- x-request-id
+x-tagGroups:
+- name: MAIN RESOURCES
+  tags:
+  - Authorizations
+  - Compliance Forms
+  - Devices
+  - Disputes
+  - Fee Profiles
+  - Files
+  - Identities
+  - Instrument Updates
+  - Merchants
+  - Onboarding Forms
+  - Payment Instruments
+  - Settlements
+  - Split Transfers
+  - Transfers
+  - Users
+  - Webhooks
+- name: CORE-PAYFAC RESOURCES
+  tags:
+  - Application Profiles
+  - Applications
+  - Balance Transfers
+  - Merchant Profiles
+  - Payout Profiles
+  - Verifications
+- name: SUBSCRIPTION BILLING
+  tags:
+  - Subscription Schedules
+  - Subscription Amounts
+  - Subscription Enrollments
+x-exclude-tags-from-libraries:
+- Applications
+- Application Profiles
+- Fees
+- Payment Instruments P2C
+- Processors
+- Review Queue
+- Subscription Schedules
+- Subscription Amounts
+- Subscription Enrollments
+- Users
