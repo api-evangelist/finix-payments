@@ -1,0 +1,155 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.finix.com/additional-resources/developers/implementation-and-testing/testing-your-integration
+note: >-
+  Finix Sandbox test values. All values are published verbatim by Finix for its Sandbox environment.
+  Provide amount in cents. The amount field is used as a trigger to simulate specific outcomes.
+environments:
+  sandbox:
+    base_url: https://finix.sandbox-payments-api.com
+    keys: Sandbox API Keys from the Sandbox Dashboard (cannot be used in Live)
+  live:
+    base_url: https://finix.live-payments-api.com
+    keys: Live API Keys from the Live Dashboard
+required_header:
+  Finix-Version: '2022-02-01'
+test_cards_by_type:
+  - card_type: CREDIT
+    number: '6011000000004675'
+    brand: Discover
+  - card_type: DEBIT
+    number: '5200820000007201'
+    brand: Mastercard
+  - card_type: HSA_FSA
+    number: '4393420000002680'
+    brand: Visa
+  - card_type: NON_RELOADABLE_PREPAID
+    number: '5223100000008423'
+    brand: Mastercard
+  - card_type: RELOADABLE_PREPAID
+    number: '379032000006086'
+    brand: American Express
+  - card_type: UNKNOWN
+    number: '386214000009097'
+    brand: Discover
+magic_amounts:
+  - amount: 102
+    description: Declined amount
+  - amount: 103
+    description: Canceled amount
+  - amount: 888888
+    description: Disputed amount
+  - amount: 193
+    description: Insufficient funds amount
+  - amount: 194
+    description: Invalid card number amount
+  - amount: 889986
+    description: AVS total failure amount
+  - amount: 889987
+    description: CVC failure amount
+test_cards_by_failure_code:
+  - failure_code: GENERIC_DECLINE
+    number: '4000000000009979'
+    brand: Visa
+  - failure_code: GENERIC_DECLINE
+    number: '378282246310005'
+    brand: American Express
+  - failure_code: GENERIC_DECLINE
+    number: '5555555555554444'
+    brand: Mastercard
+  - failure_code: GENERIC_DECLINE
+    number: '6011111111111117'
+    brand: Discover
+  - failure_code: CALL_ISSUER
+    number: '4012888888881881'
+    brand: Visa
+  - failure_code: CARD_NOT_ACTIVATED_OR_BLOCKED
+    number: '4539148803436467'
+    brand: Visa
+  - failure_code: DO_NOT_HONOR
+    number: '4000000000000002'
+    brand: Visa
+  - failure_code: EXCEEDS_APPROVAL_LIMIT
+    number: '4000000000009995'
+    brand: Visa
+  - failure_code: EXPIRED_CARD
+    number: '4000000000009987'
+    brand: Visa
+  - failure_code: FRAUD_DETECTED_BY_FINIX
+    number: '4129054449449482'
+    brand: Visa
+  - failure_code: FRAUD_DETECTED_BY_ISSUER
+    number: '4783512839773883'
+    brand: Visa
+  - failure_code: INSUFFICIENT_FUNDS
+    number: '4000000000000069'
+    brand: Visa
+  - failure_code: INVALID_CARD_NUMBER_OR_EXPIRED_CARD
+    number: '4544206329536898'
+    brand: Visa
+  - failure_code: INVALID_CVV
+    number: '4000056655665556'
+    brand: Visa
+  - failure_code: ISSUER_POLICY_VIOLATION
+    number: '4709247730212712'
+    brand: Visa
+  - failure_code: LOST_OR_STOLEN_CARD
+    number: '4000000000000127'
+    brand: Visa
+  - failure_code: PICK_UP_CARD
+    number: '4000000000000119'
+    brand: Visa
+  - failure_code: RESTRICTED_CARD
+    number: '4242424242424242'
+    brand: Visa
+network_token_state_cards:
+  - state: CLOSED
+    number: '4181126552690790'
+  - state: FAILED
+    number: '4281168227567010'
+  - state: SUSPENDED
+    number: '4220706972789265'
+name_verification_sentinels:
+  - first_name: Billy
+    last_name: NameVerification
+    result: MATCH
+  - first_name: Joey
+    last_name: NameVerification
+    result: NO_MATCH
+  - first_name: Sarah
+    last_name: NameVerification
+    result: PARTIAL_MATCH
+  - first_name: Amanda
+    last_name: NameVerification
+    result: NOT_SUPPORTED
+refund_test_cards:
+  - state: FAILED
+    number: '4000000000000135'
+    brand: Visa
+bank_account_validation:
+  - result: VALID
+    bank_code: '122105278'
+    account_number: '0000000016'
+  - result: INVALID
+    bank_code: '122105278'
+    account_number: '0000000005'
+  - result: INCONCLUSIVE
+    bank_code: '121000358'
+    account_number: '123123128'
+ach_return_test_accounts:
+  - ach_return_code: R01
+    failure_code: INSUFFICIENT_FUNDS
+    bank_code: '122105278'
+    account_number: '123120006'
+  - ach_return_code: R02
+    failure_code: BANK_ACCOUNT_CLOSED
+    bank_code: '122105278'
+    account_number: '123120007'
+  - ach_return_code: R03
+    failure_code: NO_BANK_ACCOUNT_FOUND
+    bank_code: '122105278'
+    account_number: '123120008'
+  - ach_return_code: R04
+    failure_code: INVALID_BANK_ACCOUNT_NUMBER
+    bank_code: '122105278'
+    account_number: '123120009'

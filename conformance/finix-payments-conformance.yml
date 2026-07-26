@@ -1,0 +1,46 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  openapi/finix-payments-openapi-original.yml +
+  https://docs.finix.com/guides/online-payments/payment-tokenization
+note: >-
+  Standards / cross-cutting conformance for the Finix API. Derived from the OpenAPI (security schemes,
+  error/pagination shapes) and searched from docs for published compliance posture.
+standards:
+  - id: http-basic-auth-rfc7617
+    conforms: true
+    evidence: OpenAPI securityScheme BasicAuth (http/basic); docs cite RFC 7617.
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 security scheme; authentication is API-key HTTP Basic.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a custom _embedded.errors[] envelope (code/logref/message), not application/problem+json.
+  - id: cursor-pagination
+    conforms: true
+    evidence: limit + after_cursor/before_cursor + page.next_cursor (docs).
+  - id: idempotency
+    conforms: true
+    evidence: idempotency_id body field on POST /transfers, /authorizations, /transfers/{id}/reversals.
+  - id: hal-hypermedia
+    conforms: true
+    evidence: Responses use HAL _embedded / _links envelope.
+  - id: webhooks
+    conforms: true
+    evidence: Documented webhook event catalog (asyncapi/finix-payments-webhooks.yml).
+  - id: pci-dss
+    conforms: true
+    evidence: Finix is a Level 1 PCI DSS certified payments platform (tokenization docs).
+  - id: emv
+    conforms: true
+    evidence: In-person EMV card-present support via Finix terminals (docs).
+  - id: 3d-secure
+    conforms: true
+    evidence: 3D Secure authentication supported for card-not-present transactions (docs).
+compliance:
+  program_published: true
+  certifications:
+    - PCI DSS Level 1
+  docs: https://docs.finix.com/guides/online-payments/payment-tokenization

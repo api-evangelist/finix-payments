@@ -1,0 +1,76 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/finix-payments + npm/PyPI/Maven Central/RubyGems
+note: >-
+  First-party Finix client libraries and mobile SDKs. Server SDKs are generated from the
+  Finix OpenAPI (version 2022-02-01). finix.js is a browser tokenization library loaded from
+  js.finix.com and is catalogued in components/ (not a registry package).
+packages:
+  - language: python
+    registry: pypi
+    name: finix
+    url: https://pypi.org/project/finix/
+    install: pip install finix
+    version: 5.0.0
+    source: https://github.com/finix-payments/finix-python
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@finix-payments/finix"
+    url: https://www.npmjs.com/package/@finix-payments/finix
+    install: npm install @finix-payments/finix
+    version: 3.0.1
+    source: https://github.com/finix-payments/finix-nodejs
+    official: true
+  - language: java
+    registry: maven
+    name: com.finix:finix-java
+    url: https://central.sonatype.com/artifact/com.finix/finix-java
+    install: "implementation 'com.finix:finix-java:1.0.0'"
+    version: 1.0.0
+    source: https://github.com/finix-payments/finix-java
+    official: true
+  - language: ruby
+    registry: rubygems
+    name: finix
+    url: https://rubygems.org/gems/finix
+    install: gem install finix
+    version: 1.0.1
+    official: true
+  - language: php
+    registry: null
+    name: finix-payments/processing-php-client
+    url: https://github.com/finix-payments/processing-php-client
+    install: "composer require finix/processing (source install)"
+    source: https://github.com/finix-payments/processing-php-client
+    official: true
+  - language: swift
+    registry: cocoapods
+    name: FinixPaymentSheet
+    url: https://github.com/finix-payments/FinixPaymentSheet
+    kind: mobile-tokenization
+    official: true
+    note: iOS payment-sheet / tokenization SDK for card + bank capture.
+  - language: kotlin
+    registry: maven
+    name: com.finix:finix-android-payment-sheet
+    url: https://central.sonatype.com/artifact/com.finix/finix-android-payment-sheet
+    version: 0.3.9
+    kind: mobile-tokenization
+    official: true
+    note: Android payment-sheet / tokenization SDK (Jetpack Compose).
+  - language: kotlin
+    registry: maven
+    name: com.finix:finix-android-terminal-sdk
+    url: https://central.sonatype.com/artifact/com.finix/finix-android-terminal-sdk
+    version: 1.0.1
+    kind: in-person-terminal
+    official: true
+    note: Android in-person / PAX terminal SDK.
+  - language: objective-c
+    registry: cocoapods
+    name: finix-pax-mpos-ios-sdk
+    url: https://github.com/finix-payments/finix-pax-mpos-ios-sdk
+    kind: in-person-terminal
+    official: true
+    note: iOS PAX mPOS in-person terminal SDK.

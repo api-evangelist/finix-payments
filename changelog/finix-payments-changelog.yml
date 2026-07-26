@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: searched
+source: https://finix.com/product-updates
+note: >-
+  Finix publishes two change surfaces: a product-updates page (product/feature releases) and an API
+  Changelog tied to dated API versions (Finix-Version header). Only the dated API versions are captured
+  here structurally; the product-updates page is the live source for feature releases.
+product_updates_url: https://finix.com/product-updates
+api_versioning:
+  scheme: date
+  header: Finix-Version
+  current: '2022-02-01'
+entries:
+  - version: '2022-02-01'
+    date: '2022-02-01'
+    breaking: true
+    highlights:
+      - Introduced cursor-based pagination (after_cursor/before_cursor + page.next_cursor) replacing offset pagination for improved query performance.
+  - version: '2018-01-01'
+    date: '2018-01-01'
+    breaking: false
+    highlights:
+      - Base API version. Requests without a valid Finix-Version header default to this version.

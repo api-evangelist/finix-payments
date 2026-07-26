@@ -1,0 +1,284 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: openapi/finix-payments-openapi-original.yml
+note: No official hosted Finix MCP server found as of this pass; this is a candidate tool surface derived one-to-one from
+  the Finix OpenAPI operations. Finix API uses HTTP Basic Auth (API key username:password).
+server:
+  name: finix
+  transport: stdio
+  auth: http-basic
+tools:
+- name: createAuthorization
+  description: Create an Authorization
+  source_operation: openapi/finix-payments-openapi-original.yml#createAuthorization
+- name: listAuthorizations
+  description: List Authorizations
+  source_operation: openapi/finix-payments-openapi-original.yml#listAuthorizations
+- name: getAuthorization
+  description: Fetch an Authorization
+  source_operation: openapi/finix-payments-openapi-original.yml#getAuthorization
+- name: captureAuthorization
+  description: Capture an Authorization
+  source_operation: openapi/finix-payments-openapi-original.yml#captureAuthorization
+- name: voidAuthorization
+  description: Void an Authorization
+  source_operation: openapi/finix-payments-openapi-original.yml#voidAuthorization
+- name: createBalanceTransfer
+  description: Create a Balance Transfer
+  source_operation: openapi/finix-payments-openapi-original.yml#createBalanceTransfer
+- name: listBalanceTransfers
+  description: List Balance Transfers
+  source_operation: openapi/finix-payments-openapi-original.yml#listBalanceTransfers
+- name: getBalanceTransfers
+  description: Fetch a Balance Transfer
+  source_operation: openapi/finix-payments-openapi-original.yml#getBalanceTransfers
+- name: updateDevice
+  description: Initiate Action on Device
+  source_operation: openapi/finix-payments-openapi-original.yml#updateDevice
+- name: getDevice
+  description: Fetch a Device
+  source_operation: openapi/finix-payments-openapi-original.yml#getDevice
+- name: getDeviceConnection
+  description: Check Device Connection
+  source_operation: openapi/finix-payments-openapi-original.yml#getDeviceConnection
+- name: listDisputes
+  description: List Disputes
+  source_operation: openapi/finix-payments-openapi-original.yml#listDisputes
+- name: getDispute
+  description: Fetch a Dispute
+  source_operation: openapi/finix-payments-openapi-original.yml#getDispute
+- name: updateDispute
+  description: Update a Dispute
+  source_operation: openapi/finix-payments-openapi-original.yml#updateDispute
+- name: createDisputeEvidence
+  description: Upload Files as Dispute Evidence
+  source_operation: openapi/finix-payments-openapi-original.yml#createDisputeEvidence
+- name: listDisputeEvidence
+  description: List Dispute Evidence
+  source_operation: openapi/finix-payments-openapi-original.yml#listDisputeEvidence
+- name: getDisputeEvidence
+  description: Fetch Dispute Evidence
+  source_operation: openapi/finix-payments-openapi-original.yml#getDisputeEvidence
+- name: updateDisputeEvidence
+  description: Update Dispute Evidence
+  source_operation: openapi/finix-payments-openapi-original.yml#updateDisputeEvidence
+- name: listFeeProfiles
+  description: List Fee Profiles
+  source_operation: openapi/finix-payments-openapi-original.yml#listFeeProfiles
+- name: createFeeProfile
+  description: Create a Fee Profile
+  source_operation: openapi/finix-payments-openapi-original.yml#createFeeProfile
+- name: getFeeProfile
+  description: Fetch a Fee Profile
+  source_operation: openapi/finix-payments-openapi-original.yml#getFeeProfile
+- name: createIdentity
+  description: Create an Identity
+  source_operation: openapi/finix-payments-openapi-original.yml#createIdentity
+- name: listIdentities
+  description: List Identities
+  source_operation: openapi/finix-payments-openapi-original.yml#listIdentities
+- name: getIdentity
+  description: Fetch an Identity
+  source_operation: openapi/finix-payments-openapi-original.yml#getIdentity
+- name: updateIdentity
+  description: Update an Identity
+  source_operation: openapi/finix-payments-openapi-original.yml#updateIdentity
+- name: createAssociatedIdentity
+  description: Create an Associated Identity
+  source_operation: openapi/finix-payments-openapi-original.yml#createAssociatedIdentity
+- name: listIdentityAssociatedIdentities
+  description: List Associated Identities
+  source_operation: openapi/finix-payments-openapi-original.yml#listIdentityAssociatedIdentities
+- name: createMerchant
+  description: Create a Merchant
+  source_operation: openapi/finix-payments-openapi-original.yml#createMerchant
+- name: createIdentitySettlement
+  description: Close Current Active Settlement
+  source_operation: openapi/finix-payments-openapi-original.yml#createIdentitySettlement
+- name: listMerchantProfiles
+  description: List Merchant Profiles
+  source_operation: openapi/finix-payments-openapi-original.yml#listMerchantProfiles
+- name: listMerchants
+  description: List Merchants
+  source_operation: openapi/finix-payments-openapi-original.yml#listMerchants
+- name: createMerchantDevice
+  description: Create a Device
+  source_operation: openapi/finix-payments-openapi-original.yml#createMerchantDevice
+- name: getMerchant
+  description: Fetch a Merchant
+  source_operation: openapi/finix-payments-openapi-original.yml#getMerchant
+- name: updateMerchant
+  description: Update a Merchant
+  source_operation: openapi/finix-payments-openapi-original.yml#updateMerchant
+- name: getMerchantProfile
+  description: Fetch a Merchant Profile
+  source_operation: openapi/finix-payments-openapi-original.yml#getMerchantProfile
+- name: updateMerchantProfile
+  description: Update a Merchant Profile
+  source_operation: openapi/finix-payments-openapi-original.yml#updateMerchantProfile
+- name: listMerchantVerifications
+  description: List Merchant Verifications
+  source_operation: openapi/finix-payments-openapi-original.yml#listMerchantVerifications
+- name: createMerchantVerification
+  description: Verify a Merchant
+  source_operation: openapi/finix-payments-openapi-original.yml#createMerchantVerification
+- name: createPaymentInstrument
+  description: Create a Payment Instrument
+  source_operation: openapi/finix-payments-openapi-original.yml#createPaymentInstrument
+- name: listPaymentInstruments
+  description: List Payment Instruments
+  source_operation: openapi/finix-payments-openapi-original.yml#listPaymentInstruments
+- name: getPaymentInstrument
+  description: Fetch a Payment Instrument
+  source_operation: openapi/finix-payments-openapi-original.yml#getPaymentInstrument
+- name: updatePaymentInstrument
+  description: Update a Payment Instrument
+  source_operation: openapi/finix-payments-openapi-original.yml#updatePaymentInstrument
+- name: listPaymentInstrumentVerifications
+  description: List Payment Instrument Verifications
+  source_operation: openapi/finix-payments-openapi-original.yml#listPaymentInstrumentVerifications
+- name: listSettlements
+  description: List All Settlements
+  source_operation: openapi/finix-payments-openapi-original.yml#listSettlements
+- name: getSettlement
+  description: Fetch a Settlement
+  source_operation: openapi/finix-payments-openapi-original.yml#getSettlement
+- name: closesettlements
+  description: Close a Settlement
+  source_operation: openapi/finix-payments-openapi-original.yml#closesettlements
+- name: listSettlementFundingTransfers
+  description: List Settlement Funding Transfers
+  source_operation: openapi/finix-payments-openapi-original.yml#listSettlementFundingTransfers
+- name: removeSettlementTransfers
+  description: Delete Settlement Transfers
+  source_operation: openapi/finix-payments-openapi-original.yml#removeSettlementTransfers
+- name: listSettlementTransfers
+  description: List all Transfers in a Settlement
+  source_operation: openapi/finix-payments-openapi-original.yml#listSettlementTransfers
+- name: createTransfer
+  description: Create a Transfer
+  source_operation: openapi/finix-payments-openapi-original.yml#createTransfer
+- name: listTransfers
+  description: List Transfers
+  source_operation: openapi/finix-payments-openapi-original.yml#listTransfers
+- name: getTransfer
+  description: Fetch a Transfer
+  source_operation: openapi/finix-payments-openapi-original.yml#getTransfer
+- name: updateTransfer
+  description: Update a Transfer
+  source_operation: openapi/finix-payments-openapi-original.yml#updateTransfer
+- name: createTransferReversal
+  description: Refund or Reverse a Transfer
+  source_operation: openapi/finix-payments-openapi-original.yml#createTransferReversal
+- name: listTransferReversals
+  description: List Reversals on a Transfer
+  source_operation: openapi/finix-payments-openapi-original.yml#listTransferReversals
+- name: createVerification
+  description: Create a Merchant Verification
+  source_operation: openapi/finix-payments-openapi-original.yml#createVerification
+- name: listVerifications
+  description: List Verifications
+  source_operation: openapi/finix-payments-openapi-original.yml#listVerifications
+- name: getVerification
+  description: Fetch a Verification
+  source_operation: openapi/finix-payments-openapi-original.yml#getVerification
+- name: createWebhook
+  description: Create a Webhook
+  source_operation: openapi/finix-payments-openapi-original.yml#createWebhook
+- name: listWebhooks
+  description: List Webhooks
+  source_operation: openapi/finix-payments-openapi-original.yml#listWebhooks
+- name: getWebhook
+  description: Fetch a Webhook
+  source_operation: openapi/finix-payments-openapi-original.yml#getWebhook
+- name: updateWebhook
+  description: Update a Webhook
+  source_operation: openapi/finix-payments-openapi-original.yml#updateWebhook
+- name: createPaymentInstrumentUpdate
+  description: Create Instrument Updates
+  source_operation: openapi/finix-payments-openapi-original.yml#createPaymentInstrumentUpdate
+- name: downloadInstrumentUpdate
+  description: Download Instrument Updates
+  source_operation: openapi/finix-payments-openapi-original.yml#downloadInstrumentUpdate
+- name: createFiles
+  description: Create a File
+  source_operation: openapi/finix-payments-openapi-original.yml#createFiles
+- name: listFiles
+  description: List All Files
+  source_operation: openapi/finix-payments-openapi-original.yml#listFiles
+- name: getFile
+  description: Fetch a File
+  source_operation: openapi/finix-payments-openapi-original.yml#getFile
+- name: listExternalLinks
+  description: List All External Links
+  source_operation: openapi/finix-payments-openapi-original.yml#listExternalLinks
+- name: createExternalLink
+  description: Create an External Link
+  source_operation: openapi/finix-payments-openapi-original.yml#createExternalLink
+- name: uploadFile
+  description: Upload files Directly
+  source_operation: openapi/finix-payments-openapi-original.yml#uploadFile
+- name: downloadFile
+  description: Download a File
+  source_operation: openapi/finix-payments-openapi-original.yml#downloadFile
+- name: getExternalLink
+  description: Fetch an External LInk
+  source_operation: openapi/finix-payments-openapi-original.yml#getExternalLink
+- name: createApplePaySession
+  description: Create an Apple Pay Session
+  source_operation: openapi/finix-payments-openapi-original.yml#createApplePaySession
+- name: listDisputesAdjustments
+  description: Fetch Dispute Adjustment Transfers
+  source_operation: openapi/finix-payments-openapi-original.yml#listDisputesAdjustments
+- name: getInstrumentUpdate
+  description: Fetch an Instrument Update
+  source_operation: openapi/finix-payments-openapi-original.yml#getInstrumentUpdate
+- name: get
+  description: Fetch a Compliance Form
+  source_operation: openapi/finix-payments-openapi-original.yml#get
+- name: updateComplianceForms
+  description: Complete a Compliance Form
+  source_operation: openapi/finix-payments-openapi-original.yml#updateComplianceForms
+- name: listComplianceForms
+  description: List Compliance Forms
+  source_operation: openapi/finix-payments-openapi-original.yml#listComplianceForms
+- name: createOnboardingForm
+  description: Create an Onboarding Form
+  source_operation: openapi/finix-payments-openapi-original.yml#createOnboardingForm
+- name: getOnboardingForm
+  description: Fetch an Onboarding Form
+  source_operation: openapi/finix-payments-openapi-original.yml#getOnboardingForm
+- name: createOnboardingFormLink
+  description: Create an Onboarding Form Link
+  source_operation: openapi/finix-payments-openapi-original.yml#createOnboardingFormLink
+- name: listPayoutprofiles
+  description: List Payout Profiles
+  source_operation: openapi/finix-payments-openapi-original.yml#listPayoutprofiles
+- name: getPayoutprofile
+  description: Fetch a Payout Profile
+  source_operation: openapi/finix-payments-openapi-original.yml#getPayoutprofile
+- name: updatePayoutProfileRequest
+  description: Update a Payout Profile
+  source_operation: openapi/finix-payments-openapi-original.yml#updatePayoutProfileRequest
+- name: fetchPayoutProfilesbyMerchant
+  description: Fetch Payout Profile by Merchant
+  source_operation: openapi/finix-payments-openapi-original.yml#fetchPayoutProfilesbyMerchant
+- name: submitDisputeEvidence
+  description: Submit Dispute Evidence
+  source_operation: openapi/finix-payments-openapi-original.yml#submitDisputeEvidence
+- name: acceptDispute
+  description: Accept a Dispute
+  source_operation: openapi/finix-payments-openapi-original.yml#acceptDispute
+- name: downloadDisputeEvidence
+  description: Download Dispute Evidence
+  source_operation: openapi/finix-payments-openapi-original.yml#downloadDisputeEvidence
+- name: getSplitTransfer
+  description: Fetch a Split Transfer
+  source_operation: openapi/finix-payments-openapi-original.yml#getSplitTransfer
+- name: getSplitTransferFees
+  description: Fetch Split Transfer Fees
+  source_operation: openapi/finix-payments-openapi-original.yml#getSplitTransferFees
+- name: listSplitTransfer
+  description: List Split Transfers
+  source_operation: openapi/finix-payments-openapi-original.yml#listSplitTransfer

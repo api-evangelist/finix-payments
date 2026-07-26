@@ -1,0 +1,25 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/versioning
+versioning:
+  scheme: header-dated
+  header: Finix-Version
+  current: '2022-02-01'
+  base: '2018-01-01'
+  docs: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/versioning
+  note: >-
+    Breaking changes ship as a new dated version selected via the Finix-Version header (exact date required).
+    Non-breaking changes are made in place and include new resources, new enum values, new optional request
+    fields, new response fields, and ID length/format changes (IDs never exceed 255 characters).
+deprecation:
+  policy_url: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/versioning
+  sunset_header: false
+  detail: >-
+    failure_codes never change without advance notice; failure_messages may change. Breaking changes are
+    isolated behind a new dated API version rather than removing behavior from an existing version.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.finix.com
+changelog: https://finix.com/product-updates
+deprecated_operations: []

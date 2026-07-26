@@ -1,0 +1,35 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.finix.com/guides/online-payments/payment-tokenization
+note: >-
+  Client-side / embeddable Finix surfaces, distinct from the server SDKs in packages/. finix.js is the
+  browser tokenization library; hosted surfaces (Checkout Pages, Payment Links) are no/low-code prebuilt UIs.
+components:
+  - family: finix.js (Tokenization Forms)
+    kind: web-component / js-library
+    loader: https://js.finix.com/v/2/finix.js
+    versions: [v1, v2]
+    description: >-
+      Browser JavaScript library that renders PCI-compliant tokenization forms (iframe-isolated) to collect
+      card and bank-account details and exchange them for tokens without the raw data touching your servers.
+    docs: https://docs.finix.com/guides/online-payments/payment-tokenization/tokenization-forms
+  - family: Fraud Detection (Session) Library
+    kind: js-library
+    description: JavaScript library added to your site to track buyer sessions and feed the Fraud Detection API.
+    docs: https://docs.finix.com/guides/online-payments/fraud-and-risk/fraud-detection
+  - family: Hosted Checkout Pages
+    kind: hosted-ui
+    description: Secure hosted checkout page for accepting online card and ACH payments with a low-code integration.
+    docs: https://docs.finix.com/guides/online-payments/checkout-pages
+  - family: Payment Links
+    kind: hosted-ui / no-code
+    description: No-code shareable payment links to accept card and ACH payments without a website.
+    docs: https://finix.com/payment-links
+  - family: FinixPaymentSheet (iOS)
+    kind: mobile-ui
+    description: Native iOS payment sheet SDK for tokenizing card and bank details in-app.
+    docs: https://docs.finix.com/guides/online-payments/payment-tokenization/mobile-tokenization-ios
+  - family: Android Payment Sheet
+    kind: mobile-ui
+    description: Native Android (Jetpack Compose) payment sheet SDK for in-app tokenization.
+    docs: https://docs.finix.com/guides/online-payments/payment-tokenization/mobile-tokenization-android

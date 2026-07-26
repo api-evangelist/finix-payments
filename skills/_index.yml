@@ -1,0 +1,17 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/finix-payments-openapi-original.yml
+note: Agent Skills grounded in verified Finix operationIds, one per marquee flow.
+skills:
+  - file: finix-payments-accept-a-card-payment.md
+    name: Accept a card payment with Finix
+    api: openapi/finix-payments-openapi-original.yml
+    operations: [createIdentity, createPaymentInstrument, createAuthorization, captureAuthorization, createTransfer]
+  - file: finix-payments-refund-a-payment.md
+    name: Refund a Finix payment
+    api: openapi/finix-payments-openapi-original.yml
+    operations: [getTransfer, createTransferReversal, listTransferReversals]
+  - file: finix-payments-onboard-a-merchant.md
+    name: Onboard a seller/merchant with Finix
+    api: openapi/finix-payments-openapi-original.yml
+    operations: [createIdentity, createMerchant, createMerchantVerification, getMerchant, listMerchantVerifications]

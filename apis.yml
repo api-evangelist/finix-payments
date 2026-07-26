@@ -1,27 +1,326 @@
 aid: finix-payments
 name: Finix Payments
-description: 'Finix Payments is a company surfaced as a portfolio company of insight-partners and added
-  to the API Evangelist network as a stub for enrichment. Sector: payments. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  Finix is a full-stack payments technology provider that lets businesses, software platforms, and
+  marketplaces accept and send payments online and in person. Its REST API (version 2022-02-01) covers the
+  full payments lifecycle — Identities, Merchants, Payment Instruments, Authorizations, Transfers,
+  Settlements, Disputes, Verifications, Fee/Payout Profiles, Devices/terminals, and Webhooks — enabling
+  card, ACH, EFT, digital-wallet, and Buy-Now-Pay-Later acceptance, seller onboarding/underwriting, split
+  transfers, payouts, and payment facilitation (PayFac-as-a-service). Finix is a Level 1 PCI DSS certified
+  platform with browser (finix.js) and mobile tokenization SDKs, hosted checkout pages, and payment links.
+  Authentication is HTTP Basic Auth with environment-scoped API keys; the API uses cursor pagination,
+  idempotency_id request-level idempotency, HAL responses, and dated versioning via the Finix-Version header.
 url: https://raw.githubusercontent.com/api-evangelist/finix-payments/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://images.ctfassets.net/kqru4vgwujx6/3dBfyfPS31FWqFPTwf4dRv/417cc8b5e94029726cffb9aa85230111/OG_Image.png?w=1200&q=90
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - insight-partners
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: openapi-and-docs-harvested
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Payments
-apis: []
+- Payment Processing
+- Payment Facilitation
+- Embedded Finance
+- Marketplaces
+- ACH
+- Card Acceptance
+- Fintech
+- PCI DSS
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: finix-payments:finix-payments-authorizations-api
+  name: Finix Payments Authorizations API
+  description: '{''$ref'': ''api-descriptions/tags/authorizations.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Authorizations
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-authorizations-api-openapi.yml
+- aid: finix-payments:finix-payments-balance-transfers-api
+  name: Finix Payments Balance Transfers API
+  description: '{''$ref'': ''api-descriptions/tags/balance-transfers.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Balance Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-balance-transfers-api-openapi.yml
+- aid: finix-payments:finix-payments-compliance-forms-api
+  name: Finix Payments Compliance Forms API
+  description: '{''$ref'': ''api-descriptions/tags/compliance-forms.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Compliance Forms
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-compliance-forms-api-openapi.yml
+- aid: finix-payments:finix-payments-devices-api
+  name: Finix Payments Devices API
+  description: '{''$ref'': ''api-descriptions/tags/devices.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-devices-api-openapi.yml
+- aid: finix-payments:finix-payments-disputes-api
+  name: Finix Payments Disputes API
+  description: '{''$ref'': ''api-descriptions/tags/disputes.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Disputes
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-disputes-api-openapi.yml
+- aid: finix-payments:finix-payments-fee-profiles-api
+  name: Finix Payments Fee Profiles API
+  description: '{''$ref'': ''api-descriptions/tags/fee-profiles.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Fee Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-fee-profiles-api-openapi.yml
+- aid: finix-payments:finix-payments-files-api
+  name: Finix Payments Files API
+  description: '{''$ref'': ''api-descriptions/tags/files.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-files-api-openapi.yml
+- aid: finix-payments:finix-payments-identities-api
+  name: Finix Payments Identities API
+  description: '{''$ref'': ''api-descriptions/tags/identities.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Identities
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-identities-api-openapi.yml
+- aid: finix-payments:finix-payments-instrument-updates-api
+  name: Finix Payments Instrument Updates API
+  description: '{''$ref'': ''api-descriptions/tags/instrument-updates.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Instrument Updates
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-instrument-updates-api-openapi.yml
+- aid: finix-payments:finix-payments-merchant-profiles-api
+  name: Finix Payments Merchant Profiles API
+  description: '{''$ref'': ''api-descriptions/tags/merchant-profiles.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Merchant Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-merchant-profiles-api-openapi.yml
+- aid: finix-payments:finix-payments-merchants-api
+  name: Finix Payments Merchants API
+  description: '{''$ref'': ''api-descriptions/tags/merchants.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Merchants
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-merchants-api-openapi.yml
+- aid: finix-payments:finix-payments-onboarding-forms-api
+  name: Finix Payments Onboarding Forms API
+  description: '{''$ref'': ''api-descriptions/tags/onboarding-forms.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Onboarding Forms
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-onboarding-forms-api-openapi.yml
+- aid: finix-payments:finix-payments-payment-instruments-api
+  name: Finix Payments Payment Instruments API
+  description: '{''$ref'': ''api-descriptions/tags/payment-instruments.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Payment Instruments
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-payment-instruments-api-openapi.yml
+- aid: finix-payments:finix-payments-payout-profiles-api
+  name: Finix Payments Payout Profiles API
+  description: '{''$ref'': ''api-descriptions/tags/payout-profiles.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Payout Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-payout-profiles-api-openapi.yml
+- aid: finix-payments:finix-payments-settlements-api
+  name: Finix Payments Settlements API
+  description: '{''$ref'': ''api-descriptions/tags/settlements.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Settlements
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-settlements-api-openapi.yml
+- aid: finix-payments:finix-payments-split-transfers-api
+  name: Finix Payments Split Transfers API
+  description: '{''$ref'': ''api-descriptions/tags/split-transfers.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Split Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-split-transfers-api-openapi.yml
+- aid: finix-payments:finix-payments-transfers-api
+  name: Finix Payments Transfers API
+  description: '{''$ref'': ''api-descriptions/tags/transfers.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-transfers-api-openapi.yml
+- aid: finix-payments:finix-payments-verifications-api
+  name: Finix Payments Verifications API
+  description: '{''$ref'': ''api-descriptions/tags/verifications.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Verifications
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-verifications-api-openapi.yml
+- aid: finix-payments:finix-payments-webhooks-api
+  name: Finix Payments Webhooks API
+  description: '{''$ref'': ''api-descriptions/tags/webhooks.md''}'
+  humanURL: https://finix.com/docs/api
+  baseURL: https://finix.live-payments-api.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/finix-payments-webhooks-api-openapi.yml
 common:
+# --- link properties (identity / discoverability) ---
 - type: Website
   url: https://www.finixpayments.com/
+- type: DeveloperPortal
+  url: https://docs.finix.com/
+- type: Documentation
+  url: https://docs.finix.com/
+- type: APIReference
+  url: https://finix.com/docs/api
+- type: GettingStarted
+  url: https://docs.finix.com/guides/getting-started
+- type: Support
+  url: https://docs.finix.com/guides/getting-started/support-at-finix
+- type: Blog
+  url: https://finix.com/resources/blogs
+- type: GitHubOrganization
+  url: https://github.com/finix-payments
+- type: Pricing
+  url: https://finix.com/pricing
+- type: SignUp
+  url: https://dashboard.finixpayments.com
+- type: TermsOfService
+  url: https://finix.com/terms-and-policies
+- type: PrivacyPolicy
+  url: https://finix.com/terms-and-policies
+- type: StatusPage
+  url: https://status.finix.com
+# --- artifacts ---
+- type: Packages
+  url: packages/finix-payments-packages.yml
+- type: SDKs
+  url: packages/finix-payments-packages.yml
+- type: Authentication
+  url: authentication/finix-payments-authentication.yml
+- type: Conventions
+  url: conventions/finix-payments-conventions.yml
+- type: Idempotency
+  url: conventions/finix-payments-conventions.yml
+- type: RateLimits
+  url: rate-limits/finix-payments-rate-limits.yml
+- type: ErrorCatalog
+  url: errors/finix-payments-problem-types.yml
+- type: DeclineCodes
+  url: errors/finix-payments-decline-codes.yml
+- type: Lifecycle
+  url: lifecycle/finix-payments-lifecycle.yml
+- type: Deprecation
+  url: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/versioning
+- type: ChangeLog
+  url: changelog/finix-payments-changelog.yml
+- type: Sandbox
+  url: sandbox/finix-payments-sandbox.yml
+- type: Components
+  url: components/finix-payments-components.yml
+- type: DataModel
+  url: data-model/finix-payments-data-model.yml
+- type: Conformance
+  url: conformance/finix-payments-conformance.yml
+- type: Compliance
+  url: conformance/finix-payments-conformance.yml
+- type: Webhooks
+  url: asyncapi/finix-payments-webhooks.yml
+- type: MCPServer
+  url: mcp/finix-payments-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/finix-payments-agentic-access.yml
+- type: LLMsTxt
+  url: llms/finix-payments-llms.txt
+- type: DomainSecurity
+  url: security/finix-payments-domain-security.yml
+- type: Arazzo
+  name: Accept a card payment (auth + capture)
+  url: arazzo/finix-payments-accept-a-card-payment.yml
+- type: Arazzo
+  name: Onboard a seller/merchant
+  url: arazzo/finix-payments-onboard-a-merchant.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

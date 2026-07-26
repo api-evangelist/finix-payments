@@ -1,0 +1,127 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/finix-payments-openapi-original.yml
+note: >-
+  Entity-relationship graph derived from the Finix OpenAPI schemas (id-reference fields on each resource).
+  id-prefixes captured from Finix docs examples where observed.
+entities:
+  - name: Identity
+    id_prefix: ID
+    description: A person or business (buyer, seller/merchant, recipient). Root of onboarding.
+  - name: Merchant
+    id_prefix: MU
+    description: An underwritten Identity provisioned to process payments.
+  - name: MerchantProfile
+    description: Processing/config profile attached during merchant creation.
+  - name: PaymentInstrument
+    id_prefix: PI
+    description: A tokenized card or bank account belonging to an Identity.
+  - name: Authorization
+    id_prefix: AU
+    description: A hold placed on a PaymentInstrument, later captured into a Transfer.
+  - name: Transfer
+    id_prefix: TR
+    description: A movement of funds (debit, credit, refund/reversal) for a Merchant.
+  - name: Settlement
+    description: A batch of Transfers to be paid out to a Merchant/Identity.
+  - name: Dispute
+    description: A chargeback raised against a Transfer.
+  - name: Verification
+    description: A verification run against a Merchant or PaymentInstrument.
+  - name: Device
+    description: A physical in-person payment terminal linked to a Merchant.
+  - name: FeeProfile
+    description: Fee configuration applied to a Merchant.
+  - name: PayoutProfile
+    description: Payout settings for a Merchant.
+  - name: Webhook
+    description: A subscription endpoint receiving event notifications.
+  - name: File
+    description: An uploaded document (e.g. dispute evidence, onboarding).
+  - name: OnboardingForm
+    description: A hosted seller onboarding form.
+  - name: ComplianceForm
+    description: A PCI/compliance attestation form.
+  - name: SplitTransfer
+    description: A portion of a Transfer routed to a seller Merchant in marketplaces.
+relationships:
+  - from: Merchant
+    to: Identity
+    type: belongs_to
+    via: identity
+  - from: Merchant
+    to: MerchantProfile
+    type: has_one
+    via: merchant_profile
+  - from: PaymentInstrument
+    to: Identity
+    type: belongs_to
+    via: identity
+  - from: Authorization
+    to: Merchant
+    type: belongs_to
+    via: merchant
+  - from: Authorization
+    to: PaymentInstrument
+    type: belongs_to
+    via: source
+  - from: Authorization
+    to: Transfer
+    type: has_one
+    via: transfer
+  - from: Authorization
+    to: Device
+    type: belongs_to
+    via: device
+  - from: Transfer
+    to: Merchant
+    type: belongs_to
+    via: merchant
+  - from: Transfer
+    to: PaymentInstrument
+    type: belongs_to
+    via: source
+  - from: Transfer
+    to: PaymentInstrument
+    type: belongs_to
+    via: destination
+  - from: Transfer
+    to: Transfer
+    type: has_many
+    via: reversals
+  - from: Settlement
+    to: Identity
+    type: belongs_to
+    via: identity
+  - from: Settlement
+    to: Transfer
+    type: has_many
+    via: transfers
+  - from: Dispute
+    to: Transfer
+    type: belongs_to
+    via: transfer
+  - from: Dispute
+    to: Merchant
+    type: belongs_to
+    via: merchant
+  - from: Dispute
+    to: File
+    type: has_many
+    via: evidence
+  - from: Verification
+    to: Merchant
+    type: belongs_to
+    via: merchant
+  - from: Verification
+    to: PaymentInstrument
+    type: belongs_to
+    via: payment_instrument
+  - from: Device
+    to: Merchant
+    type: belongs_to
+    via: merchant
+  - from: PayoutProfile
+    to: Merchant
+    type: belongs_to
+    via: merchant

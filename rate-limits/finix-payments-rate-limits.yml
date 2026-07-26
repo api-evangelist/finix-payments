@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/rate-limits
+note: >-
+  Finix enforces per-second rate limits in the Live environment. Sandbox limits exist but are not publicly
+  documented. Custom limits are available for high-traffic applications via a Finix point of contact.
+exceed_status: 429
+exceed_code: TOO_MANY_REQUESTS
+strategy: [exponential-backoff, response-caching, prefer-webhooks-over-polling]
+rate_limits:
+  - environment: live
+    operation: writes
+    limit_count: 100
+    window: second
+  - environment: live
+    operation: reads
+    limit_count: 100
+    window: second
+  - environment: sandbox
+    operation: reads-and-writes
+    limit_count: null
+    window: second
+    note: enforced but not publicly documented

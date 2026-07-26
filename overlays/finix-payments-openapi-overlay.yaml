@@ -1,0 +1,34 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Finix API
+  version: 1.0.0
+extends: openapi/finix-payments-openapi-original.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-19'
+      x-api-style: rest-hal
+      x-auth-style: http-basic
+      x-idempotency:
+        field: idempotency_id
+        scope: [POST /transfers, POST /authorizations, "POST /transfers/{id}/reversals"]
+      x-pagination:
+        style: cursor
+        params: [limit, after_cursor, before_cursor]
+        response: [page.next_cursor]
+        max_page_size: 100
+      x-versioning:
+        header: Finix-Version
+        current: '2022-02-01'
+      x-rate-limit:
+        live: 100/s reads, 100/s writes
+        status: 429
+      x-error-envelope: _embedded.errors[] (code, logref, message); declines add failure_code + failure_message
+      x-compliance: [PCI DSS Level 1]
+      x-webhooks: asyncapi/finix-payments-webhooks.yml
+  - target: $.servers
+    update:
+      - url: https://finix.sandbox-payments-api.com
+        description: Sandbox
+      - url: https://finix.live-payments-api.com
+        description: Live

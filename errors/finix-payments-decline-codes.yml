@@ -1,0 +1,186 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.finix.com/additional-resources/developers/implementation-and-testing/failure-codes
+note: >-
+  When a Transfer or Authorization is declined, Finix returns failure_code (stable, never changes without
+  advance notice) and failure_message (human-readable, may change) on the resource. Codes marked disables_instrument
+  will disable the Payment Instrument. Complements errors/finix-payments-problem-types.yml (API-level HTTP errors).
+envelope:
+  fields: [failure_code, failure_message]
+  location: Transfer / Authorization resource (also surfaced in _embedded.errors[] with code DECLINED)
+masked_to_buyers:
+  - LOST_OR_STOLEN_CARD   # docs instruct returning a generic decline to cardholders instead
+decline_codes:
+  - code: ADDRESS_VERIFICATION_FAILED_RISK_RULES
+    meaning: Merchant Risk Rules declined the transaction on AVS.
+    action: Cardholder must use a card with the correct billing address.
+  - code: ALLOWABLE_NUMBER_OF_PIN_ENTRY_TRIES_EXCEEDED
+    meaning: Maximum PIN entry attempts exceeded.
+    action: Use another payment method.
+  - code: AUTHORIZATION_EXPIRED_OR_ALREADY_CAPTURED
+    meaning: Authorization is expired or already captured.
+    action: Create a new authorization.
+  - code: BANK_ACCOUNT_CLOSED
+    meaning: The bank account has been closed.
+    action: Obtain another active payment method.
+  - code: BANK_ACCOUNT_FROZEN
+    meaning: The bank account is frozen.
+    action: Obtain another payment method.
+  - code: CALL_ISSUER
+    meaning: Declined for an unknown reason.
+    action: Cardholder should contact their issuer.
+  - code: CANCELLATION_VIA_API
+    meaning: Transaction canceled via API before completion.
+    action: Reattempt the transaction.
+  - code: CANCELLATION_VIA_DEVICE
+    meaning: Cancel pressed on the device before completion.
+    action: Reattempt the transaction.
+  - code: CARD_ACCOUNT_CLOSED
+    meaning: The card account has been closed.
+    action: Use an active card.
+    disables_instrument: true
+  - code: CARD_NETWORK_ERROR
+    meaning: Problem with the card network.
+    action: Contact the network.
+  - code: CARD_NOT_ACTIVATED_OR_BLOCKED
+    meaning: Card not activated or temporarily blocked.
+    action: Cardholder activates card or contacts issuer.
+  - code: CARD_NOT_SUPPORTED
+    meaning: Card does not support this purchase type.
+    action: Cardholder contacts issuer.
+  - code: CARDHOLDER_PREVENTED_RECURRING_TRANSACTION
+    meaning: Cardholder requested recurring/installment be stopped.
+    action: Stop the recurring transaction.
+  - code: COMMUNICATION_ERROR
+    meaning: Network communication error with the host.
+    action: Check connection and retry.
+  - code: CVV_FAILED_RISK_RULES
+    meaning: Merchant Risk Rules declined on CVV.
+    action: Cardholder must use the correct CVV.
+  - code: DEVICE_IN_USE
+    meaning: Device is currently processing a request.
+    action: Retry once complete or within 6 minutes.
+  - code: DEVICE_NOT_CONNECTED
+    meaning: Terminal is not connected to a network.
+    action: Connect the terminal and reattempt.
+  - code: DEVICE_UNREACHABLE
+    meaning: API could not communicate with the device.
+    action: Try again.
+  - code: DO_NOT_HONOR
+    meaning: Declined for an unknown reason.
+    action: Cardholder contacts issuer.
+  - code: DUPLICATE_TRANSACTION
+    meaning: Same amount and card approved recently, flagged as duplicate.
+    action: If intentional, set check_for_duplicate_transactions to false.
+  - code: EXCEEDED_CARDHOLDER_INPUT_TIME_LIMIT
+    meaning: Card not swiped/tapped/dipped in time.
+    action: Reattempt the transaction.
+  - code: EXCEEDS_APPROVAL_LIMIT
+    meaning: Exceeded the daily approval limit for the card.
+    action: Use a different card.
+  - code: EXCEEDS_WITHDRAWAL_FREQUENCY_LIMIT
+    meaning: Card exceeded its withdrawal frequency limit.
+    action: Use a different card.
+  - code: EXPIRED_CARD
+    meaning: The card has expired.
+    action: Use a non-expired card.
+  - code: FRAUD_DETECTED
+    meaning: Declined for fraud by the processor.
+    action: Cardholder contacts issuer.
+  - code: FRAUD_DETECTED_BY_FINIX
+    meaning: Declined for suspected fraud by Finix.
+    action: Contact Finix.
+  - code: FRAUD_DETECTED_BY_ISSUER
+    meaning: Declined for suspected fraud by the issuing bank.
+    action: Cardholder contacts issuer.
+  - code: GENERIC_DECLINE
+    meaning: Declined for an unknown reason.
+    action: Cardholder contacts issuer.
+  - code: INACTIVE_CARD
+    meaning: The card is inactive.
+    action: Activate the card or use an active one.
+  - code: INCOMPLETE_TRANSACTION
+    meaning: Transaction not completed by the cardholder.
+    action: Reattempt the transaction.
+  - code: INSUFFICIENT_FUNDS
+    meaning: Account has insufficient funds.
+    action: Use another payment method.
+  - code: INVALID_ACCOUNT_NUMBER
+    meaning: Card number is not valid.
+    action: Cardholder contacts issuer or uses another card.
+    disables_instrument: true
+  - code: INVALID_AMOUNT
+    meaning: Amount exceeds what is allowed on the card.
+    action: Cardholder checks with issuer.
+  - code: INVALID_BANK_ACCOUNT_NUMBER
+    meaning: Bank account number is not valid.
+    action: Use a valid account number.
+  - code: INVALID_BANK_ACCOUNT_VALIDATION_CHECK
+    meaning: Routing number no longer valid.
+    action: Verify routing/account or use another bank account.
+  - code: INVALID_CARD
+    meaning: The card is invalid.
+    action: Use another card.
+  - code: INVALID_CARD_NUMBER_OR_EXPIRED_CARD
+    meaning: Issuer indicates the card number is invalid/closed or expiration invalid.
+    action: Use a valid card.
+  - code: INVALID_CVV
+    meaning: The CVV number is invalid.
+    action: Reattempt with the correct CVV.
+  - code: INVALID_ISSUER
+    meaning: Card number not associated with a valid issuing bank.
+    action: Cardholder contacts issuer.
+  - code: INVALID_ROUTING_NUMBER
+    meaning: Bank routing number provided is invalid.
+    action: Provide a valid routing number.
+  - code: INVALID_TRANSACTION
+    meaning: Transaction not permitted by the issuing bank.
+    action: Cardholder contacts issuer.
+  - code: ISSUER_POLICY_VIOLATION
+    meaning: Issuing bank internal rule prevents the transaction (MCC/account/country restrictions).
+    action: Cardholder contacts issuer.
+  - code: LOST_OR_STOLEN_CARD
+    meaning: Card reported lost or stolen.
+    action: Do not surface to cardholder; return a generic decline instead.
+    disables_instrument: true
+  - code: MAX_TRANSACTION_AMOUNT_EXCEEDED
+    meaning: Exceeded the Merchant max transaction amount.
+    action: Reprovision merchant with higher max or lower the amount.
+  - code: NO_BANK_ACCOUNT_FOUND
+    meaning: Account number valid but does not match holder or is not open.
+    action: Reenter correct details.
+  - code: NON_TRANSACTION_ACCOUNT
+    meaning: Non-transaction account that limits/prevents transactions.
+    action: Request permission to charge a different bank account.
+  - code: PAYMENT_STOPPED
+    meaning: Customer stopped the payment with their bank.
+    action: Contact the customer to arrange payment.
+  - code: PICK_UP_CARD
+    meaning: Card reported lost or stolen by the cardholder.
+    action: Cardholder contacts issuer.
+    disables_instrument: true
+  - code: RESTRICTED_CARD
+    meaning: Card has a restriction preventing approval.
+    action: Contact issuing bank for the specific reason.
+  - code: RESUBMIT_TRANSACTION
+    meaning: Issuer could not process for an unknown reason.
+    action: Reattempt; if declined again, cardholder contacts issuer.
+  - code: TRANSACTION_NOT_PERMITTED
+    meaning: Card or transaction type is not permitted.
+    action: Use a different card or transaction method.
+ach_return_codes:
+  - return_code: R01
+    failure_code: INSUFFICIENT_FUNDS
+    meaning: Insufficient Funds
+  - return_code: R02
+    failure_code: BANK_ACCOUNT_CLOSED
+    meaning: Account is Closed
+  - return_code: R03
+    failure_code: NO_BANK_ACCOUNT_FOUND
+    meaning: No account on file
+  - return_code: R04
+    failure_code: INVALID_BANK_ACCOUNT_NUMBER
+    meaning: Invalid Account Number
+push_to_card_note: >-
+  Push-to-Card returns a separate set of error values on the messages attribute (e.g. CANNOT_VERIFY_PIN,
+  CARD_AUTHENTICATION_FAILED, EXCEEDS_APPROVAL_AMOUNT_LIMIT, NOT_SUFFICIENT_FUNDS). See failure-codes docs.

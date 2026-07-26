@@ -1,0 +1,25 @@
+generated: '2026-07-19'
+method: searched
+source: live probes of finix.com + API hosts
+note: >-
+  Probed the standard /.well-known/ discovery surface on the Finix website and API hosts. No discovery
+  documents are published (website returns 404; API hosts require auth and return 401). Recorded for
+  auditability; no WellKnown/SecurityTxt pointer is emitted because nothing was found.
+hosts:
+  - host: https://finix.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+  - host: https://www.finixpayments.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+  - host: https://finix.sandbox-payments-api.com
+    documents:
+      - {path: /.well-known/security.txt, status: 401}
+      - {path: /.well-known/openid-configuration, status: 401}
+  - host: https://finix.live-payments-api.com
+    documents:
+      - {path: /.well-known/security.txt, status: 401}

@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/finix-payments-openapi-original.yml
+workflows:
+  - file: finix-payments-accept-a-card-payment.yml
+    workflowId: acceptCardPayment
+    title: Accept a card payment (auth + capture)
+    summary: Create a buyer Identity, tokenize a card, authorize, then capture into a Transfer.
+  - file: finix-payments-onboard-a-merchant.yml
+    workflowId: onboardMerchant
+    title: Onboard a seller/merchant
+    summary: Create a seller Identity, provision a Merchant, and run verification/underwriting.

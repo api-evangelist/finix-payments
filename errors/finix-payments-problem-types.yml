@@ -1,0 +1,79 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.finix.com/additional-resources/developers/implementation-and-testing/error-codes
+format: custom
+note: Finix does NOT use RFC 9457 problem+json. Errors return an object with an _embedded.errors[] array; each error carries
+  code, logref (unique request/response id), and message. HAL _links.self points at the resource. Transfer/Authorization declines
+  additionally carry failure_code + failure_message (see decline codes artifact).
+envelope:
+  container: _embedded.errors[]
+  fields:
+  - code
+  - logref
+  - message
+  - _links.self.href
+  decline_fields:
+  - failure_code
+  - failure_message
+  - authorization
+spec_error_statuses:
+- '400'
+- '401'
+- '402'
+- '403'
+- '404'
+- '406'
+- '422'
+problems:
+- status: 400
+  code: BAD_REQUEST
+  title: You provided a request that can not be successfully parsed. Verify you are providing valid JSON.
+  in_spec: true
+- status: 401
+  code: UNKNOWN
+  title: We could not authenticate your request. You used an incorrect API Key.
+  in_spec: true
+- status: 402
+  code: UPSTREAM_PROCESSOR_ERROR
+  title: Errors caused by 3rd-party services (e.g. card networks/processors).
+  in_spec: true
+- status: 402
+  code: DECLINED
+  title: The authorization was declined. See failure_code and failure_message for details.
+  in_spec: true
+- status: 403
+  code: FORBIDDEN
+  title: Your credentials do not have the right permissions to submit the request.
+  in_spec: true
+- status: 404
+  code: NOT_FOUND
+  title: The specified resource could not be found.
+  in_spec: true
+- status: 405
+  code: METHOD_NOT_ALLOWED
+  title: The HTTP request method used is not supported by the specified resource.
+  in_spec: false
+- status: 406
+  code: NOT_ACCEPTABLE
+  title: The server cannot accept the submitted request. Confirm formatting/submission.
+  in_spec: true
+- status: 409
+  code: CONFLICT
+  title: The submitted request conflicts with the current state of the server.
+  in_spec: false
+- status: 422
+  code: UNPROCESSABLE_ENTITY
+  title: The parameters were valid but the request failed (often an out-of-order step, e.g. transfer on an unapproved merchant).
+  in_spec: true
+- status: 422
+  code: INVALID_FIELD
+  title: A provided field has an invalid value.
+  in_spec: true
+- status: 429
+  code: TOO_MANY_REQUESTS
+  title: A rate limit has been reached. Wait and retry after the limit resets.
+  in_spec: false
+- status: 500
+  code: SERVER_ERROR
+  title: We had a problem with our server. Try again later.
+  in_spec: false

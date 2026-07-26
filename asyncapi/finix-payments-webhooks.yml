@@ -1,0 +1,74 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.finix.com/additional-resources/developers/webhooks/webhook-events
+spec_type: Webhooks
+note: >-
+  Finix documents webhooks but does not publish an AsyncAPI document. This captures the webhook event
+  catalog. Events are delivered as HTTP POST to subscribed endpoints; each event carries an entity + type.
+  "default" indicates whether newly created webhooks subscribe to that event by default. Webhook delivery
+  history is retained 30 days in the Dashboard. Managed via the Webhooks API (createWebhook/listWebhooks/
+  getWebhook/updateWebhook).
+transport: http-post
+delivery_history_days: 30
+management_api:
+  - openapi/finix-payments-openapi-original.yml#createWebhook
+  - openapi/finix-payments-openapi-original.yml#listWebhooks
+  - openapi/finix-payments-openapi-original.yml#getWebhook
+  - openapi/finix-payments-openapi-original.yml#updateWebhook
+events:
+  - {entity: application, type: created, default: false}
+  - {entity: application, type: updated, default: false}
+  - {entity: application_profile, type: created, default: false}
+  - {entity: application_profile, type: updated, default: false}
+  - {entity: authorization, type: created, default: false}
+  - {entity: authorization, type: updated, default: false}
+  - {entity: balance_transfer, type: created, default: false}
+  - {entity: balance_transfer, type: updated, default: false}
+  - {entity: checkout_form, type: created, default: false}
+  - {entity: checkout_form, type: updated, default: false}
+  - {entity: compliance_form, type: created, default: false}
+  - {entity: compliance_form, type: updated, default: false}
+  - {entity: dispute, type: created, default: false}
+  - {entity: dispute, type: updated, default: true}
+  - {entity: evidence, type: created, default: true}
+  - {entity: evidence, type: updated, default: false}
+  - {entity: external_link, type: created, default: false}
+  - {entity: external_link, type: updated, default: false}
+  - {entity: fee, type: created, default: false}
+  - {entity: fee, type: updated, default: false}
+  - {entity: fee_profile, type: created, default: false}
+  - {entity: fee_profile, type: updated, default: false}
+  - {entity: file, type: created, default: false}
+  - {entity: file, type: updated, default: false}
+  - {entity: gateway_integration, type: created, default: false}
+  - {entity: gateway_integration, type: updated, default: false}
+  - {entity: identity, type: created, default: false}
+  - {entity: identity, type: updated, default: false}
+  - {entity: instrument, type: created, default: false}
+  - {entity: instrument, type: updated, default: false}
+  - {entity: instrument_history, type: created, default: true}
+  - {entity: merchant, type: created, default: true}
+  - {entity: merchant, type: updated, default: true}
+  - {entity: merchant, type: underwritten, default: true}
+  - {entity: merchant_profile, type: created, default: false}
+  - {entity: merchant_profile, type: updated, default: false}
+  - {entity: onboarding_form, type: created, default: false}
+  - {entity: onboarding_form, type: updated, default: false}
+  - {entity: payment_link, type: created, default: false}
+  - {entity: payment_link, type: updated, default: false}
+  - {entity: payout_profile, type: created, default: false}
+  - {entity: subscription, type: created, default: false}
+  - {entity: subscription, type: updated, default: false}
+  - {entity: risk_profile, type: created, default: false}
+  - {entity: risk_profile, type: updated, default: false}
+  - {entity: settlement, type: accruing_started, default: false}
+  - {entity: settlement, type: created, default: true}
+  - {entity: settlement, type: updated, default: false}
+  - {entity: transfer, type: created, default: true}
+  - {entity: transfer, type: updated, default: true}
+  - {entity: transfer_attempt, type: created, default: false}
+  - {entity: transfer_attempt, type: updated, default: false}
+  - {entity: verification, type: created, default: false}
+  - {entity: verification, type: updated, default: false}
+  - {entity: funding_transfer_attempt, type: created, default: false}
+  - {entity: funding_transfer_attempt, type: updated, default: false}

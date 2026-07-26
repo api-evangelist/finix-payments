@@ -1,0 +1,72 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics
+note: >-
+  Cross-cutting request/response semantics for the Finix API (version 2022-02-01), captured from
+  the Finix developer docs and the OpenAPI. Cross-links errors/, lifecycle/, authentication/, rate-limits/.
+authentication:
+  style: http-basic
+  detail: >-
+    HTTP Basic Authentication (RFC 7617). Username = API Key id (e.g. USxxxx), password = API Key secret.
+    Base64-encode "username:password" into the Authorization: Basic header. Keys are environment-scoped
+    (Sandbox keys cannot be used in Live and vice-versa).
+  docs: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/api-keys
+  artifact: authentication/finix-payments-authentication.yml
+idempotency:
+  supported: true
+  mechanism: request-body-field
+  field: idempotency_id
+  header: null
+  scope: [POST /transfers, POST /authorizations, "POST /transfers/{id}/reversals"]
+  retention: original response replayed on repeat; a differing payload with the same id returns 422 Unprocessable Entity
+  recommendation: use a fresh UUID per request
+  docs: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/idempotent-request
+pagination:
+  style: cursor
+  params: [limit, after_cursor, before_cursor]
+  response_fields: [page.limit, page.next_cursor]
+  max_page_size: 100
+  end_signal: page.next_cursor is null
+  note: >-
+    Cursor-based pagination requires the Finix-Version: 2022-02-01 header. Forward with after_cursor,
+    backward with before_cursor. Legacy offset pagination exists on the base (2018-01-01) version.
+  docs: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/pagination
+response_envelope:
+  style: HAL
+  fields: [_embedded, _links, page]
+  detail: >-
+    List responses wrap resources under _embedded.<resource>[] with HAL _links and a page block.
+    Errors wrap under _embedded.errors[] (see errors/ artifact).
+versioning:
+  style: header-dated
+  header: Finix-Version
+  current: '2022-02-01'
+  base: '2018-01-01'
+  detail: >-
+    Breaking changes ship as a new dated version behind the Finix-Version header (exact date required, else
+    requests default to the 2018-01-01 base). Non-breaking changes (new resources/enums/optional+response fields,
+    ID length/format changes up to 255 chars) are made in place.
+  docs: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/versioning
+  artifact: lifecycle/finix-payments-lifecycle.yml
+request_tracing:
+  field: logref
+  detail: Each API response (and each error object) carries a logref, a unique identifier for that request/response, used with Finix Support and API Logs.
+rate_limiting:
+  limit: 100 requests/second for reads and 100 requests/second for writes (Live)
+  status_code: 429
+  strategy: exponential backoff; cache; use webhooks instead of polling
+  docs: https://docs.finix.com/additional-resources/developers/authentication-and-api-basics/rate-limits
+  artifact: rate-limits/finix-payments-rate-limits.yml
+error_handling:
+  envelope: _embedded.errors[] with code, logref, message, _links.self
+  declines: Transfer/Authorization declines add failure_code + failure_message
+  timeout: API requests have a maximum 5-minute timeout
+  artifact: errors/finix-payments-problem-types.yml
+identifiers:
+  style: type-prefixed opaque strings (max 255 chars)
+  observed_prefixes:
+    US: API Key / User
+    MU: Merchant
+    PI: Payment Instrument
+    AU: Authorization
+    TR: Transfer

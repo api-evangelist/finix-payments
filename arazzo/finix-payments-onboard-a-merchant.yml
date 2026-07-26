@@ -1,0 +1,52 @@
+arazzo: 1.0.1
+info:
+  title: Finix — Onboard a seller/merchant
+  version: 1.0.0
+  summary: Create a seller Identity, provision a Merchant, and run verification/underwriting.
+sourceDescriptions:
+  - name: finix
+    url: ../openapi/finix-payments-openapi-original.yml
+    type: openapi
+workflows:
+  - workflowId: onboardMerchant
+    summary: Provision and verify a seller merchant for platform payments.
+    description: >-
+      Requires HTTP Basic Auth and the Finix-Version 2022-02-01 header. The merchant must reach
+      onboarding_state APPROVED before it can process Transfers.
+    inputs:
+      type: object
+      properties:
+        processor: {type: string, default: DUMMY_V1}
+      required: []
+    steps:
+      - stepId: createSeller
+        operationId: createIdentity
+        outputs:
+          identity_id: $response.body#/id
+      - stepId: provisionMerchant
+        operationId: createMerchant
+        parameters:
+          - name: identity_id
+            in: path
+            value: $steps.createSeller.outputs.identity_id
+        outputs:
+          merchant_id: $response.body#/id
+      - stepId: verifyMerchant
+        operationId: createMerchantVerification
+        parameters:
+          - name: merchant_id
+            in: path
+            value: $steps.provisionMerchant.outputs.merchant_id
+        outputs:
+          verification_id: $response.body#/id
+      - stepId: checkStatus
+        operationId: getMerchant
+        parameters:
+          - name: merchant_id
+            in: path
+            value: $steps.provisionMerchant.outputs.merchant_id
+        outputs:
+          onboarding_state: $response.body#/onboarding_state
+    outputs:
+      merchant_id: $steps.provisionMerchant.outputs.merchant_id
+      onboarding_state: $steps.checkStatus.outputs.onboarding_state
