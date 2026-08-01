@@ -1,0 +1,1096 @@
+{
+  "info": {
+    "_postman_id": "17079400-d291-4fdb-9229-8522bdd8ae43",
+    "name": "Finix Authorizations Compliance Forms API",
+    "description": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:39:03.000Z",
+    "updatedAt": "2026-07-28T01:39:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-17079400-d291-4fdb-9229-8522bdd8ae43"
+  },
+  "item": [
+    {
+      "name": "compliance_forms",
+      "item": [
+        {
+          "name": "{compliance_forms_id}",
+          "item": [
+            {
+              "name": "Fetch a Compliance Form",
+              "id": "5c94163b-5bfe-4a8d-8e09-afd2d3b414b1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compliance_forms",
+                    ":compliance_forms_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "00881555-2bdd-45f7-83b2-b2794ee63c87",
+                      "key": "compliance_forms_id",
+                      "value": "<string>",
+                      "description": "(Required) ID of the `compliance_form`."
+                    }
+                  ]
+                },
+                "description": "A webhook notifies you when Finix creates a `compliance_form`.\n\nUse the ID in the webhook to fetch the `compliance_form` resource from the `/compliance_forms/:COMPLIANCE_FORM_ID:` endpoint."
+              },
+              "response": [
+                {
+                  "id": "e81e6eb5-4182-40c0-bfd2-2bf4903d6f3e",
+                  "name": "Example response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"application_id\": \"<string>\",\n  \"compliance_form_template\": \"<string>\",\n  \"due_at\": \"<dateTime>\",\n  \"files\": {\n    \"signed_file\": \"<string>\",\n    \"unsigned_file\": \"<string>\"\n  },\n  \"linked_to\": \"<string>\",\n  \"linked_type\": \"<string>\",\n  \"pci_saq_a\": {\n    \"ip_address\": \"<string>\",\n    \"is_accepted\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"signed_at\": \"<string>\",\n    \"title\": \"<string>\",\n    \"user_agent\": \"<string>\"\n  },\n  \"state\": \"INVALID\",\n  \"tags\": {\n    \"dolore_4da\": \"<string>\",\n    \"minim_f\": \"<string>\"\n  },\n  \"type\": \"PCI_SAQ_A\",\n  \"valid_from\": \"<dateTime>\",\n  \"valid_until\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-e81e6eb5-4182-40c0-bfd2-2bf4903d6f3e"
+                },
+                {
+                  "id": "480ddddf-8e7e-4b93-ba7c-13164692eb14",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"irure_dc4\": \"pariatur tempor\"\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-480ddddf-8e7e-4b93-ba7c-13164692eb14"
+                },
+                {
+                  "id": "4e769d6d-0bf3-4367-92e1-d137d3b72500",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"esse_9b5\": \"consequat\",\n        \"ut_63a\": -68780269.19680794,\n        \"consectetur2\": \"commodo sunt\",\n        \"in1\": -71356151\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-4e769d6d-0bf3-4367-92e1-d137d3b72500"
+                },
+                {
+                  "id": "e707e0e8-d582-49b8-899e-7d05125b6f2f",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"commodo281\": 39971708\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-e707e0e8-d582-49b8-899e-7d05125b6f2f"
+                },
+                {
+                  "id": "7585cc63-e7e6-4305-ab29-bc9a1e4bc9df",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"nisi_a0\": \"ea commodo\",\n        \"sed_3\": -61130270.63578586,\n        \"aute516\": -49318103.44218164,\n        \"Lorem_c\": -35916240\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-7585cc63-e7e6-4305-ab29-bc9a1e4bc9df"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:04.000Z",
+              "updatedAt": "2026-07-28T01:39:04.000Z",
+              "uid": "35240-5c94163b-5bfe-4a8d-8e09-afd2d3b414b1"
+            },
+            {
+              "name": "Complete a Compliance Form",
+              "id": "882e38aa-f7d9-4487-a230-71f6e2c3a93a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pci_saq_a\": {\n    \"ip_address\": \"<string>\",\n    \"name\": \"<string>\",\n    \"signed_at\": \"<string>\",\n    \"title\": \"<string>\",\n    \"user_agent\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compliance_forms",
+                    ":compliance_forms_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7f1798a2-d45f-4295-b278-a04b77d16209",
+                      "key": "compliance_forms_id",
+                      "value": "<string>",
+                      "description": "(Required) ID of the `compliance_form`."
+                    }
+                  ]
+                },
+                "description": "As part of onboarding your users, you'll need to build a UI experience that allows users to complete the PCI `compliance_form` and download the form as a PDF if requested.\n\nFor more information, see [Managing Compliance Forms](/guides/security-and-compliance/pci-dss-compliance/managing-pci-compliance/#completing-compliance-forms)."
+              },
+              "response": [
+                {
+                  "id": "cccb5a87-a62a-4180-8410-bff14085cef3",
+                  "name": "Example response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pci_saq_a\": {\n    \"ip_address\": \"<string>\",\n    \"name\": \"<string>\",\n    \"signed_at\": \"<string>\",\n    \"title\": \"<string>\",\n    \"user_agent\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"application_id\": \"<string>\",\n  \"compliance_form_template\": \"<string>\",\n  \"due_at\": \"<dateTime>\",\n  \"files\": {\n    \"signed_file\": \"<string>\",\n    \"unsigned_file\": \"<string>\"\n  },\n  \"linked_to\": \"<string>\",\n  \"linked_type\": \"<string>\",\n  \"pci_saq_a\": {\n    \"ip_address\": \"<string>\",\n    \"is_accepted\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"signed_at\": \"<string>\",\n    \"title\": \"<string>\",\n    \"user_agent\": \"<string>\"\n  },\n  \"state\": \"INVALID\",\n  \"tags\": {\n    \"dolore_4da\": \"<string>\",\n    \"minim_f\": \"<string>\"\n  },\n  \"type\": \"PCI_SAQ_A\",\n  \"valid_from\": \"<dateTime>\",\n  \"valid_until\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-cccb5a87-a62a-4180-8410-bff14085cef3"
+                },
+                {
+                  "id": "e481697c-27ae-4b2d-bda6-1a4263b720f5",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pci_saq_a\": {\n    \"ip_address\": \"<string>\",\n    \"name\": \"<string>\",\n    \"signed_at\": \"<string>\",\n    \"title\": \"<string>\",\n    \"user_agent\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"irure_dc4\": \"pariatur tempor\"\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-e481697c-27ae-4b2d-bda6-1a4263b720f5"
+                },
+                {
+                  "id": "bde4c99b-daea-4231-88d1-00f596f96a01",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pci_saq_a\": {\n    \"ip_address\": \"<string>\",\n    \"name\": \"<string>\",\n    \"signed_at\": \"<string>\",\n    \"title\": \"<string>\",\n    \"user_agent\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"esse_9b5\": \"consequat\",\n        \"ut_63a\": -68780269.19680794,\n        \"consectetur2\": \"commodo sunt\",\n        \"in1\": -71356151\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-bde4c99b-daea-4231-88d1-00f596f96a01"
+                },
+                {
+                  "id": "1fb757e1-1ee5-401c-99c9-04c3b955fedb",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pci_saq_a\": {\n    \"ip_address\": \"<string>\",\n    \"name\": \"<string>\",\n    \"signed_at\": \"<string>\",\n    \"title\": \"<string>\",\n    \"user_agent\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"commodo281\": 39971708\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-1fb757e1-1ee5-401c-99c9-04c3b955fedb"
+                },
+                {
+                  "id": "324f9d3e-85ae-4c5d-a5ae-b54dd27a8846",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pci_saq_a\": {\n    \"ip_address\": \"<string>\",\n    \"name\": \"<string>\",\n    \"signed_at\": \"<string>\",\n    \"title\": \"<string>\",\n    \"user_agent\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"nisi_a0\": \"ea commodo\",\n        \"sed_3\": -61130270.63578586,\n        \"aute516\": -49318103.44218164,\n        \"Lorem_c\": -35916240\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-324f9d3e-85ae-4c5d-a5ae-b54dd27a8846"
+                },
+                {
+                  "id": "90fb7842-b7b9-4637-8bdb-522727373b30",
+                  "name": "Invalid field",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pci_saq_a\": {\n    \"ip_address\": \"<string>\",\n    \"name\": \"<string>\",\n    \"signed_at\": \"<string>\",\n    \"title\": \"<string>\",\n    \"user_agent\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance_forms/:compliance_forms_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance_forms",
+                        ":compliance_forms_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "compliance_forms_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:04.000Z",
+                  "updatedAt": "2026-07-28T01:39:04.000Z",
+                  "uid": "35240-90fb7842-b7b9-4637-8bdb-522727373b30"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:04.000Z",
+              "updatedAt": "2026-07-28T01:39:04.000Z",
+              "uid": "35240-882e38aa-f7d9-4487-a230-71f6e2c3a93a"
+            }
+          ],
+          "id": "fc975473-a668-454c-a917-0b907c201968",
+          "createdAt": "2026-07-28T01:39:04.000Z",
+          "updatedAt": "2026-07-28T01:39:04.000Z",
+          "uid": "35240-fc975473-a668-454c-a917-0b907c201968"
+        },
+        {
+          "name": "List Compliance Forms",
+          "id": "7c8fee86-48f2-4333-a899-34ce9ad6f5ed",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/compliance_forms?state=INCOMPLETE",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "compliance_forms"
+              ],
+              "query": [
+                {
+                  "description": "Filter by the `state` of the `Compliance Form`.",
+                  "key": "state",
+                  "value": "INCOMPLETE"
+                }
+              ]
+            },
+            "description": "Retrieves a list of `Compliance Forms`."
+          },
+          "response": [
+            {
+              "id": "c6514a0e-afc2-4f4f-9300-89693c154a40",
+              "name": "List of `Compliance Form` objects.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compliance_forms?state=INCOMPLETE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compliance_forms"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by the `state` of the `Compliance Form`.",
+                      "key": "state",
+                      "value": "INCOMPLETE"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"_embedded\": {\n    \"compliance_forms\": [\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"application_id\": \"<string>\",\n        \"compliance_form_template\": \"<string>\",\n        \"due_at\": \"<dateTime>\",\n        \"files\": {\n          \"signed_file\": \"<string>\",\n          \"unsigned_file\": \"<string>\"\n        },\n        \"linked_to\": \"<string>\",\n        \"linked_type\": \"<string>\",\n        \"pci_saq_a\": {\n          \"ip_address\": \"<string>\",\n          \"is_accepted\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"signed_at\": \"<string>\",\n          \"title\": \"<string>\",\n          \"user_agent\": \"<string>\"\n        },\n        \"state\": \"INCOMPLETE\",\n        \"tags\": {\n          \"et_27_\": \"<string>\",\n          \"incididunt_ea\": \"<string>\",\n          \"aliqua23\": \"<string>\"\n        },\n        \"type\": \"PCI_SAQ_A\",\n        \"valid_from\": \"<dateTime>\",\n        \"valid_until\": \"<string>\",\n        \"version\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"application_id\": \"<string>\",\n        \"compliance_form_template\": \"<string>\",\n        \"due_at\": \"<dateTime>\",\n        \"files\": {\n          \"signed_file\": \"<string>\",\n          \"unsigned_file\": \"<string>\"\n        },\n        \"linked_to\": \"<string>\",\n        \"linked_type\": \"<string>\",\n        \"pci_saq_a\": {\n          \"ip_address\": \"<string>\",\n          \"is_accepted\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"signed_at\": \"<string>\",\n          \"title\": \"<string>\",\n          \"user_agent\": \"<string>\"\n        },\n        \"state\": \"PENDING\",\n        \"tags\": {\n          \"nisi_0\": \"<string>\",\n          \"irure93\": \"<string>\",\n          \"esse_60\": \"<string>\"\n        },\n        \"type\": \"PCI_SAQ_A\",\n        \"valid_from\": \"<dateTime>\",\n        \"valid_until\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    ]\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"enim_6\": 69016170,\n    \"quie91\": -17508012,\n    \"magna__0\": \"cillum eu commodo\"\n  },\n  \"page\": {\n    \"limit\": \"<integer>\",\n    \"next_cursor\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:39:04.000Z",
+              "updatedAt": "2026-07-28T01:39:04.000Z",
+              "uid": "35240-c6514a0e-afc2-4f4f-9300-89693c154a40"
+            },
+            {
+              "id": "b701d322-8195-418c-9574-c7d7e1aa8608",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compliance_forms?state=INCOMPLETE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compliance_forms"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by the `state` of the `Compliance Form`.",
+                      "key": "state",
+                      "value": "INCOMPLETE"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"irure_dc4\": \"pariatur tempor\"\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:04.000Z",
+              "updatedAt": "2026-07-28T01:39:04.000Z",
+              "uid": "35240-b701d322-8195-418c-9574-c7d7e1aa8608"
+            },
+            {
+              "id": "2df3d8c7-8028-470e-80b8-12224feac1e9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compliance_forms?state=INCOMPLETE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compliance_forms"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by the `state` of the `Compliance Form`.",
+                      "key": "state",
+                      "value": "INCOMPLETE"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"esse_9b5\": \"consequat\",\n        \"ut_63a\": -68780269.19680794,\n        \"consectetur2\": \"commodo sunt\",\n        \"in1\": -71356151\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:04.000Z",
+              "updatedAt": "2026-07-28T01:39:04.000Z",
+              "uid": "35240-2df3d8c7-8028-470e-80b8-12224feac1e9"
+            },
+            {
+              "id": "8df950a2-f565-401d-a3af-1a546a579cee",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compliance_forms?state=INCOMPLETE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compliance_forms"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by the `state` of the `Compliance Form`.",
+                      "key": "state",
+                      "value": "INCOMPLETE"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"commodo281\": 39971708\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:04.000Z",
+              "updatedAt": "2026-07-28T01:39:04.000Z",
+              "uid": "35240-8df950a2-f565-401d-a3af-1a546a579cee"
+            },
+            {
+              "id": "fde525d1-5ba8-4b3b-bbe4-7b7136e77b7b",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compliance_forms?state=INCOMPLETE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compliance_forms"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by the `state` of the `Compliance Form`.",
+                      "key": "state",
+                      "value": "INCOMPLETE"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"nisi_a0\": \"ea commodo\",\n        \"sed_3\": -61130270.63578586,\n        \"aute516\": -49318103.44218164,\n        \"Lorem_c\": -35916240\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:04.000Z",
+              "updatedAt": "2026-07-28T01:39:04.000Z",
+              "uid": "35240-fde525d1-5ba8-4b3b-bbe4-7b7136e77b7b"
+            }
+          ],
+          "createdAt": "2026-07-28T01:39:04.000Z",
+          "updatedAt": "2026-07-28T01:39:04.000Z",
+          "uid": "35240-7c8fee86-48f2-4333-a899-34ce9ad6f5ed"
+        }
+      ],
+      "id": "1d3861cf-4e41-4f6b-b57f-e2d3ae8e2d28",
+      "createdAt": "2026-07-28T01:39:04.000Z",
+      "updatedAt": "2026-07-28T01:39:04.000Z",
+      "uid": "35240-1d3861cf-4e41-4f6b-b57f-e2d3ae8e2d28"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://finix.sandbox-payments-api.com"
+    }
+  ]
+}

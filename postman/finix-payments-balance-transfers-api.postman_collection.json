@@ -1,0 +1,1517 @@
+{
+  "info": {
+    "_postman_id": "fb2f2619-299b-4f6d-bf9a-b48312664fd6",
+    "name": "Finix Authorizations Balance Transfers API",
+    "description": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:39:01.000Z",
+    "updatedAt": "2026-07-28T01:39:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fb2f2619-299b-4f6d-bf9a-b48312664fd6"
+  },
+  "item": [
+    {
+      "name": "balance_transfers",
+      "item": [
+        {
+          "name": "{balance_transfers_id}",
+          "item": [
+            {
+              "name": "Fetch a Balance Transfer",
+              "id": "6024ef2d-91df-4178-97d6-7c36841ceeb1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers/:balance_transfers_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers",
+                    ":balance_transfers_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d06f3a64-1126-49b6-929f-00282c8917b1",
+                      "key": "balance_transfers_id",
+                      "value": "<string>",
+                      "description": "(Required) ID of the `balance_transfer` resource."
+                    }
+                  ]
+                },
+                "description": "Retrieve the details of a `balance_transfer`."
+              },
+              "response": [
+                {
+                  "id": "b9c12208-da3e-4e24-bab2-a363a2a1952c",
+                  "name": "Single balance_transfer object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/balance_transfers/:balance_transfers_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "balance_transfers",
+                        ":balance_transfers_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "balance_transfers_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"amount\": \"<long>\",\n  \"currency\": \"ILS\",\n  \"description\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"external_reference_id\": \"<string>\",\n  \"processor_type\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"source\": \"<string>\",\n  \"state\": \"FAILED\",\n  \"tags\": {\n    \"tempor_e63\": \"<string>\"\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:01.000Z",
+                  "updatedAt": "2026-07-28T01:39:01.000Z",
+                  "uid": "35240-b9c12208-da3e-4e24-bab2-a363a2a1952c"
+                },
+                {
+                  "id": "aef5afef-7909-490d-86be-e7db39fccc2c",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/balance_transfers/:balance_transfers_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "balance_transfers",
+                        ":balance_transfers_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "balance_transfers_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"labore_cc\": -26468407.616269693,\n          \"mollit_c9\": 34239542\n        },\n        \"sint_2b\": 95124543.34957764,\n        \"sint_ca0\": 79933835.5496881,\n        \"est_039\": \"culpa enim in occaecat\",\n        \"ea0_\": true\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:01.000Z",
+                  "updatedAt": "2026-07-28T01:39:01.000Z",
+                  "uid": "35240-aef5afef-7909-490d-86be-e7db39fccc2c"
+                },
+                {
+                  "id": "02a043d8-a5d5-409e-826f-b0ba09cca007",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/balance_transfers/:balance_transfers_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "balance_transfers",
+                        ":balance_transfers_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "balance_transfers_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"sintf4\": -44020600.92308808\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:01.000Z",
+                  "updatedAt": "2026-07-28T01:39:01.000Z",
+                  "uid": "35240-02a043d8-a5d5-409e-826f-b0ba09cca007"
+                },
+                {
+                  "id": "46b5827d-17cb-4e0d-af25-c447c322985e",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/balance_transfers/:balance_transfers_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "balance_transfers",
+                        ":balance_transfers_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "balance_transfers_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"exercitation_ba\": \"dolor commodo nostrud\",\n        \"commodo_c56\": -34249936,\n        \"sed6\": 55689965.17649126\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"tempore_\": \"Duis sunt ad\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:01.000Z",
+                  "updatedAt": "2026-07-28T01:39:01.000Z",
+                  "uid": "35240-46b5827d-17cb-4e0d-af25-c447c322985e"
+                },
+                {
+                  "id": "d200a15e-4801-44be-95fc-c3becc057bca",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/balance_transfers/:balance_transfers_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "balance_transfers",
+                        ":balance_transfers_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "balance_transfers_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"minim0\": false\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:01.000Z",
+                  "updatedAt": "2026-07-28T01:39:01.000Z",
+                  "uid": "35240-d200a15e-4801-44be-95fc-c3becc057bca"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-6024ef2d-91df-4178-97d6-7c36841ceeb1"
+            }
+          ],
+          "id": "32a0e8f1-8859-4c18-9e5b-17431ecc239f",
+          "createdAt": "2026-07-28T01:39:01.000Z",
+          "updatedAt": "2026-07-28T01:39:01.000Z",
+          "uid": "35240-32a0e8f1-8859-4c18-9e5b-17431ecc239f"
+        },
+        {
+          "name": "Create a Balance Transfer",
+          "id": "25ff4ba0-8175-4a15-ad36-b0e81a214a69",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<long>\",\n  \"currency\": \"VUV\",\n  \"description\": \"<string>\",\n  \"destination\": \"FOR_BENEFIT_OF_ACCOUNT\",\n  \"processor_type\": \"<string>\",\n  \"source\": \"OPERATING_ACCOUNT\",\n  \"tags\": {\n    \"officiae5f\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/balance_transfers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "balance_transfers"
+              ]
+            },
+            "description": "Create a `balance_transfer`."
+          },
+          "response": [
+            {
+              "id": "27b8c776-32bd-4a90-a065-39cf32441ae9",
+              "name": "Single balance_transfer object",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<long>\",\n  \"currency\": \"VUV\",\n  \"description\": \"<string>\",\n  \"destination\": \"FOR_BENEFIT_OF_ACCOUNT\",\n  \"processor_type\": \"<string>\",\n  \"source\": \"OPERATING_ACCOUNT\",\n  \"tags\": {\n    \"officiae5f\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "finix-apiuser-role",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "x-request-id",
+                  "value": ""
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"amount\": \"<long>\",\n  \"currency\": \"ILS\",\n  \"description\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"external_reference_id\": \"<string>\",\n  \"processor_type\": \"<string>\",\n  \"reference_id\": \"<string>\",\n  \"source\": \"<string>\",\n  \"state\": \"FAILED\",\n  \"tags\": {\n    \"tempor_e63\": \"<string>\"\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-27b8c776-32bd-4a90-a065-39cf32441ae9"
+            },
+            {
+              "id": "95393707-c288-4d4b-994d-dbf8cd5ad464",
+              "name": "Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<long>\",\n  \"currency\": \"VUV\",\n  \"description\": \"<string>\",\n  \"destination\": \"FOR_BENEFIT_OF_ACCOUNT\",\n  \"processor_type\": \"<string>\",\n  \"source\": \"OPERATING_ACCOUNT\",\n  \"tags\": {\n    \"officiae5f\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"labore_1\": -86054981\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-95393707-c288-4d4b-994d-dbf8cd5ad464"
+            },
+            {
+              "id": "406ae564-fd7d-4e88-ace2-9169b7844e82",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<long>\",\n  \"currency\": \"VUV\",\n  \"description\": \"<string>\",\n  \"destination\": \"FOR_BENEFIT_OF_ACCOUNT\",\n  \"processor_type\": \"<string>\",\n  \"source\": \"OPERATING_ACCOUNT\",\n  \"tags\": {\n    \"officiae5f\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"labore_cc\": -26468407.616269693,\n          \"mollit_c9\": 34239542\n        },\n        \"sint_2b\": 95124543.34957764,\n        \"sint_ca0\": 79933835.5496881,\n        \"est_039\": \"culpa enim in occaecat\",\n        \"ea0_\": true\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-406ae564-fd7d-4e88-ace2-9169b7844e82"
+            },
+            {
+              "id": "5f9030b3-df9d-4585-9f70-17d48ed5c884",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<long>\",\n  \"currency\": \"VUV\",\n  \"description\": \"<string>\",\n  \"destination\": \"FOR_BENEFIT_OF_ACCOUNT\",\n  \"processor_type\": \"<string>\",\n  \"source\": \"OPERATING_ACCOUNT\",\n  \"tags\": {\n    \"officiae5f\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"sintf4\": -44020600.92308808\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-5f9030b3-df9d-4585-9f70-17d48ed5c884"
+            },
+            {
+              "id": "8499242a-88ee-420e-aa76-1917ed7bc062",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<long>\",\n  \"currency\": \"VUV\",\n  \"description\": \"<string>\",\n  \"destination\": \"FOR_BENEFIT_OF_ACCOUNT\",\n  \"processor_type\": \"<string>\",\n  \"source\": \"OPERATING_ACCOUNT\",\n  \"tags\": {\n    \"officiae5f\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"minim0\": false\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-8499242a-88ee-420e-aa76-1917ed7bc062"
+            }
+          ],
+          "createdAt": "2026-07-28T01:39:01.000Z",
+          "updatedAt": "2026-07-28T01:39:01.000Z",
+          "uid": "35240-25ff4ba0-8175-4a15-ad36-b0e81a214a69"
+        },
+        {
+          "name": "List Balance Transfers",
+          "id": "28f6712d-b5be-4345-94c9-ec249a7fb55a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/balance_transfers?limit=<integer>&pageNumber=<integer>&pageSize=<integer>&created_at.gte=<string>&created_at.lte=<string>&updated_at.gte=<string>&updated_at.lte=<string>&idempotency_id=<string>&amount=<integer>&description=<string>&destination=<string>&external_reference_id=<string>&reference_id=<string>&source=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "balance_transfers"
+              ],
+              "query": [
+                {
+                  "description": "The numbers of items to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The page number to list.",
+                  "key": "pageNumber",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The size of the page.",
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter where `created_at` is after the given date.",
+                  "key": "created_at.gte",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter where `created_at` is before the given date.",
+                  "key": "created_at.lte",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter where `updated_at` is after the given date.",
+                  "key": "updated_at.gte",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter where `updated_at` is before the given date.",
+                  "key": "updated_at.lte",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by `idempotency_id`.",
+                  "key": "idempotency_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by an amount equal to the given value.",
+                  "key": "amount",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter by the `Description` value .",
+                  "key": "description",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by the `Payment Instrument` saved in `Destination`.",
+                  "key": "destination",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by the value saved in `external_reference_id`.",
+                  "key": "external_reference_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by the value saved in `reference_id`.",
+                  "key": "reference_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by the `Payment Instrument` saved in `source`.",
+                  "key": "source",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve a list of `balance_transfers`."
+          },
+          "response": [
+            {
+              "id": "0cdffb58-fe2a-4927-864e-10d91af7997a",
+              "name": "List of balance_transfer objects",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers?limit=<integer>&pageNumber=<integer>&pageSize=<integer>&created_at.gte=<string>&created_at.lte=<string>&updated_at.gte=<string>&updated_at.lte=<string>&idempotency_id=<string>&amount=<integer>&description=<string>&destination=<string>&external_reference_id=<string>&reference_id=<string>&source=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The page number to list.",
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The size of the page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is after the given date.",
+                      "key": "created_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is before the given date.",
+                      "key": "created_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is after the given date.",
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is before the given date.",
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by `idempotency_id`.",
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by an amount equal to the given value.",
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by the `Description` value .",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `Destination`.",
+                      "key": "destination",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `external_reference_id`.",
+                      "key": "external_reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `reference_id`.",
+                      "key": "reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `source`.",
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "finix-apiuser-role",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "x-request-id",
+                  "value": ""
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"page\": {\n    \"count\": \"<integer>\",\n    \"limit\": \"<integer>\",\n    \"offset\": \"<integer>\"\n  },\n  \"_embedded\": {\n    \"balance_transfers\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/BalanceTransferList detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/BalanceTransferList detected>\"\n      }\n    ]\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-0cdffb58-fe2a-4927-864e-10d91af7997a"
+            },
+            {
+              "id": "8aca25f3-adac-467e-8539-3a57143dba4b",
+              "name": "Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers?limit=<integer>&pageNumber=<integer>&pageSize=<integer>&created_at.gte=<string>&created_at.lte=<string>&updated_at.gte=<string>&updated_at.lte=<string>&idempotency_id=<string>&amount=<integer>&description=<string>&destination=<string>&external_reference_id=<string>&reference_id=<string>&source=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The page number to list.",
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The size of the page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is after the given date.",
+                      "key": "created_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is before the given date.",
+                      "key": "created_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is after the given date.",
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is before the given date.",
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by `idempotency_id`.",
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by an amount equal to the given value.",
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by the `Description` value .",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `Destination`.",
+                      "key": "destination",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `external_reference_id`.",
+                      "key": "external_reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `reference_id`.",
+                      "key": "reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `source`.",
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"labore_1\": -86054981\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-8aca25f3-adac-467e-8539-3a57143dba4b"
+            },
+            {
+              "id": "e26593da-43b7-4b62-8cdf-294ea1d5a35a",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers?limit=<integer>&pageNumber=<integer>&pageSize=<integer>&created_at.gte=<string>&created_at.lte=<string>&updated_at.gte=<string>&updated_at.lte=<string>&idempotency_id=<string>&amount=<integer>&description=<string>&destination=<string>&external_reference_id=<string>&reference_id=<string>&source=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The page number to list.",
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The size of the page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is after the given date.",
+                      "key": "created_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is before the given date.",
+                      "key": "created_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is after the given date.",
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is before the given date.",
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by `idempotency_id`.",
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by an amount equal to the given value.",
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by the `Description` value .",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `Destination`.",
+                      "key": "destination",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `external_reference_id`.",
+                      "key": "external_reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `reference_id`.",
+                      "key": "reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `source`.",
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"labore_cc\": -26468407.616269693,\n          \"mollit_c9\": 34239542\n        },\n        \"sint_2b\": 95124543.34957764,\n        \"sint_ca0\": 79933835.5496881,\n        \"est_039\": \"culpa enim in occaecat\",\n        \"ea0_\": true\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-e26593da-43b7-4b62-8cdf-294ea1d5a35a"
+            },
+            {
+              "id": "6fa89f8f-a386-4836-ba04-ec77888b20d0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers?limit=<integer>&pageNumber=<integer>&pageSize=<integer>&created_at.gte=<string>&created_at.lte=<string>&updated_at.gte=<string>&updated_at.lte=<string>&idempotency_id=<string>&amount=<integer>&description=<string>&destination=<string>&external_reference_id=<string>&reference_id=<string>&source=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The page number to list.",
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The size of the page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is after the given date.",
+                      "key": "created_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is before the given date.",
+                      "key": "created_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is after the given date.",
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is before the given date.",
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by `idempotency_id`.",
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by an amount equal to the given value.",
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by the `Description` value .",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `Destination`.",
+                      "key": "destination",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `external_reference_id`.",
+                      "key": "external_reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `reference_id`.",
+                      "key": "reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `source`.",
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"sintf4\": -44020600.92308808\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-6fa89f8f-a386-4836-ba04-ec77888b20d0"
+            },
+            {
+              "id": "b08f3794-29eb-4e5c-9c36-9c31e843814e",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers?limit=<integer>&pageNumber=<integer>&pageSize=<integer>&created_at.gte=<string>&created_at.lte=<string>&updated_at.gte=<string>&updated_at.lte=<string>&idempotency_id=<string>&amount=<integer>&description=<string>&destination=<string>&external_reference_id=<string>&reference_id=<string>&source=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The page number to list.",
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The size of the page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is after the given date.",
+                      "key": "created_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is before the given date.",
+                      "key": "created_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is after the given date.",
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is before the given date.",
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by `idempotency_id`.",
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by an amount equal to the given value.",
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by the `Description` value .",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `Destination`.",
+                      "key": "destination",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `external_reference_id`.",
+                      "key": "external_reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `reference_id`.",
+                      "key": "reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `source`.",
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-b08f3794-29eb-4e5c-9c36-9c31e843814e"
+            },
+            {
+              "id": "585360dc-9b2c-4d25-9cd3-5e5705790b01",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/balance_transfers?limit=<integer>&pageNumber=<integer>&pageSize=<integer>&created_at.gte=<string>&created_at.lte=<string>&updated_at.gte=<string>&updated_at.lte=<string>&idempotency_id=<string>&amount=<integer>&description=<string>&destination=<string>&external_reference_id=<string>&reference_id=<string>&source=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "balance_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The page number to list.",
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The size of the page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is after the given date.",
+                      "key": "created_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `created_at` is before the given date.",
+                      "key": "created_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is after the given date.",
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter where `updated_at` is before the given date.",
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by `idempotency_id`.",
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by an amount equal to the given value.",
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by the `Description` value .",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `Destination`.",
+                      "key": "destination",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `external_reference_id`.",
+                      "key": "external_reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the value saved in `reference_id`.",
+                      "key": "reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the `Payment Instrument` saved in `source`.",
+                      "key": "source",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"minim0\": false\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:01.000Z",
+              "updatedAt": "2026-07-28T01:39:01.000Z",
+              "uid": "35240-585360dc-9b2c-4d25-9cd3-5e5705790b01"
+            }
+          ],
+          "createdAt": "2026-07-28T01:39:01.000Z",
+          "updatedAt": "2026-07-28T01:39:01.000Z",
+          "uid": "35240-28f6712d-b5be-4345-94c9-ec249a7fb55a"
+        }
+      ],
+      "id": "3373e102-1df4-4dc6-9566-d1f3a39ba27b",
+      "createdAt": "2026-07-28T01:39:01.000Z",
+      "updatedAt": "2026-07-28T01:39:01.000Z",
+      "uid": "35240-3373e102-1df4-4dc6-9566-d1f3a39ba27b"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://finix.sandbox-payments-api.com"
+    }
+  ]
+}

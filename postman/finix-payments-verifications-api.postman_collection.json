@@ -1,0 +1,1978 @@
+{
+  "info": {
+    "_postman_id": "b5970566-2786-4c16-a5f1-121d6ff31a9b",
+    "name": "Finix Authorizations Verifications API",
+    "description": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:39:47.000Z",
+    "updatedAt": "2026-07-28T01:39:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b5970566-2786-4c16-a5f1-121d6ff31a9b"
+  },
+  "item": [
+    {
+      "name": "merchants",
+      "item": [
+        {
+          "name": "{merchant_id}",
+          "item": [
+            {
+              "name": "verifications",
+              "item": [
+                {
+                  "name": "List Merchant Verifications",
+                  "id": "ee60b69a-0e9d-4a28-bd0d-d5af0585ecb2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/merchants/:merchant_id/verifications?limit=<long>&after_cursor=<string>&before_cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchants",
+                        ":merchant_id",
+                        "verifications"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of entries to return.",
+                          "key": "limit",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "Return every resource created after the cursor value.",
+                          "key": "after_cursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Return every resource created before the cursor value.",
+                          "key": "before_cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "a74f9eed-38dd-4852-a2d9-24e41855de0d",
+                          "key": "merchant_id",
+                          "value": "<string>",
+                          "description": "(Required) ID of `Merchant` object."
+                        }
+                      ]
+                    },
+                    "description": "Get a list of all the `Verifications` for a `Merchant` resource."
+                  },
+                  "response": [
+                    {
+                      "id": "fbaa5cf2-e8a9-4d46-ac14-b2e8b337c32f",
+                      "name": "List of Verification objects",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/verifications?limit=<long>&after_cursor=<string>&before_cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "verifications"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of entries to return.",
+                              "key": "limit",
+                              "value": "<long>"
+                            },
+                            {
+                              "description": "Return every resource created after the cursor value.",
+                              "key": "after_cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Return every resource created before the cursor value.",
+                              "key": "before_cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "finix-apiuser-role",
+                          "value": ""
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "date",
+                          "value": ""
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "x-request-id",
+                          "value": ""
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"_embedded\": {\n    \"verifications\": [\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"application\": \"<string>\",\n        \"identity\": \"<string>\",\n        \"merchant\": \"<string>\",\n        \"merchant_identity\": \"<string>\",\n        \"payment_instrument\": \"<string>\",\n        \"payment_instrument_verification_details\": {\n          \"push_to_card_domestic\": \"NON_FAST_FUNDS\",\n          \"push_to_card_cross_border\": \"NON_FAST_FUNDS\",\n          \"card_type\": \"UNKNOWN\",\n          \"billing_currency\": \"CAD\",\n          \"issuer_country\": \"VNM\"\n        },\n        \"processor\": \"<string>\",\n        \"raw\": {},\n        \"state\": \"FAILED\",\n        \"tags\": {\n          \"nostrud_5\": \"<string>\",\n          \"Loremf\": \"<string>\"\n        },\n        \"trace_id\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"merchant\": {\n            \"href\": \"<string>\"\n          },\n          \"application\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"application\": \"<string>\",\n        \"identity\": \"<string>\",\n        \"merchant\": \"<string>\",\n        \"merchant_identity\": \"<string>\",\n        \"payment_instrument\": \"<string>\",\n        \"payment_instrument_verification_details\": {\n          \"push_to_card_domestic\": \"NOT_SUPPORTED\",\n          \"push_to_card_cross_border\": \"UNKNOWN\",\n          \"card_type\": \"CREDIT\",\n          \"billing_currency\": \"LAK\",\n          \"issuer_country\": \"LVA\"\n        },\n        \"processor\": \"<string>\",\n        \"raw\": {},\n        \"state\": \"PENDING\",\n        \"tags\": {\n          \"irure915\": \"<string>\",\n          \"sed225\": \"<string>\"\n        },\n        \"trace_id\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"merchant\": {\n            \"href\": \"<string>\"\n          },\n          \"application\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"do_1\": true,\n    \"sed_\": -90595016\n  },\n  \"page\": {\n    \"limit\": \"<integer>\",\n    \"next_cursor\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:47.000Z",
+                      "updatedAt": "2026-07-28T01:39:47.000Z",
+                      "uid": "35240-fbaa5cf2-e8a9-4d46-ac14-b2e8b337c32f"
+                    },
+                    {
+                      "id": "0e2ba5c4-a1da-4a4f-937c-b4f0a0d042e0",
+                      "name": "Authentication information is missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/verifications?limit=<long>&after_cursor=<string>&before_cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "verifications"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of entries to return.",
+                              "key": "limit",
+                              "value": "<long>"
+                            },
+                            {
+                              "description": "Return every resource created after the cursor value.",
+                              "key": "after_cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Return every resource created before the cursor value.",
+                              "key": "before_cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"exercitation8\": \"ex ut Excepteur commodo\"\n        },\n        \"ad9d\": false,\n        \"officia51\": -88423028\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"sintd94\": 89523506\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:47.000Z",
+                      "updatedAt": "2026-07-28T01:39:47.000Z",
+                      "uid": "35240-0e2ba5c4-a1da-4a4f-937c-b4f0a0d042e0"
+                    },
+                    {
+                      "id": "00a3c2fe-204d-45de-9676-365fb3a427ec",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/verifications?limit=<long>&after_cursor=<string>&before_cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "verifications"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of entries to return.",
+                              "key": "limit",
+                              "value": "<long>"
+                            },
+                            {
+                              "description": "Return every resource created after the cursor value.",
+                              "key": "after_cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Return every resource created before the cursor value.",
+                              "key": "before_cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"laborec\": -94629016.05142853,\n        \"Duis_fb\": \"labore Excepteur consequat tempor mollit\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:47.000Z",
+                      "updatedAt": "2026-07-28T01:39:47.000Z",
+                      "uid": "35240-00a3c2fe-204d-45de-9676-365fb3a427ec"
+                    },
+                    {
+                      "id": "6717919b-b0c8-4de8-bfa4-41a99639e74c",
+                      "name": "Object does not exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/verifications?limit=<long>&after_cursor=<string>&before_cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "verifications"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of entries to return.",
+                              "key": "limit",
+                              "value": "<long>"
+                            },
+                            {
+                              "description": "Return every resource created after the cursor value.",
+                              "key": "after_cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Return every resource created before the cursor value.",
+                              "key": "before_cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"ullamco0f8\": -23179017,\n        \"ullamco_9\": false,\n        \"sunta\": \"Duis non ut\"\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"velit_193\": true\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:47.000Z",
+                      "updatedAt": "2026-07-28T01:39:47.000Z",
+                      "uid": "35240-6717919b-b0c8-4de8-bfa4-41a99639e74c"
+                    },
+                    {
+                      "id": "0f434e66-4ab2-4cba-838d-8a2423df9464",
+                      "name": "Not Acceptable",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/verifications?limit=<long>&after_cursor=<string>&before_cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "verifications"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of entries to return.",
+                              "key": "limit",
+                              "value": "<long>"
+                            },
+                            {
+                              "description": "Return every resource created after the cursor value.",
+                              "key": "after_cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Return every resource created before the cursor value.",
+                              "key": "before_cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Acceptable",
+                      "code": 406,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"utacd\": true\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:47.000Z",
+                      "updatedAt": "2026-07-28T01:39:47.000Z",
+                      "uid": "35240-0f434e66-4ab2-4cba-838d-8a2423df9464"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-ee60b69a-0e9d-4a28-bd0d-d5af0585ecb2"
+                }
+              ],
+              "id": "8bee5f52-e0dd-474c-a3bb-a5cf566957ca",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-8bee5f52-e0dd-474c-a3bb-a5cf566957ca"
+            }
+          ],
+          "id": "256d01a9-3d11-436c-897a-9715a084e4db",
+          "createdAt": "2026-07-28T01:39:47.000Z",
+          "updatedAt": "2026-07-28T01:39:47.000Z",
+          "uid": "35240-256d01a9-3d11-436c-897a-9715a084e4db"
+        }
+      ],
+      "id": "f99a7d2e-d7d1-40f8-8967-ae24320e46be",
+      "createdAt": "2026-07-28T01:39:47.000Z",
+      "updatedAt": "2026-07-28T01:39:47.000Z",
+      "uid": "35240-f99a7d2e-d7d1-40f8-8967-ae24320e46be"
+    },
+    {
+      "name": "payment_instruments",
+      "item": [
+        {
+          "name": "{payment_instrument_id_verify}",
+          "item": [
+            {
+              "name": "List Payment Instrument Verifications",
+              "id": "a09ea1ea-53e7-4cb0-b5c2-a123d7e121b1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payment_instruments/:payment_instrument_id_verify?limit=<long>&offset=<long>&pageNumber=<long>&pageSize=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id_verify"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of entries to return.",
+                      "key": "limit",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "The number of items to skip before starting to collect the result set.",
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "The page number to list.",
+                      "key": "pageNumber",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "The size of the page.",
+                      "key": "pageSize",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "a0630e92-5fe7-407d-9706-2239b819bb80",
+                      "key": "payment_instrument_id_verify",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "List all the `Verifications` created for a `Payment Instrument`."
+              },
+              "response": [
+                {
+                  "id": "ec7d9fec-ad71-4b49-9b00-4f0920c9f492",
+                  "name": "List of Verification objects",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment_instruments/:payment_instrument_id_verify?limit=<long>&offset=<long>&pageNumber=<long>&pageSize=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment_instruments",
+                        ":payment_instrument_id_verify"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of entries to return.",
+                          "key": "limit",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The number of items to skip before starting to collect the result set.",
+                          "key": "offset",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The page number to list.",
+                          "key": "pageNumber",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The size of the page.",
+                          "key": "pageSize",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "payment_instrument_id_verify"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"_embedded\": {\n    \"verifications\": [\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"application\": \"<string>\",\n        \"identity\": \"<string>\",\n        \"merchant\": \"<string>\",\n        \"merchant_identity\": \"<string>\",\n        \"payment_instrument\": \"<string>\",\n        \"payment_instrument_verification_details\": {\n          \"push_to_card_domestic\": \"NON_FAST_FUNDS\",\n          \"push_to_card_cross_border\": \"NON_FAST_FUNDS\",\n          \"card_type\": \"UNKNOWN\",\n          \"billing_currency\": \"CAD\",\n          \"issuer_country\": \"VNM\"\n        },\n        \"processor\": \"<string>\",\n        \"raw\": {},\n        \"state\": \"FAILED\",\n        \"tags\": {\n          \"nostrud_5\": \"<string>\",\n          \"Loremf\": \"<string>\"\n        },\n        \"trace_id\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"merchant\": {\n            \"href\": \"<string>\"\n          },\n          \"application\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"application\": \"<string>\",\n        \"identity\": \"<string>\",\n        \"merchant\": \"<string>\",\n        \"merchant_identity\": \"<string>\",\n        \"payment_instrument\": \"<string>\",\n        \"payment_instrument_verification_details\": {\n          \"push_to_card_domestic\": \"NOT_SUPPORTED\",\n          \"push_to_card_cross_border\": \"UNKNOWN\",\n          \"card_type\": \"CREDIT\",\n          \"billing_currency\": \"LAK\",\n          \"issuer_country\": \"LVA\"\n        },\n        \"processor\": \"<string>\",\n        \"raw\": {},\n        \"state\": \"PENDING\",\n        \"tags\": {\n          \"irure915\": \"<string>\",\n          \"sed225\": \"<string>\"\n        },\n        \"trace_id\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"merchant\": {\n            \"href\": \"<string>\"\n          },\n          \"application\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"do_1\": true,\n    \"sed_\": -90595016\n  },\n  \"page\": {\n    \"limit\": \"<integer>\",\n    \"next_cursor\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-ec7d9fec-ad71-4b49-9b00-4f0920c9f492"
+                },
+                {
+                  "id": "3a3c301a-118e-4407-bd52-0b3b965ebf2a",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment_instruments/:payment_instrument_id_verify?limit=<long>&offset=<long>&pageNumber=<long>&pageSize=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment_instruments",
+                        ":payment_instrument_id_verify"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of entries to return.",
+                          "key": "limit",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The number of items to skip before starting to collect the result set.",
+                          "key": "offset",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The page number to list.",
+                          "key": "pageNumber",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The size of the page.",
+                          "key": "pageSize",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "payment_instrument_id_verify"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"exercitation8\": \"ex ut Excepteur commodo\"\n        },\n        \"ad9d\": false,\n        \"officia51\": -88423028\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"sintd94\": 89523506\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-3a3c301a-118e-4407-bd52-0b3b965ebf2a"
+                },
+                {
+                  "id": "ac8d878a-72b3-452e-8594-9258b0efa294",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment_instruments/:payment_instrument_id_verify?limit=<long>&offset=<long>&pageNumber=<long>&pageSize=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment_instruments",
+                        ":payment_instrument_id_verify"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of entries to return.",
+                          "key": "limit",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The number of items to skip before starting to collect the result set.",
+                          "key": "offset",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The page number to list.",
+                          "key": "pageNumber",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The size of the page.",
+                          "key": "pageSize",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "payment_instrument_id_verify"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"laborec\": -94629016.05142853,\n        \"Duis_fb\": \"labore Excepteur consequat tempor mollit\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-ac8d878a-72b3-452e-8594-9258b0efa294"
+                },
+                {
+                  "id": "3e47fde4-106d-4faf-b46f-acdcf546e424",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment_instruments/:payment_instrument_id_verify?limit=<long>&offset=<long>&pageNumber=<long>&pageSize=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment_instruments",
+                        ":payment_instrument_id_verify"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of entries to return.",
+                          "key": "limit",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The number of items to skip before starting to collect the result set.",
+                          "key": "offset",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The page number to list.",
+                          "key": "pageNumber",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The size of the page.",
+                          "key": "pageSize",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "payment_instrument_id_verify"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"ullamco0f8\": -23179017,\n        \"ullamco_9\": false,\n        \"sunta\": \"Duis non ut\"\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"velit_193\": true\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-3e47fde4-106d-4faf-b46f-acdcf546e424"
+                },
+                {
+                  "id": "3ce536b1-caae-47d9-aec9-db20e83af199",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment_instruments/:payment_instrument_id_verify?limit=<long>&offset=<long>&pageNumber=<long>&pageSize=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment_instruments",
+                        ":payment_instrument_id_verify"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of entries to return.",
+                          "key": "limit",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The number of items to skip before starting to collect the result set.",
+                          "key": "offset",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The page number to list.",
+                          "key": "pageNumber",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "The size of the page.",
+                          "key": "pageSize",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "payment_instrument_id_verify"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"utacd\": true\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-3ce536b1-caae-47d9-aec9-db20e83af199"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-a09ea1ea-53e7-4cb0-b5c2-a123d7e121b1"
+            }
+          ],
+          "id": "93ae3f0f-4ee3-4758-803f-d4858bc0cc65",
+          "createdAt": "2026-07-28T01:39:47.000Z",
+          "updatedAt": "2026-07-28T01:39:47.000Z",
+          "uid": "35240-93ae3f0f-4ee3-4758-803f-d4858bc0cc65"
+        }
+      ],
+      "id": "6391fcc0-5f92-4b14-9fe8-6f9ffb245739",
+      "createdAt": "2026-07-28T01:39:47.000Z",
+      "updatedAt": "2026-07-28T01:39:47.000Z",
+      "uid": "35240-6391fcc0-5f92-4b14-9fe8-6f9ffb245739"
+    },
+    {
+      "name": "verifications",
+      "item": [
+        {
+          "name": "{verification_id}",
+          "item": [
+            {
+              "name": "Fetch a Verification",
+              "id": "2bd6369c-002d-4cc2-a719-80a6bc7a8903",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/verifications/:verification_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications",
+                    ":verification_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "fa39e4a4-e223-444c-836b-5e1a223cfd8b",
+                      "key": "verification_id",
+                      "value": "<string>",
+                      "description": "(Required) ID of `Verification` object."
+                    }
+                  ]
+                },
+                "description": "Retrieve the details of a `Verification`."
+              },
+              "response": [
+                {
+                  "id": "67caa1ea-e253-448f-8c1d-3de99d30d81f",
+                  "name": "Single Verification object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/verifications/:verification_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "verifications",
+                        ":verification_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "verification_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"application\": \"<string>\",\n  \"identity\": \"<string>\",\n  \"merchant\": \"<string>\",\n  \"merchant_identity\": \"<string>\",\n  \"payment_instrument\": \"<string>\",\n  \"payment_instrument_verification_details\": {\n    \"push_to_card_domestic\": \"FAST_FUNDS\",\n    \"push_to_card_cross_border\": \"UNKNOWN\",\n    \"card_type\": \"CREDIT\",\n    \"billing_currency\": \"CAD\",\n    \"issuer_country\": \"ISR\"\n  },\n  \"processor\": \"<string>\",\n  \"raw\": {},\n  \"state\": \"FAILED\",\n  \"tags\": {\n    \"magna_c\": \"<string>\",\n    \"officia6_a\": \"<string>\"\n  },\n  \"trace_id\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"merchant\": {\n      \"href\": \"<string>\"\n    },\n    \"application\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-67caa1ea-e253-448f-8c1d-3de99d30d81f"
+                },
+                {
+                  "id": "c6193ec7-d4b8-41e6-b302-018ba283202b",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/verifications/:verification_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "verifications",
+                        ":verification_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "verification_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"exercitation8\": \"ex ut Excepteur commodo\"\n        },\n        \"ad9d\": false,\n        \"officia51\": -88423028\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"sintd94\": 89523506\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-c6193ec7-d4b8-41e6-b302-018ba283202b"
+                },
+                {
+                  "id": "9ea16361-982e-4e1a-8fd8-b9d31e2677c4",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/verifications/:verification_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "verifications",
+                        ":verification_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "verification_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"laborec\": -94629016.05142853,\n        \"Duis_fb\": \"labore Excepteur consequat tempor mollit\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-9ea16361-982e-4e1a-8fd8-b9d31e2677c4"
+                },
+                {
+                  "id": "667c300b-fa77-468e-a284-91fb1cb09454",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/verifications/:verification_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "verifications",
+                        ":verification_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "verification_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"ullamco0f8\": -23179017,\n        \"ullamco_9\": false,\n        \"sunta\": \"Duis non ut\"\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"velit_193\": true\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-667c300b-fa77-468e-a284-91fb1cb09454"
+                },
+                {
+                  "id": "dce6307f-156b-4803-98c2-86bcdc8a5680",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/verifications/:verification_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "verifications",
+                        ":verification_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "verification_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"utacd\": true\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:47.000Z",
+                  "updatedAt": "2026-07-28T01:39:47.000Z",
+                  "uid": "35240-dce6307f-156b-4803-98c2-86bcdc8a5680"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-2bd6369c-002d-4cc2-a719-80a6bc7a8903"
+            }
+          ],
+          "id": "c3bea7b5-cb0c-4eec-93f3-6b0b726fca40",
+          "createdAt": "2026-07-28T01:39:47.000Z",
+          "updatedAt": "2026-07-28T01:39:47.000Z",
+          "uid": "35240-c3bea7b5-cb0c-4eec-93f3-6b0b726fca40"
+        },
+        {
+          "name": "Create a Merchant Verification",
+          "id": "368be7e4-e81b-4fb2-9ab1-e5a706ac6d4a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchant\": \"<string>\",\n  \"processor\": \"DUMMY_V1\",\n  \"security_code\": \"<string>\",\n  \"verify_payment_card\": \"<boolean>\",\n  \"tags\": {\n    \"auteef1\": \"<string>\",\n    \"occaecat_cf0\": \"<string>\",\n    \"ute8\": \"<string>\"\n  },\n  \"address\": {\n    \"city\": \"<string>\",\n    \"country\": \"FLK\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\"\n  },\n  \"identity\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/verifications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "verifications"
+              ]
+            },
+            "description": "Create a `Verification` to verify a seller's `Identity`.\n\nVerifications can also be created directly on the resources you want to verify. For example:\n- `POST /merchants/{merchant_id}/verifications`\n- `POST /payment_instruments/{payment_instrument_id}/verifications`"
+          },
+          "response": [
+            {
+              "id": "8189435f-9a83-447e-be17-dcc068ca4753",
+              "name": "Single Verification object",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": \"<string>\",\n  \"processor\": \"DUMMY_V1\",\n  \"security_code\": \"<string>\",\n  \"verify_payment_card\": \"<boolean>\",\n  \"tags\": {\n    \"auteef1\": \"<string>\",\n    \"occaecat_cf0\": \"<string>\",\n    \"ute8\": \"<string>\"\n  },\n  \"address\": {\n    \"city\": \"<string>\",\n    \"country\": \"FLK\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\"\n  },\n  \"identity\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/verifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "finix-apiuser-role",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "x-request-id",
+                  "value": ""
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"application\": \"<string>\",\n  \"identity\": \"<string>\",\n  \"merchant\": \"<string>\",\n  \"merchant_identity\": \"<string>\",\n  \"payment_instrument\": \"<string>\",\n  \"payment_instrument_verification_details\": {\n    \"push_to_card_domestic\": \"FAST_FUNDS\",\n    \"push_to_card_cross_border\": \"UNKNOWN\",\n    \"card_type\": \"CREDIT\",\n    \"billing_currency\": \"CAD\",\n    \"issuer_country\": \"ISR\"\n  },\n  \"processor\": \"<string>\",\n  \"raw\": {},\n  \"state\": \"FAILED\",\n  \"tags\": {\n    \"magna_c\": \"<string>\",\n    \"officia6_a\": \"<string>\"\n  },\n  \"trace_id\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"merchant\": {\n      \"href\": \"<string>\"\n    },\n    \"application\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-8189435f-9a83-447e-be17-dcc068ca4753"
+            },
+            {
+              "id": "326f3b1b-66b0-48ea-839a-2ca4e7c6d035",
+              "name": "Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": \"<string>\",\n  \"processor\": \"DUMMY_V1\",\n  \"security_code\": \"<string>\",\n  \"verify_payment_card\": \"<boolean>\",\n  \"tags\": {\n    \"auteef1\": \"<string>\",\n    \"occaecat_cf0\": \"<string>\",\n    \"ute8\": \"<string>\"\n  },\n  \"address\": {\n    \"city\": \"<string>\",\n    \"country\": \"FLK\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\"\n  },\n  \"identity\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/verifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-326f3b1b-66b0-48ea-839a-2ca4e7c6d035"
+            },
+            {
+              "id": "ed6cebfc-9020-4ec7-b18c-b2cf004e7e22",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": \"<string>\",\n  \"processor\": \"DUMMY_V1\",\n  \"security_code\": \"<string>\",\n  \"verify_payment_card\": \"<boolean>\",\n  \"tags\": {\n    \"auteef1\": \"<string>\",\n    \"occaecat_cf0\": \"<string>\",\n    \"ute8\": \"<string>\"\n  },\n  \"address\": {\n    \"city\": \"<string>\",\n    \"country\": \"FLK\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\"\n  },\n  \"identity\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/verifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"exercitation8\": \"ex ut Excepteur commodo\"\n        },\n        \"ad9d\": false,\n        \"officia51\": -88423028\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"sintd94\": 89523506\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-ed6cebfc-9020-4ec7-b18c-b2cf004e7e22"
+            },
+            {
+              "id": "8493baea-3e3b-4274-b90a-705c96ee1a82",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": \"<string>\",\n  \"processor\": \"DUMMY_V1\",\n  \"security_code\": \"<string>\",\n  \"verify_payment_card\": \"<boolean>\",\n  \"tags\": {\n    \"auteef1\": \"<string>\",\n    \"occaecat_cf0\": \"<string>\",\n    \"ute8\": \"<string>\"\n  },\n  \"address\": {\n    \"city\": \"<string>\",\n    \"country\": \"FLK\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\"\n  },\n  \"identity\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/verifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"laborec\": -94629016.05142853,\n        \"Duis_fb\": \"labore Excepteur consequat tempor mollit\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-8493baea-3e3b-4274-b90a-705c96ee1a82"
+            },
+            {
+              "id": "75c25dfc-24e5-49ac-bb4b-ef411acb290b",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": \"<string>\",\n  \"processor\": \"DUMMY_V1\",\n  \"security_code\": \"<string>\",\n  \"verify_payment_card\": \"<boolean>\",\n  \"tags\": {\n    \"auteef1\": \"<string>\",\n    \"occaecat_cf0\": \"<string>\",\n    \"ute8\": \"<string>\"\n  },\n  \"address\": {\n    \"city\": \"<string>\",\n    \"country\": \"FLK\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\"\n  },\n  \"identity\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/verifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications"
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"utacd\": true\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-75c25dfc-24e5-49ac-bb4b-ef411acb290b"
+            },
+            {
+              "id": "fac982d6-bfc7-4902-b39c-083509a86e39",
+              "name": "Invalid field",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": \"<string>\",\n  \"processor\": \"DUMMY_V1\",\n  \"security_code\": \"<string>\",\n  \"verify_payment_card\": \"<boolean>\",\n  \"tags\": {\n    \"auteef1\": \"<string>\",\n    \"occaecat_cf0\": \"<string>\",\n    \"ute8\": \"<string>\"\n  },\n  \"address\": {\n    \"city\": \"<string>\",\n    \"country\": \"FLK\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\"\n  },\n  \"identity\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/verifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-fac982d6-bfc7-4902-b39c-083509a86e39"
+            }
+          ],
+          "createdAt": "2026-07-28T01:39:47.000Z",
+          "updatedAt": "2026-07-28T01:39:47.000Z",
+          "uid": "35240-368be7e4-e81b-4fb2-9ab1-e5a706ac6d4a"
+        },
+        {
+          "name": "List Verifications",
+          "id": "09d278f0-3629-4a02-b2fc-272f473d1085",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/verifications?limit=<integer>&after_cursor=<string>&before_cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "verifications"
+              ],
+              "query": [
+                {
+                  "description": "The numbers of items to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Return every resource created after the cursor value.",
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Return every resource created before the cursor value.",
+                  "key": "before_cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve a list of `Verifications`."
+          },
+          "response": [
+            {
+              "id": "360b778c-37c7-4f91-b215-ded881417917",
+              "name": "List of Verification objects",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/verifications?limit=<integer>&after_cursor=<string>&before_cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return every resource created before the cursor value.",
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "finix-apiuser-role",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "x-request-id",
+                  "value": ""
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"_embedded\": {\n    \"verifications\": [\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"application\": \"<string>\",\n        \"identity\": \"<string>\",\n        \"merchant\": \"<string>\",\n        \"merchant_identity\": \"<string>\",\n        \"payment_instrument\": \"<string>\",\n        \"payment_instrument_verification_details\": {\n          \"push_to_card_domestic\": \"NON_FAST_FUNDS\",\n          \"push_to_card_cross_border\": \"NON_FAST_FUNDS\",\n          \"card_type\": \"UNKNOWN\",\n          \"billing_currency\": \"CAD\",\n          \"issuer_country\": \"VNM\"\n        },\n        \"processor\": \"<string>\",\n        \"raw\": {},\n        \"state\": \"FAILED\",\n        \"tags\": {\n          \"nostrud_5\": \"<string>\",\n          \"Loremf\": \"<string>\"\n        },\n        \"trace_id\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"merchant\": {\n            \"href\": \"<string>\"\n          },\n          \"application\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"application\": \"<string>\",\n        \"identity\": \"<string>\",\n        \"merchant\": \"<string>\",\n        \"merchant_identity\": \"<string>\",\n        \"payment_instrument\": \"<string>\",\n        \"payment_instrument_verification_details\": {\n          \"push_to_card_domestic\": \"NOT_SUPPORTED\",\n          \"push_to_card_cross_border\": \"UNKNOWN\",\n          \"card_type\": \"CREDIT\",\n          \"billing_currency\": \"LAK\",\n          \"issuer_country\": \"LVA\"\n        },\n        \"processor\": \"<string>\",\n        \"raw\": {},\n        \"state\": \"PENDING\",\n        \"tags\": {\n          \"irure915\": \"<string>\",\n          \"sed225\": \"<string>\"\n        },\n        \"trace_id\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"merchant\": {\n            \"href\": \"<string>\"\n          },\n          \"application\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"do_1\": true,\n    \"sed_\": -90595016\n  },\n  \"page\": {\n    \"limit\": \"<integer>\",\n    \"next_cursor\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-360b778c-37c7-4f91-b215-ded881417917"
+            },
+            {
+              "id": "55339c2d-651e-4ede-ab61-b3fa31e340f4",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/verifications?limit=<integer>&after_cursor=<string>&before_cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return every resource created before the cursor value.",
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"exercitation8\": \"ex ut Excepteur commodo\"\n        },\n        \"ad9d\": false,\n        \"officia51\": -88423028\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"sintd94\": 89523506\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-55339c2d-651e-4ede-ab61-b3fa31e340f4"
+            },
+            {
+              "id": "cd1afafe-2ab3-428d-97fd-86ca40062d13",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/verifications?limit=<integer>&after_cursor=<string>&before_cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return every resource created before the cursor value.",
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"laborec\": -94629016.05142853,\n        \"Duis_fb\": \"labore Excepteur consequat tempor mollit\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-cd1afafe-2ab3-428d-97fd-86ca40062d13"
+            },
+            {
+              "id": "79cf731d-baf4-4693-a84e-6db28cf4e7a8",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/verifications?limit=<integer>&after_cursor=<string>&before_cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "verifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return every resource created before the cursor value.",
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"utacd\": true\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:47.000Z",
+              "updatedAt": "2026-07-28T01:39:47.000Z",
+              "uid": "35240-79cf731d-baf4-4693-a84e-6db28cf4e7a8"
+            }
+          ],
+          "createdAt": "2026-07-28T01:39:47.000Z",
+          "updatedAt": "2026-07-28T01:39:47.000Z",
+          "uid": "35240-09d278f0-3629-4a02-b2fc-272f473d1085"
+        }
+      ],
+      "id": "9291f496-be2c-46b4-a8f5-a4e160822bed",
+      "createdAt": "2026-07-28T01:39:47.000Z",
+      "updatedAt": "2026-07-28T01:39:47.000Z",
+      "uid": "35240-9291f496-be2c-46b4-a8f5-a4e160822bed"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://finix.sandbox-payments-api.com"
+    }
+  ]
+}

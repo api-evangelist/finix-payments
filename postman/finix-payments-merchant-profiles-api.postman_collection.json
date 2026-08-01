@@ -1,0 +1,998 @@
+{
+  "info": {
+    "_postman_id": "f3fcfdb4-fca2-4952-8965-afab13d99864",
+    "name": "Finix Authorizations Merchant Profiles API",
+    "description": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:39:34.000Z",
+    "updatedAt": "2026-07-28T01:39:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f3fcfdb4-fca2-4952-8965-afab13d99864"
+  },
+  "item": [
+    {
+      "name": "merchant_profiles",
+      "item": [
+        {
+          "name": "{merchant_profile_id}",
+          "item": [
+            {
+              "name": "Fetch a Merchant Profile",
+              "id": "c10d9337-8b33-46f2-a973-89b1e27bfd73",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "merchant_profiles",
+                    ":merchant_profile_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "cabee313-0fd6-4d17-8471-f7a64f45a60b",
+                      "key": "merchant_profile_id",
+                      "value": "<string>",
+                      "description": "(Required) ID of `merchant_profile`."
+                    }
+                  ]
+                },
+                "description": "Retrieve the details of a previosuly created `merchant_profile`."
+              },
+              "response": [
+                {
+                  "id": "1001f384-45f7-4296-b12c-1dda03e19eff",
+                  "name": "Single merchant profile object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchant_profiles",
+                        ":merchant_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchant_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"application\": \"<string>\",\n  \"fee_profile\": \"<string>\",\n  \"payout_profile\": \"<string>\",\n  \"risk_profile\": \"<string>\",\n  \"tags\": {\n    \"animef8\": \"<string>\",\n    \"ind8\": \"<string>\",\n    \"voluptatec11\": \"<string>\"\n  },\n  \"_links\": {\n    \"application\": {\n      \"href\": \"<string>\"\n    },\n    \"fee_profile\": {\n      \"href\": \"<string>\"\n    },\n    \"owner_identity\": {\n      \"href\": \"<string>\"\n    },\n    \"processors\": {\n      \"href\": \"<string>\"\n    },\n    \"reserve_profile\": {\n      \"href\": \"<string>\"\n    },\n    \"risk_profile\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"users\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:35.000Z",
+                  "updatedAt": "2026-07-28T01:39:35.000Z",
+                  "uid": "35240-1001f384-45f7-4296-b12c-1dda03e19eff"
+                },
+                {
+                  "id": "705b67b5-42f2-4659-85d9-62398939cdb2",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchant_profiles",
+                        ":merchant_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchant_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"fugiat0\": -4363365,\n        \"mollit688\": 93815089\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:35.000Z",
+                  "updatedAt": "2026-07-28T01:39:35.000Z",
+                  "uid": "35240-705b67b5-42f2-4659-85d9-62398939cdb2"
+                },
+                {
+                  "id": "d43d9db7-b35b-4c3a-8cc0-c49f8dad0beb",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchant_profiles",
+                        ":merchant_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchant_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"officia_c_\": -2008868,\n        \"dolor58e\": 73474295\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"velit_81c\": \"\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:35.000Z",
+                  "updatedAt": "2026-07-28T01:39:35.000Z",
+                  "uid": "35240-d43d9db7-b35b-4c3a-8cc0-c49f8dad0beb"
+                },
+                {
+                  "id": "e9d1c148-42e5-4ef5-88f8-b64edbe327ab",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchant_profiles",
+                        ":merchant_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchant_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"velit_abe\": true\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:35.000Z",
+                  "updatedAt": "2026-07-28T01:39:35.000Z",
+                  "uid": "35240-e9d1c148-42e5-4ef5-88f8-b64edbe327ab"
+                },
+                {
+                  "id": "8afbd26b-87c6-4c6a-86f8-6d849ed6d8fc",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchant_profiles",
+                        ":merchant_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchant_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:35.000Z",
+                  "updatedAt": "2026-07-28T01:39:35.000Z",
+                  "uid": "35240-8afbd26b-87c6-4c6a-86f8-6d849ed6d8fc"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:35.000Z",
+              "updatedAt": "2026-07-28T01:39:35.000Z",
+              "uid": "35240-c10d9337-8b33-46f2-a973-89b1e27bfd73"
+            },
+            {
+              "name": "Update a Merchant Profile",
+              "id": "1ebd6a0e-2ce7-496a-8c33-0d5f0933052b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fee_profile\": \"<string>\",\n  \"payout_profile\": \"<string>\",\n  \"risk_profile\": \"<string>\",\n  \"tags\": {\n    \"et81\": \"<string>\",\n    \"ex_c\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "merchant_profiles",
+                    ":merchant_profile_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c0bf0839-e3c8-49d9-b75c-146f2b9a693f",
+                      "key": "merchant_profile_id",
+                      "value": "<string>",
+                      "description": "(Required) ID of `merchant_profile`."
+                    }
+                  ]
+                },
+                "description": "Update a `merchant_profile`."
+              },
+              "response": [
+                {
+                  "id": "2466b48d-b576-46b2-9946-45aa33462bad",
+                  "name": "Single merchant profile object",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fee_profile\": \"<string>\",\n  \"payout_profile\": \"<string>\",\n  \"risk_profile\": \"<string>\",\n  \"tags\": {\n    \"et81\": \"<string>\",\n    \"ex_c\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchant_profiles",
+                        ":merchant_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchant_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"application\": \"<string>\",\n  \"fee_profile\": \"<string>\",\n  \"payout_profile\": \"<string>\",\n  \"risk_profile\": \"<string>\",\n  \"tags\": {\n    \"animef8\": \"<string>\",\n    \"ind8\": \"<string>\",\n    \"voluptatec11\": \"<string>\"\n  },\n  \"_links\": {\n    \"application\": {\n      \"href\": \"<string>\"\n    },\n    \"fee_profile\": {\n      \"href\": \"<string>\"\n    },\n    \"owner_identity\": {\n      \"href\": \"<string>\"\n    },\n    \"processors\": {\n      \"href\": \"<string>\"\n    },\n    \"reserve_profile\": {\n      \"href\": \"<string>\"\n    },\n    \"risk_profile\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"users\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:35.000Z",
+                  "updatedAt": "2026-07-28T01:39:35.000Z",
+                  "uid": "35240-2466b48d-b576-46b2-9946-45aa33462bad"
+                },
+                {
+                  "id": "b8084f37-4667-4c76-b593-993bc66f8ec4",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fee_profile\": \"<string>\",\n  \"payout_profile\": \"<string>\",\n  \"risk_profile\": \"<string>\",\n  \"tags\": {\n    \"et81\": \"<string>\",\n    \"ex_c\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchant_profiles",
+                        ":merchant_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchant_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"fugiat0\": -4363365,\n        \"mollit688\": 93815089\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:35.000Z",
+                  "updatedAt": "2026-07-28T01:39:35.000Z",
+                  "uid": "35240-b8084f37-4667-4c76-b593-993bc66f8ec4"
+                },
+                {
+                  "id": "0bda7a46-9cdf-4e70-8703-1cd7ef2dd593",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fee_profile\": \"<string>\",\n  \"payout_profile\": \"<string>\",\n  \"risk_profile\": \"<string>\",\n  \"tags\": {\n    \"et81\": \"<string>\",\n    \"ex_c\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchant_profiles",
+                        ":merchant_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchant_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"officia_c_\": -2008868,\n        \"dolor58e\": 73474295\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"velit_81c\": \"\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:35.000Z",
+                  "updatedAt": "2026-07-28T01:39:35.000Z",
+                  "uid": "35240-0bda7a46-9cdf-4e70-8703-1cd7ef2dd593"
+                },
+                {
+                  "id": "11671deb-acc4-47ef-990a-4d287e1be454",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fee_profile\": \"<string>\",\n  \"payout_profile\": \"<string>\",\n  \"risk_profile\": \"<string>\",\n  \"tags\": {\n    \"et81\": \"<string>\",\n    \"ex_c\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/merchant_profiles/:merchant_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchant_profiles",
+                        ":merchant_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchant_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:35.000Z",
+                  "updatedAt": "2026-07-28T01:39:35.000Z",
+                  "uid": "35240-11671deb-acc4-47ef-990a-4d287e1be454"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:35.000Z",
+              "updatedAt": "2026-07-28T01:39:35.000Z",
+              "uid": "35240-1ebd6a0e-2ce7-496a-8c33-0d5f0933052b"
+            }
+          ],
+          "id": "09134122-3eff-4059-94b2-1163d6f633e2",
+          "createdAt": "2026-07-28T01:39:35.000Z",
+          "updatedAt": "2026-07-28T01:39:35.000Z",
+          "uid": "35240-09134122-3eff-4059-94b2-1163d6f633e2"
+        },
+        {
+          "name": "List Merchant Profiles",
+          "id": "4a8e5c18-db93-49fd-a9ee-b0830b23865d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/merchant_profiles?id=<string>&before_cursor=<string>&limit=<integer>&after_cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "merchant_profiles"
+              ],
+              "query": [
+                {
+                  "description": "Filter by `id`.",
+                  "key": "id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Return every resource created before the cursor value.",
+                  "key": "before_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The numbers of items to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Return every resource created after the cursor value.",
+                  "key": "after_cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retireve a list of all `merchant_profiles`."
+          },
+          "response": [
+            {
+              "id": "e667d376-2a80-439c-a448-8e16e03c5eeb",
+              "name": "Single merchant profile object",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/merchant_profiles?id=<string>&before_cursor=<string>&limit=<integer>&after_cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "merchant_profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by `id`.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return every resource created before the cursor value.",
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"page\": {\n    \"limit\": \"<integer>\",\n    \"next_cursor\": \"<string>\"\n  },\n  \"_embedded\": {\n    \"merchant_profiles\": [\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"application\": \"<string>\",\n        \"fee_profile\": \"<string>\",\n        \"payout_profile\": \"<string>\",\n        \"risk_profile\": \"<string>\",\n        \"tags\": {\n          \"voluptateaec\": \"<string>\",\n          \"suntb\": \"<string>\"\n        },\n        \"_links\": {\n          \"application\": {\n            \"href\": \"<string>\"\n          },\n          \"fee_profile\": {\n            \"href\": \"<string>\"\n          },\n          \"owner_identity\": {\n            \"href\": \"<string>\"\n          },\n          \"processors\": {\n            \"href\": \"<string>\"\n          },\n          \"reserve_profile\": {\n            \"href\": \"<string>\"\n          },\n          \"risk_profile\": {\n            \"href\": \"<string>\"\n          },\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"users\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"application\": \"<string>\",\n        \"fee_profile\": \"<string>\",\n        \"payout_profile\": \"<string>\",\n        \"risk_profile\": \"<string>\",\n        \"tags\": {\n          \"cillum_3_\": \"<string>\"\n        },\n        \"_links\": {\n          \"application\": {\n            \"href\": \"<string>\"\n          },\n          \"fee_profile\": {\n            \"href\": \"<string>\"\n          },\n          \"owner_identity\": {\n            \"href\": \"<string>\"\n          },\n          \"processors\": {\n            \"href\": \"<string>\"\n          },\n          \"reserve_profile\": {\n            \"href\": \"<string>\"\n          },\n          \"risk_profile\": {\n            \"href\": \"<string>\"\n          },\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"users\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"voluptate__4\": -56379195.93361223,\n    \"in_66\": -80132536,\n    \"consequat9\": -21038205.7822998,\n    \"non_cd\": false\n  }\n}",
+              "createdAt": "2026-07-28T01:39:35.000Z",
+              "updatedAt": "2026-07-28T01:39:35.000Z",
+              "uid": "35240-e667d376-2a80-439c-a448-8e16e03c5eeb"
+            },
+            {
+              "id": "a85d16ad-1af6-476c-8bed-3ffad19163d1",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/merchant_profiles?id=<string>&before_cursor=<string>&limit=<integer>&after_cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "merchant_profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by `id`.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return every resource created before the cursor value.",
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"fugiat0\": -4363365,\n        \"mollit688\": 93815089\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:35.000Z",
+              "updatedAt": "2026-07-28T01:39:35.000Z",
+              "uid": "35240-a85d16ad-1af6-476c-8bed-3ffad19163d1"
+            },
+            {
+              "id": "ff422758-737a-45f7-b3dd-da45a520f643",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/merchant_profiles?id=<string>&before_cursor=<string>&limit=<integer>&after_cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "merchant_profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by `id`.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return every resource created before the cursor value.",
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"officia_c_\": -2008868,\n        \"dolor58e\": 73474295\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"velit_81c\": \"\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:35.000Z",
+              "updatedAt": "2026-07-28T01:39:35.000Z",
+              "uid": "35240-ff422758-737a-45f7-b3dd-da45a520f643"
+            },
+            {
+              "id": "861b2510-3ac1-4a06-9f9f-baf5f6cf03c1",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/merchant_profiles?id=<string>&before_cursor=<string>&limit=<integer>&after_cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "merchant_profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by `id`.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Return every resource created before the cursor value.",
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:35.000Z",
+              "updatedAt": "2026-07-28T01:39:35.000Z",
+              "uid": "35240-861b2510-3ac1-4a06-9f9f-baf5f6cf03c1"
+            }
+          ],
+          "createdAt": "2026-07-28T01:39:35.000Z",
+          "updatedAt": "2026-07-28T01:39:35.000Z",
+          "uid": "35240-4a8e5c18-db93-49fd-a9ee-b0830b23865d"
+        }
+      ],
+      "id": "f55eed2c-b00b-4237-a791-ea80bc22721e",
+      "createdAt": "2026-07-28T01:39:35.000Z",
+      "updatedAt": "2026-07-28T01:39:35.000Z",
+      "uid": "35240-f55eed2c-b00b-4237-a791-ea80bc22721e"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://finix.sandbox-payments-api.com"
+    }
+  ]
+}

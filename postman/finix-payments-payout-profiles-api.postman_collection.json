@@ -1,0 +1,1635 @@
+{
+  "info": {
+    "_postman_id": "82865461-8e95-4291-8396-430e5b583289",
+    "name": "Finix Authorizations Payout Profiles API",
+    "description": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:39:42.000Z",
+    "updatedAt": "2026-07-28T01:39:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-82865461-8e95-4291-8396-430e5b583289"
+  },
+  "item": [
+    {
+      "name": "payout_profiles",
+      "item": [
+        {
+          "name": "{payout_profile_id}",
+          "item": [
+            {
+              "name": "Fetch a Payout Profile",
+              "id": "7450e0ab-0ba8-4d5e-bb2e-4600d67f1e8e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payout_profiles",
+                    ":payout_profile_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "05571bfa-d6bc-4e94-bc28-e079438a3ccf",
+                      "key": "payout_profile_id",
+                      "value": "<string>",
+                      "description": "(Required) ID of the `Payout Profile`."
+                    }
+                  ]
+                },
+                "description": "Retrieve the details of a previously created `Payout Profile`."
+              },
+              "response": [
+                {
+                  "id": "2d7dae5a-d61d-40b8-836e-bec7f7aa1f0d",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"gross\": {\n    \"fees\": {\n      \"day_of_month\": \"<integer>\",\n      \"frequency\": \"MONTHLY\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"SAME_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    },\n    \"payouts\": {\n      \"frequency\": \"CONTINUOUS\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"NEXT_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    }\n  },\n  \"linked_id\": \"<string>\",\n  \"linked_type\": \"<string>\",\n  \"tags\": {\n    \"aliqua_df\": \"<string>\",\n    \"Ut___\": \"<string>\"\n  },\n  \"type\": \"GROSS\",\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"enim59\": \"tempor adipisicing\"\n  },\n  \"net\": {\n    \"frequency\": \"CUSTOM\",\n    \"payment_instrument_id\": \"<string>\",\n    \"rail\": \"SAME_DAY_ACH\",\n    \"submission_delay_days\": \"<integer>\"\n  },\n  \"custom\": {}\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-2d7dae5a-d61d-40b8-836e-bec7f7aa1f0d"
+                },
+                {
+                  "id": "4a18bc97-703f-477b-9836-f0f50a703372",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"esseb\": -78907711.34995611\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-4a18bc97-703f-477b-9836-f0f50a703372"
+                },
+                {
+                  "id": "2c6cc806-08ba-43aa-801b-9317a1ac5b88",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"ea_55a\": -44029317,\n        \"non_0\": 86138148,\n        \"nulla_26\": -45067068,\n        \"nostrud_9\": -90611668\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-2c6cc806-08ba-43aa-801b-9317a1ac5b88"
+                },
+                {
+                  "id": "143034e0-a888-4bdf-a689-1532b35d216c",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-143034e0-a888-4bdf-a689-1532b35d216c"
+                },
+                {
+                  "id": "8b104623-3e22-4288-a019-a646c98f5605",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"reprehenderit_d\": 29495691.277930945\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-8b104623-3e22-4288-a019-a646c98f5605"
+                },
+                {
+                  "id": "205213c5-db53-4afb-9448-7a71bb3180ae",
+                  "name": "Invalid field",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-205213c5-db53-4afb-9448-7a71bb3180ae"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:42.000Z",
+              "updatedAt": "2026-07-28T01:39:42.000Z",
+              "uid": "35240-7450e0ab-0ba8-4d5e-bb2e-4600d67f1e8e"
+            },
+            {
+              "name": "Update a Payout Profile",
+              "id": "ae42b30b-0126-41bd-94c4-66318d72f318",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gross\": {\n    \"fees\": {\n      \"day_of_month\": \"<integer>\",\n      \"frequency\": \"CONTINUOUS\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"SAME_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    },\n    \"payouts\": {\n      \"frequency\": \"CUSTOM\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"<string>\",\n      \"submission_delay_days\": \"<integer>\"\n    }\n  },\n  \"tags\": {\n    \"voluptated9\": \"<string>\",\n    \"mollit21\": \"<string>\"\n  },\n  \"type\": \"GROSS\",\n  \"net\": {\n    \"frequency\": \"CONTINUOUS\",\n    \"payment_instrument_id\": \"<string>\",\n    \"rail\": \"NEXT_DAY_ACH\",\n    \"submission_delay_days\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payout_profiles",
+                    ":payout_profile_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "9e4dd30d-492d-4b77-a018-acd40d1d30f9",
+                      "key": "payout_profile_id",
+                      "value": "<string>",
+                      "description": "(Required) ID of the `Payout Profile`."
+                    }
+                  ]
+                },
+                "description": "Update a `Payout Profile` to configure how fees and payouts get calculated, credited, and debited.\n\nBy default, `Merchants` get configured with daily net settlements. Payouts get submitted using the **Next-Day ACH** `rail`. Contact [Finix Support](/guides/getting-started/support-at-finix/) to configure payouts on a custom schedule."
+              },
+              "response": [
+                {
+                  "id": "6bfe3112-fd6e-4993-9012-1904c0e6ccbc",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"gross\": {\n    \"fees\": {\n      \"day_of_month\": \"<integer>\",\n      \"frequency\": \"CONTINUOUS\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"SAME_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    },\n    \"payouts\": {\n      \"frequency\": \"CUSTOM\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"<string>\",\n      \"submission_delay_days\": \"<integer>\"\n    }\n  },\n  \"tags\": {\n    \"voluptated9\": \"<string>\",\n    \"mollit21\": \"<string>\"\n  },\n  \"type\": \"GROSS\",\n  \"net\": {\n    \"frequency\": \"CONTINUOUS\",\n    \"payment_instrument_id\": \"<string>\",\n    \"rail\": \"NEXT_DAY_ACH\",\n    \"submission_delay_days\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"gross\": {\n    \"fees\": {\n      \"day_of_month\": \"<integer>\",\n      \"frequency\": \"MONTHLY\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"SAME_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    },\n    \"payouts\": {\n      \"frequency\": \"CONTINUOUS\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"NEXT_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    }\n  },\n  \"linked_id\": \"<string>\",\n  \"linked_type\": \"<string>\",\n  \"tags\": {\n    \"aliqua_df\": \"<string>\",\n    \"Ut___\": \"<string>\"\n  },\n  \"type\": \"GROSS\",\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"enim59\": \"tempor adipisicing\"\n  },\n  \"net\": {\n    \"frequency\": \"CUSTOM\",\n    \"payment_instrument_id\": \"<string>\",\n    \"rail\": \"SAME_DAY_ACH\",\n    \"submission_delay_days\": \"<integer>\"\n  },\n  \"custom\": {}\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-6bfe3112-fd6e-4993-9012-1904c0e6ccbc"
+                },
+                {
+                  "id": "38d0e72c-b114-4de5-8089-189f32cc33dd",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"gross\": {\n    \"fees\": {\n      \"day_of_month\": \"<integer>\",\n      \"frequency\": \"CONTINUOUS\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"SAME_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    },\n    \"payouts\": {\n      \"frequency\": \"CUSTOM\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"<string>\",\n      \"submission_delay_days\": \"<integer>\"\n    }\n  },\n  \"tags\": {\n    \"voluptated9\": \"<string>\",\n    \"mollit21\": \"<string>\"\n  },\n  \"type\": \"GROSS\",\n  \"net\": {\n    \"frequency\": \"CONTINUOUS\",\n    \"payment_instrument_id\": \"<string>\",\n    \"rail\": \"NEXT_DAY_ACH\",\n    \"submission_delay_days\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"esseb\": -78907711.34995611\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-38d0e72c-b114-4de5-8089-189f32cc33dd"
+                },
+                {
+                  "id": "f2a45963-a551-42f1-b14b-a0f2c740155b",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"gross\": {\n    \"fees\": {\n      \"day_of_month\": \"<integer>\",\n      \"frequency\": \"CONTINUOUS\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"SAME_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    },\n    \"payouts\": {\n      \"frequency\": \"CUSTOM\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"<string>\",\n      \"submission_delay_days\": \"<integer>\"\n    }\n  },\n  \"tags\": {\n    \"voluptated9\": \"<string>\",\n    \"mollit21\": \"<string>\"\n  },\n  \"type\": \"GROSS\",\n  \"net\": {\n    \"frequency\": \"CONTINUOUS\",\n    \"payment_instrument_id\": \"<string>\",\n    \"rail\": \"NEXT_DAY_ACH\",\n    \"submission_delay_days\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"ea_55a\": -44029317,\n        \"non_0\": 86138148,\n        \"nulla_26\": -45067068,\n        \"nostrud_9\": -90611668\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-f2a45963-a551-42f1-b14b-a0f2c740155b"
+                },
+                {
+                  "id": "516f0721-7b7a-4bf4-b09a-1b31c8277131",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"gross\": {\n    \"fees\": {\n      \"day_of_month\": \"<integer>\",\n      \"frequency\": \"CONTINUOUS\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"SAME_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    },\n    \"payouts\": {\n      \"frequency\": \"CUSTOM\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"<string>\",\n      \"submission_delay_days\": \"<integer>\"\n    }\n  },\n  \"tags\": {\n    \"voluptated9\": \"<string>\",\n    \"mollit21\": \"<string>\"\n  },\n  \"type\": \"GROSS\",\n  \"net\": {\n    \"frequency\": \"CONTINUOUS\",\n    \"payment_instrument_id\": \"<string>\",\n    \"rail\": \"NEXT_DAY_ACH\",\n    \"submission_delay_days\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-516f0721-7b7a-4bf4-b09a-1b31c8277131"
+                },
+                {
+                  "id": "1893fe3d-2e05-4d88-bacf-c46bb37800a1",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"gross\": {\n    \"fees\": {\n      \"day_of_month\": \"<integer>\",\n      \"frequency\": \"CONTINUOUS\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"SAME_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    },\n    \"payouts\": {\n      \"frequency\": \"CUSTOM\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"<string>\",\n      \"submission_delay_days\": \"<integer>\"\n    }\n  },\n  \"tags\": {\n    \"voluptated9\": \"<string>\",\n    \"mollit21\": \"<string>\"\n  },\n  \"type\": \"GROSS\",\n  \"net\": {\n    \"frequency\": \"CONTINUOUS\",\n    \"payment_instrument_id\": \"<string>\",\n    \"rail\": \"NEXT_DAY_ACH\",\n    \"submission_delay_days\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"reprehenderit_d\": 29495691.277930945\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-1893fe3d-2e05-4d88-bacf-c46bb37800a1"
+                },
+                {
+                  "id": "52934b81-5455-4c70-9cc0-e7f03a42b7c0",
+                  "name": "Invalid field",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"gross\": {\n    \"fees\": {\n      \"day_of_month\": \"<integer>\",\n      \"frequency\": \"CONTINUOUS\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"SAME_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    },\n    \"payouts\": {\n      \"frequency\": \"CUSTOM\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"<string>\",\n      \"submission_delay_days\": \"<integer>\"\n    }\n  },\n  \"tags\": {\n    \"voluptated9\": \"<string>\",\n    \"mollit21\": \"<string>\"\n  },\n  \"type\": \"GROSS\",\n  \"net\": {\n    \"frequency\": \"CONTINUOUS\",\n    \"payment_instrument_id\": \"<string>\",\n    \"rail\": \"NEXT_DAY_ACH\",\n    \"submission_delay_days\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payout_profiles/:payout_profile_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payout_profiles",
+                        ":payout_profile_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payout_profile_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-52934b81-5455-4c70-9cc0-e7f03a42b7c0"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:42.000Z",
+              "updatedAt": "2026-07-28T01:39:42.000Z",
+              "uid": "35240-ae42b30b-0126-41bd-94c4-66318d72f318"
+            }
+          ],
+          "id": "1d202aee-be40-47a9-b705-78a20290d440",
+          "createdAt": "2026-07-28T01:39:42.000Z",
+          "updatedAt": "2026-07-28T01:39:42.000Z",
+          "uid": "35240-1d202aee-be40-47a9-b705-78a20290d440"
+        },
+        {
+          "name": "List Payout Profiles",
+          "id": "2b32964f-94ba-4c3a-845d-489a62a5cb4d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payout_profiles?after_cursor=<string>&limit=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payout_profiles"
+              ],
+              "query": [
+                {
+                  "description": "Return every resource created after the cursor value.",
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The numbers of items to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "List all `Payout Profiles`."
+          },
+          "response": [
+            {
+              "id": "25fd38a5-75bf-4a1e-aeed-fc78b29796ca",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payout_profiles?after_cursor=<string>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payout_profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "finix-apiuser-role",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "x-request-id",
+                  "value": ""
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"_embedded\": {\n    \"payout_profiles\": [\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"gross\": {\n          \"fees\": {\n            \"day_of_month\": \"<integer>\",\n            \"frequency\": \"CONTINUOUS\",\n            \"payment_instrument_id\": \"<string>\",\n            \"rail\": \"NEXT_DAY_ACH\",\n            \"submission_delay_days\": \"<integer>\"\n          },\n          \"payouts\": {\n            \"frequency\": \"MONTHLY\",\n            \"payment_instrument_id\": \"<string>\",\n            \"rail\": \"SAME_DAY_ACH\",\n            \"submission_delay_days\": \"<integer>\"\n          }\n        },\n        \"linked_id\": \"<string>\",\n        \"linked_type\": \"<string>\",\n        \"tags\": {\n          \"sed3_\": \"<string>\",\n          \"sint_0\": \"<string>\"\n        },\n        \"type\": \"CUSTOM\",\n        \"_links\": {\n          \"next\": {\n            \"href\": \"<string>\"\n          },\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"fugiat197\": -31608210\n        },\n        \"net\": {\n          \"frequency\": \"DAILY\",\n          \"payment_instrument_id\": \"<string>\",\n          \"rail\": \"SAME_DAY_ACH\",\n          \"submission_delay_days\": \"<integer>\"\n        },\n        \"custom\": {}\n      },\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"gross\": {\n          \"fees\": {\n            \"day_of_month\": \"<integer>\",\n            \"frequency\": \"DAILY\",\n            \"payment_instrument_id\": \"<string>\",\n            \"rail\": \"SAME_DAY_ACH\",\n            \"submission_delay_days\": \"<integer>\"\n          },\n          \"payouts\": {\n            \"frequency\": \"CONTINUOUS\",\n            \"payment_instrument_id\": \"<string>\",\n            \"rail\": \"NEXT_DAY_ACH\",\n            \"submission_delay_days\": \"<integer>\"\n          }\n        },\n        \"linked_id\": \"<string>\",\n        \"linked_type\": \"<string>\",\n        \"tags\": {\n          \"nulla_b72\": \"<string>\"\n        },\n        \"type\": \"CUSTOM\",\n        \"_links\": {\n          \"next\": {\n            \"href\": \"<string>\"\n          },\n          \"self\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"net\": {\n          \"frequency\": \"MONTHLY\",\n          \"payment_instrument_id\": \"<string>\",\n          \"rail\": \"SAME_DAY_ACH\",\n          \"submission_delay_days\": \"<integer>\"\n        },\n        \"custom\": {}\n      }\n    ]\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"sit___0\": 88790582,\n    \"pariatur_0\": false\n  },\n  \"page\": {\n    \"limit\": \"<integer>\",\n    \"next_cursor\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:39:42.000Z",
+              "updatedAt": "2026-07-28T01:39:42.000Z",
+              "uid": "35240-25fd38a5-75bf-4a1e-aeed-fc78b29796ca"
+            },
+            {
+              "id": "d5d7f572-8d85-4bc0-8bd3-16d0eef8861d",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payout_profiles?after_cursor=<string>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payout_profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"esseb\": -78907711.34995611\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:42.000Z",
+              "updatedAt": "2026-07-28T01:39:42.000Z",
+              "uid": "35240-d5d7f572-8d85-4bc0-8bd3-16d0eef8861d"
+            },
+            {
+              "id": "73919ea1-d3af-4392-a0bd-125f8a543d58",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payout_profiles?after_cursor=<string>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payout_profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"ea_55a\": -44029317,\n        \"non_0\": 86138148,\n        \"nulla_26\": -45067068,\n        \"nostrud_9\": -90611668\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:42.000Z",
+              "updatedAt": "2026-07-28T01:39:42.000Z",
+              "uid": "35240-73919ea1-d3af-4392-a0bd-125f8a543d58"
+            },
+            {
+              "id": "35a8c79f-ad6a-4ffc-aeec-aacb4f3d21cf",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payout_profiles?after_cursor=<string>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payout_profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:42.000Z",
+              "updatedAt": "2026-07-28T01:39:42.000Z",
+              "uid": "35240-35a8c79f-ad6a-4ffc-aeec-aacb4f3d21cf"
+            },
+            {
+              "id": "87d32ace-645b-404b-83f7-43b833701278",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payout_profiles?after_cursor=<string>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payout_profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:39:42.000Z",
+              "updatedAt": "2026-07-28T01:39:42.000Z",
+              "uid": "35240-87d32ace-645b-404b-83f7-43b833701278"
+            },
+            {
+              "id": "215d652f-7358-4652-8c3f-b5fb03b289bc",
+              "name": "Invalid field",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payout_profiles?after_cursor=<string>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payout_profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return every resource created after the cursor value.",
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The numbers of items to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:42.000Z",
+              "updatedAt": "2026-07-28T01:39:42.000Z",
+              "uid": "35240-215d652f-7358-4652-8c3f-b5fb03b289bc"
+            }
+          ],
+          "createdAt": "2026-07-28T01:39:42.000Z",
+          "updatedAt": "2026-07-28T01:39:42.000Z",
+          "uid": "35240-2b32964f-94ba-4c3a-845d-489a62a5cb4d"
+        }
+      ],
+      "id": "7d965b98-8042-456d-acdf-1f66db891bcc",
+      "createdAt": "2026-07-28T01:39:42.000Z",
+      "updatedAt": "2026-07-28T01:39:42.000Z",
+      "uid": "35240-7d965b98-8042-456d-acdf-1f66db891bcc"
+    },
+    {
+      "name": "merchants",
+      "item": [
+        {
+          "name": "{merchant_id}",
+          "item": [
+            {
+              "name": "payout_profile",
+              "item": [
+                {
+                  "name": "Fetch Payout Profile by Merchant",
+                  "id": "de4e5bdd-ee14-4dd1-8930-7de3a1c55c73",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/merchants/:merchant_id/payout_profile",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchants",
+                        ":merchant_id",
+                        "payout_profile"
+                      ],
+                      "variable": [
+                        {
+                          "id": "8ba761f6-536b-45e0-8728-d93c2d015105",
+                          "key": "merchant_id",
+                          "value": "<string>",
+                          "description": "(Required) ID of the `Merchant`."
+                        }
+                      ]
+                    },
+                    "description": "Fetch the the `Payout Profile` createrd for a specific `Merchant`."
+                  },
+                  "response": [
+                    {
+                      "id": "fb796b4a-f9b8-4d12-ba57-68563b032d6f",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/payout_profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "payout_profile"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "finix-apiuser-role",
+                          "value": ""
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "date",
+                          "value": ""
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "x-request-id",
+                          "value": ""
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"gross\": {\n    \"fees\": {\n      \"day_of_month\": \"<integer>\",\n      \"frequency\": \"MONTHLY\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"SAME_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    },\n    \"payouts\": {\n      \"frequency\": \"CONTINUOUS\",\n      \"payment_instrument_id\": \"<string>\",\n      \"rail\": \"NEXT_DAY_ACH\",\n      \"submission_delay_days\": \"<integer>\"\n    }\n  },\n  \"linked_id\": \"<string>\",\n  \"linked_type\": \"<string>\",\n  \"tags\": {\n    \"aliqua_df\": \"<string>\",\n    \"Ut___\": \"<string>\"\n  },\n  \"type\": \"GROSS\",\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"enim59\": \"tempor adipisicing\"\n  },\n  \"net\": {\n    \"frequency\": \"CUSTOM\",\n    \"payment_instrument_id\": \"<string>\",\n    \"rail\": \"SAME_DAY_ACH\",\n    \"submission_delay_days\": \"<integer>\"\n  },\n  \"custom\": {}\n}",
+                      "createdAt": "2026-07-28T01:39:42.000Z",
+                      "updatedAt": "2026-07-28T01:39:42.000Z",
+                      "uid": "35240-fb796b4a-f9b8-4d12-ba57-68563b032d6f"
+                    },
+                    {
+                      "id": "1c67aa8f-80a1-459a-a830-7897d4fd5aef",
+                      "name": "Authentication information is missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/payout_profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "payout_profile"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"esseb\": -78907711.34995611\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:42.000Z",
+                      "updatedAt": "2026-07-28T01:39:42.000Z",
+                      "uid": "35240-1c67aa8f-80a1-459a-a830-7897d4fd5aef"
+                    },
+                    {
+                      "id": "80b26300-8c43-417d-9723-c6862b0e4d5d",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/payout_profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "payout_profile"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"ea_55a\": -44029317,\n        \"non_0\": 86138148,\n        \"nulla_26\": -45067068,\n        \"nostrud_9\": -90611668\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:42.000Z",
+                      "updatedAt": "2026-07-28T01:39:42.000Z",
+                      "uid": "35240-80b26300-8c43-417d-9723-c6862b0e4d5d"
+                    },
+                    {
+                      "id": "eafd8757-6823-4175-9dd3-b21778bc0c68",
+                      "name": "Object does not exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/payout_profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "payout_profile"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:42.000Z",
+                      "updatedAt": "2026-07-28T01:39:42.000Z",
+                      "uid": "35240-eafd8757-6823-4175-9dd3-b21778bc0c68"
+                    },
+                    {
+                      "id": "860fece9-2d6e-4ab8-a2bd-44deb3d5e19d",
+                      "name": "Not Acceptable",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/payout_profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "payout_profile"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Acceptable",
+                      "code": 406,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"reprehenderit_d\": 29495691.277930945\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:42.000Z",
+                      "updatedAt": "2026-07-28T01:39:42.000Z",
+                      "uid": "35240-860fece9-2d6e-4ab8-a2bd-44deb3d5e19d"
+                    },
+                    {
+                      "id": "0a2ec7cf-c011-41d5-8a49-fa32768f157a",
+                      "name": "Invalid field",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/payout_profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "payout_profile"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"<string>\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:42.000Z",
+                      "updatedAt": "2026-07-28T01:39:42.000Z",
+                      "uid": "35240-0a2ec7cf-c011-41d5-8a49-fa32768f157a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:39:42.000Z",
+                  "updatedAt": "2026-07-28T01:39:42.000Z",
+                  "uid": "35240-de4e5bdd-ee14-4dd1-8930-7de3a1c55c73"
+                }
+              ],
+              "id": "a323f5e8-a07c-408b-905b-e819ba248ae0",
+              "createdAt": "2026-07-28T01:39:42.000Z",
+              "updatedAt": "2026-07-28T01:39:42.000Z",
+              "uid": "35240-a323f5e8-a07c-408b-905b-e819ba248ae0"
+            }
+          ],
+          "id": "5e072749-aeb6-4534-b121-4ff6f1462533",
+          "createdAt": "2026-07-28T01:39:42.000Z",
+          "updatedAt": "2026-07-28T01:39:42.000Z",
+          "uid": "35240-5e072749-aeb6-4534-b121-4ff6f1462533"
+        }
+      ],
+      "id": "bc0887c2-08d6-4239-a5af-90c491957f65",
+      "createdAt": "2026-07-28T01:39:42.000Z",
+      "updatedAt": "2026-07-28T01:39:42.000Z",
+      "uid": "35240-bc0887c2-08d6-4239-a5af-90c491957f65"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://finix.sandbox-payments-api.com"
+    }
+  ]
+}

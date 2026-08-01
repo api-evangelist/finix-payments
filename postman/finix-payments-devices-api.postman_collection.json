@@ -1,0 +1,1668 @@
+{
+  "info": {
+    "_postman_id": "32f3e106-0eb8-402e-be5a-044582783a72",
+    "name": "Finix Authorizations Devices API",
+    "description": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:39:06.000Z",
+    "updatedAt": "2026-07-28T01:39:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-32f3e106-0eb8-402e-be5a-044582783a72"
+  },
+  "item": [
+    {
+      "name": "devices",
+      "item": [
+        {
+          "name": "{device_id}",
+          "item": [
+            {
+              "name": "Initiate Action on Device",
+              "id": "85bf5b18-7217-47a3-b247-8e8a948e4e8c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2018-01-01"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"ACTIVATE\",\n  \"tags\": {\n    \"eue83\": \"<string>\"\n  },\n  \"activation_code\": \"<string>\",\n  \"idle_message\": \"<string>\",\n  \"configuration_details\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"serial_number\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/devices/:device_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "devices",
+                    ":device_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b57c467d-bd57-41c6-92c7-6d578a467656",
+                      "key": "device_id",
+                      "value": "<string>",
+                      "description": "(Required) ID of the `Device`."
+                    }
+                  ]
+                },
+                "description": "Initiate an action on a `Device`. Actions that are available include:\n- Activating the `Device`\n- Rebooting the `Device`\n- Setting an idle message\n- Deactivating the `Device`\n\nYou can also use a PUT request to update the `configuration_details`, `description`, `name`, and `serial_number` of the `Device`."
+              },
+              "response": [
+                {
+                  "id": "81a27b3b-288c-4495-bd08-64621073569c",
+                  "name": "Single Device object",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                        "key": "Finix-Version",
+                        "value": "2018-01-01"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"action\": \"ACTIVATE\",\n  \"tags\": {\n    \"eue83\": \"<string>\"\n  },\n  \"activation_code\": \"<string>\",\n  \"idle_message\": \"<string>\",\n  \"configuration_details\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"serial_number\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"configuration_details\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<long>\"\n  },\n  \"connection\": \"CLOSED\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"idle_message\": \"<string>\",\n  \"merchant\": \"<string>\",\n  \"model\": \"<string>\",\n  \"name\": \"<string>\",\n  \"serial_number\": \"<string>\",\n  \"tags\": {\n    \"velitb\": \"<string>\",\n    \"consecteturb0e\": \"<string>\"\n  },\n  \"_links\": {\n    \"authorizations\": {\n      \"href\": \"<string>\"\n    },\n    \"merchant\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"transfers\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-81a27b3b-288c-4495-bd08-64621073569c"
+                },
+                {
+                  "id": "11901b2b-ee06-49bf-a060-44aec01a7c27",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                        "key": "Finix-Version",
+                        "value": "2018-01-01"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"action\": \"ACTIVATE\",\n  \"tags\": {\n    \"eue83\": \"<string>\"\n  },\n  \"activation_code\": \"<string>\",\n  \"idle_message\": \"<string>\",\n  \"configuration_details\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"serial_number\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"non_5\": \"est ullamco quis et eiusmod\"\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-11901b2b-ee06-49bf-a060-44aec01a7c27"
+                },
+                {
+                  "id": "bb01bd66-cf19-4489-9416-6c55a6b7dd4e",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                        "key": "Finix-Version",
+                        "value": "2018-01-01"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"action\": \"ACTIVATE\",\n  \"tags\": {\n    \"eue83\": \"<string>\"\n  },\n  \"activation_code\": \"<string>\",\n  \"idle_message\": \"<string>\",\n  \"configuration_details\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"serial_number\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-bb01bd66-cf19-4489-9416-6c55a6b7dd4e"
+                },
+                {
+                  "id": "f74fa3c3-6607-4c76-91a9-a21082c068d3",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                        "key": "Finix-Version",
+                        "value": "2018-01-01"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"action\": \"ACTIVATE\",\n  \"tags\": {\n    \"eue83\": \"<string>\"\n  },\n  \"activation_code\": \"<string>\",\n  \"idle_message\": \"<string>\",\n  \"configuration_details\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"serial_number\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-f74fa3c3-6607-4c76-91a9-a21082c068d3"
+                },
+                {
+                  "id": "a9cbe486-1f4e-44df-b11d-5f9155f1b5eb",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                        "key": "Finix-Version",
+                        "value": "2018-01-01"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"action\": \"ACTIVATE\",\n  \"tags\": {\n    \"eue83\": \"<string>\"\n  },\n  \"activation_code\": \"<string>\",\n  \"idle_message\": \"<string>\",\n  \"configuration_details\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"serial_number\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"laboris_0\": false,\n        \"enim_5\": -14112696,\n        \"non03d\": \"Lorem dolore ad sunt\",\n        \"anim_f\": -36310836.86463072\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-a9cbe486-1f4e-44df-b11d-5f9155f1b5eb"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:06.000Z",
+              "updatedAt": "2026-07-28T01:39:06.000Z",
+              "uid": "35240-85bf5b18-7217-47a3-b247-8e8a948e4e8c"
+            },
+            {
+              "name": "Fetch a Device",
+              "id": "2be776b6-62bf-4b9f-b676-2875a56a208b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/devices/:device_id?include_connection=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "devices",
+                    ":device_id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Specifies whether the connection information should be included.",
+                      "key": "include_connection",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "c540bc70-07ae-4a67-b9c7-73be5c363ccd",
+                      "key": "device_id",
+                      "value": "<string>",
+                      "description": "(Required) ID of the `Device`."
+                    }
+                  ]
+                },
+                "description": "Retrieve the details of an existing `Device`."
+              },
+              "response": [
+                {
+                  "id": "78439a8a-dad5-4f91-bc05-6bc23a70d2a6",
+                  "name": "Single Device object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id?include_connection=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies whether the connection information should be included.",
+                          "key": "include_connection",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"configuration_details\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<long>\"\n  },\n  \"connection\": \"CLOSED\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"idle_message\": \"<string>\",\n  \"merchant\": \"<string>\",\n  \"model\": \"<string>\",\n  \"name\": \"<string>\",\n  \"serial_number\": \"<string>\",\n  \"tags\": {\n    \"velitb\": \"<string>\",\n    \"consecteturb0e\": \"<string>\"\n  },\n  \"_links\": {\n    \"authorizations\": {\n      \"href\": \"<string>\"\n    },\n    \"merchant\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"transfers\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-78439a8a-dad5-4f91-bc05-6bc23a70d2a6"
+                },
+                {
+                  "id": "7d107fde-a3e8-48a6-bf60-e7654d3a7cef",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id?include_connection=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies whether the connection information should be included.",
+                          "key": "include_connection",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"non_5\": \"est ullamco quis et eiusmod\"\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-7d107fde-a3e8-48a6-bf60-e7654d3a7cef"
+                },
+                {
+                  "id": "eafbc125-198e-4b09-929e-fbebd884b93c",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id?include_connection=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies whether the connection information should be included.",
+                          "key": "include_connection",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-eafbc125-198e-4b09-929e-fbebd884b93c"
+                },
+                {
+                  "id": "6291b3e5-7e7f-440c-bed0-472b62c71780",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id?include_connection=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies whether the connection information should be included.",
+                          "key": "include_connection",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-6291b3e5-7e7f-440c-bed0-472b62c71780"
+                },
+                {
+                  "id": "e637f8f3-0f2d-4d48-8ebf-f0250a98e108",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id?include_connection=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies whether the connection information should be included.",
+                          "key": "include_connection",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"laboris_0\": false,\n        \"enim_5\": -14112696,\n        \"non03d\": \"Lorem dolore ad sunt\",\n        \"anim_f\": -36310836.86463072\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-e637f8f3-0f2d-4d48-8ebf-f0250a98e108"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:06.000Z",
+              "updatedAt": "2026-07-28T01:39:06.000Z",
+              "uid": "35240-2be776b6-62bf-4b9f-b676-2875a56a208b"
+            }
+          ],
+          "id": "f13bd8c5-ae97-4724-a82f-586c91a69749",
+          "createdAt": "2026-07-28T01:39:06.000Z",
+          "updatedAt": "2026-07-28T01:39:06.000Z",
+          "uid": "35240-f13bd8c5-ae97-4724-a82f-586c91a69749"
+        },
+        {
+          "name": "{device_id_connection}",
+          "item": [
+            {
+              "name": "Check Device Connection",
+              "id": "c15298f0-69c3-4707-89ac-8c9ffcfcd0ed",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/devices/:device_id_connection?include_connection=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "devices",
+                    ":device_id_connection"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Specifies whether the connection information should be included.",
+                      "key": "include_connection",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "8cd2112b-23cd-4c0f-8127-f475b4a1c33d",
+                      "key": "device_id_connection",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "To check the connection of the `Device`, include `?include_connection\\=true\\` at the end of the request endpoint."
+              },
+              "response": [
+                {
+                  "id": "2c796213-74a3-4fcb-87f0-b1b3e1af3dbe",
+                  "name": "Single Device object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id_connection?include_connection=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id_connection"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies whether the connection information should be included.",
+                          "key": "include_connection",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id_connection"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"configuration_details\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<long>\"\n  },\n  \"connection\": \"CLOSED\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"idle_message\": \"<string>\",\n  \"merchant\": \"<string>\",\n  \"model\": \"<string>\",\n  \"name\": \"<string>\",\n  \"serial_number\": \"<string>\",\n  \"tags\": {\n    \"velitb\": \"<string>\",\n    \"consecteturb0e\": \"<string>\"\n  },\n  \"_links\": {\n    \"authorizations\": {\n      \"href\": \"<string>\"\n    },\n    \"merchant\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"transfers\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-2c796213-74a3-4fcb-87f0-b1b3e1af3dbe"
+                },
+                {
+                  "id": "510a4903-6702-417a-bde9-0248eabcfd2a",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id_connection?include_connection=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id_connection"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies whether the connection information should be included.",
+                          "key": "include_connection",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id_connection"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"non_5\": \"est ullamco quis et eiusmod\"\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-510a4903-6702-417a-bde9-0248eabcfd2a"
+                },
+                {
+                  "id": "028b4593-ab1c-4f1c-9d5c-278f1f832349",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id_connection?include_connection=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id_connection"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies whether the connection information should be included.",
+                          "key": "include_connection",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id_connection"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-028b4593-ab1c-4f1c-9d5c-278f1f832349"
+                },
+                {
+                  "id": "f9557ff4-be35-4928-b894-2f2abfdc2160",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id_connection?include_connection=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id_connection"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies whether the connection information should be included.",
+                          "key": "include_connection",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id_connection"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-f9557ff4-be35-4928-b894-2f2abfdc2160"
+                },
+                {
+                  "id": "0790a756-e164-42ae-9501-3ac44a5c39c0",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:device_id_connection?include_connection=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":device_id_connection"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Specifies whether the connection information should be included.",
+                          "key": "include_connection",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "device_id_connection"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"laboris_0\": false,\n        \"enim_5\": -14112696,\n        \"non03d\": \"Lorem dolore ad sunt\",\n        \"anim_f\": -36310836.86463072\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-0790a756-e164-42ae-9501-3ac44a5c39c0"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:06.000Z",
+              "updatedAt": "2026-07-28T01:39:06.000Z",
+              "uid": "35240-c15298f0-69c3-4707-89ac-8c9ffcfcd0ed"
+            }
+          ],
+          "id": "7f303575-681d-40fa-9f88-06afbde6bcd8",
+          "createdAt": "2026-07-28T01:39:06.000Z",
+          "updatedAt": "2026-07-28T01:39:06.000Z",
+          "uid": "35240-7f303575-681d-40fa-9f88-06afbde6bcd8"
+        }
+      ],
+      "id": "00b4a9b6-6757-4f60-9d49-59eae5b55afa",
+      "createdAt": "2026-07-28T01:39:06.000Z",
+      "updatedAt": "2026-07-28T01:39:06.000Z",
+      "uid": "35240-00b4a9b6-6757-4f60-9d49-59eae5b55afa"
+    },
+    {
+      "name": "merchants",
+      "item": [
+        {
+          "name": "{merchant_id}",
+          "item": [
+            {
+              "name": "devices",
+              "item": [
+                {
+                  "name": "Create a Device",
+                  "id": "ef1067f1-9515-4bbe-a5a0-af9190b42223",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": \"MX915\",\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"cillum3dc\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/merchants/:merchant_id/devices",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchants",
+                        ":merchant_id",
+                        "devices"
+                      ],
+                      "variable": [
+                        {
+                          "id": "fda1ed13-190a-4683-8626-5361e69b71d8",
+                          "key": "merchant_id",
+                          "value": "<string>",
+                          "description": "(Required) ID of the `Merchant` object."
+                        }
+                      ]
+                    },
+                    "description": "Create a `Device` under a `Merchant`."
+                  },
+                  "response": [
+                    {
+                      "id": "57f15b15-435f-4168-ab79-d31d72726cdb",
+                      "name": "Single Device object",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"MX915\",\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"cillum3dc\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/devices",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "devices"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "finix-apiuser-role",
+                          "value": ""
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "date",
+                          "value": ""
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "x-request-id",
+                          "value": ""
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"configuration_details\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<long>\"\n  },\n  \"connection\": \"CLOSED\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"idle_message\": \"<string>\",\n  \"merchant\": \"<string>\",\n  \"model\": \"<string>\",\n  \"name\": \"<string>\",\n  \"serial_number\": \"<string>\",\n  \"tags\": {\n    \"velitb\": \"<string>\",\n    \"consecteturb0e\": \"<string>\"\n  },\n  \"_links\": {\n    \"authorizations\": {\n      \"href\": \"<string>\"\n    },\n    \"merchant\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"transfers\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:06.000Z",
+                      "updatedAt": "2026-07-28T01:39:06.000Z",
+                      "uid": "35240-57f15b15-435f-4168-ab79-d31d72726cdb"
+                    },
+                    {
+                      "id": "79ca9fd9-b90f-4a3b-9b56-2d4ab4ae0fe7",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"MX915\",\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"cillum3dc\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/devices",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "devices"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"dolore_0\": \"mollit\"\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:06.000Z",
+                      "updatedAt": "2026-07-28T01:39:06.000Z",
+                      "uid": "35240-79ca9fd9-b90f-4a3b-9b56-2d4ab4ae0fe7"
+                    },
+                    {
+                      "id": "d7567d2c-71a6-4133-91ad-ebb5b756111d",
+                      "name": "Authentication information is missing or invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"MX915\",\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"cillum3dc\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/devices",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "devices"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"non_5\": \"est ullamco quis et eiusmod\"\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:06.000Z",
+                      "updatedAt": "2026-07-28T01:39:06.000Z",
+                      "uid": "35240-d7567d2c-71a6-4133-91ad-ebb5b756111d"
+                    },
+                    {
+                      "id": "bebe80d8-5eee-49b8-96ca-6c6b53d6a611",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"MX915\",\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"cillum3dc\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/devices",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "devices"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:06.000Z",
+                      "updatedAt": "2026-07-28T01:39:06.000Z",
+                      "uid": "35240-bebe80d8-5eee-49b8-96ca-6c6b53d6a611"
+                    },
+                    {
+                      "id": "a662a2c6-97b1-4363-a3e1-e87e19d18d5a",
+                      "name": "Object does not exist",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"MX915\",\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"cillum3dc\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/devices",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "devices"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:06.000Z",
+                      "updatedAt": "2026-07-28T01:39:06.000Z",
+                      "uid": "35240-a662a2c6-97b1-4363-a3e1-e87e19d18d5a"
+                    },
+                    {
+                      "id": "36817c8d-f636-40a0-b4b3-086f38d79792",
+                      "name": "Not Acceptable",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"MX915\",\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"allow_debit\": \"<boolean>\",\n    \"bypass_device_on_capture\": \"<boolean>\",\n    \"check_for_duplicate_transactions\": \"<boolean>\",\n    \"prompt_amount_confirmation\": \"<boolean>\",\n    \"prompt_manual_entry\": \"<boolean>\",\n    \"prompt_signature\": \"<string>\",\n    \"signature_threshold_amount\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"cillum3dc\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/merchants/:merchant_id/devices",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "merchants",
+                            ":merchant_id",
+                            "devices"
+                          ],
+                          "variable": [
+                            {
+                              "key": "merchant_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Acceptable",
+                      "code": 406,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"laboris_0\": false,\n        \"enim_5\": -14112696,\n        \"non03d\": \"Lorem dolore ad sunt\",\n        \"anim_f\": -36310836.86463072\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:06.000Z",
+                      "updatedAt": "2026-07-28T01:39:06.000Z",
+                      "uid": "35240-36817c8d-f636-40a0-b4b3-086f38d79792"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:39:06.000Z",
+                  "updatedAt": "2026-07-28T01:39:06.000Z",
+                  "uid": "35240-ef1067f1-9515-4bbe-a5a0-af9190b42223"
+                }
+              ],
+              "id": "88574297-4920-42ef-8a63-0940105cc94e",
+              "createdAt": "2026-07-28T01:39:06.000Z",
+              "updatedAt": "2026-07-28T01:39:06.000Z",
+              "uid": "35240-88574297-4920-42ef-8a63-0940105cc94e"
+            }
+          ],
+          "id": "113f6483-d8b3-4a28-87a7-26d50fa83622",
+          "createdAt": "2026-07-28T01:39:06.000Z",
+          "updatedAt": "2026-07-28T01:39:06.000Z",
+          "uid": "35240-113f6483-d8b3-4a28-87a7-26d50fa83622"
+        }
+      ],
+      "id": "b4d312e1-a638-4f46-9ac3-a521ae57d924",
+      "createdAt": "2026-07-28T01:39:06.000Z",
+      "updatedAt": "2026-07-28T01:39:06.000Z",
+      "uid": "35240-b4d312e1-a638-4f46-9ac3-a521ae57d924"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://finix.sandbox-payments-api.com"
+    }
+  ]
+}

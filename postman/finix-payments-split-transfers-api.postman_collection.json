@@ -1,0 +1,965 @@
+{
+  "info": {
+    "_postman_id": "62c6f20d-4a1e-46ee-900d-ef1d04aa73bc",
+    "name": "Finix Authorizations Split Transfers API",
+    "description": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:39:44.000Z",
+    "updatedAt": "2026-07-28T01:39:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-62c6f20d-4a1e-46ee-900d-ef1d04aa73bc"
+  },
+  "item": [
+    {
+      "name": "split_transfers",
+      "item": [
+        {
+          "name": "{split_transfer_id}",
+          "item": [
+            {
+              "name": "fees",
+              "item": [
+                {
+                  "name": "Fetch Split Transfer Fees",
+                  "id": "261875f4-830b-4f43-87e9-b60824832174",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/split_transfers/:split_transfer_id/fees",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "split_transfers",
+                        ":split_transfer_id",
+                        "fees"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7690378a-4fca-42c6-a579-1d7d3c19b9a6",
+                          "key": "split_transfer_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Fetch the fees associated with a `split_transfer`.\n\n\nFor more information, see [Split a Transaction](/docs/guides/payments/modify/split-transactions/)."
+                  },
+                  "response": [
+                    {
+                      "id": "9f7256cf-9253-44e8-8a8c-6d4eb46ba1a3",
+                      "name": "List of Transfer objects",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/split_transfers/:split_transfer_id/fees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "split_transfers",
+                            ":split_transfer_id",
+                            "fees"
+                          ],
+                          "variable": [
+                            {
+                              "key": "split_transfer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "finix-apiuser-role",
+                          "value": ""
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "date",
+                          "value": ""
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "x-request-id",
+                          "value": ""
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"page\": {\n    \"limit\": \"<integer>\",\n    \"next_cursor\": \"<string>\"\n  },\n  \"_embedded\": {\n    \"transfers\": [\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"additional_buyer_charges\": {\n          \"convenience_amount\": \"<number>\",\n          \"rent_surcharge_amount\": \"<number>\"\n        },\n        \"additional_healthcare_data\": {\n          \"clinic_amount\": \"<integer>\",\n          \"dental_amount\": \"<integer>\",\n          \"prescription_amount\": \"<integer>\",\n          \"vision_amount\": \"<integer>\"\n        },\n        \"additional_purchase_data\": {\n          \"customer_reference_number\": \"<string>\",\n          \"sales_tax\": \"<integer>\",\n          \"customs_duty_amount\": \"<integer>\",\n          \"destination_country_code\": \"<string>\",\n          \"destination_postal_code\": \"<string>\",\n          \"discount_amount\": \"<integer>\",\n          \"invoice_reference_number\": \"<string>\",\n          \"item_data\": [\n            {\n              \"amount_excluding_sales_tax\": \"<integer>\",\n              \"amount_including_sales_tax\": \"<integer>\",\n              \"commodity_code\": \"<string>\",\n              \"cost_per_unit\": \"<integer>\",\n              \"item_description\": \"<string>\",\n              \"item_discount_amount\": \"<integer>\",\n              \"merchant_product_code\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"unit_of_measure\": \"<string>\"\n            },\n            {\n              \"amount_excluding_sales_tax\": \"<integer>\",\n              \"amount_including_sales_tax\": \"<integer>\",\n              \"commodity_code\": \"<string>\",\n              \"cost_per_unit\": \"<integer>\",\n              \"item_description\": \"<string>\",\n              \"item_discount_amount\": \"<integer>\",\n              \"merchant_product_code\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"unit_of_measure\": \"<string>\"\n            }\n          ],\n          \"order_date\": {\n            \"day\": \"<integer>\",\n            \"month\": \"<integer>\",\n            \"year\": \"<integer>\"\n          },\n          \"ship_from_postal_code\": \"<string>\",\n          \"shipping_amount\": \"<integer>\",\n          \"tax_exempt\": \"<boolean>\"\n        },\n        \"address_verification\": \"<string>\",\n        \"amount\": \"<long>\",\n        \"amount_requested\": \"<integer>\",\n        \"application\": \"<string>\",\n        \"card_present_details\": {\n          \"approval_code\": \"<string>\",\n          \"brand\": \"<string>\",\n          \"emv_data\": {\n            \"application_identifier\": \"<string>\",\n            \"application_label\": \"<string>\",\n            \"application_preferred_name\": \"<string>\",\n            \"application_transaction_counter\": \"<string>\",\n            \"cryptogram\": \"<string>\",\n            \"issuer_code_table_index\": \"<string>\",\n            \"pin_verified\": \"<boolean>\",\n            \"tags\": {\n              \"Excepteur_e\": \"<string>\",\n              \"nostrud_e\": \"<string>\",\n              \"velite\": \"<string>\"\n            }\n          },\n          \"entry_mode\": \"<string>\",\n          \"masked_account_number\": \"<string>\",\n          \"name\": \"<string>\",\n          \"payment_type\": \"<string>\"\n        },\n        \"currency\": \"UAH\",\n        \"destination\": \"<string>\",\n        \"device\": \"<string>\",\n        \"externally_funded\": \"<string>\",\n        \"failure_code\": \"<string>\",\n        \"failure_message\": \"<string>\",\n        \"fee\": \"<long>\",\n        \"fee_type\": \"VISA_CREDIT_VOUCHER_FIXED\",\n        \"idempotency_id\": \"<string>\",\n        \"merchant\": \"<string>\",\n        \"merchant_identity\": \"<string>\",\n        \"parent_transfer\": \"<string>\",\n        \"parent_transfer_trace_id\": \"<string>\",\n        \"messages\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"raw\": {},\n        \"ready_to_settle_at\": \"<dateTime>\",\n        \"security_code_verification\": \"<string>\",\n        \"source\": \"<string>\",\n        \"split_transfers\": \"<string>\",\n        \"state\": \"UNKNOWN\",\n        \"statement_descriptor\": \"<string>\",\n        \"subtype\": \"DISPUTE\",\n        \"tags\": {\n          \"sint_67\": \"<string>\",\n          \"minim_16\": \"<string>\",\n          \"in69a\": \"<string>\"\n        },\n        \"trace_id\": \"<string>\",\n        \"type\": \"DEBIT\",\n        \"_links\": {\n          \"application\": {\n            \"href\": \"<string>\"\n          },\n          \"destination\": {\n            \"href\": \"<string>\"\n          },\n          \"device\": {\n            \"href\": \"<string>\"\n          },\n          \"disputes\": {\n            \"href\": \"<string>\"\n          },\n          \"fee_profile\": {\n            \"href\": \"<string>\"\n          },\n          \"fees\": {\n            \"href\": \"<string>\"\n          },\n          \"merchant_identity\": {\n            \"href\": \"<string>\"\n          },\n          \"payment_instruments\": {\n            \"href\": \"<string>\"\n          },\n          \"disputed_transfer\": {\n            \"href\": \"<string>\"\n          },\n          \"reversals\": {\n            \"href\": \"<string>\"\n          },\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"parent\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"additional_buyer_charges\": {\n          \"convenience_amount\": \"<number>\",\n          \"rent_surcharge_amount\": \"<number>\"\n        },\n        \"additional_healthcare_data\": {\n          \"clinic_amount\": \"<integer>\",\n          \"dental_amount\": \"<integer>\",\n          \"prescription_amount\": \"<integer>\",\n          \"vision_amount\": \"<integer>\"\n        },\n        \"additional_purchase_data\": {\n          \"customer_reference_number\": \"<string>\",\n          \"sales_tax\": \"<integer>\",\n          \"customs_duty_amount\": \"<integer>\",\n          \"destination_country_code\": \"<string>\",\n          \"destination_postal_code\": \"<string>\",\n          \"discount_amount\": \"<integer>\",\n          \"invoice_reference_number\": \"<string>\",\n          \"item_data\": [\n            {\n              \"amount_excluding_sales_tax\": \"<integer>\",\n              \"amount_including_sales_tax\": \"<integer>\",\n              \"commodity_code\": \"<string>\",\n              \"cost_per_unit\": \"<integer>\",\n              \"item_description\": \"<string>\",\n              \"item_discount_amount\": \"<integer>\",\n              \"merchant_product_code\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"unit_of_measure\": \"<string>\"\n            },\n            {\n              \"amount_excluding_sales_tax\": \"<integer>\",\n              \"amount_including_sales_tax\": \"<integer>\",\n              \"commodity_code\": \"<string>\",\n              \"cost_per_unit\": \"<integer>\",\n              \"item_description\": \"<string>\",\n              \"item_discount_amount\": \"<integer>\",\n              \"merchant_product_code\": \"<string>\",\n              \"quantity\": \"<integer>\",\n              \"unit_of_measure\": \"<string>\"\n            }\n          ],\n          \"order_date\": {\n            \"day\": \"<integer>\",\n            \"month\": \"<integer>\",\n            \"year\": \"<integer>\"\n          },\n          \"ship_from_postal_code\": \"<string>\",\n          \"shipping_amount\": \"<integer>\",\n          \"tax_exempt\": \"<boolean>\"\n        },\n        \"address_verification\": \"<string>\",\n        \"amount\": \"<long>\",\n        \"amount_requested\": \"<integer>\",\n        \"application\": \"<string>\",\n        \"card_present_details\": {\n          \"approval_code\": \"<string>\",\n          \"brand\": \"<string>\",\n          \"emv_data\": {\n            \"application_identifier\": \"<string>\",\n            \"application_label\": \"<string>\",\n            \"application_preferred_name\": \"<string>\",\n            \"application_transaction_counter\": \"<string>\",\n            \"cryptogram\": \"<string>\",\n            \"issuer_code_table_index\": \"<string>\",\n            \"pin_verified\": \"<boolean>\",\n            \"tags\": {\n              \"cupidatat_14\": \"<string>\"\n            }\n          },\n          \"entry_mode\": \"<string>\",\n          \"masked_account_number\": \"<string>\",\n          \"name\": \"<string>\",\n          \"payment_type\": \"<string>\"\n        },\n        \"currency\": \"BTN\",\n        \"destination\": \"<string>\",\n        \"device\": \"<string>\",\n        \"externally_funded\": \"<string>\",\n        \"failure_code\": \"<string>\",\n        \"failure_message\": \"<string>\",\n        \"fee\": \"<long>\",\n        \"fee_type\": \"MASTERCARD_ASSESSMENT_OVER_1K_BASIS_POINTS\",\n        \"idempotency_id\": \"<string>\",\n        \"merchant\": \"<string>\",\n        \"merchant_identity\": \"<string>\",\n        \"parent_transfer\": \"<string>\",\n        \"parent_transfer_trace_id\": \"<string>\",\n        \"messages\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"raw\": {},\n        \"ready_to_settle_at\": \"<dateTime>\",\n        \"security_code_verification\": \"<string>\",\n        \"source\": \"<string>\",\n        \"split_transfers\": \"<string>\",\n        \"state\": \"UNKNOWN\",\n        \"statement_descriptor\": \"<string>\",\n        \"subtype\": \"MERCHANT_DEBIT\",\n        \"tags\": {\n          \"voluptatef8\": \"<string>\"\n        },\n        \"trace_id\": \"<string>\",\n        \"type\": \"SETTLEMENT\",\n        \"_links\": {\n          \"application\": {\n            \"href\": \"<string>\"\n          },\n          \"destination\": {\n            \"href\": \"<string>\"\n          },\n          \"device\": {\n            \"href\": \"<string>\"\n          },\n          \"disputes\": {\n            \"href\": \"<string>\"\n          },\n          \"fee_profile\": {\n            \"href\": \"<string>\"\n          },\n          \"fees\": {\n            \"href\": \"<string>\"\n          },\n          \"merchant_identity\": {\n            \"href\": \"<string>\"\n          },\n          \"payment_instruments\": {\n            \"href\": \"<string>\"\n          },\n          \"disputed_transfer\": {\n            \"href\": \"<string>\"\n          },\n          \"reversals\": {\n            \"href\": \"<string>\"\n          },\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"parent\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:45.000Z",
+                      "updatedAt": "2026-07-28T01:39:45.000Z",
+                      "uid": "35240-9f7256cf-9253-44e8-8a8c-6d4eb46ba1a3"
+                    },
+                    {
+                      "id": "64b3d3c3-e74f-40f8-89a6-6690b9a967d8",
+                      "name": "Authentication information is missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/split_transfers/:split_transfer_id/fees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "split_transfers",
+                            ":split_transfer_id",
+                            "fees"
+                          ],
+                          "variable": [
+                            {
+                              "key": "split_transfer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"nostrud_42\": 50407019,\n          \"pariatur56\": -59848651.70840306\n        },\n        \"eiusmodc17\": \"\",\n        \"sunt3\": -56984660.35295629,\n        \"do47\": -16845850\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:45.000Z",
+                      "updatedAt": "2026-07-28T01:39:45.000Z",
+                      "uid": "35240-64b3d3c3-e74f-40f8-89a6-6690b9a967d8"
+                    },
+                    {
+                      "id": "032b7d11-933d-4365-a4d5-6e039be41edf",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/split_transfers/:split_transfer_id/fees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "split_transfers",
+                            ":split_transfer_id",
+                            "fees"
+                          ],
+                          "variable": [
+                            {
+                              "key": "split_transfer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"enim_3f\": -43456790,\n        \"ad_91\": 22415014,\n        \"ipsum213\": \"exercitation elit Lorem mollit nostrud\",\n        \"Excepteur0f2\": true,\n        \"in18\": -25019769.505112514\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:45.000Z",
+                      "updatedAt": "2026-07-28T01:39:45.000Z",
+                      "uid": "35240-032b7d11-933d-4365-a4d5-6e039be41edf"
+                    },
+                    {
+                      "id": "ba7bf9f9-2ee8-4f7c-9ce0-d561720e4a69",
+                      "name": "Object does not exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/split_transfers/:split_transfer_id/fees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "split_transfers",
+                            ":split_transfer_id",
+                            "fees"
+                          ],
+                          "variable": [
+                            {
+                              "key": "split_transfer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"consequat_1a\": false,\n        \"tempor_f_0\": false\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"eu_bc8\": -12048917.80843784,\n        \"fugiat_c\": -35498304.77306273\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:45.000Z",
+                      "updatedAt": "2026-07-28T01:39:45.000Z",
+                      "uid": "35240-ba7bf9f9-2ee8-4f7c-9ce0-d561720e4a69"
+                    },
+                    {
+                      "id": "af63434e-0e28-4d61-9da3-946583b66bd6",
+                      "name": "Not Acceptable",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/split_transfers/:split_transfer_id/fees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "split_transfers",
+                            ":split_transfer_id",
+                            "fees"
+                          ],
+                          "variable": [
+                            {
+                              "key": "split_transfer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Acceptable",
+                      "code": 406,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:39:45.000Z",
+                      "updatedAt": "2026-07-28T01:39:45.000Z",
+                      "uid": "35240-af63434e-0e28-4d61-9da3-946583b66bd6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:39:45.000Z",
+                  "updatedAt": "2026-07-28T01:39:45.000Z",
+                  "uid": "35240-261875f4-830b-4f43-87e9-b60824832174"
+                }
+              ],
+              "id": "f136269d-0eeb-4f38-aa59-01093a9e4567",
+              "createdAt": "2026-07-28T01:39:45.000Z",
+              "updatedAt": "2026-07-28T01:39:45.000Z",
+              "uid": "35240-f136269d-0eeb-4f38-aa59-01093a9e4567"
+            },
+            {
+              "name": "Fetch a Split Transfer",
+              "id": "15d259da-ddc9-4bda-bb5a-0dc24aae3d3e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/split_transfers/:split_transfer_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "split_transfers",
+                    ":split_transfer_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2337cc20-c5d6-483e-a1c9-176ed513b900",
+                      "key": "split_transfer_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Fetch a `split_transfer` that was created from a split transaction.\n\nFor more information, see [Split a Transaction](/docs/guides/payments/modify/split-transactions/)."
+              },
+              "response": [
+                {
+                  "id": "a1e69ccc-35cd-48ad-ae8c-15c30c94915f",
+                  "name": "The `split_transfer` resource that was created from a split transacion.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/split_transfers/:split_transfer_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "split_transfers",
+                        ":split_transfer_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "split_transfer_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "finix-apiuser-role",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-request-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"amount\": \"<long>\",\n  \"fee\": \"<long>\",\n  \"currency\": \"WST\",\n  \"parent_transfer_id\": \"TRxxxxxxxxxxxxxxxxxxxxxx\",\n  \"ready_to_settle_at\": \"<dateTime>\",\n  \"type\": \"<string>\",\n  \"merchant_id\": \"<string>\",\n  \"identity_id\": \"<string>\",\n  \"fee_profile_id\": \"<string>\",\n  \"application_id\": \"<string>\",\n  \"tags\": {\n    \"key\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:45.000Z",
+                  "updatedAt": "2026-07-28T01:39:45.000Z",
+                  "uid": "35240-a1e69ccc-35cd-48ad-ae8c-15c30c94915f"
+                },
+                {
+                  "id": "df3e222b-4870-4df8-a88f-e7fd07682cd1",
+                  "name": "Authentication information is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/split_transfers/:split_transfer_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "split_transfers",
+                        ":split_transfer_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "split_transfer_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"nostrud_42\": 50407019,\n          \"pariatur56\": -59848651.70840306\n        },\n        \"eiusmodc17\": \"\",\n        \"sunt3\": -56984660.35295629,\n        \"do47\": -16845850\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:45.000Z",
+                  "updatedAt": "2026-07-28T01:39:45.000Z",
+                  "uid": "35240-df3e222b-4870-4df8-a88f-e7fd07682cd1"
+                },
+                {
+                  "id": "dbc16c36-2d56-41f6-b8c9-24d1e51c672f",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/split_transfers/:split_transfer_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "split_transfers",
+                        ":split_transfer_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "split_transfer_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"enim_3f\": -43456790,\n        \"ad_91\": 22415014,\n        \"ipsum213\": \"exercitation elit Lorem mollit nostrud\",\n        \"Excepteur0f2\": true,\n        \"in18\": -25019769.505112514\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:45.000Z",
+                  "updatedAt": "2026-07-28T01:39:45.000Z",
+                  "uid": "35240-dbc16c36-2d56-41f6-b8c9-24d1e51c672f"
+                },
+                {
+                  "id": "9916ff86-a20e-48a8-984d-25f861c9ffa7",
+                  "name": "Object does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/split_transfers/:split_transfer_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "split_transfers",
+                        ":split_transfer_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "split_transfer_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"consequat_1a\": false,\n        \"tempor_f_0\": false\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"eu_bc8\": -12048917.80843784,\n        \"fugiat_c\": -35498304.77306273\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:45.000Z",
+                  "updatedAt": "2026-07-28T01:39:45.000Z",
+                  "uid": "35240-9916ff86-a20e-48a8-984d-25f861c9ffa7"
+                },
+                {
+                  "id": "861cbcb5-5781-4969-92da-3a689411f596",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/split_transfers/:split_transfer_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "split_transfers",
+                        ":split_transfer_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "split_transfer_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:39:45.000Z",
+                  "updatedAt": "2026-07-28T01:39:45.000Z",
+                  "uid": "35240-861cbcb5-5781-4969-92da-3a689411f596"
+                }
+              ],
+              "createdAt": "2026-07-28T01:39:45.000Z",
+              "updatedAt": "2026-07-28T01:39:45.000Z",
+              "uid": "35240-15d259da-ddc9-4bda-bb5a-0dc24aae3d3e"
+            }
+          ],
+          "id": "c2b37f58-a582-45bd-9585-917f0ca3ea28",
+          "createdAt": "2026-07-28T01:39:45.000Z",
+          "updatedAt": "2026-07-28T01:39:45.000Z",
+          "uid": "35240-c2b37f58-a582-45bd-9585-917f0ca3ea28"
+        },
+        {
+          "name": "List Split Transfers",
+          "id": "88b70e1e-0d6f-421c-9ee6-67ba6bb48662",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/split_transfers?parent_transfer_id=TRxxxxxxxxxxxxxxxxxxxxxx",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "split_transfers"
+              ],
+              "query": [
+                {
+                  "description": "(Required) **ID** of the parent `Transfer` that was split.",
+                  "key": "parent_transfer_id",
+                  "value": "TRxxxxxxxxxxxxxxxxxxxxxx"
+                }
+              ]
+            },
+            "description": "Retireve a list of `split_transfers` created for a specifc split `Transfer`.\n\nFor more information, see [Split a Transaction](/docs/guides/payments/modify/split-transactions/)."
+          },
+          "response": [
+            {
+              "id": "b9d093e3-c9e6-4e47-9c94-3f972b6a0de7",
+              "name": "List of `split_transfers` created for a split `Transfer`.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/split_transfers?parent_transfer_id=TRxxxxxxxxxxxxxxxxxxxxxx",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "split_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **ID** of the parent `Transfer` that was split.",
+                      "key": "parent_transfer_id",
+                      "value": "TRxxxxxxxxxxxxxxxxxxxxxx"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"_embedded\": {\n    \"split_transfers\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SplitTransfersList detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SplitTransfersList detected>\"\n      }\n    ]\n  },\n  \"_links\": {\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"page\": {\n    \"limit\": \"<integer>\",\n    \"next_cursor\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:39:45.000Z",
+              "updatedAt": "2026-07-28T01:39:45.000Z",
+              "uid": "35240-b9d093e3-c9e6-4e47-9c94-3f972b6a0de7"
+            },
+            {
+              "id": "255f5268-1b38-40bf-b042-127d8637cebe",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/split_transfers?parent_transfer_id=TRxxxxxxxxxxxxxxxxxxxxxx",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "split_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **ID** of the parent `Transfer` that was split.",
+                      "key": "parent_transfer_id",
+                      "value": "TRxxxxxxxxxxxxxxxxxxxxxx"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          },\n          \"nostrud_42\": 50407019,\n          \"pariatur56\": -59848651.70840306\n        },\n        \"eiusmodc17\": \"\",\n        \"sunt3\": -56984660.35295629,\n        \"do47\": -16845850\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"<string>\"\n          },\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:45.000Z",
+              "updatedAt": "2026-07-28T01:39:45.000Z",
+              "uid": "35240-255f5268-1b38-40bf-b042-127d8637cebe"
+            },
+            {
+              "id": "31f9d18a-a09f-4bc1-a741-a51ac3ca7aa6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/split_transfers?parent_transfer_id=TRxxxxxxxxxxxxxxxxxxxxxx",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "split_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **ID** of the parent `Transfer` that was split.",
+                      "key": "parent_transfer_id",
+                      "value": "TRxxxxxxxxxxxxxxxxxxxxxx"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"enim_3f\": -43456790,\n        \"ad_91\": 22415014,\n        \"ipsum213\": \"exercitation elit Lorem mollit nostrud\",\n        \"Excepteur0f2\": true,\n        \"in18\": -25019769.505112514\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:45.000Z",
+              "updatedAt": "2026-07-28T01:39:45.000Z",
+              "uid": "35240-31f9d18a-a09f-4bc1-a741-a51ac3ca7aa6"
+            },
+            {
+              "id": "1c747f9b-4b33-47f8-a73a-1adc336ed282",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/split_transfers?parent_transfer_id=TRxxxxxxxxxxxxxxxxxxxxxx",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "split_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **ID** of the parent `Transfer` that was split.",
+                      "key": "parent_transfer_id",
+                      "value": "TRxxxxxxxxxxxxxxxxxxxxxx"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"consequat_1a\": false,\n        \"tempor_f_0\": false\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        },\n        \"eu_bc8\": -12048917.80843784,\n        \"fugiat_c\": -35498304.77306273\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:45.000Z",
+              "updatedAt": "2026-07-28T01:39:45.000Z",
+              "uid": "35240-1c747f9b-4b33-47f8-a73a-1adc336ed282"
+            },
+            {
+              "id": "2a6c6b5c-930c-41ed-a7dc-16b7566eb24b",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/split_transfers?parent_transfer_id=TRxxxxxxxxxxxxxxxxxxxxxx",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "split_transfers"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **ID** of the parent `Transfer` that was split.",
+                      "key": "parent_transfer_id",
+                      "value": "TRxxxxxxxxxxxxxxxxxxxxxx"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"<string>\"\n        },\n        \"message\": \"<string>\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"<string>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:39:45.000Z",
+              "updatedAt": "2026-07-28T01:39:45.000Z",
+              "uid": "35240-2a6c6b5c-930c-41ed-a7dc-16b7566eb24b"
+            }
+          ],
+          "createdAt": "2026-07-28T01:39:45.000Z",
+          "updatedAt": "2026-07-28T01:39:45.000Z",
+          "uid": "35240-88b70e1e-0d6f-421c-9ee6-67ba6bb48662"
+        }
+      ],
+      "id": "a0ceb57f-16c1-45eb-ba02-69a784b1da6e",
+      "createdAt": "2026-07-28T01:39:45.000Z",
+      "updatedAt": "2026-07-28T01:39:45.000Z",
+      "uid": "35240-a0ceb57f-16c1-45eb-ba02-69a784b1da6e"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://finix.sandbox-payments-api.com"
+    }
+  ]
+}
