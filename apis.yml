@@ -241,6 +241,8 @@ apis:
   - type: OpenAPI
     url: openapi/finix-payments-webhooks-api-openapi.yml
 common:
+- type: Overlay
+  url: overlays/finix-payments-openapi-overlay.yaml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/finix-payments/overview
 # --- link properties (identity / discoverability) ---
