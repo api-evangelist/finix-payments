@@ -3,12 +3,12 @@
   "feeds": [
     {
       "source": "https://docs.finix.com/guides/getting-started/support-at-finix",
-      "feed_url": "https://docs.finix.com/guides/getting-started/support-at-finix",
+      "feed_url": "https://docs.finix.com/release-notes/rss.xml",
       "title": "",
-      "saved": 0,
-      "method": "none"
+      "saved": 1,
+      "method": "discovered"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-08-06T14:08:46Z"
+  "post_count": 1,
+  "fetched": "2026-08-15T12:22:01Z"
 }
