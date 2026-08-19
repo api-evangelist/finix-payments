@@ -1,0 +1,365 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Transfers API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/transfers",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount equal to the given value."
+              },
+              {
+                "name": "amount.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount greater than or equal."
+              },
+              {
+                "name": "amount.gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount greater than."
+              },
+              {
+                "name": "amount.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount less than or equal."
+              },
+              {
+                "name": "amount.lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount less than."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is after the given date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is before the given date."
+              },
+              {
+                "name": "idempotency_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `idempotency_id`."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `id`."
+              },
+              {
+                "name": "ready_to_settle_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `ready_to_settle_at` is after the given date. Only available on `Finix-Version: 2022-02-01`. For more details, see [Versioning](/guides/developers/versioning/)."
+              },
+              {
+                "name": "ready_to_settle_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `ready_to_settle_at` is before the given date. Only available on `Finix-Version: 2022-02-01`. For more details, see [Versioning](/guides/developers/versioning/)."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Transaction state."
+              },
+              {
+                "name": "statement_descriptor",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `statement_descriptor`."
+              },
+              {
+                "name": "trace_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `trace_id`."
+              },
+              {
+                "name": "updated_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is after the given date."
+              },
+              {
+                "name": "updated_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is before the given date."
+              },
+              {
+                "name": "instrument_bin",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Bank Identification Number (BIN). The BIN is the first 6 digits of the masked number."
+              },
+              {
+                "name": "instrument_account_last4",
+                "value": "",
+                "type": "query",
+                "description": "Filter Transactions by the last 4 digits of the bank account. The bank account last 4 are the last 4 digits of the masked number\tinstrument_account_last4=9444 BIN."
+              },
+              {
+                "name": "instrument_brand_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by card brand. Available card brand types can be found in the drop-down."
+              },
+              {
+                "name": "merchant_identity_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `Identity` ID."
+              },
+              {
+                "name": "merchant_identity_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter Transactions by `Identity` name. The name is not case-sensitive."
+              },
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter Transactions by `Payment Instrument` name."
+              },
+              {
+                "name": "instrument_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter Transactions by `Payment Instrument` type. Available instrument types include: Bank Account or Payment Card"
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `Merchant` ID."
+              },
+              {
+                "name": "merchant_mid",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Merchant Identification Number (MID)."
+              },
+              {
+                "name": "instrument_card_last4",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the payment card last 4 digits."
+              },
+              {
+                "name": "merchant_processor_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `Processor` ID."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `Transfer` type. Available type filters include: All, Debits, Refunds, or Credits."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              },
+              {
+                "name": "tags.key",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the [`key` of a `Tag`](/api/overview/#section/Tags)."
+              },
+              {
+                "name": "tags.value",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags)."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of `Transfers`."
+        },
+        {
+          "info": {
+            "name": "Create a Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/transfers",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a `Transfer`."
+        },
+        {
+          "info": {
+            "name": "Fetch a Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/transfers/:transfer_id",
+            "params": [
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Transfer` resource."
+              }
+            ]
+          },
+          "docs": "Retrieve a `Transfer`."
+        },
+        {
+          "info": {
+            "name": "Update a Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/transfers/:transfer_id",
+            "params": [
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Transfer` resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a `Transfer`."
+        },
+        {
+          "info": {
+            "name": "List Reversals on a Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/transfers/:transfer_id/reversals",
+            "params": [
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Transfer` object."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of entries to return."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of reversals for a `Transfer`."
+        },
+        {
+          "info": {
+            "name": "Refund or Reverse a Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/transfers/:transfer_id/reversals",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Transfer` object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reverse a transfer with a `type` of **DEBIT**. This reversal creates a new `Transfer` resource with a `type` of **REVERSAL**. \n\nRelated Guides: [Refunding Payments](/guides/after-the-payment/refunding-and-cancelling-payments/)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

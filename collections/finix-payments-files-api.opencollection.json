@@ -1,0 +1,283 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Files API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/files",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `id`."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is after the given date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is before the given date."
+              },
+              {
+                "name": "updated_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is after the given date."
+              },
+              {
+                "name": "updated_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is before the given date."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              }
+            ]
+          },
+          "docs": "List all the `File` resources you've created."
+        },
+        {
+          "info": {
+            "name": "Create a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/files",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Before uploading a file, you need to create a `File` resource. \n\nOnce created, you can [upload](/guides/onboarding/uploading-files-to-finix/#how-to-upload-a-file-to-finix) your file to the new `File` resource."
+        },
+        {
+          "info": {
+            "name": "Fetch a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/files/:file_id",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "Your `File` ID."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a `File` resource."
+        },
+        {
+          "info": {
+            "name": "List All External Links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/files/:file_id/external_links",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "Your `File` ID."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `id`."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is after the given date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is before the given date."
+              },
+              {
+                "name": "updated_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is after the given date."
+              },
+              {
+                "name": "updated_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is before the given date."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              }
+            ]
+          },
+          "docs": "List the previously created `external_links` for a `File`."
+        },
+        {
+          "info": {
+            "name": "Create an External Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/files/:file_id/external_links",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "Your `File` ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an `external_link` resource to share with users so they can upload files directly from their browser. For more info, see [Uploading files to Finix](/guides/onboarding/uploading-files-to-finix/)."
+        },
+        {
+          "info": {
+            "name": "Upload files Directly",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/files/:file_id/upload",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the `File` that was created to upload the file."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Upload files directly with a `multipart/form-data` request."
+        },
+        {
+          "info": {
+            "name": "Download a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/files/:file_id/download",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the `File` that was created to upload the file."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "Stream the contents of the `File` so it's displayed inline in the user's web browser."
+              }
+            ]
+          },
+          "docs": "Download a file that was uploaded to a `File` resource."
+        },
+        {
+          "info": {
+            "name": "Fetch an External LInk",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/files/:file_id/external_links/:external_link_id",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the `File` that has the links you want to retrieve."
+              },
+              {
+                "name": "external_link_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the `external_link` that you want to retireve."
+              }
+            ]
+          },
+          "docs": "Fetch a previously created `external_link` resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

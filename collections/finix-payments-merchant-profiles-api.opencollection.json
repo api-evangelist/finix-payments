@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Merchant Profiles API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Merchant Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/merchant_profiles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `id`."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              }
+            ]
+          },
+          "docs": "Retireve a list of all `merchant_profiles`."
+        },
+        {
+          "info": {
+            "name": "Fetch a Merchant Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/merchant_profiles/:merchant_profile_id",
+            "params": [
+              {
+                "name": "merchant_profile_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `merchant_profile`."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a previosuly created `merchant_profile`."
+        },
+        {
+          "info": {
+            "name": "Update a Merchant Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/merchant_profiles/:merchant_profile_id",
+            "params": [
+              {
+                "name": "merchant_profile_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `merchant_profile`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a `merchant_profile`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

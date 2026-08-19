@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Compliance Forms API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Compliance Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch a Compliance Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/compliance_forms/:compliance_forms_id",
+            "params": [
+              {
+                "name": "compliance_forms_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `compliance_form`."
+              }
+            ]
+          },
+          "docs": "A webhook notifies you when Finix creates a `compliance_form`.\n\nUse the ID in the webhook to fetch the `compliance_form` resource from the `/compliance_forms/:COMPLIANCE_FORM_ID:` endpoint."
+        },
+        {
+          "info": {
+            "name": "Complete a Compliance Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/compliance_forms/:compliance_forms_id",
+            "params": [
+              {
+                "name": "compliance_forms_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `compliance_form`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "As part of onboarding your users, you'll need to build a UI experience that allows users to complete the PCI `compliance_form` and download the form as a PDF if requested.\n\nFor more information, see [Managing Compliance Forms](/guides/security-and-compliance/pci-dss-compliance/managing-pci-compliance/#completing-compliance-forms)."
+        },
+        {
+          "info": {
+            "name": "List Compliance Forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/compliance_forms",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the `state` of the `Compliance Form`."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of `Compliance Forms`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

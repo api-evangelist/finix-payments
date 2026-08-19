@@ -1,0 +1,494 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Disputes API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Disputes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Disputes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/disputes",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is after the given date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is before the given date."
+              },
+              {
+                "name": "updated_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is after the given date."
+              },
+              {
+                "name": "updated_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is before the given date."
+              },
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the `Transfer` that's being disputed. <br><br>**Note**: If included, all other filter parameters are ignored."
+              },
+              {
+                "name": "adjustment_transfer_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the adjustment `Transfer`. <br><br>**Note**: If included, all other filter parameters are ignored."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount equal to the given value."
+              },
+              {
+                "name": "amount.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount greater than or equal."
+              },
+              {
+                "name": "amount.gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount greater than."
+              },
+              {
+                "name": "amount.lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount less than."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the state of the `Dispute`."
+              },
+              {
+                "name": "response_state",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the `response_state` of the `Dispute`."
+              },
+              {
+                "name": "respond_by.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `respond_by` is before the given date."
+              },
+              {
+                "name": "respond_by.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `respond_by` is after the given date."
+              },
+              {
+                "name": "instrument_bin",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the Bank Identification Number (BIN). The BIN is the first 6 digits of the masked account number."
+              },
+              {
+                "name": "instrument_brand_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the card brand used."
+              },
+              {
+                "name": "merchant_identity_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the `Identity` used by the `Merchant`."
+              },
+              {
+                "name": "merchant_identity_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name used by the `Merchant`."
+              },
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name of the `Payment Instrument`."
+              },
+              {
+                "name": "instrument_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `Payment Instrument` type."
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the `Merchant`."
+              },
+              {
+                "name": "merchant_mid",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the MID of the `Merchant`."
+              },
+              {
+                "name": "instrument_card_last4",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the last 4 digits of the card used."
+              },
+              {
+                "name": "instrument_card_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the card type."
+              },
+              {
+                "name": "instrument_fingerprint",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the fingerprint of the `Payment Instrument`."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Returns every `Dispute` created before the cursor value."
+              },
+              {
+                "name": "tags.key",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the [`key` of a `Tag`](/api/overview/#section/Tags)."
+              },
+              {
+                "name": "tags.value",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags)."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of `Disputes`."
+        },
+        {
+          "info": {
+            "name": "Fetch a Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/disputes/:dispute_id",
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Dispute`."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a previously created `Dispute`."
+        },
+        {
+          "info": {
+            "name": "Update a Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/disputes/:dispute_id",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Dispute`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update `tags` on `Disputes`."
+        },
+        {
+          "info": {
+            "name": "List Dispute Evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/disputes/:dispute_id/evidence",
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Dispute` to mange evidence for."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of dispute evidence for a `Dispute`."
+        },
+        {
+          "info": {
+            "name": "Upload Files as Dispute Evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/disputes/:dispute_id/evidence",
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Dispute` to mange evidence for."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Upload a file as evidence for a `Dispute`.\n\n- You can upload up to 8 files; the total size of the uploaded files combined cannot exceed 10 MB.\n- The allowed file formats include JPG, PNG, PDF, or TIFF.\n- Individual PNG and JPEG files can't exceed 50 KB; PDF and TIFF files can't exceed 1 MB."
+        },
+        {
+          "info": {
+            "name": "Fetch Dispute Evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/disputes/:dispute_id/evidence/:evidence_id",
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Dispute` to fetch evidence for."
+              },
+              {
+                "name": "evidence_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `evidence` to fetch."
+              }
+            ]
+          },
+          "docs": "Fetch evidence uploaded for a `Dispute`. \n\nIf you don't have the Finix Dashboard available, you can fetch the evidence to review the `status` of the upload to confirm the evidence got sent to the processor."
+        },
+        {
+          "info": {
+            "name": "Update Dispute Evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/disputes/:dispute_id/evidence/:evidence_id",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Dispute` to fetch evidence for."
+              },
+              {
+                "name": "evidence_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `evidence` to fetch."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update tags on `Dispute` evidence."
+        },
+        {
+          "info": {
+            "name": "Fetch Dispute Adjustment Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/disputes/:dispute_id/adjustment_transfers",
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `Dispute` resource."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              }
+            ]
+          },
+          "docs": "List the adjustment `Transfers` for a `Dispute`. Depending on the stage of the `Dispute`, different adjustment `Transfer` subtypes can be applied.\n\nThere are four available subtypes for adjustment `Transfers` in `Disputes`: <ul><li><strong>PLATFORM\\_CREDIT</strong><li><strong>MERCHANT\\_DEBIT</strong><li><strong>MERCHANT\\_CREDIT</strong><li><strong>PLATFORM\\_DEBIT</strong></ul>"
+        },
+        {
+          "info": {
+            "name": "Submit Dispute Evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/disputes/:dispute_id/submit",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Dispute` to move forward and submit evidence."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You can manually submit evidence to the issuing bank to manually move a dispute forward. Use the `/disputes/DISPUTE_ID/submit` endpoint to submit evidence. Making a POST request lets the issuing bank know the seller has completed submitting evidence and is prepared to move forward with the dispute.\n\nRelated guides: [Responding to Disputes](/guides/after-the-payment/disputes/responding-disputes/)."
+        },
+        {
+          "info": {
+            "name": "Accept a Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/disputes/:dispute_id/accept",
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Dispute` to move forward and submit evidence."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You can accept a `Dispute` to prevent a long (and potentially expensive) process. When you accept a `Dispute`, you concede that the Dispute is not worth challenging or representing.\n\nRelated guides: [Accepting a Dispute](/guides/after-the-payment/disputes/accepting-disputes/)\n"
+        },
+        {
+          "info": {
+            "name": "Download Dispute Evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/disputes/:dispute_id/evidence/:evidence_id/download",
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Dispute` to download evidence from."
+              },
+              {
+                "name": "evidence_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `evidence` to download."
+              }
+            ]
+          },
+          "docs": "Download a file uploaded as `Dispute Evidence`.\n\n**Note**: The file extension included in `output` must match the extension of the original uploaded file."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

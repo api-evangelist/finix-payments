@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Fee Profiles API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fee Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Fee Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/fee_profiles",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              }
+            ]
+          },
+          "docs": "List all `Fee Profiles`."
+        },
+        {
+          "info": {
+            "name": "Create a Fee Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/fee_profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a `fee_profile`."
+        },
+        {
+          "info": {
+            "name": "Fetch a Fee Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/fee_profiles/:fee_profile_id",
+            "params": [
+              {
+                "name": "fee_profile_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the `fee_profile`."
+              }
+            ]
+          },
+          "docs": "Get a `fee_profile`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

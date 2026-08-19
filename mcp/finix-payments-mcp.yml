@@ -2,8 +2,8 @@ generated: '2026-07-19'
 method: derived
 status: candidate
 source: openapi/finix-payments-openapi-original.yml
-note: No official hosted Finix MCP server found as of this pass; this is a candidate tool surface derived one-to-one from
-  the Finix OpenAPI operations. Finix API uses HTTP Basic Auth (API key username:password).
+note: No official hosted Finix MCP server found as of this pass; this is a candidate tool surface derived
+  one-to-one from the Finix OpenAPI operations. Finix API uses HTTP Basic Auth (API key username:password).
 server:
   name: finix
   transport: stdio
@@ -282,3 +282,9 @@ tools:
 - name: listSplitTransfer
   description: List Split Transfers
   source_operation: openapi/finix-payments-openapi-original.yml#listSplitTransfer
+deployment:
+  mode: none
+  verified: derived
+  tools: 91
+  checked: '2026-08-12'
+  source: catalog MCP census

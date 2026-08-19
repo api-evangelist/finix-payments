@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Balance Transfers API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Balance Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Balance Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/balance_transfers",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number to list."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is after the given date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is before the given date."
+              },
+              {
+                "name": "updated_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is after the given date."
+              },
+              {
+                "name": "updated_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is before the given date."
+              },
+              {
+                "name": "idempotency_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `idempotency_id`."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount equal to the given value."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the `Description` value ."
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the `Payment Instrument` saved in `Destination`."
+              },
+              {
+                "name": "external_reference_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the value saved in `external_reference_id`."
+              },
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the value saved in `reference_id`."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the `Payment Instrument` saved in `source`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of `balance_transfers`."
+        },
+        {
+          "info": {
+            "name": "Create a Balance Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/balance_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a `balance_transfer`."
+        },
+        {
+          "info": {
+            "name": "Fetch a Balance Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/balance_transfers/:balance_transfers_id",
+            "params": [
+              {
+                "name": "balance_transfers_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `balance_transfer` resource."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a `balance_transfer`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

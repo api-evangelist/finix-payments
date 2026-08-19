@@ -1,0 +1,251 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Identities API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Identities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/identities",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `id`."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is after the given date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is before the given date."
+              },
+              {
+                "name": "default_statement_descriptor",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the `default_statement_descriptor`."
+              },
+              {
+                "name": "business_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the full business name. Partial business names are not supported."
+              },
+              {
+                "name": "business_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the business type. Partial business types are not supported."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the email address or email domain. Partial emails are not supported."
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the first name of the person associated to the `Identity`."
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the last name of the person associated to the `Identity`."
+              },
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the title if available."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              },
+              {
+                "name": "tags.key",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the [`key` of a `Tag`](/api/overview/#section/Tags)."
+              },
+              {
+                "name": "tags.value",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags)."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of `Identities`."
+        },
+        {
+          "info": {
+            "name": "Create an Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/identities",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an `Identity` for your seller or buyer.\n\nAll fields for a buyer's `Identity` are optional. \n\nProviding `business_type` indicates that the `Identity` is being created for a Merchant.\n\nRelated Guides: [Getting Started](/guides/getting-started/), [Onboarding](/guides/onboarding/)"
+        },
+        {
+          "info": {
+            "name": "Fetch an Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/identities/:identity_id",
+            "params": [
+              {
+                "name": "identity_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `Identity` to fetch."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a previously created `Identity`."
+        },
+        {
+          "info": {
+            "name": "Update an Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/identities/:identity_id",
+            "params": [
+              {
+                "name": "identity_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `Identity` to fetch."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing `Identity`.\n\nIf you are updating the `Identity` of a `Merchant` that’s already been onboarded, you need to [verify the merchant again](/api/tag/Merchants/#tag/Merchants/operation/createMerchantVerification)."
+        },
+        {
+          "info": {
+            "name": "List Associated Identities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/identities/:identity_id/associated_identities",
+            "params": [
+              {
+                "name": "identity_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Identity` to associate object with."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of entries to return."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of `Associated Identities` for an `Identity`."
+        },
+        {
+          "info": {
+            "name": "Create an Associated Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/identities/:identity_id/associated_identities",
+            "params": [
+              {
+                "name": "identity_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Identity` to associate object with."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an associated `Identity` for [every owner with 25% or more ownership](/guides/onboarding/onboarding-with-api#step-3-add-associated-identities) over the merchant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

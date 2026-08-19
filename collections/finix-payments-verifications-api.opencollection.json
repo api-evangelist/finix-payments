@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Verifications API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Verifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Merchant Verifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/merchants/:merchant_id/verifications",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Merchant` object."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of entries to return."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              }
+            ]
+          },
+          "docs": "Get a list of all the `Verifications` for a `Merchant` resource."
+        },
+        {
+          "info": {
+            "name": "List Payment Instrument Verifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/payment_instruments/:payment_instrument_id_verify",
+            "params": [
+              {
+                "name": "payment_instrument_id_verify",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of entries to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number to list."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page."
+              }
+            ]
+          },
+          "docs": "List all the `Verifications` created for a `Payment Instrument`."
+        },
+        {
+          "info": {
+            "name": "List Verifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/verifications",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of `Verifications`."
+        },
+        {
+          "info": {
+            "name": "Create a Merchant Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/verifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a `Verification` to verify a seller's `Identity`.\n\nVerifications can also be created directly on the resources you want to verify. For example:\n- `POST /merchants/{merchant_id}/verifications`\n- `POST /payment_instruments/{payment_instrument_id}/verifications`"
+        },
+        {
+          "info": {
+            "name": "Fetch a Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/verifications/:verification_id",
+            "params": [
+              {
+                "name": "verification_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Verification` object."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a `Verification`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

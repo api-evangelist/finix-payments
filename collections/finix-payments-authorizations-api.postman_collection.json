@@ -1,0 +1,2662 @@
+{
+  "item": [
+    {
+      "id": "db90d7a9-53bc-49f2-a1df-38d4fa21d269",
+      "name": "Authorizations",
+      "description": {
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c0401e8e-ba76-4f49-aebd-ffbe01bb4119",
+          "name": "Create an Authorization",
+          "request": {
+            "name": "Create an Authorization",
+            "description": {
+              "content": "Create an `Authorization` to process a transaction.\n\nRelated Guides: [Creating and Capturing an Authorization](/guides/payments/making-a-payment/creating-and-capturing-an-authorization/), [Level 2 and 3 Processing](/guides/payments/making-a-payment/level-2-and-level-3-processing/), [In-Person Cloud Payments](/guides/payments/in-person-payments/cloud/in-person-cloud-payments/), [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authorizations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                "key": "Finix-Version",
+                "value": "2018-01-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"additional_buyer_charges\": {\n    \"convenience_amount\": \"<number>\",\n    \"rent_surcharge_amount\": \"<number>\"\n  },\n  \"additional_purchase_data\": {\n    \"customer_reference_number\": \"<string>\",\n    \"sales_tax\": \"<integer>\",\n    \"customs_duty_amount\": \"<integer>\",\n    \"destination_country_code\": \"<string>\",\n    \"destination_postal_code\": \"<string>\",\n    \"discount_amount\": \"<integer>\",\n    \"invoice_reference_number\": \"<string>\",\n    \"item_data\": [\n      {\n        \"amount_excluding_sales_tax\": \"<integer>\",\n        \"amount_including_sales_tax\": \"<integer>\",\n        \"commodity_code\": \"<string>\",\n        \"cost_per_unit\": \"<integer>\",\n        \"item_description\": \"<string>\",\n        \"item_discount_amount\": \"<integer>\",\n        \"merchant_product_code\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"unit_of_measure\": \"<string>\"\n      },\n      {\n        \"amount_excluding_sales_tax\": \"<integer>\",\n        \"amount_including_sales_tax\": \"<integer>\",\n        \"commodity_code\": \"<string>\",\n        \"cost_per_unit\": \"<integer>\",\n        \"item_description\": \"<string>\",\n        \"item_discount_amount\": \"<integer>\",\n        \"merchant_product_code\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"unit_of_measure\": \"<string>\"\n      }\n    ],\n    \"order_date\": {\n      \"day\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"year\": \"<integer>\"\n    },\n    \"ship_from_postal_code\": \"<string>\",\n    \"shipping_amount\": \"<integer>\",\n    \"tax_exempt\": \"<boolean>\"\n  },\n  \"amount\": \"<long>\",\n  \"currency\": \"<string>\",\n  \"device\": \"<string>\",\n  \"fraud_session_id\": \"<string>\",\n  \"hsa_fsa_payment\": \"<boolean>\",\n  \"idempotency_id\": \"<string>\",\n  \"merchant\": \"<string>\",\n  \"operation_key\": \"<string>\",\n  \"security_code\": \"<string>\",\n  \"source\": \"<string>\",\n  \"tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"3d_secure_authentication\": {\n    \"cardholder_authentication\": \"<string>\",\n    \"electronic_commerce_indicator\": \"<string>\",\n    \"cardholder_ip_address\": \"<string>\",\n    \"transaction_id\": \"<string>\"\n  },\n  \"additional_purchase_data \": {\n    \"customer_reference_number\": \"<string>\",\n    \"customs_duty_amount\": \"<integer>\",\n    \"discount_amount\": \"<integer>\",\n    \"item_data\": [\n      {\n        \"amount_excluding_sales_tax\": \"<integer>\",\n        \"amount_including_sales_tax\": \"<integer>\",\n        \"commodity_code\": \"<string>\",\n        \"cost_per_unit\": \"<integer>\",\n        \"item_description\": \"<string>\",\n        \"item_discount_amount\": \"<integer>\",\n        \"merchant_product_code\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"unit_of_measure\": \"<string>\"\n      },\n      {\n        \"amount_excluding_sales_tax\": \"<integer>\",\n        \"amount_including_sales_tax\": \"<integer>\",\n        \"commodity_code\": \"<string>\",\n        \"cost_per_unit\": \"<integer>\",\n        \"item_description\": \"<string>\",\n        \"item_discount_amount\": \"<integer>\",\n        \"merchant_product_code\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"unit_of_measure\": \"<string>\"\n      }\n    ],\n    \"sales_tax\": \"<integer>\",\n    \"shipping_amount\": \"<integer>\",\n    \"destination_country_code\": \"<string>\",\n    \"destination_postal_code\": \"<string>\",\n    \"invoice_reference_number\": \"<string>\",\n    \"order_date\": {\n      \"day\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"year\": \"<integer>\"\n    },\n    \"ship_from_postal_code\": \"<string>\",\n    \"tax_exempt\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3fc80dfd-8e5b-4dbe-994a-a4013ea47d18",
+              "name": "Single Authorization object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"AUvZbBaTJkFCbiAMrGtc66ko\",\n  \"created_at\": \"2022-10-11T02:27:39.10Z\",\n  \"updated_at\": \"2022-10-11T02:27:39.48Z\",\n  \"3ds_redirect_url\": null,\n  \"additional_buyer_charges\": null,\n  \"additional_healthcare_data\": null,\n  \"address_verification\": \"POSTAL_CODE_AND_STREET_MATCH\",\n  \"amount\": 100,\n  \"amount_requested\": 100,\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"currency\": \"USD\",\n  \"expires_at\": \"2022-10-18T02:27:39.10Z\",\n  \"failure_code\": null,\n  \"failure_message\": null,\n  \"idempotency_id\": null,\n  \"is_void\": false,\n  \"merchant\": \"MUeDVrf2ahuKc9Eg5TeZugvs\",\n  \"merchant_identity\": \"IDuqZpDw28f2KK6YuDk4jNLg\",\n  \"messages\": [],\n  \"raw\": null,\n  \"security_code_verification\": \"MATCHED\",\n  \"source\": \"PIe2YvpcjvoVJ6PzoRPBK137\",\n  \"state\": \"SUCCEEDED\",\n  \"tags\": {\n    \"order_number\": \"21DFASJSAKAS\"\n  },\n  \"trace_id\": \"e1a10287-4909-4aa7-9cb7-abd069a3b833\",\n  \"transfer\": null,\n  \"void_state\": \"UNATTEMPTED\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/authorizations/AUvZbBaTJkFCbiAMrGtc66ko\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    },\n    \"merchant_identity\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb4024e3-3657-4ce3-a2d0-3be2c83c5d2b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3123,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42e65f1d-b2df-4e62-a6de-b0a0f5025b73",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 6771,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2053854-50b5-47e6-b531-7f361b0060ef",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5490,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": false\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d353e0d2-c8b9-4d56-acd9-6f877388f213",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 7944,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7ede858-3495-4401-b26f-e61116935889",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2754,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c694ba62-601b-4a32-b8ad-de990ede29bd",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8022,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": false,\n        \"key_2\": 7352\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b5188cb-0404-4ed8-a9b7-d3b0f39b0c1e",
+              "name": "Invalid field",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 7876,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"string\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"string\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a49279c-f650-4566-9a8d-4173b92b640a",
+          "name": "List Authorizations",
+          "request": {
+            "name": "List Authorizations",
+            "description": {
+              "content": "Retrieve a list of `Authorizations`. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authorizations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<integer>",
+                  "description": "Filter by an amount equal to the given value."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount.gt",
+                  "value": "<integer>",
+                  "description": "Filter by an amount greater than."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount.gte",
+                  "value": "<integer>",
+                  "description": "Filter by an amount greater than or equal."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount.lt",
+                  "value": "<integer>",
+                  "description": "Filter by an amount less than."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount.lte",
+                  "value": "<integer>",
+                  "description": "Filter by an amount less than or equal."
+                },
+                {
+                  "disabled": false,
+                  "key": "before_cursor",
+                  "value": "<string>",
+                  "description": "Return every resource created before the cursor value."
+                },
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>",
+                  "description": "Return every resource created after the cursor value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.gte",
+                  "value": "<string>",
+                  "description": "Filter where `created_at` is after the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.lte",
+                  "value": "<string>",
+                  "description": "Filter where `created_at` is before the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_id",
+                  "value": "<string>",
+                  "description": "Filter by `idempotency_id`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The numbers of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags.key",
+                  "value": "<string>",
+                  "description": "Filter by the [`key` of a `Tag`](/api/overview/#section/Tags)."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags.value",
+                  "value": "<string>",
+                  "description": "Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags)."
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter by Transaction state."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at.gte",
+                  "value": "<string>",
+                  "description": "Filter where `updated_at` is after the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at.lte",
+                  "value": "<string>",
+                  "description": "Filter where `updated_at` is before the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "trace_id",
+                  "value": "<string>",
+                  "description": "Filter by `trace_id`."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_void",
+                  "value": "<string>",
+                  "description": "Filter by `idempotency_id`."
+                },
+                {
+                  "disabled": false,
+                  "key": "instrument_bin",
+                  "value": "<string>",
+                  "description": "Filter by Bank Identification Number (BIN). The BIN is the first 6 digits of the masked number."
+                },
+                {
+                  "disabled": false,
+                  "key": "instrument_account_last4",
+                  "value": "<string>",
+                  "description": "Filter Transactions by the last 4 digits of the bank account. The bank account last 4 are the last 4 digits of the masked number\tinstrument_account_last4=9444 BIN."
+                },
+                {
+                  "disabled": false,
+                  "key": "instrument_brand_type",
+                  "value": "<string>",
+                  "description": "Filter by card brand. Available card brand types can be found in the drop-down."
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_identity_id",
+                  "value": "<string>",
+                  "description": "Filter by `Identity` ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_identity_name",
+                  "value": "<string>",
+                  "description": "Filter Transactions by `Identity` name. The name is not case-sensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "instrument_name",
+                  "value": "<string>",
+                  "description": "Filter Transactions by `Payment Instrument` name."
+                },
+                {
+                  "disabled": false,
+                  "key": "instrument_type",
+                  "value": "<string>",
+                  "description": "Filter Transactions by `Payment Instrument` type. Available instrument types include: Bank Account or Payment Card."
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_id",
+                  "value": "<string>",
+                  "description": "Filter by `Merchant` ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_mid",
+                  "value": "<string>",
+                  "description": "Filter by Merchant Identification Number (MID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "instrument_card_last4",
+                  "value": "<string>",
+                  "description": "Filter by the payment card last 4 digits."
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_processor_id",
+                  "value": "<string>",
+                  "description": "Filter by `Processor` ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Type of the `Authorization`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                "key": "Finix-Version",
+                "value": "2018-01-01"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52528507-ca1a-42ad-8b5f-2a49a76ae066",
+              "name": "List of Authorization objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_void",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_bin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_account_last4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_brand_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_identity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_identity_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_mid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_card_last4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_processor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_embedded\": {\n    \"authorizations\": [\n      {\n        \"id\": \"AUoCse3evsJWctBbh6hSEsZj\",\n        \"created_at\": \"2022-10-10T06:14:57.84Z\",\n        \"updated_at\": \"2022-10-10T06:14:58.28Z\",\n        \"3ds_redirect_url\": null,\n        \"additional_buyer_charges\": null,\n        \"additional_healthcare_data\": null,\n        \"address_verification\": null,\n        \"amount\": 150,\n        \"amount_requested\": 150,\n        \"application\": \"APeUbTUjvYb1CdPXvNcwW1wP\",\n        \"card_present_details\": {\n          \"emv_data\": null,\n          \"masked_account_number\": null,\n          \"name\": null,\n          \"brand\": null,\n          \"entry_mode\": null,\n          \"payment_type\": \"NONE\",\n          \"approval_code\": null\n        },\n        \"currency\": \"USD\",\n        \"device\": \"DVsEanpBtsAVvCHbNXkFaH6f\",\n        \"expires_at\": \"2022-10-17T06:14:57.84Z\",\n        \"failure_code\": null,\n        \"failure_message\": null,\n        \"idempotency_id\": null,\n        \"is_void\": false,\n        \"merchant_identity\": \"IDsbTBawhnLBAVeinRb84vFR\",\n        \"messages\": [\n          \"LaneID 1 does not exist.\",\n          \"Authorization AUoCse3evsJWctBbh6hSEsZj could not be submitted. Cause: LaneID 1 does not exist.\",\n          \"DECLINED\"\n        ],\n        \"raw\": {\n          \"approved_amount\": 0,\n          \"convenience_fee_amount\": 0,\n          \"currency_code\": \"None\",\n          \"is_approved\": false,\n          \"is_offline\": false,\n          \"payment_type\": \"None\",\n          \"pin_verified\": false,\n          \"status_code\": \"None\",\n          \"sub_total_amount\": 0,\n          \"tip_amount\": 0,\n          \"total_amount\": 0,\n          \"order_id\": \"FNXhDjLCPDzR33zk8jjTicZv2\",\n          \"lane_id\": 1,\n          \"_errors\": [\n            {\n              \"developer_message\": \"ERROR:POST error\\r\\nEXCEPTION: LaneID 1 does not exist.\\r\\n\",\n              \"error_type\": \"\",\n              \"exception_message\": \"LaneID 1 does not exist.\",\n              \"exception_type_full_name\": \"TriPos.Shared.Exceptions.PinPadNotFoundException\",\n              \"exception_type_short_name\": \"PinPadNotFoundException\",\n              \"user_message\": \"\"\n            }\n          ],\n          \"_links\": [],\n          \"_processor\": {\n            \"logs\": [\n              \"LaneID 1 does not exist.\"\n            ],\n            \"processor_logs\": [\n              \"LaneID 1 does not exist.\"\n            ],\n            \"processor_request_failed\": false,\n            \"processor_request_was_approved\": false,\n            \"processor_response_code\": \"Unknown\"\n          },\n          \"_type\": \"authorizationResponse\",\n          \"_warnings\": []\n        },\n        \"security_code_verification\": null,\n        \"source\": \"PIg2q5tVAPcHpUpbJBNe4Vus\",\n        \"state\": \"FAILED\",\n        \"tags\": {\n          \"order_number\": \"chris123transfer\"\n        },\n        \"trace_id\": \"FNXhDjLCPDzR33zk8jjTicZv2\",\n        \"transfer\": null,\n        \"void_state\": \"UNATTEMPTED\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/authorizations/AUoCse3evsJWctBbh6hSEsZj\"\n          },\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APeUbTUjvYb1CdPXvNcwW1wP\"\n          },\n          \"device\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/devices/DVsEanpBtsAVvCHbNXkFaH6f\"\n          },\n          \"merchant_identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDsbTBawhnLBAVeinRb84vFR\"\n          }\n        }\n      },\n      {\n        \"id\": \"AUuRnfhaBm84RhHyonkHAUrt\",\n        \"created_at\": \"2022-08-01T22:14:13.31Z\",\n        \"updated_at\": \"2022-08-01T22:14:13.44Z\",\n        \"3ds_redirect_url\": null,\n        \"additional_buyer_charges\": null,\n        \"additional_healthcare_data\": null,\n        \"address_verification\": \"POSTAL_CODE_AND_STREET_MATCH\",\n        \"amount\": 100,\n        \"amount_requested\": 100,\n        \"application\": \"AP3AB2itAWrrrPVS6spvrGYp\",\n        \"currency\": \"USD\",\n        \"expires_at\": \"2022-08-08T22:14:13.31Z\",\n        \"failure_code\": null,\n        \"failure_message\": null,\n        \"idempotency_id\": null,\n        \"is_void\": false,\n        \"merchant_identity\": \"IDsArLxCm9QGbi2QfhaFrTED\",\n        \"messages\": [],\n        \"raw\": {\n          \"additional_large_number\": 9223372036854776000,\n          \"value\": 100,\n          \"order_id\": \"e770db75-fbf6-4efb-afe7-57aedd7ac40d\"\n        },\n        \"security_code_verification\": \"MATCHED\",\n        \"source\": \"PIbDnouV59En1yKfYUNLTpG9\",\n        \"state\": \"SUCCEEDED\",\n        \"tags\": {},\n        \"trace_id\": \"e770db75-fbf6-4efb-afe7-57aedd7ac40d\",\n        \"transfer\": null,\n        \"void_state\": \"UNATTEMPTED\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/authorizations/AUuRnfhaBm84RhHyonkHAUrt\"\n          },\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/AP3AB2itAWrrrPVS6spvrGYp\"\n          },\n          \"merchant_identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDsArLxCm9QGbi2QfhaFrTED\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/authorizations?offset=0&limit=20&sort=created_at,desc&sort=id,desc\"\n    },\n    \"next\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/authorizations?offset=20&limit=20&sort=created_at,desc&sort=id,desc\"\n    },\n    \"last\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/authorizations?offset=633380&limit=20&sort=created_at,desc&sort=id,desc\"\n    }\n  },\n  \"page\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"count\": 633397\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4ca740b-213d-4ac5-96ff-7015b5936e32",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_void",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_bin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_account_last4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_brand_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_identity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_identity_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_mid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_card_last4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_processor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8212,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": false\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": false,\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "557832ad-b4fe-43b3-97c9-e1201e294643",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_void",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_bin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_account_last4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_brand_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_identity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_identity_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_mid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_card_last4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_processor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 9752,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 8078,\n        \"key_1\": 7207.0344172016685\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ad82bf6-90ad-4fdd-aa9e-0d87caf8c440",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_void",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_bin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_account_last4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_brand_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_identity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_identity_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_mid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_card_last4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_processor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4097,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 1712\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82274c2a-961e-4933-8f6e-3f92e50b4412",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "idempotency_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at.gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at.lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "trace_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_void",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_bin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_account_last4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_brand_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_identity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_identity_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_mid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrument_card_last4",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_processor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8905,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09209176-7312-4600-8133-807d99204bed",
+          "name": "Fetch an Authorization",
+          "request": {
+            "name": "Fetch an Authorization",
+            "description": {
+              "content": "Retrieve the details of a previously created `Authorization`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authorizations",
+                ":authorization_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorization_id",
+                  "description": "(Required) ID of `Authorization` to fetch."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b983e93b-6580-4709-adfc-d9ea7e59ba96",
+              "name": "Single Authorization object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id",
+                      "description": "(Required) ID of `Authorization` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"AUvZbBaTJkFCbiAMrGtc66ko\",\n  \"created_at\": \"2022-10-11T02:27:39.10Z\",\n  \"updated_at\": \"2022-10-11T02:27:39.48Z\",\n  \"3ds_redirect_url\": null,\n  \"additional_buyer_charges\": null,\n  \"additional_healthcare_data\": null,\n  \"address_verification\": \"POSTAL_CODE_AND_STREET_MATCH\",\n  \"amount\": 100,\n  \"amount_requested\": 100,\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"currency\": \"USD\",\n  \"expires_at\": \"2022-10-18T02:27:39.10Z\",\n  \"failure_code\": null,\n  \"failure_message\": null,\n  \"idempotency_id\": null,\n  \"is_void\": false,\n  \"merchant\": \"MUeDVrf2ahuKc9Eg5TeZugvs\",\n  \"merchant_identity\": \"IDuqZpDw28f2KK6YuDk4jNLg\",\n  \"messages\": [],\n  \"raw\": null,\n  \"security_code_verification\": \"MATCHED\",\n  \"source\": \"PIe2YvpcjvoVJ6PzoRPBK137\",\n  \"state\": \"SUCCEEDED\",\n  \"tags\": {\n    \"order_number\": \"21DFASJSAKAS\"\n  },\n  \"trace_id\": \"e1a10287-4909-4aa7-9cb7-abd069a3b833\",\n  \"transfer\": null,\n  \"void_state\": \"UNATTEMPTED\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/authorizations/AUvZbBaTJkFCbiAMrGtc66ko\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    },\n    \"merchant_identity\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe11a4cc-cbc9-4f07-9aa0-d2efcbabd766",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id",
+                      "description": "(Required) ID of `Authorization` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8212,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": false\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": false,\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05d7b129-47fc-44d8-9ac4-e9ae5b678789",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id",
+                      "description": "(Required) ID of `Authorization` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 9752,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 8078,\n        \"key_1\": 7207.0344172016685\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d21bda9-4566-4234-b045-5a588dff03c1",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id",
+                      "description": "(Required) ID of `Authorization` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4097,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 1712\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9d0114e-a2ed-4210-bec4-f846fd84d1dd",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id",
+                      "description": "(Required) ID of `Authorization` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8905,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9a9900c-e4d1-4e50-b2f0-59db252cf4b7",
+          "name": "Capture an Authorization",
+          "request": {
+            "name": "Capture an Authorization",
+            "description": {
+              "content": "Use a PUT request to capture an `Authorization`. If captured successfully, the `transfer` field of the `Authorization` will contain the ID of the `Transfer` resource that moves funds.\n\nRelated Guides: [Creating and Capturing an Authorization](/guides/payments/making-a-payment/creating-and-capturing-an-authorization/), [Level 2 and 3 Processing](/guides/payments/making-a-payment/level-2-and-level-3-processing/), [In-Person Cloud Payments](/guides/payments/in-person-payments/cloud/in-person-cloud-payments/), [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authorizations",
+                ":authorization_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorization_id",
+                  "description": "(Required) ID of `Authorization` to fetch."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                "key": "Finix-Version",
+                "value": "2018-01-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"additional_purchase_data\": {\n    \"customer_reference_number\": \"<string>\",\n    \"sales_tax\": \"<integer>\",\n    \"customs_duty_amount\": \"<integer>\",\n    \"destination_country_code\": \"<string>\",\n    \"destination_postal_code\": \"<string>\",\n    \"discount_amount\": \"<integer>\",\n    \"invoice_reference_number\": \"<string>\",\n    \"item_data\": [\n      {\n        \"amount_excluding_sales_tax\": \"<integer>\",\n        \"amount_including_sales_tax\": \"<integer>\",\n        \"commodity_code\": \"<string>\",\n        \"cost_per_unit\": \"<integer>\",\n        \"item_description\": \"<string>\",\n        \"item_discount_amount\": \"<integer>\",\n        \"merchant_product_code\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"unit_of_measure\": \"<string>\"\n      },\n      {\n        \"amount_excluding_sales_tax\": \"<integer>\",\n        \"amount_including_sales_tax\": \"<integer>\",\n        \"commodity_code\": \"<string>\",\n        \"cost_per_unit\": \"<integer>\",\n        \"item_description\": \"<string>\",\n        \"item_discount_amount\": \"<integer>\",\n        \"merchant_product_code\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"unit_of_measure\": \"<string>\"\n      }\n    ],\n    \"order_date\": {\n      \"day\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"year\": \"<integer>\"\n    },\n    \"ship_from_postal_code\": \"<string>\",\n    \"shipping_amount\": \"<integer>\",\n    \"tax_exempt\": \"<boolean>\"\n  },\n  \"capture_amount\": \"<long>\",\n  \"fee\": \"<long>\",\n  \"tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"void_me\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "602e206f-1b86-417b-95b1-c5f2550b18c8",
+              "name": "Single captured Authorization object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id",
+                      "description": "(Required) ID of `Authorization` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"AUbrumLihwhdLixtbU1mfMiF\",\n  \"created_at\": \"2022-10-06T20:22:42.25Z\",\n  \"updated_at\": \"2022-10-07T17:09:22.85Z\",\n  \"3ds_redirect_url\": null,\n  \"additional_buyer_charges\": null,\n  \"additional_healthcare_data\": null,\n  \"address_verification\": \"POSTAL_CODE_AND_STREET_MATCH\",\n  \"amount\": 118,\n  \"amount_requested\": 118,\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"currency\": \"USD\",\n  \"expires_at\": \"2022-10-13T20:22:42.25Z\",\n  \"failure_code\": null,\n  \"failure_message\": null,\n  \"idempotency_id\": null,\n  \"is_void\": false,\n  \"merchant\": \"MUeDVrf2ahuKc9Eg5TeZugvs\",\n  \"merchant_identity\": \"IDuqZpDw28f2KK6YuDk4jNLg\",\n  \"messages\": [],\n  \"raw\": null,\n  \"security_code_verification\": \"MATCHED\",\n  \"source\": \"PIe2YvpcjvoVJ6PzoRPBK137\",\n  \"state\": \"SUCCEEDED\",\n  \"tags\": {\n    \"test_key_101\": \"test_val_101\"\n  },\n  \"trace_id\": \"2724719e-6cc4-4cba-a859-2e6ac0bffb9b\",\n  \"transfer\": \"TRs6APHuUAvSYq2FfTDkb5d8\",\n  \"void_state\": \"UNATTEMPTED\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/authorizations/AUbrumLihwhdLixtbU1mfMiF\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    },\n    \"transfer\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/transfers/TRs6APHuUAvSYq2FfTDkb5d8\"\n    },\n    \"merchant_identity\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62bc2129-b5d8-44af-9878-f7d5a2a1ee78",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id",
+                      "description": "(Required) ID of `Authorization` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8212,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": false\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": false,\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c440ab60-d8df-4040-8130-612270ba320d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id",
+                      "description": "(Required) ID of `Authorization` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 9752,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 8078,\n        \"key_1\": 7207.0344172016685\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59bebd7d-6da3-4eab-9d33-0acbe77b0582",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id",
+                      "description": "(Required) ID of `Authorization` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8905,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2320ae2-7a29-4f34-a561-37322a9410ca",
+              "name": "Invalid field",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id",
+                      "description": "(Required) ID of `Authorization` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2493,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"string\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"string\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56b44360-6f93-4404-ae77-65e439e13de9",
+          "name": "Void an Authorization",
+          "request": {
+            "name": "Void an Authorization",
+            "description": {
+              "content": "Use a PUT request to void an `Authorization`. If voided successfully, funds get released and the transaction stops from completing. Additionally, voided `Authorization` can no longer be captured.\n\nRelated Guides: [Creating and Capturing an Authorization](/guides/payments/making-a-payment/creating-and-capturing-an-authorization/), [Level 2 and 3 Processing](/guides/payments/making-a-payment/level-2-and-level-3-processing/), [In-Person Cloud Payments](/guides/payments/in-person-payments/cloud/in-person-cloud-payments/), [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authorizations",
+                ":authorization_id_void_to"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorization_id_void_to",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                "key": "Finix-Version",
+                "value": "2018-01-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tags\": {\n    \"key_0\": \"<string>\"\n  },\n  \"void_me\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec2fb57a-4e87-484a-a6e0-3f3bbef1ef94",
+              "name": "Single captured Authorization object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id_void_to"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id_void_to",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"AUbrumLihwhdLixtbU1mfMiF\",\n  \"created_at\": \"2022-10-06T20:22:42.25Z\",\n  \"updated_at\": \"2022-10-07T17:09:22.85Z\",\n  \"3ds_redirect_url\": null,\n  \"additional_buyer_charges\": null,\n  \"additional_healthcare_data\": null,\n  \"address_verification\": \"POSTAL_CODE_AND_STREET_MATCH\",\n  \"amount\": 118,\n  \"amount_requested\": 118,\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"currency\": \"USD\",\n  \"expires_at\": \"2022-10-13T20:22:42.25Z\",\n  \"failure_code\": null,\n  \"failure_message\": null,\n  \"idempotency_id\": null,\n  \"is_void\": false,\n  \"merchant\": \"MUeDVrf2ahuKc9Eg5TeZugvs\",\n  \"merchant_identity\": \"IDuqZpDw28f2KK6YuDk4jNLg\",\n  \"messages\": [],\n  \"raw\": null,\n  \"security_code_verification\": \"MATCHED\",\n  \"source\": \"PIe2YvpcjvoVJ6PzoRPBK137\",\n  \"state\": \"SUCCEEDED\",\n  \"tags\": {\n    \"test_key_101\": \"test_val_101\"\n  },\n  \"trace_id\": \"2724719e-6cc4-4cba-a859-2e6ac0bffb9b\",\n  \"transfer\": \"TRs6APHuUAvSYq2FfTDkb5d8\",\n  \"void_state\": \"UNATTEMPTED\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/authorizations/AUbrumLihwhdLixtbU1mfMiF\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    },\n    \"transfer\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/transfers/TRs6APHuUAvSYq2FfTDkb5d8\"\n    },\n    \"merchant_identity\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55e4c303-d0b0-47d8-be52-a1761bc8d6a1",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id_void_to"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id_void_to",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8212,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": false\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": false,\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a51a47db-f9ae-48ef-b2b8-4dd5e85677ea",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id_void_to"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id_void_to",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 9752,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 8078,\n        \"key_1\": 7207.0344172016685\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "140b922a-bdce-48ed-9bd5-8b0024b87190",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id_void_to"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id_void_to",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8905,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a3dce64-d3b5-4364-89ec-e043b2337395",
+              "name": "Invalid field",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    ":authorization_id_void_to"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorization_id_void_to",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2493,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"string\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"string\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://finix.sandbox-payments-api.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f87bd813-7b41-47f4-9121-cbc77528792e",
+    "name": "Finix Authorizations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+      "type": "text/plain"
+    }
+  }
+}

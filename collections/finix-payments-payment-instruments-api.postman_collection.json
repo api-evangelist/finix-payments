@@ -1,0 +1,1991 @@
+{
+  "item": [
+    {
+      "id": "a7c85e69-2696-4e02-acf4-3a2fb8bdc31e",
+      "name": "Payment Instruments",
+      "description": {
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "83230889-5808-459e-b524-97f5446af783",
+          "name": "Create a Payment Instrument",
+          "request": {
+            "name": "Create a Payment Instrument",
+            "description": {
+              "content": "Create a `Payment Instrument` resource using a card or bank account.\n\n- The creation of `Payment Instruments` directly via Finix's API should only be done for testing purposes. You must use [our hosted fields](/guides/payments/making-a-payment/using-hosted-fields/) or the javascript client to remain out of PCI scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_instruments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                "key": "Finix-Version",
+                "value": "2018-01-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"city\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"expiration_month\": \"<integer>\",\n  \"expiration_year\": \"<integer>\",\n  \"identity\": \"<string>\",\n  \"name\": \"<string>\",\n  \"number\": \"<string>\",\n  \"security_code\": \"<string>\",\n  \"tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"third_party_token\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"account_type\": \"<string>\",\n  \"attempt_bank_account_validation_check\": false,\n  \"bank_code\": \"<string>\",\n  \"token\": \"<string>\",\n  \"merchant_identity\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e780bedb-1ae7-406b-8bab-3b5e82b0282f",
+              "name": "Single Payment Instrument object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_MERCHANT",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PI8uU6wfi6hqBoWmzm9L4F2b\",\n  \"created_at\": \"2022-10-11T01:42:22.32Z\",\n  \"updated_at\": \"2022-10-11T01:42:22.32Z\",\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"created_via\": \"API\",\n  \"currency\": \"USD\",\n  \"enabled\": true,\n  \"fingerprint\": \"FPRiCenDk2SoRng7WjQTr7RJY\",\n  \"identity\": \"IDgWxBhfGYLLdkhxx2ddYf9K\",\n  \"instrument_type\": \"PAYMENT_CARD\",\n  \"address\": {\n    \"line1\": \"900 Metro Center Blv\",\n    \"line2\": null,\n    \"city\": \"San Francisco\",\n    \"region\": \"CA\",\n    \"postal_code\": \"94404\",\n    \"country\": \"USA\"\n  },\n  \"address_verification\": \"UNKNOWN\",\n  \"bin\": \"520082\",\n  \"brand\": \"MASTERCARD\",\n  \"card_type\": \"DEBIT\",\n  \"expiration_month\": 12,\n  \"expiration_year\": 2029,\n  \"issuer_country\": \"NON_USA\",\n  \"last_four\": \"8210\",\n  \"name\": \"John Smith\",\n  \"security_code_verification\": \"UNKNOWN\",\n  \"tags\": {\n    \"card_name\": \"Business Card\"\n  },\n  \"type\": \"PAYMENT_CARD\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b\"\n    },\n    \"authorizations\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/authorizations\"\n    },\n    \"transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/transfers\"\n    },\n    \"verifications\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/verifications\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    },\n    \"identity\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDgWxBhfGYLLdkhxx2ddYf9K\"\n    },\n    \"updates\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/updates\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5969d2ef-0cda-4a7f-9415-19e19cbeeb7e",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5691,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1be11887-b163-414a-b3db-7e87e543faf6",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 112,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": 6802.878889141056,\n          \"key_1\": 9394.622677704921\n        },\n        \"key_0\": 4332\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52c663e1-809c-4d4c-b5d2-b9c21c7194d3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 7837,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a5e27a6-fbe6-4c37-9f83-62dbd090d1e4",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5815,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56a1168a-9010-46f0-97b6-eeddf5fff6d4",
+          "name": "List Payment Instruments",
+          "request": {
+            "name": "List Payment Instruments",
+            "description": {
+              "content": "Retrieve a list of `Payment Instruments`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_instruments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_last4",
+                  "value": "<string>",
+                  "description": "Filter by the last 4 digits of the account if available."
+                },
+                {
+                  "disabled": false,
+                  "key": "account_routing_number",
+                  "value": "<string>",
+                  "description": "Filter by the account routing number if available."
+                },
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>",
+                  "description": "Return every resource created after the cursor value."
+                },
+                {
+                  "disabled": false,
+                  "key": "application",
+                  "value": "<string>",
+                  "description": "Filter by `Application` ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "before_cursor",
+                  "value": "<string>",
+                  "description": "Return every resource created before the cursor value."
+                },
+                {
+                  "disabled": false,
+                  "key": "bin",
+                  "value": "<string>",
+                  "description": "Filter by Bank Identification Number (BIN). The BIN is the first 6 digits of the masked number."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.gte",
+                  "value": "<string>",
+                  "description": "Filter where `created_at` is after the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.lte",
+                  "value": "<string>",
+                  "description": "Filter where `created_at` is before the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "expiration_month",
+                  "value": "<string>",
+                  "description": "Filter by the expiration month associated with the `Payment Instrument` if applicable. This filter only applies to payment cards."
+                },
+                {
+                  "disabled": false,
+                  "key": "expiration_year",
+                  "value": "<string>",
+                  "description": "Filter by the 4 digit expiration year associated with the Payment Instrument if applicable. This filter only applies to payment cards."
+                },
+                {
+                  "disabled": false,
+                  "key": "last4",
+                  "value": "<string>",
+                  "description": "Filter by the last 4 digits of the `Payment Instrument` card. This filter only applies to payment cards."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The numbers of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by the name."
+                },
+                {
+                  "disabled": false,
+                  "key": "owner_identity_id",
+                  "value": "<string>",
+                  "description": "Filter by the owner id of the associated `Identity`."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by the `Payment Instrument` type."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags.key",
+                  "value": "<string>",
+                  "description": "Filter by the [`key` of a `Tag`](/api/overview/#section/Tags)."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags.value",
+                  "value": "<string>",
+                  "description": "Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86084905-452a-4be1-9fd4-d41979688064",
+              "name": "List of Payment Instrument objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_last4",
+                      "value": "9444"
+                    },
+                    {
+                      "key": "account_routing_number",
+                      "value": "9444"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "application",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bin",
+                      "value": "489514"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "expiration_month",
+                      "value": "1"
+                    },
+                    {
+                      "key": "expiration_year",
+                      "value": "2022"
+                    },
+                    {
+                      "key": "last4",
+                      "value": "0454"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "name",
+                      "value": "john%20smith"
+                    },
+                    {
+                      "key": "owner_identity_id",
+                      "value": "IDcWwprrKrD6cSh225JWPri3"
+                    },
+                    {
+                      "key": "type",
+                      "value": "BANK_ACCOUNT"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_MERCHANT",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_embedded\": {\n    \"payment_instruments\": [\n      {\n        \"id\": \"PI3AbkuRR1JbT5kPiGQCXvD9\",\n        \"created_at\": \"2022-10-11T01:42:53.29Z\",\n        \"updated_at\": \"2022-10-11T01:42:53.29Z\",\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"created_via\": \"API\",\n        \"currency\": \"USD\",\n        \"enabled\": true,\n        \"fingerprint\": \"FPRd5moHxL3Ltuvk4cczxetCg\",\n        \"identity\": \"IDpYDM7J9n57q849o9E9yNrG\",\n        \"instrument_type\": \"BANK_ACCOUNT\",\n        \"account_type\": \"SAVINGS\",\n        \"bank_account_validation_check\": \"NOT_ATTEMPTED\",\n        \"bank_code\": \"123123123\",\n        \"country\": \"USA\",\n        \"masked_account_number\": \"XXXXX3123\",\n        \"name\": \"John\",\n        \"tags\": {\n          \"Bank Account\": \"Company Account\"\n        },\n        \"type\": \"BANK_ACCOUNT\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9\"\n          },\n          \"authorizations\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9/authorizations\"\n          },\n          \"transfers\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9/transfers\"\n          },\n          \"verifications\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI3AbkuRR1JbT5kPiGQCXvD9/verifications\"\n          },\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          },\n          \"identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDpYDM7J9n57q849o9E9yNrG\"\n          }\n        }\n      },\n      {\n        \"id\": \"PIrb1DcGz1qjThotDJ5KURpv\",\n        \"created_at\": \"2022-10-06T20:23:38.74Z\",\n        \"updated_at\": \"2022-10-06T20:23:38.74Z\",\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"created_via\": \"API\",\n        \"currency\": \"USD\",\n        \"enabled\": true,\n        \"fingerprint\": \"FPRtvYkgcwLUdjq7B4AgxKfmr\",\n        \"identity\": \"IDpYDM7J9n57q849o9E9yNrG\",\n        \"instrument_type\": \"BANK_ACCOUNT\",\n        \"account_type\": \"SAVINGS\",\n        \"bank_account_validation_check\": \"NOT_ATTEMPTED\",\n        \"bank_code\": \"666666666\",\n        \"country\": \"USA\",\n        \"masked_account_number\": \"XXXXX3123\",\n        \"name\": \"test_python\",\n        \"tags\": {\n          \"bank_account\": \"Test Python Account\"\n        },\n        \"type\": \"BANK_ACCOUNT\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PIrb1DcGz1qjThotDJ5KURpv\"\n          },\n          \"authorizations\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PIrb1DcGz1qjThotDJ5KURpv/authorizations\"\n          },\n          \"transfers\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PIrb1DcGz1qjThotDJ5KURpv/transfers\"\n          },\n          \"verifications\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PIrb1DcGz1qjThotDJ5KURpv/verifications\"\n          },\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          },\n          \"identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDpYDM7J9n57q849o9E9yNrG\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments?offset=0&limit=20&sort=created_at,desc&sort=id,desc\"\n    },\n    \"next\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments?offset=20&limit=20&sort=created_at,desc&sort=id,desc\"\n    },\n    \"last\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments?offset=14660&limit=20&sort=created_at,desc&sort=id,desc\"\n    }\n  },\n  \"page\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"count\": 14679\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "533f6647-4219-4d5a-b7ec-93f7f1ab73a4",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_last4",
+                      "value": "9444"
+                    },
+                    {
+                      "key": "account_routing_number",
+                      "value": "9444"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "application",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bin",
+                      "value": "489514"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "expiration_month",
+                      "value": "1"
+                    },
+                    {
+                      "key": "expiration_year",
+                      "value": "2022"
+                    },
+                    {
+                      "key": "last4",
+                      "value": "0454"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "name",
+                      "value": "john%20smith"
+                    },
+                    {
+                      "key": "owner_identity_id",
+                      "value": "IDcWwprrKrD6cSh225JWPri3"
+                    },
+                    {
+                      "key": "type",
+                      "value": "BANK_ACCOUNT"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2261,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dddc9785-a61d-4726-a748-955ddd55ad70",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_last4",
+                      "value": "9444"
+                    },
+                    {
+                      "key": "account_routing_number",
+                      "value": "9444"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "application",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bin",
+                      "value": "489514"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "expiration_month",
+                      "value": "1"
+                    },
+                    {
+                      "key": "expiration_year",
+                      "value": "2022"
+                    },
+                    {
+                      "key": "last4",
+                      "value": "0454"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "name",
+                      "value": "john%20smith"
+                    },
+                    {
+                      "key": "owner_identity_id",
+                      "value": "IDcWwprrKrD6cSh225JWPri3"
+                    },
+                    {
+                      "key": "type",
+                      "value": "BANK_ACCOUNT"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 7778,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 1470\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 9380.703438746255,\n        \"key_1\": 7713.741037266579\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca6784d7-a526-4b14-bb77-053544fd57ac",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_last4",
+                      "value": "9444"
+                    },
+                    {
+                      "key": "account_routing_number",
+                      "value": "9444"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "application",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bin",
+                      "value": "489514"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "expiration_month",
+                      "value": "1"
+                    },
+                    {
+                      "key": "expiration_year",
+                      "value": "2022"
+                    },
+                    {
+                      "key": "last4",
+                      "value": "0454"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "name",
+                      "value": "john%20smith"
+                    },
+                    {
+                      "key": "owner_identity_id",
+                      "value": "IDcWwprrKrD6cSh225JWPri3"
+                    },
+                    {
+                      "key": "type",
+                      "value": "BANK_ACCOUNT"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5463,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe221817-e6a6-4bf4-a8db-9572fcd12aae",
+          "name": "Fetch a Payment Instrument",
+          "request": {
+            "name": "Fetch a Payment Instrument",
+            "description": {
+              "content": "Retrieve the details of a `Payment Instrument`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_instruments",
+                ":payment_instrument_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payment_instrument_id",
+                  "description": "(Required) ID of object"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "590dee4e-c039-4175-83b2-12999f7f0aa7",
+              "name": "Single Payment Instrument object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_MERCHANT",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PI8uU6wfi6hqBoWmzm9L4F2b\",\n  \"created_at\": \"2022-10-11T01:42:22.32Z\",\n  \"updated_at\": \"2022-10-11T01:42:22.32Z\",\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"created_via\": \"API\",\n  \"currency\": \"USD\",\n  \"enabled\": true,\n  \"fingerprint\": \"FPRiCenDk2SoRng7WjQTr7RJY\",\n  \"identity\": \"IDgWxBhfGYLLdkhxx2ddYf9K\",\n  \"instrument_type\": \"PAYMENT_CARD\",\n  \"address\": {\n    \"line1\": \"900 Metro Center Blv\",\n    \"line2\": null,\n    \"city\": \"San Francisco\",\n    \"region\": \"CA\",\n    \"postal_code\": \"94404\",\n    \"country\": \"USA\"\n  },\n  \"address_verification\": \"UNKNOWN\",\n  \"bin\": \"520082\",\n  \"brand\": \"MASTERCARD\",\n  \"card_type\": \"DEBIT\",\n  \"expiration_month\": 12,\n  \"expiration_year\": 2029,\n  \"issuer_country\": \"NON_USA\",\n  \"last_four\": \"8210\",\n  \"name\": \"John Smith\",\n  \"security_code_verification\": \"UNKNOWN\",\n  \"tags\": {\n    \"card_name\": \"Business Card\"\n  },\n  \"type\": \"PAYMENT_CARD\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b\"\n    },\n    \"authorizations\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/authorizations\"\n    },\n    \"transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/transfers\"\n    },\n    \"verifications\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/verifications\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    },\n    \"identity\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDgWxBhfGYLLdkhxx2ddYf9K\"\n    },\n    \"updates\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/updates\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7397964a-a03d-4d69-a7b2-f9798e49414e",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2261,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31418f81-e57c-41ca-a21c-a9fd6d79cf20",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 7778,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 1470\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 9380.703438746255,\n        \"key_1\": 7713.741037266579\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c7f8186-8a7c-40ee-96c2-b6b656b53482",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 9427,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fecf9c4-1dba-4fde-91fc-b4f5d46b70a7",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5463,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ab484a8-7476-44c7-a9ad-7eea270d591b",
+              "name": "Invalid field",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8705,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"string\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"string\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94aff532-30ad-41b6-bfe0-2b2149ad9355",
+          "name": "Update a Payment Instrument",
+          "request": {
+            "name": "Update a Payment Instrument",
+            "description": {
+              "content": "Update a `Payment Instrument` to:\n- Change the **billing address** in case the account holder moved (`instrument_type`:**PAYMENT_CARD** only).\n- Disable the `Payment Instrument` resource so it can't be used in requests.\n- Update the `name` on the `Payment Instrument`.\n- Change the `tags`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_instruments",
+                ":payment_instrument_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payment_instrument_id",
+                  "description": "(Required) ID of object"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                "key": "Finix-Version",
+                "value": "2018-01-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\"\n  },\n  \"merchant\": false,\n  \"verify_payment_card\": false,\n  \"tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"enabled\": \"<boolean>\",\n  \"name\": false,\n  \"attempt_bank_account_validation_check\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3364fc21-2c40-4a7b-800f-285bda9730e1",
+              "name": "Single Payment Instrument object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_MERCHANT",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PI8uU6wfi6hqBoWmzm9L4F2b\",\n  \"created_at\": \"2022-10-11T01:42:22.32Z\",\n  \"updated_at\": \"2022-10-11T01:42:22.32Z\",\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"created_via\": \"API\",\n  \"currency\": \"USD\",\n  \"enabled\": true,\n  \"fingerprint\": \"FPRiCenDk2SoRng7WjQTr7RJY\",\n  \"identity\": \"IDgWxBhfGYLLdkhxx2ddYf9K\",\n  \"instrument_type\": \"PAYMENT_CARD\",\n  \"address\": {\n    \"line1\": \"900 Metro Center Blv\",\n    \"line2\": null,\n    \"city\": \"San Francisco\",\n    \"region\": \"CA\",\n    \"postal_code\": \"94404\",\n    \"country\": \"USA\"\n  },\n  \"address_verification\": \"UNKNOWN\",\n  \"bin\": \"520082\",\n  \"brand\": \"MASTERCARD\",\n  \"card_type\": \"DEBIT\",\n  \"expiration_month\": 12,\n  \"expiration_year\": 2029,\n  \"issuer_country\": \"NON_USA\",\n  \"last_four\": \"8210\",\n  \"name\": \"John Smith\",\n  \"security_code_verification\": \"UNKNOWN\",\n  \"tags\": {\n    \"card_name\": \"Business Card\"\n  },\n  \"type\": \"PAYMENT_CARD\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b\"\n    },\n    \"authorizations\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/authorizations\"\n    },\n    \"transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/transfers\"\n    },\n    \"verifications\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/verifications\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    },\n    \"identity\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDgWxBhfGYLLdkhxx2ddYf9K\"\n    },\n    \"updates\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/payment_instruments/PI8uU6wfi6hqBoWmzm9L4F2b/updates\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "915f3259-047c-4f85-afd7-f3b93bc18cb3",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2261,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15998086-2c06-44a7-8070-ed69daeada16",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 7778,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 1470\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 9380.703438746255,\n        \"key_1\": 7713.741037266579\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ba0f6d5-afdc-4541-a5f0-c87e77213dc3",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2519,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4014d98-2f72-4f7c-8d36-0f54cdb6529a",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_instruments",
+                    ":payment_instrument_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_instrument_id",
+                      "description": "(Required) ID of object"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5463,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "959ded72-0e2e-4266-8d31-8c7833097161",
+          "name": "Create an Apple Pay Session",
+          "request": {
+            "name": "Create an Apple Pay Session",
+            "description": {
+              "content": "Create an `apple_pay_session` to process Apple Pay transactions on the web.\n\nTo create an Apple Pay Session, pass the unique `validation_url` (provided by Apple) while creating an `apple_pay_sessions` resource. Finix returns a `merchantSession` object that you can use to create a payment. For more information, see [Apple Pay](/guides/payments/alternative-payment-methods/apple-pay/).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apple_pay_sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"display_name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"merchant_identity\": \"<string>\",\n  \"validation_url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4bb2032-716f-493a-85af-523392ea6625",
+              "name": "Single apple_pay_session object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apple_pay_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_MERCHANT",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"APPLEPAYSESSION_xxx\",\n  \"created_at\": \"2021-11-22T23:58:19.50Z\",\n  \"updated_at\": \"2021-11-22T23:58:19.50Z\",\n  \"session_details\": \"{\\\"epochTimestamp\\\":1640213041060,\\\"expiresAt\\\":1640216641060,\\\"merchantSessionIdentifier\\\":\\\"SSH1524BA9006A944B8B9B8FB60227D9990_916523AAED1343F5BC5815E12BEE9250AFFDC1A17C46B0DE5A943F0F94927C24\\\",\\\"nonce\\\":\\\"a5ee8554\\\",\\\"merchantIdentifier\\\":\\\"23D5E1F154400B277E14CC8361878AA0AAFD46B2DF74003C7587B256269102BD\\\",\\\"domainName\\\":\\\"tj.ngrok.io\\\",\\\"displayName\\\":\\\"Christmas Shopping\\\",\\\"signature\\\":\\\"...\\\",\\\"operationalAnalyticsIdentifier\\\":\\\"Christmas Shopping:23D5E1F154400B277E14CC8361878AA0AAFD46B2DF74003C7587B256269102BD\\\",\\\"retries\\\":0}\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/apple_pay_sessions/APPLEPAYSESSION_xxx\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40d7c81d-f26a-4b74-9a73-a880c73dc0a6",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apple_pay_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2261,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5661da7c-6a78-4071-8d6c-99cad083812b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apple_pay_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 7778,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 1470\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 9380.703438746255,\n        \"key_1\": 7713.741037266579\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90d3f702-8e44-499c-9ebf-41683ea6da46",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apple_pay_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2519,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae955f67-515b-4e11-abfd-5bb61e3c8fbb",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apple_pay_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5463,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://finix.sandbox-payments-api.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f14190b6-beec-4f63-a710-8f0ff0050889",
+    "name": "Finix Authorizations Payment Instruments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+      "type": "text/plain"
+    }
+  }
+}

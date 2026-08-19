@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Payout Profiles API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payout Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Payout Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/payout_profiles",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              }
+            ]
+          },
+          "docs": "List all `Payout Profiles`."
+        },
+        {
+          "info": {
+            "name": "Fetch a Payout Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/payout_profiles/:payout_profile_id",
+            "params": [
+              {
+                "name": "payout_profile_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `Payout Profile`."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a previously created `Payout Profile`."
+        },
+        {
+          "info": {
+            "name": "Update a Payout Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/payout_profiles/:payout_profile_id",
+            "params": [
+              {
+                "name": "payout_profile_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `Payout Profile`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a `Payout Profile` to configure how fees and payouts get calculated, credited, and debited.\n\nBy default, `Merchants` get configured with daily net settlements. Payouts get submitted using the **Next-Day ACH** `rail`. Contact [Finix Support](/guides/getting-started/support-at-finix/) to configure payouts on a custom schedule."
+        },
+        {
+          "info": {
+            "name": "Fetch Payout Profile by Merchant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/merchants/:merchant_id/payout_profile",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `Merchant`."
+              }
+            ]
+          },
+          "docs": "Fetch the the `Payout Profile` createrd for a specific `Merchant`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,321 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Authorizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/authorizations",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount equal to the given value."
+              },
+              {
+                "name": "amount.gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount greater than."
+              },
+              {
+                "name": "amount.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount greater than or equal."
+              },
+              {
+                "name": "amount.lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount less than."
+              },
+              {
+                "name": "amount.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount less than or equal."
+              },
+              {
+                "name": "before_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created before the cursor value."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query",
+                "description": "Return every resource created after the cursor value."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is after the given date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is before the given date."
+              },
+              {
+                "name": "idempotency_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `idempotency_id`."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              },
+              {
+                "name": "tags.key",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the [`key` of a `Tag`](/api/overview/#section/Tags)."
+              },
+              {
+                "name": "tags.value",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags)."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Transaction state."
+              },
+              {
+                "name": "updated_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is after the given date."
+              },
+              {
+                "name": "updated_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `updated_at` is before the given date."
+              },
+              {
+                "name": "trace_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `trace_id`."
+              },
+              {
+                "name": "is_void",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `idempotency_id`."
+              },
+              {
+                "name": "instrument_bin",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Bank Identification Number (BIN). The BIN is the first 6 digits of the masked number."
+              },
+              {
+                "name": "instrument_account_last4",
+                "value": "",
+                "type": "query",
+                "description": "Filter Transactions by the last 4 digits of the bank account. The bank account last 4 are the last 4 digits of the masked number\tinstrument_account_last4=9444 BIN."
+              },
+              {
+                "name": "instrument_brand_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by card brand. Available card brand types can be found in the drop-down."
+              },
+              {
+                "name": "merchant_identity_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `Identity` ID."
+              },
+              {
+                "name": "merchant_identity_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter Transactions by `Identity` name. The name is not case-sensitive."
+              },
+              {
+                "name": "instrument_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter Transactions by `Payment Instrument` name."
+              },
+              {
+                "name": "instrument_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter Transactions by `Payment Instrument` type. Available instrument types include: Bank Account or Payment Card."
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `Merchant` ID."
+              },
+              {
+                "name": "merchant_mid",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Merchant Identification Number (MID)."
+              },
+              {
+                "name": "instrument_card_last4",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the payment card last 4 digits."
+              },
+              {
+                "name": "merchant_processor_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by `Processor` ID."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of the `Authorization`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of `Authorizations`. "
+        },
+        {
+          "info": {
+            "name": "Create an Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/authorizations",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an `Authorization` to process a transaction.\n\nRelated Guides: [Creating and Capturing an Authorization](/guides/payments/making-a-payment/creating-and-capturing-an-authorization/), [Level 2 and 3 Processing](/guides/payments/making-a-payment/level-2-and-level-3-processing/), [In-Person Cloud Payments](/guides/payments/in-person-payments/cloud/in-person-cloud-payments/), [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/)"
+        },
+        {
+          "info": {
+            "name": "Fetch an Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/authorizations/:authorization_id",
+            "params": [
+              {
+                "name": "authorization_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Authorization` to fetch."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a previously created `Authorization`."
+        },
+        {
+          "info": {
+            "name": "Capture an Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/authorizations/:authorization_id",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "authorization_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Authorization` to fetch."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use a PUT request to capture an `Authorization`. If captured successfully, the `transfer` field of the `Authorization` will contain the ID of the `Transfer` resource that moves funds.\n\nRelated Guides: [Creating and Capturing an Authorization](/guides/payments/making-a-payment/creating-and-capturing-an-authorization/), [Level 2 and 3 Processing](/guides/payments/making-a-payment/level-2-and-level-3-processing/), [In-Person Cloud Payments](/guides/payments/in-person-payments/cloud/in-person-cloud-"
+        },
+        {
+          "info": {
+            "name": "Void an Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/authorizations/:authorization_id_void_to",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "authorization_id_void_to",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use a PUT request to void an `Authorization`. If voided successfully, funds get released and the transaction stops from completing. Additionally, voided `Authorization` can no longer be captured.\n\nRelated Guides: [Creating and Capturing an Authorization](/guides/payments/making-a-payment/creating-and-capturing-an-authorization/), [Level 2 and 3 Processing](/guides/payments/making-a-payment/level-2-and-level-3-processing/), [In-Person Cloud Payments](/guides/payments/in-person-payments/cloud/in-p"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

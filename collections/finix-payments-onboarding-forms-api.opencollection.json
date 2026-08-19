@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Onboarding Forms API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Onboarding Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an Onboarding Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/onboarding_forms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an `onboarding_form` with the name of the processor you plan to onboard users to and the links they` get redirected to when completing or moving away from the Finix Onboarding Form.\n\nOnly **ROLE_PARTNER** credentials can be used to create an `onboarding_form`."
+        },
+        {
+          "info": {
+            "name": "Fetch an Onboarding Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/onboarding_forms/:onboarding_form_id",
+            "params": [
+              {
+                "name": "onboarding_form_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the `onboarding_form`."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of an `onboarding_form`."
+        },
+        {
+          "info": {
+            "name": "Create an Onboarding Form Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/onboarding_forms/:onboarding_form_id/links",
+            "params": [
+              {
+                "name": "onboarding_form_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the `onboarding_form` resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use the `onboarding_forms` API to create a link that can return users to where they left off completing their Finix Onboarding Form."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

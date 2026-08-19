@@ -1,0 +1,2540 @@
+{
+  "item": [
+    {
+      "id": "67fbc1ee-0266-4fed-b8e3-afeecf5bae53",
+      "name": "Identities",
+      "description": {
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0184d87a-7fd1-4e5f-b98d-120b9b699293",
+          "name": "Create an Identity",
+          "request": {
+            "name": "Create an Identity",
+            "description": {
+              "content": "Create an `Identity` for your seller or buyer.\n\nAll fields for a buyer's `Identity` are optional. \n\nProviding `business_type` indicates that the `Identity` is being created for a Merchant.\n\nRelated Guides: [Getting Started](/guides/getting-started/), [Onboarding](/guides/onboarding/)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                "key": "Finix-Version",
+                "value": "2018-01-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"additional_underwriting_data\": {\n    \"annual_ach_volume\": \"<integer>\",\n    \"average_ach_transfer_amount\": \"<integer>\",\n    \"average_card_transfer_amount\": \"<integer>\",\n    \"business_description\": \"<string>\",\n    \"card_volume_distribution\": {\n      \"card_present_percentage\": \"<integer>\",\n      \"mail_order_telephone_order_percentage\": \"<integer>\",\n      \"ecommerce_percentage\": \"<integer>\"\n    },\n    \"credit_check_allowed\": \"<boolean>\",\n    \"credit_check_ip_address\": \"<string>\",\n    \"credit_check_timestamp\": \"<string>\",\n    \"credit_check_user_agent\": \"<string>\",\n    \"merchant_agreement_accepted\": \"<boolean>\",\n    \"merchant_agreement_ip_address\": \"<string>\",\n    \"merchant_agreement_timestamp\": \"<string>\",\n    \"merchant_agreement_user_agent\": \"<string>\",\n    \"refund_policy\": \"<string>\",\n    \"volume_distribution_by_business_type\": {\n      \"other_volume_percentage\": \"<integer>\",\n      \"consumer_to_consumer_volume_percentage\": \"<integer>\",\n      \"business_to_consumer_volume_percentage\": \"<integer>\",\n      \"business_to_business_volume_percentage\": \"<integer>\",\n      \"person_to_person_volume_percentage\": \"<integer>\"\n    }\n  },\n  \"entity\": {\n    \"annual_card_volume\": \"<integer>\",\n    \"business_address\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"business_name\": \"<string>\",\n    \"business_phone\": \"<string>\",\n    \"business_tax_id\": \"<string>\",\n    \"business_type\": \"<string>\",\n    \"default_statement_descriptor\": \"<string>\",\n    \"dob\": {\n      \"day\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"year\": \"<integer>\"\n    },\n    \"doing_business_as\": \"<string>\",\n    \"email\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"has_accepted_credit_cards_previously\": \"<boolean>\",\n    \"incorporation_date\": {\n      \"day\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"year\": \"<integer>\"\n    },\n    \"last_name\": \"<string>\",\n    \"max_transaction_amount\": \"<integer>\",\n    \"ach_max_transaction_amount\": \"<integer>\",\n    \"mcc\": \"<string>\",\n    \"ownership_type\": \"<string>\",\n    \"personal_address\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"region\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"principal_percentage_ownership\": \"<integer>\",\n    \"tax_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\"\n  },\n  \"tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "230e2961-819e-44b6-a6fc-4da63193f2fd",
+              "name": "Single Identity object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_PARTNER",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"IDezsbY5qYujV7ecdrn8psrh\",\n  \"created_at\": \"2022-10-11T00:37:03.02Z\",\n  \"updated_at\": \"2022-10-11T00:37:03.02Z\",\n  \"additional_underwriting_data\": {\n    \"annual_ach_volume\": 200000,\n    \"average_ach_transfer_amount\": 200000,\n    \"average_card_transfer_amount\": 200000,\n    \"business_description\": \"SB3 vegan cafe\",\n    \"card_volume_distribution\": {\n      \"card_present_percentage\": 30,\n      \"ecommerce_percentage\": 60,\n      \"mail_order_telephone_order_percentage\": 10\n    },\n    \"credit_check_allowed\": true,\n    \"credit_check_ip_address\": \"42.1.1.113\",\n    \"credit_check_timestamp\": \"2021-04-28T16:42:55Z\",\n    \"credit_check_user_agent\": \"Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)\",\n    \"merchant_agreement_accepted\": true,\n    \"merchant_agreement_ip_address\": \"42.1.1.113\",\n    \"merchant_agreement_timestamp\": \"2021-04-28T16:42:55Z\",\n    \"merchant_agreement_user_agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6)\",\n    \"refund_policy\": \"MERCHANDISE_EXCHANGE_ONLY\",\n    \"volume_distribution_by_business_type\": {\n      \"business_to_business_volume_percentage\": 100,\n      \"business_to_consumer_volume_percentage\": 0,\n      \"consumer_to_consumer_volume_percentage\": 0,\n      \"other_volume_percentage\": 0,\n      \"person_to_person_volume_percentage\": 0\n    }\n  },\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"entity\": {\n    \"amex_mid\": null,\n    \"annual_card_volume\": 12000000,\n    \"business_address\": {\n      \"line1\": \"741 Douglass St\",\n      \"line2\": \"Apartment 8\",\n      \"city\": \"San Mateo\",\n      \"region\": \"CA\",\n      \"postal_code\": \"94114\",\n      \"country\": \"USA\"\n    },\n    \"business_name\": \"Finix Flowers\",\n    \"business_phone\": \"+1 (408) 756-4497\",\n    \"business_tax_id_provided\": true,\n    \"business_type\": \"INDIVIDUAL_SOLE_PROPRIETORSHIP\",\n    \"default_statement_descriptor\": \"Finix Flowers\",\n    \"discover_mid\": null,\n    \"dob\": {\n      \"day\": 27,\n      \"month\": 6,\n      \"year\": 1978\n    },\n    \"doing_business_as\": \"Finix Flowers\",\n    \"email\": \"user@example.org\",\n    \"first_name\": \"John\",\n    \"has_accepted_credit_cards_previously\": true,\n    \"incorporation_date\": {\n      \"day\": 27,\n      \"month\": 6,\n      \"year\": 1978\n    },\n    \"last_name\": \"Smith\",\n    \"max_transaction_amount\": 12000000,\n    \"mcc\": \"4900\",\n    \"ownership_type\": \"PRIVATE\",\n    \"personal_address\": {\n      \"line1\": \"741 Douglass St\",\n      \"line2\": \"Apartment 7\",\n      \"city\": \"San Mateo\",\n      \"region\": \"CA\",\n      \"postal_code\": \"94114\",\n      \"country\": \"USA\"\n    },\n    \"phone\": \"14158885080\",\n    \"principal_percentage_ownership\": 50,\n    \"short_business_name\": null,\n    \"tax_authority\": null,\n    \"tax_id_provided\": true,\n    \"title\": \"CEO\",\n    \"url\": \"https://www.finix.com\"\n  },\n  \"tags\": {\n    \"Studio Rating\": \"4.7\"\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh\"\n    },\n    \"verifications\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/verifications\"\n    },\n    \"merchants\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/merchants\"\n    },\n    \"settlements\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/settlements\"\n    },\n    \"authorizations\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/authorizations\"\n    },\n    \"transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/transfers\"\n    },\n    \"payment_instruments\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/payment_instruments\"\n    },\n    \"associated_identities\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/associated_identities\"\n    },\n    \"disputes\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/disputes\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb873648-5de0-497d-ae4d-986bacf91dcf",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 6263,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee7424e8-d861-49c8-bbf7-56a76b1d5d3b",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8039,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": 9280,\n          \"key_1\": false\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": 3486.2632070403356\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9552213-4713-4202-b4a4-90fe6657ca77",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 700,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2280fbd5-b8bc-4612-ac0e-eb6b2cce61e3",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 7985,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 3125\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 9260.78103836594,\n        \"key_1\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "837c97a1-9c29-4a16-9434-3fcb9722d6d3",
+          "name": "List Identities",
+          "request": {
+            "name": "List Identities",
+            "description": {
+              "content": "Retrieve a list of `Identities`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>",
+                  "description": "Return every resource created after the cursor value."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The numbers of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Filter by `id`."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.gte",
+                  "value": "<string>",
+                  "description": "Filter where `created_at` is after the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.lte",
+                  "value": "<string>",
+                  "description": "Filter where `created_at` is before the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "default_statement_descriptor",
+                  "value": "<string>",
+                  "description": "Filter by the `default_statement_descriptor`."
+                },
+                {
+                  "disabled": false,
+                  "key": "business_name",
+                  "value": "<string>",
+                  "description": "Filter by the full business name. Partial business names are not supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "business_type",
+                  "value": "<string>",
+                  "description": "Filter by the business type. Partial business types are not supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "Filter by the email address or email domain. Partial emails are not supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>",
+                  "description": "Filter by the first name of the person associated to the `Identity`."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>",
+                  "description": "Filter by the last name of the person associated to the `Identity`."
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "Filter by the title if available."
+                },
+                {
+                  "disabled": false,
+                  "key": "before_cursor",
+                  "value": "<string>",
+                  "description": "Return every resource created before the cursor value."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags.key",
+                  "value": "<string>",
+                  "description": "Filter by the [`key` of a `Tag`](/api/overview/#section/Tags)."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags.value",
+                  "value": "<string>",
+                  "description": "Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fccc6e58-6239-4c6d-b20f-62b348d8ae0f",
+              "name": "List of Identity objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "default_statement_descriptor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "user@example.org"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Daphne"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "kline"
+                    },
+                    {
+                      "key": "title",
+                      "value": "ceo"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_PARTNER",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_embedded\": {\n    \"identities\": [\n      {\n        \"id\": \"IDrNRsZ2miEQcmGHCpo4rBQr\",\n        \"created_at\": \"2022-08-16T18:44:27.46Z\",\n        \"updated_at\": \"2022-08-16T18:44:27.46Z\",\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"entity\": {\n          \"amex_mid\": null,\n          \"annual_card_volume\": 12000000,\n          \"business_address\": {\n            \"line1\": \"741 Douglass St\",\n            \"line2\": \"Apartment 8\",\n            \"city\": \"San Mateo\",\n            \"region\": \"CA\",\n            \"postal_code\": \"94114\",\n            \"country\": \"USA\"\n          },\n          \"business_name\": \"Petes Coffee\",\n          \"business_phone\": \"+1 (408) 756-4497\",\n          \"business_tax_id_provided\": true,\n          \"business_type\": \"INDIVIDUAL_SOLE_PROPRIETORSHIP\",\n          \"default_statement_descriptor\": \"Petes Coffee\",\n          \"discover_mid\": null,\n          \"dob\": {\n            \"day\": 27,\n            \"month\": 6,\n            \"year\": 1978\n          },\n          \"doing_business_as\": \"Petes Coffee\",\n          \"email\": \"user@example.org\",\n          \"first_name\": \"dwayne\",\n          \"has_accepted_credit_cards_previously\": true,\n          \"incorporation_date\": {\n            \"day\": 27,\n            \"month\": 6,\n            \"year\": 1978\n          },\n          \"last_name\": \"xbc\",\n          \"max_transaction_amount\": 12000000,\n          \"mcc\": \"4900\",\n          \"ownership_type\": \"PRIVATE\",\n          \"personal_address\": {\n            \"line1\": \"741 Douglass St\",\n            \"line2\": \"Apartment 7\",\n            \"city\": \"San Mateo\",\n            \"region\": \"CA\",\n            \"postal_code\": \"94114\",\n            \"country\": \"USA\"\n          },\n          \"phone\": \"14158885080\",\n          \"principal_percentage_ownership\": 50,\n          \"short_business_name\": null,\n          \"tax_authority\": null,\n          \"tax_id_provided\": true,\n          \"title\": \"CEO\",\n          \"url\": \"www.PetesCoffee.com\"\n        },\n        \"tags\": {\n          \"test_key_103\": \"test_val_103\"\n        },\n        \"_links\": {\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr\"\n          },\n          \"verifications\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/verifications\"\n          },\n          \"merchants\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/merchants\"\n          },\n          \"settlements\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/settlements\"\n          },\n          \"authorizations\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/authorizations\"\n          },\n          \"transfers\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/transfers\"\n          },\n          \"payment_instruments\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/payment_instruments\"\n          },\n          \"associated_identities\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/associated_identities\"\n          },\n          \"disputes\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/disputes\"\n          },\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDf33pdVaTZGXVFNccdKvaPu/associated_identities?offset=0&limit=20&sort=created_at,desc&sort=id,desc\"\n    }\n  },\n  \"page\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"count\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a028104-a6ef-4893-9f09-ce1ee79775d3",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "default_statement_descriptor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "user@example.org"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Daphne"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "kline"
+                    },
+                    {
+                      "key": "title",
+                      "value": "ceo"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3672,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\"\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": false,\n          \"key_1\": 2206.8950294051083\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 6214,\n        \"key_2\": \"string\",\n        \"key_3\": 3977\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f2a51cb-89be-49e7-8486-c379f1d5319e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "default_statement_descriptor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "user@example.org"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Daphne"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "kline"
+                    },
+                    {
+                      "key": "title",
+                      "value": "ceo"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4186,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff295e90-2e8d-47e8-8975-53e41c7a063f",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "default_statement_descriptor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "user@example.org"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Daphne"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "kline"
+                    },
+                    {
+                      "key": "title",
+                      "value": "ceo"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1041,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 8908,\n        \"key_1\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9744a06-5028-430a-90f4-e8cf418b1fb2",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "default_statement_descriptor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "user@example.org"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Daphne"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "kline"
+                    },
+                    {
+                      "key": "title",
+                      "value": "ceo"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags.value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5162,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 4463,\n        \"key_1\": 2926.2974441014358\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7d76aab-897d-40c8-9905-f3d0af0c99d1",
+          "name": "Fetch an Identity",
+          "request": {
+            "name": "Fetch an Identity",
+            "description": {
+              "content": "Retrieve the details of a previously created `Identity`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":identity_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identity_id",
+                  "description": "(Required) ID of the `Identity` to fetch."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2394efc4-3688-4b52-8ef4-39c02423a1aa",
+              "name": "Single Identity object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_PARTNER",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"IDezsbY5qYujV7ecdrn8psrh\",\n  \"created_at\": \"2022-10-11T00:37:03.02Z\",\n  \"updated_at\": \"2022-10-11T00:37:03.02Z\",\n  \"additional_underwriting_data\": {\n    \"annual_ach_volume\": 200000,\n    \"average_ach_transfer_amount\": 200000,\n    \"average_card_transfer_amount\": 200000,\n    \"business_description\": \"SB3 vegan cafe\",\n    \"card_volume_distribution\": {\n      \"card_present_percentage\": 30,\n      \"ecommerce_percentage\": 60,\n      \"mail_order_telephone_order_percentage\": 10\n    },\n    \"credit_check_allowed\": true,\n    \"credit_check_ip_address\": \"42.1.1.113\",\n    \"credit_check_timestamp\": \"2021-04-28T16:42:55Z\",\n    \"credit_check_user_agent\": \"Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)\",\n    \"merchant_agreement_accepted\": true,\n    \"merchant_agreement_ip_address\": \"42.1.1.113\",\n    \"merchant_agreement_timestamp\": \"2021-04-28T16:42:55Z\",\n    \"merchant_agreement_user_agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6)\",\n    \"refund_policy\": \"MERCHANDISE_EXCHANGE_ONLY\",\n    \"volume_distribution_by_business_type\": {\n      \"business_to_business_volume_percentage\": 100,\n      \"business_to_consumer_volume_percentage\": 0,\n      \"consumer_to_consumer_volume_percentage\": 0,\n      \"other_volume_percentage\": 0,\n      \"person_to_person_volume_percentage\": 0\n    }\n  },\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"entity\": {\n    \"amex_mid\": null,\n    \"annual_card_volume\": 12000000,\n    \"business_address\": {\n      \"line1\": \"741 Douglass St\",\n      \"line2\": \"Apartment 8\",\n      \"city\": \"San Mateo\",\n      \"region\": \"CA\",\n      \"postal_code\": \"94114\",\n      \"country\": \"USA\"\n    },\n    \"business_name\": \"Finix Flowers\",\n    \"business_phone\": \"+1 (408) 756-4497\",\n    \"business_tax_id_provided\": true,\n    \"business_type\": \"INDIVIDUAL_SOLE_PROPRIETORSHIP\",\n    \"default_statement_descriptor\": \"Finix Flowers\",\n    \"discover_mid\": null,\n    \"dob\": {\n      \"day\": 27,\n      \"month\": 6,\n      \"year\": 1978\n    },\n    \"doing_business_as\": \"Finix Flowers\",\n    \"email\": \"user@example.org\",\n    \"first_name\": \"John\",\n    \"has_accepted_credit_cards_previously\": true,\n    \"incorporation_date\": {\n      \"day\": 27,\n      \"month\": 6,\n      \"year\": 1978\n    },\n    \"last_name\": \"Smith\",\n    \"max_transaction_amount\": 12000000,\n    \"mcc\": \"4900\",\n    \"ownership_type\": \"PRIVATE\",\n    \"personal_address\": {\n      \"line1\": \"741 Douglass St\",\n      \"line2\": \"Apartment 7\",\n      \"city\": \"San Mateo\",\n      \"region\": \"CA\",\n      \"postal_code\": \"94114\",\n      \"country\": \"USA\"\n    },\n    \"phone\": \"14158885080\",\n    \"principal_percentage_ownership\": 50,\n    \"short_business_name\": null,\n    \"tax_authority\": null,\n    \"tax_id_provided\": true,\n    \"title\": \"CEO\",\n    \"url\": \"https://www.finix.com\"\n  },\n  \"tags\": {\n    \"Studio Rating\": \"4.7\"\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh\"\n    },\n    \"verifications\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/verifications\"\n    },\n    \"merchants\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/merchants\"\n    },\n    \"settlements\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/settlements\"\n    },\n    \"authorizations\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/authorizations\"\n    },\n    \"transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/transfers\"\n    },\n    \"payment_instruments\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/payment_instruments\"\n    },\n    \"associated_identities\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/associated_identities\"\n    },\n    \"disputes\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/disputes\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ab740aa-b89a-40e9-92c8-8ddc87f7471c",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3672,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\"\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": false,\n          \"key_1\": 2206.8950294051083\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 6214,\n        \"key_2\": \"string\",\n        \"key_3\": 3977\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69b853f3-edb2-4c26-9c83-d656d65d07ba",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4186,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d3dd899-786d-4b9e-8105-a86935355851",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3638,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true,\n        \"key_1\": \"string\",\n        \"key_2\": true,\n        \"key_3\": 5041\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02434ef8-481e-4c15-87e0-789f76157405",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5162,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 4463,\n        \"key_1\": 2926.2974441014358\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6479e7d3-7151-4448-90f0-6979d8091426",
+          "name": "Update an Identity",
+          "request": {
+            "name": "Update an Identity",
+            "description": {
+              "content": "Update an existing `Identity`.\n\nIf you are updating the `Identity` of a `Merchant` that’s already been onboarded, you need to [verify the merchant again](/api/tag/Merchants/#tag/Merchants/operation/createMerchantVerification).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":identity_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identity_id",
+                  "description": "(Required) ID of the `Identity` to fetch."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"additional_underwriting_data\": {\n    \"annual_ach_volume\": \"<integer>\",\n    \"average_ach_transfer_amount\": \"<integer>\",\n    \"average_card_transfer_amount\": \"<integer>\",\n    \"business_description\": \"<string>\",\n    \"credit_check_allowed\": \"<boolean>\",\n    \"credit_check_ip_address\": \"<string>\",\n    \"credit_check_timestamp\": \"<string>\",\n    \"credit_check_user_agent\": \"<string>\",\n    \"card_volume_distribution\": {\n      \"card_present_percentage\": \"<integer>\",\n      \"ecommerce_percentage\": \"<integer>\",\n      \"mail_order_telephone_order_percentage\": \"<integer>\"\n    },\n    \"merchant_agreement_accepted\": \"<boolean>\",\n    \"merchant_agreement_ip_address\": \"<string>\",\n    \"merchant_agreement_timestamp\": \"<string>\",\n    \"merchant_agreement_user_agent\": \"<string>\",\n    \"refund_policy\": \"<string>\",\n    \"volume_distribution_by_business_type\": {\n      \"other_volume_percentage\": \"<integer>\",\n      \"consumer_to_consumer_volume_percentage\": \"<integer>\",\n      \"business_to_consumer_volume_percentage\": \"<integer>\",\n      \"business_to_business_volume_percentage\": \"<integer>\",\n      \"person_to_person_volume_percentage\": \"<integer>\"\n    }\n  },\n  \"entity\": {\n    \"annual_card_volume\": \"<integer>\",\n    \"business_address\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"postal_code\": \"<string>\"\n    },\n    \"business_name\": \"<string>\",\n    \"business_phone\": \"<string>\",\n    \"business_tax_id\": \"<string>\",\n    \"business_type\": \"<string>\",\n    \"default_statement_descriptor\": \"<string>\",\n    \"dob\": {\n      \"day\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"year\": \"<integer>\"\n    },\n    \"doing_business_as\": \"<string>\",\n    \"email\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"has_accepted_credit_cards_previously\": \"<boolean>\",\n    \"incorporation_date\": {\n      \"day\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"year\": \"<integer>\"\n    },\n    \"last_name\": \"<string>\",\n    \"max_transaction_amount\": \"<integer>\",\n    \"mcc\": \"<string>\",\n    \"ownership_type\": \"<string>\",\n    \"personal_address\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"postal_code\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"principal_percentage_ownership\": \"<integer>\",\n    \"tax_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\"\n  },\n  \"tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f3a2e781-47b2-4795-88d7-a9c6cf991065",
+              "name": "Single Identity object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_PARTNER",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"IDezsbY5qYujV7ecdrn8psrh\",\n  \"created_at\": \"2022-10-11T00:37:03.02Z\",\n  \"updated_at\": \"2022-10-11T00:37:03.02Z\",\n  \"additional_underwriting_data\": {\n    \"annual_ach_volume\": 200000,\n    \"average_ach_transfer_amount\": 200000,\n    \"average_card_transfer_amount\": 200000,\n    \"business_description\": \"SB3 vegan cafe\",\n    \"card_volume_distribution\": {\n      \"card_present_percentage\": 30,\n      \"ecommerce_percentage\": 60,\n      \"mail_order_telephone_order_percentage\": 10\n    },\n    \"credit_check_allowed\": true,\n    \"credit_check_ip_address\": \"42.1.1.113\",\n    \"credit_check_timestamp\": \"2021-04-28T16:42:55Z\",\n    \"credit_check_user_agent\": \"Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)\",\n    \"merchant_agreement_accepted\": true,\n    \"merchant_agreement_ip_address\": \"42.1.1.113\",\n    \"merchant_agreement_timestamp\": \"2021-04-28T16:42:55Z\",\n    \"merchant_agreement_user_agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6)\",\n    \"refund_policy\": \"MERCHANDISE_EXCHANGE_ONLY\",\n    \"volume_distribution_by_business_type\": {\n      \"business_to_business_volume_percentage\": 100,\n      \"business_to_consumer_volume_percentage\": 0,\n      \"consumer_to_consumer_volume_percentage\": 0,\n      \"other_volume_percentage\": 0,\n      \"person_to_person_volume_percentage\": 0\n    }\n  },\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"entity\": {\n    \"amex_mid\": null,\n    \"annual_card_volume\": 12000000,\n    \"business_address\": {\n      \"line1\": \"741 Douglass St\",\n      \"line2\": \"Apartment 8\",\n      \"city\": \"San Mateo\",\n      \"region\": \"CA\",\n      \"postal_code\": \"94114\",\n      \"country\": \"USA\"\n    },\n    \"business_name\": \"Finix Flowers\",\n    \"business_phone\": \"+1 (408) 756-4497\",\n    \"business_tax_id_provided\": true,\n    \"business_type\": \"INDIVIDUAL_SOLE_PROPRIETORSHIP\",\n    \"default_statement_descriptor\": \"Finix Flowers\",\n    \"discover_mid\": null,\n    \"dob\": {\n      \"day\": 27,\n      \"month\": 6,\n      \"year\": 1978\n    },\n    \"doing_business_as\": \"Finix Flowers\",\n    \"email\": \"user@example.org\",\n    \"first_name\": \"John\",\n    \"has_accepted_credit_cards_previously\": true,\n    \"incorporation_date\": {\n      \"day\": 27,\n      \"month\": 6,\n      \"year\": 1978\n    },\n    \"last_name\": \"Smith\",\n    \"max_transaction_amount\": 12000000,\n    \"mcc\": \"4900\",\n    \"ownership_type\": \"PRIVATE\",\n    \"personal_address\": {\n      \"line1\": \"741 Douglass St\",\n      \"line2\": \"Apartment 7\",\n      \"city\": \"San Mateo\",\n      \"region\": \"CA\",\n      \"postal_code\": \"94114\",\n      \"country\": \"USA\"\n    },\n    \"phone\": \"14158885080\",\n    \"principal_percentage_ownership\": 50,\n    \"short_business_name\": null,\n    \"tax_authority\": null,\n    \"tax_id_provided\": true,\n    \"title\": \"CEO\",\n    \"url\": \"https://www.finix.com\"\n  },\n  \"tags\": {\n    \"Studio Rating\": \"4.7\"\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh\"\n    },\n    \"verifications\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/verifications\"\n    },\n    \"merchants\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/merchants\"\n    },\n    \"settlements\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/settlements\"\n    },\n    \"authorizations\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/authorizations\"\n    },\n    \"transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/transfers\"\n    },\n    \"payment_instruments\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/payment_instruments\"\n    },\n    \"associated_identities\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/associated_identities\"\n    },\n    \"disputes\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/disputes\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3866ef6-3129-401f-b2b1-b3fc8c7d1c9b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8078,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 7934.911752612365\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9588feb4-805f-40d4-b975-7588159922bc",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3672,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\"\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": false,\n          \"key_1\": 2206.8950294051083\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 6214,\n        \"key_2\": \"string\",\n        \"key_3\": 3977\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6837142-8588-4276-aa9f-843cca343437",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4186,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a551d8cb-64e3-4c08-b5cd-596f58e84932",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3638,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true,\n        \"key_1\": \"string\",\n        \"key_2\": true,\n        \"key_3\": 5041\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdf5d68d-fb88-46ea-945f-9239e04e6118",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5162,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 4463,\n        \"key_1\": 2926.2974441014358\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e39d80a2-45ca-4773-bd13-9ef8fbd7d2b1",
+          "name": "Create an Associated Identity",
+          "request": {
+            "name": "Create an Associated Identity",
+            "description": {
+              "content": "Create an associated `Identity` for [every owner with 25% or more ownership](/guides/onboarding/onboarding-with-api#step-3-add-associated-identities) over the merchant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":identity_id",
+                "associated_identities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identity_id",
+                  "description": "(Required) ID of `Identity` to associate object with."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entity\": {\n    \"annual_card_volume\": \"<integer>\",\n    \"business_address\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"region\": \"<string>\"\n    },\n    \"business_name\": \"<string>\",\n    \"business_phone\": \"<string>\",\n    \"business_tax_id\": \"<string>\",\n    \"business_type\": \"<string>\",\n    \"default_statement_descriptor\": \"<string>\",\n    \"dob\": {\n      \"day\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"year\": \"<integer>\"\n    },\n    \"doing_business_as\": \"<string>\",\n    \"email\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"has_accepted_credit_cards_previously\": \"<boolean>\",\n    \"incorporation_date\": {\n      \"day\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"year\": \"<integer>\"\n    },\n    \"last_name\": \"<string>\",\n    \"max_transaction_amount\": \"<integer>\",\n    \"mcc\": \"<string>\",\n    \"ownership_type\": \"<string>\",\n    \"personal_address\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"region\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"principal_percentage_ownership\": \"<integer>\",\n    \"tax_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\"\n  },\n  \"tags\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d60f70a5-8c8c-45d3-995c-ba2f8a4a4f15",
+              "name": "Single Identity object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_PARTNER",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"IDezsbY5qYujV7ecdrn8psrh\",\n  \"created_at\": \"2022-10-11T00:37:03.02Z\",\n  \"updated_at\": \"2022-10-11T00:37:03.02Z\",\n  \"additional_underwriting_data\": {\n    \"annual_ach_volume\": 200000,\n    \"average_ach_transfer_amount\": 200000,\n    \"average_card_transfer_amount\": 200000,\n    \"business_description\": \"SB3 vegan cafe\",\n    \"card_volume_distribution\": {\n      \"card_present_percentage\": 30,\n      \"ecommerce_percentage\": 60,\n      \"mail_order_telephone_order_percentage\": 10\n    },\n    \"credit_check_allowed\": true,\n    \"credit_check_ip_address\": \"42.1.1.113\",\n    \"credit_check_timestamp\": \"2021-04-28T16:42:55Z\",\n    \"credit_check_user_agent\": \"Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)\",\n    \"merchant_agreement_accepted\": true,\n    \"merchant_agreement_ip_address\": \"42.1.1.113\",\n    \"merchant_agreement_timestamp\": \"2021-04-28T16:42:55Z\",\n    \"merchant_agreement_user_agent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6)\",\n    \"refund_policy\": \"MERCHANDISE_EXCHANGE_ONLY\",\n    \"volume_distribution_by_business_type\": {\n      \"business_to_business_volume_percentage\": 100,\n      \"business_to_consumer_volume_percentage\": 0,\n      \"consumer_to_consumer_volume_percentage\": 0,\n      \"other_volume_percentage\": 0,\n      \"person_to_person_volume_percentage\": 0\n    }\n  },\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"entity\": {\n    \"amex_mid\": null,\n    \"annual_card_volume\": 12000000,\n    \"business_address\": {\n      \"line1\": \"741 Douglass St\",\n      \"line2\": \"Apartment 8\",\n      \"city\": \"San Mateo\",\n      \"region\": \"CA\",\n      \"postal_code\": \"94114\",\n      \"country\": \"USA\"\n    },\n    \"business_name\": \"Finix Flowers\",\n    \"business_phone\": \"+1 (408) 756-4497\",\n    \"business_tax_id_provided\": true,\n    \"business_type\": \"INDIVIDUAL_SOLE_PROPRIETORSHIP\",\n    \"default_statement_descriptor\": \"Finix Flowers\",\n    \"discover_mid\": null,\n    \"dob\": {\n      \"day\": 27,\n      \"month\": 6,\n      \"year\": 1978\n    },\n    \"doing_business_as\": \"Finix Flowers\",\n    \"email\": \"user@example.org\",\n    \"first_name\": \"John\",\n    \"has_accepted_credit_cards_previously\": true,\n    \"incorporation_date\": {\n      \"day\": 27,\n      \"month\": 6,\n      \"year\": 1978\n    },\n    \"last_name\": \"Smith\",\n    \"max_transaction_amount\": 12000000,\n    \"mcc\": \"4900\",\n    \"ownership_type\": \"PRIVATE\",\n    \"personal_address\": {\n      \"line1\": \"741 Douglass St\",\n      \"line2\": \"Apartment 7\",\n      \"city\": \"San Mateo\",\n      \"region\": \"CA\",\n      \"postal_code\": \"94114\",\n      \"country\": \"USA\"\n    },\n    \"phone\": \"14158885080\",\n    \"principal_percentage_ownership\": 50,\n    \"short_business_name\": null,\n    \"tax_authority\": null,\n    \"tax_id_provided\": true,\n    \"title\": \"CEO\",\n    \"url\": \"https://www.finix.com\"\n  },\n  \"tags\": {\n    \"Studio Rating\": \"4.7\"\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh\"\n    },\n    \"verifications\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/verifications\"\n    },\n    \"merchants\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/merchants\"\n    },\n    \"settlements\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/settlements\"\n    },\n    \"authorizations\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/authorizations\"\n    },\n    \"transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/transfers\"\n    },\n    \"payment_instruments\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/payment_instruments\"\n    },\n    \"associated_identities\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/associated_identities\"\n    },\n    \"disputes\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/disputes\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fe22711-838c-4e22-851d-63d9ee59bf8a",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8078,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 7934.911752612365\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a03e433-c26e-4732-83db-acba4a501e82",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3672,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\"\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": false,\n          \"key_1\": 2206.8950294051083\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 6214,\n        \"key_2\": \"string\",\n        \"key_3\": 3977\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e45333b-f66b-4871-b181-963c9c3425f4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4186,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb06165a-e715-495c-b952-d2a8a90dbd58",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3638,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true,\n        \"key_1\": \"string\",\n        \"key_2\": true,\n        \"key_3\": 5041\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a868c25f-97a3-4774-b840-52b639b666fe",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5162,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 4463,\n        \"key_1\": 2926.2974441014358\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "076b643e-78c5-4671-a953-b808add36e2f",
+          "name": "List Associated Identities",
+          "request": {
+            "name": "List Associated Identities",
+            "description": {
+              "content": "Retrieve a list of `Associated Identities` for an `Identity`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":identity_id",
+                "associated_identities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<long>",
+                  "description": "The number of entries to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>",
+                  "description": "Return every resource created after the cursor value."
+                },
+                {
+                  "disabled": false,
+                  "key": "before_cursor",
+                  "value": "<string>",
+                  "description": "Return every resource created before the cursor value."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identity_id",
+                  "description": "(Required) ID of `Identity` to associate object with."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "244406b8-8851-4ca2-9322-1e46eeab16e8",
+              "name": "List of Identity objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_PARTNER",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_embedded\": {\n    \"identities\": [\n      {\n        \"id\": \"IDrNRsZ2miEQcmGHCpo4rBQr\",\n        \"created_at\": \"2022-08-16T18:44:27.46Z\",\n        \"updated_at\": \"2022-08-16T18:44:27.46Z\",\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"entity\": {\n          \"amex_mid\": null,\n          \"annual_card_volume\": 12000000,\n          \"business_address\": {\n            \"line1\": \"741 Douglass St\",\n            \"line2\": \"Apartment 8\",\n            \"city\": \"San Mateo\",\n            \"region\": \"CA\",\n            \"postal_code\": \"94114\",\n            \"country\": \"USA\"\n          },\n          \"business_name\": \"Petes Coffee\",\n          \"business_phone\": \"+1 (408) 756-4497\",\n          \"business_tax_id_provided\": true,\n          \"business_type\": \"INDIVIDUAL_SOLE_PROPRIETORSHIP\",\n          \"default_statement_descriptor\": \"Petes Coffee\",\n          \"discover_mid\": null,\n          \"dob\": {\n            \"day\": 27,\n            \"month\": 6,\n            \"year\": 1978\n          },\n          \"doing_business_as\": \"Petes Coffee\",\n          \"email\": \"user@example.org\",\n          \"first_name\": \"dwayne\",\n          \"has_accepted_credit_cards_previously\": true,\n          \"incorporation_date\": {\n            \"day\": 27,\n            \"month\": 6,\n            \"year\": 1978\n          },\n          \"last_name\": \"xbc\",\n          \"max_transaction_amount\": 12000000,\n          \"mcc\": \"4900\",\n          \"ownership_type\": \"PRIVATE\",\n          \"personal_address\": {\n            \"line1\": \"741 Douglass St\",\n            \"line2\": \"Apartment 7\",\n            \"city\": \"San Mateo\",\n            \"region\": \"CA\",\n            \"postal_code\": \"94114\",\n            \"country\": \"USA\"\n          },\n          \"phone\": \"14158885080\",\n          \"principal_percentage_ownership\": 50,\n          \"short_business_name\": null,\n          \"tax_authority\": null,\n          \"tax_id_provided\": true,\n          \"title\": \"CEO\",\n          \"url\": \"www.PetesCoffee.com\"\n        },\n        \"tags\": {\n          \"test_key_103\": \"test_val_103\"\n        },\n        \"_links\": {\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr\"\n          },\n          \"verifications\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/verifications\"\n          },\n          \"merchants\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/merchants\"\n          },\n          \"settlements\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/settlements\"\n          },\n          \"authorizations\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/authorizations\"\n          },\n          \"transfers\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/transfers\"\n          },\n          \"payment_instruments\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/payment_instruments\"\n          },\n          \"associated_identities\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/associated_identities\"\n          },\n          \"disputes\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/disputes\"\n          },\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDf33pdVaTZGXVFNccdKvaPu/associated_identities?offset=0&limit=20&sort=created_at,desc&sort=id,desc\"\n    }\n  },\n  \"page\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"count\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a0acab5-786f-4462-af43-500fd1205d25",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3672,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\"\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": false,\n          \"key_1\": 2206.8950294051083\n        },\n        \"key_0\": \"string\",\n        \"key_1\": 6214,\n        \"key_2\": \"string\",\n        \"key_3\": 3977\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7a82179-8849-41c6-a928-662958b91178",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4186,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a63322bc-f1e8-49ca-b02e-70f9726e7d37",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3638,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true,\n        \"key_1\": \"string\",\n        \"key_2\": true,\n        \"key_3\": 5041\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e687563d-a397-41f3-b573-afff922603f1",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "associated_identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before_cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of `Identity` to associate object with."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 5162,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 4463,\n        \"key_1\": 2926.2974441014358\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://finix.sandbox-payments-api.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ba30afe3-f688-4a48-8be7-a5dd09cf4d48",
+    "name": "Finix Authorizations Identities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+      "type": "text/plain"
+    }
+  }
+}

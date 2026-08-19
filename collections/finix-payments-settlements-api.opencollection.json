@@ -1,0 +1,242 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Settlements API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Settlements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Close Current Active Settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/identities/:identity_id/settlements",
+            "params": [
+              {
+                "name": "identity_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `Identity` for the merchant you want to settle. "
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Close the currently accruing `settlement`. \n\nFinix, by default, creates accruing `settlements` then closes them based on your payout configurations. Use this endpoint to manually close the currently accruing settlement.\n\nThe closed `Settlement` will not accrue any further transactions and gets immediately submitted for approval.\n- This endpoint is only available to Finix Core customers. If you have any questions, please contact the [Finix Support Team.](mailto:support@finixpayments.com)\n- Any re"
+        },
+        {
+          "info": {
+            "name": "List All Settlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/settlements",
+            "params": [
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is after the given date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where `created_at` is before the given date."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount equal to the given value."
+              },
+              {
+                "name": "amount.gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount greater than."
+              },
+              {
+                "name": "amount.gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount greater than or equal."
+              },
+              {
+                "name": "amount.lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount less than."
+              },
+              {
+                "name": "amount.lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an amount less than or equal."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the status of the `Settlement`. Available values include:<ul><li>**PENDING**<li>**STAGED**<li>**AWAITING_APPROVAL**<li>**APPROVED**.</ul> Merchants only receive payouts when `Settlements` are **APPROVED**. For more information, see [Payouts](/docs/guides/payouts/payouts/)."
+              },
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a `transfer_id` a `Settlement` has accrued. Please note this filter is only available for non-versioned requests, or requests using `-H 'Finix-Version: 2018-01-01'`. We're actively working on making this filter available for later versions. For more details, see [Versioning](/guides/developers/versioning/)."
+              },
+              {
+                "name": "funding_transfer_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a `funding_transfer` a `Settlement` has created."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of `Settlements`.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch a Settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/settlements/:settlement_id",
+            "params": [
+              {
+                "name": "settlement_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Settlement` object."
+              }
+            ]
+          },
+          "docs": "Retreive the details of a `Settlement`."
+        },
+        {
+          "info": {
+            "name": "Close a Settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/settlements/:settlement_id",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "settlement_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Settlement` object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Close an accruing `settlement`.\n\nFinix, by default, creates accruing `settlements` then closes them based on your payout configurations. Use this endpoint to manually close a specific `settlement`.\n\nThe closed `Settlement` will not accrue any further transactions and gets immediately submitted for approval.\n- This endpoint is only available to Finix Core customers. If you have any questions, please contact the [Finix Support Team](mailto:support@finixpayments.com).\n- Any refunded `Transfers` get"
+        },
+        {
+          "info": {
+            "name": "List Settlement Funding Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/settlements/:settlement_id/funding_transfers",
+            "params": [
+              {
+                "name": "settlement_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Settlement` object."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              }
+            ]
+          },
+          "docs": "List the funding `Transfers` that were created when a `Settlement` was approved that have `type` **CREDIT** or **DEBIT**."
+        },
+        {
+          "info": {
+            "name": "List all Transfers in a Settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/settlements/:settlement_id/transfers",
+            "params": [
+              {
+                "name": "settlement_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Settlement` object."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "The numbers of items to return."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of every `Transfer` in a `Settlement` that has `type` **DEBIT** or **REFUND**."
+        },
+        {
+          "info": {
+            "name": "Delete Settlement Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://finix.sandbox-payments-api.com/settlements/:settlement_id/transfers",
+            "params": [
+              {
+                "name": "settlement_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of `Settlement` object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a `Transfer` that makes up a `Settlement`.\n\nAs long as the `Settlement` hasn't been funded, you can remove the `Transfer` or an array of `Transfers`, along with its corresponding `fee` from the encompassing `Settlement`.\n- Funding `transfers` can't be deleted.\n\n\n> Per the JSON API for deleting a resource, our API doesn't have a response body when removing a `Transfer` from a `Settlement`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

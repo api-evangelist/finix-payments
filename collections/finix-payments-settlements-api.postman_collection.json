@@ -1,0 +1,2726 @@
+{
+  "item": [
+    {
+      "id": "29bcc32e-2bcb-46e1-9ea5-687da083583c",
+      "name": "Settlements",
+      "description": {
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6363cf4-a1ac-4b3c-898c-cc3e394b6fa8",
+          "name": "Close Current Active Settlement",
+          "request": {
+            "name": "Close Current Active Settlement",
+            "description": {
+              "content": "Close the currently accruing `settlement`. \n\nFinix, by default, creates accruing `settlements` then closes them based on your payout configurations. Use this endpoint to manually close the currently accruing settlement.\n\nThe closed `Settlement` will not accrue any further transactions and gets immediately submitted for approval.\n- This endpoint is only available to Finix Core customers. If you have any questions, please contact the [Finix Support Team.](mailto:support@finixpayments.com)\n- Any refunded `Transfers` get included in `Settlements` as a deduction.\n- **PENDING** `Transfers` don't get included in `Settlements`. \n- The `total_amount` minus the `total_fee` equals the `net_amount`. The `net_amount` is the amount in cents that gets deposited into the seller's bank account.\n\nRelated Guides: [Accruing Settlements](/guides/payouts/accruing-settlements/#closing-an-accruing-settlement)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":identity_id",
+                "settlements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identity_id",
+                  "description": "(Required) ID of the `Identity` for the merchant you want to settle. "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currency\": \"<string>\",\n  \"merchant_id\": \"<string>\",\n  \"processor\": \"<string>\",\n  \"tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b9639452-a324-429f-90c6-94940073eb06",
+              "name": "`Settlement` object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` for the merchant you want to settle. "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"STvUfBLbCUsun2KFoTuxR2j1\",\n  \"created_at\": \"2022-08-09T17:06:02.99Z\",\n  \"updated_at\": \"2022-08-09T17:15:25.60Z\",\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"currency\": \"USD\",\n  \"destination\": null,\n  \"funds_flow\": null,\n  \"identity\": \"IDuqZpDw28f2KK6YuDk4jNLg\",\n  \"merchant_id\": \"MUeDVrf2ahuKc9Eg5TeZugvs\",\n  \"net_amount\": 2238357,\n  \"payment_type\": null,\n  \"processor\": \"DUMMY_V1\",\n  \"status\": \"AWAITING_APPROVAL\",\n  \"tags\": {},\n  \"total_amount\": 2287662,\n  \"total_fee\": 49305,\n  \"total_fees\": 49305,\n  \"type\": \"MERCHANT_REVENUE\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    },\n    \"identity\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg\"\n    },\n    \"funding_transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/funding_transfers\"\n    },\n    \"transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers\"\n    },\n    \"fees\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=fee\"\n    },\n    \"reversals\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=reverse\"\n    },\n    \"credits\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=credit\"\n    },\n    \"debits\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=debit\"\n    },\n    \"disputes\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=dispute\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76b80a47-8e33-41df-ab72-83fd85240f7b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` for the merchant you want to settle. "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3727,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21e287e5-4685-4011-ac98-e886d5d773cb",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` for the merchant you want to settle. "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 9878,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          },\n          \"key_0\": 338,\n          \"key_1\": 4044,\n          \"key_2\": 918.7326137339979\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24bdb592-813d-4285-b953-070efb9cc3f4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` for the merchant you want to settle. "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4220,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 5971.83437378673,\n        \"key_1\": \"string\",\n        \"key_2\": 269\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dd9e17d-54b1-416a-b39c-2de61ae57659",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` for the merchant you want to settle. "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2491,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8250519-bf76-47fc-a924-17b81268b12c",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` for the merchant you want to settle. "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1921,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true,\n        \"key_1\": \"string\"\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a3679db-1a7d-441f-9fc5-a84fa02802b2",
+              "name": "Merchant identity disabled error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":identity_id",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity_id",
+                      "description": "(Required) ID of the `Identity` for the merchant you want to settle. "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1646,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 5316,\n        \"key_1\": 8535,\n        \"key_2\": 8689.766390488918\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": 8302.353794983319\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c4d0347-e255-48e5-83e5-a239b314516b",
+          "name": "List All Settlements",
+          "request": {
+            "name": "List All Settlements",
+            "description": {
+              "content": "Retrieve a list of `Settlements`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "created_at.gte",
+                  "value": "<string>",
+                  "description": "Filter where `created_at` is after the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.lte",
+                  "value": "<string>",
+                  "description": "Filter where `created_at` is before the given date."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<integer>",
+                  "description": "Filter by an amount equal to the given value."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount.gt",
+                  "value": "<integer>",
+                  "description": "Filter by an amount greater than."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount.gte",
+                  "value": "<integer>",
+                  "description": "Filter by an amount greater than or equal."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount.lt",
+                  "value": "<integer>",
+                  "description": "Filter by an amount less than."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount.lte",
+                  "value": "<integer>",
+                  "description": "Filter by an amount less than or equal."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by the status of the `Settlement`. Available values include:<ul><li>**PENDING**<li>**STAGED**<li>**AWAITING_APPROVAL**<li>**APPROVED**.</ul> Merchants only receive payouts when `Settlements` are **APPROVED**. For more information, see [Payouts](/docs/guides/payouts/payouts/)."
+                },
+                {
+                  "disabled": false,
+                  "key": "transfer_id",
+                  "value": "<string>",
+                  "description": "Filter by a `transfer_id` a `Settlement` has accrued. Please note this filter is only available for non-versioned requests, or requests using `-H 'Finix-Version: 2018-01-01'`. We're actively working on making this filter available for later versions. For more details, see [Versioning](/guides/developers/versioning/)."
+                },
+                {
+                  "disabled": false,
+                  "key": "funding_transfer_id",
+                  "value": "<string>",
+                  "description": "Filter by a `funding_transfer` a `Settlement` has created."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b88c933-cdd5-4e4c-a36e-2f267985295c",
+              "name": "List of `Settlement` objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transfer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "funding_transfer_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_embedded\": {\n    \"settlements\": [\n      {\n        \"id\": \"ST7R7mHjHq3ywG4vGa9cYe9b\",\n        \"created_at\": \"2023-07-14T09:10:02.91Z\",\n        \"updated_at\": \"2023-07-15T07:15:58.36Z\",\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"currency\": \"USD\",\n        \"destination\": null,\n        \"funds_flow\": null,\n        \"identity\": \"IDvHGrfeVmB3i7uL78xjemNk\",\n        \"merchant_id\": \"MU7cXuKj2xx41hhZZi6bZ13A\",\n        \"net_amount\": 8329,\n        \"payment_type\": null,\n        \"processor\": \"DUMMY_V1\",\n        \"status\": \"AWAITING_APPROVAL\",\n        \"tags\": {},\n        \"total_amount\": 9252,\n        \"total_fee\": 923,\n        \"total_fees\": 923,\n        \"type\": \"MERCHANT_REVENUE\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/ST7R7mHjHq3ywG4vGa9cYe9b\"\n          },\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          },\n          \"identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDvHGrfeVmB3i7uL78xjemNk\"\n          },\n          \"funding_transfers\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/ST7R7mHjHq3ywG4vGa9cYe9b/funding_transfers\"\n          },\n          \"transfers\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/ST7R7mHjHq3ywG4vGa9cYe9b/transfers\"\n          },\n          \"fees\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/ST7R7mHjHq3ywG4vGa9cYe9b/transfers?type=fee\"\n          },\n          \"reversals\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/ST7R7mHjHq3ywG4vGa9cYe9b/transfers?type=reverse\"\n          },\n          \"credits\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/ST7R7mHjHq3ywG4vGa9cYe9b/transfers?type=credit\"\n          },\n          \"debits\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/ST7R7mHjHq3ywG4vGa9cYe9b/transfers?type=debit\"\n          },\n          \"disputes\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/ST7R7mHjHq3ywG4vGa9cYe9b/transfers?type=dispute\"\n          }\n        }\n      },\n      {\n        \"id\": \"SThN7W7iDZM4mhGXqPDaVojn\",\n        \"created_at\": \"2022-12-21T22:05:08.10Z\",\n        \"updated_at\": \"2022-12-22T07:15:56.22Z\",\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"currency\": \"USD\",\n        \"destination\": null,\n        \"funds_flow\": null,\n        \"identity\": \"IDuqZpDw28f2KK6YuDk4jNLg\",\n        \"merchant_id\": \"MUeDVrf2ahuKc9Eg5TeZugvs\",\n        \"net_amount\": 648211,\n        \"payment_type\": null,\n        \"processor\": \"DUMMY_V1\",\n        \"status\": \"AWAITING_APPROVAL\",\n        \"tags\": {},\n        \"total_amount\": 661854,\n        \"total_fee\": 13643,\n        \"total_fees\": 13643,\n        \"type\": \"MERCHANT_REVENUE\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/SThN7W7iDZM4mhGXqPDaVojn\"\n          },\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          },\n          \"identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg\"\n          },\n          \"funding_transfers\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/SThN7W7iDZM4mhGXqPDaVojn/funding_transfers\"\n          },\n          \"transfers\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/SThN7W7iDZM4mhGXqPDaVojn/transfers\"\n          },\n          \"fees\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/SThN7W7iDZM4mhGXqPDaVojn/transfers?type=fee\"\n          },\n          \"reversals\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/SThN7W7iDZM4mhGXqPDaVojn/transfers?type=reverse\"\n          },\n          \"credits\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/SThN7W7iDZM4mhGXqPDaVojn/transfers?type=credit\"\n          },\n          \"debits\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/SThN7W7iDZM4mhGXqPDaVojn/transfers?type=debit\"\n          },\n          \"disputes\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/SThN7W7iDZM4mhGXqPDaVojn/transfers?type=dispute\"\n          }\n        }\n      },\n      {\n        \"id\": \"STsdvwKDyZq3gwZi5upuAETj\",\n        \"created_at\": \"2022-12-21T22:00:06.57Z\",\n        \"updated_at\": \"2022-12-22T07:15:55.04Z\",\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"currency\": \"USD\",\n        \"destination\": null,\n        \"funds_flow\": null,\n        \"identity\": \"IDvHGrfeVmB3i7uL78xjemNk\",\n        \"merchant_id\": \"MU7cXuKj2xx41hhZZi6bZ13A\",\n        \"net_amount\": 648811,\n        \"payment_type\": null,\n        \"processor\": \"DUMMY_V1\",\n        \"status\": \"AWAITING_APPROVAL\",\n        \"tags\": {},\n        \"total_amount\": 662154,\n        \"total_fee\": 13343,\n        \"total_fees\": 13343,\n        \"type\": \"MERCHANT_REVENUE\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/STsdvwKDyZq3gwZi5upuAETj\"\n          },\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          },\n          \"identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDvHGrfeVmB3i7uL78xjemNk\"\n          },\n          \"funding_transfers\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/STsdvwKDyZq3gwZi5upuAETj/funding_transfers\"\n          },\n          \"transfers\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/STsdvwKDyZq3gwZi5upuAETj/transfers\"\n          },\n          \"fees\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/STsdvwKDyZq3gwZi5upuAETj/transfers?type=fee\"\n          },\n          \"reversals\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/STsdvwKDyZq3gwZi5upuAETj/transfers?type=reverse\"\n          },\n          \"credits\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/STsdvwKDyZq3gwZi5upuAETj/transfers?type=credit\"\n          },\n          \"debits\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/STsdvwKDyZq3gwZi5upuAETj/transfers?type=debit\"\n          },\n          \"disputes\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/settlements/STsdvwKDyZq3gwZi5upuAETj/transfers?type=dispute\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/\"\n    },\n    \"next\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/?after_cursor=STsdvwKDyZq3gwZi5upuAETj\"\n    }\n  },\n  \"page\": {\n    \"limit\": 100,\n    \"next_cursor\": \"STsdvwKDyZq3gwZi5upuAETj\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eae6b014-2660-48bd-8ad8-6e63ef6133b7",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transfer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "funding_transfer_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1874,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": false,\n        \"key_1\": false,\n        \"key_2\": false,\n        \"key_3\": true\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9aafc89c-17a7-40cc-b024-15f8c7d27e4a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transfer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "funding_transfer_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 936,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38ef1120-a165-4b55-8525-f232cb068b23",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-27T11:21:23"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount.lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transfer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "funding_transfer_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3709,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16772f29-39a7-444c-b702-90b83e3ddaef",
+          "name": "Fetch a Settlement",
+          "request": {
+            "name": "Fetch a Settlement",
+            "description": {
+              "content": "Retreive the details of a `Settlement`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements",
+                ":settlement_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlement_id",
+                  "description": "(Required) ID of `Settlement` object."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a6f034a-0ad8-4af9-b45f-f912996482eb",
+              "name": "`Settlement` object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"STvUfBLbCUsun2KFoTuxR2j1\",\n  \"created_at\": \"2022-08-09T17:06:02.99Z\",\n  \"updated_at\": \"2022-08-09T17:15:25.60Z\",\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"currency\": \"USD\",\n  \"destination\": null,\n  \"funds_flow\": null,\n  \"identity\": \"IDuqZpDw28f2KK6YuDk4jNLg\",\n  \"merchant_id\": \"MUeDVrf2ahuKc9Eg5TeZugvs\",\n  \"net_amount\": 2238357,\n  \"payment_type\": null,\n  \"processor\": \"DUMMY_V1\",\n  \"status\": \"AWAITING_APPROVAL\",\n  \"tags\": {},\n  \"total_amount\": 2287662,\n  \"total_fee\": 49305,\n  \"total_fees\": 49305,\n  \"type\": \"MERCHANT_REVENUE\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    },\n    \"identity\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg\"\n    },\n    \"funding_transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/funding_transfers\"\n    },\n    \"transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers\"\n    },\n    \"fees\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=fee\"\n    },\n    \"reversals\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=reverse\"\n    },\n    \"credits\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=credit\"\n    },\n    \"debits\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=debit\"\n    },\n    \"disputes\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=dispute\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6b5f77a-3142-4517-92f0-9b8617bd9d33",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1874,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": false,\n        \"key_1\": false,\n        \"key_2\": false,\n        \"key_3\": true\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11d2052f-e6b8-4ef2-8beb-3ea3258533e2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 936,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c88d6cd-6cdd-4c9d-a995-0680ee75f382",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2110,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\"\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df35750e-c881-4e1a-8e47-4838bd0e9776",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3709,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5454d881-0a94-4302-a5ca-f48c02f63b78",
+          "name": "Close a Settlement",
+          "request": {
+            "name": "Close a Settlement",
+            "description": {
+              "content": "Close an accruing `settlement`.\n\nFinix, by default, creates accruing `settlements` then closes them based on your payout configurations. Use this endpoint to manually close a specific `settlement`.\n\nThe closed `Settlement` will not accrue any further transactions and gets immediately submitted for approval.\n- This endpoint is only available to Finix Core customers. If you have any questions, please contact the [Finix Support Team](mailto:support@finixpayments.com).\n- Any refunded `Transfers` get included in `Settlements` as a deduction. \n- **PENDING** `Transfers` don't get included in `Settlements`.\n- The `total_amount` minus the `total_fee` equals the `net_amount`. The `net_amount` is the amount in cents that gets deposited into the seller's bank account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements",
+                ":settlement_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlement_id",
+                  "description": "(Required) ID of `Settlement` object."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                "key": "Finix-Version",
+                "value": "2018-01-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5a2fdc2-56f0-49c1-8c66-cd195389794e",
+              "name": "`Settlement` object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"STvUfBLbCUsun2KFoTuxR2j1\",\n  \"created_at\": \"2022-08-09T17:06:02.99Z\",\n  \"updated_at\": \"2022-08-09T17:15:25.60Z\",\n  \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n  \"currency\": \"USD\",\n  \"destination\": null,\n  \"funds_flow\": null,\n  \"identity\": \"IDuqZpDw28f2KK6YuDk4jNLg\",\n  \"merchant_id\": \"MUeDVrf2ahuKc9Eg5TeZugvs\",\n  \"net_amount\": 2238357,\n  \"payment_type\": null,\n  \"processor\": \"DUMMY_V1\",\n  \"status\": \"AWAITING_APPROVAL\",\n  \"tags\": {},\n  \"total_amount\": 2287662,\n  \"total_fee\": 49305,\n  \"total_fees\": 49305,\n  \"type\": \"MERCHANT_REVENUE\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1\"\n    },\n    \"application\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n    },\n    \"identity\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/identities/IDuqZpDw28f2KK6YuDk4jNLg\"\n    },\n    \"funding_transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/funding_transfers\"\n    },\n    \"transfers\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers\"\n    },\n    \"fees\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=fee\"\n    },\n    \"reversals\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=reverse\"\n    },\n    \"credits\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=credit\"\n    },\n    \"debits\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=debit\"\n    },\n    \"disputes\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/settlements/STvUfBLbCUsun2KFoTuxR2j1/transfers?type=dispute\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41fef1f0-9e7c-4e49-8bdb-ecacf2d3b2c1",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1874,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": false,\n        \"key_1\": false,\n        \"key_2\": false,\n        \"key_3\": true\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11198d39-f81c-4e38-95bf-af23cdadb353",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 936,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f47e11f-8cd2-41c6-8f2b-d2e9a3e5635e",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1874,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": false,\n        \"key_1\": false,\n        \"key_2\": false,\n        \"key_3\": true\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05c859e2-7fdb-4733-acd7-21508bd9a6eb",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specify the API version of your request. For more details, see [Versioning.](/guides/developers/versioning/)",
+                    "key": "Finix-Version",
+                    "value": "2022-02-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3709,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef2e648e-3f2b-4677-9b61-9ca1198422e3",
+          "name": "List Settlement Funding Transfers",
+          "request": {
+            "name": "List Settlement Funding Transfers",
+            "description": {
+              "content": "List the funding `Transfers` that were created when a `Settlement` was approved that have `type` **CREDIT** or **DEBIT**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements",
+                ":settlement_id",
+                "funding_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The numbers of items to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlement_id",
+                  "description": "(Required) ID of `Settlement` object."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65ab3b55-b324-4761-a600-754227f906b3",
+              "name": "List of Transfer objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "funding_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_embedded\": {\n    \"transfers\": [\n      {\n        \"id\": \"TRvQN3v5mhA2Ttc78hzjLV3j\",\n        \"created_at\": \"2022-10-11T03:25:04.79Z\",\n        \"updated_at\": \"2022-10-11T03:25:04.79Z\",\n        \"additional_buyer_charges\": null,\n        \"additional_healthcare_data\": null,\n        \"address_verification\": null,\n        \"amount\": 13243,\n        \"amount_requested\": 13243,\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"currency\": \"USD\",\n        \"destination\": null,\n        \"externally_funded\": \"FALSE\",\n        \"failure_code\": null,\n        \"failure_message\": null,\n        \"fee\": 0,\n        \"fee_type\": \"CARD_BASIS_POINTS\",\n        \"idempotency_id\": null,\n        \"merchant_identity\": \"IDddHpRqwf2VsH2XB1fmLfhM\",\n        \"messages\": [],\n        \"raw\": null,\n        \"ready_to_settle_at\": \"2022-10-11T03:25:05.32Z\",\n        \"security_code_verification\": null,\n        \"source\": null,\n        \"state\": \"SUCCEEDED\",\n        \"statement_descriptor\": null,\n        \"subtype\": \"PLATFORM_FEE\",\n        \"tags\": {},\n        \"trace_id\": \"611dcc5f-0622-4ec7-8c8b-b08896456d62\",\n        \"type\": \"FEE\",\n        \"_links\": {\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          },\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TRvQN3v5mhA2Ttc78hzjLV3j\"\n          },\n          \"merchant_identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDddHpRqwf2VsH2XB1fmLfhM\"\n          },\n          \"payment_instruments\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TRvQN3v5mhA2Ttc78hzjLV3j/payment_instruments\"\n          },\n          \"parent\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TR61nQ89c8U5i7uAvwmSuLnv\"\n          },\n          \"fee_profile\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8\"\n          }\n        }\n      },\n      {\n        \"id\": \"TR34MdY6eagpEqhtTaP8EBCR\",\n        \"created_at\": \"2022-10-10T06:32:04.58Z\",\n        \"updated_at\": \"2022-10-10T06:32:04.58Z\",\n        \"additional_buyer_charges\": null,\n        \"additional_healthcare_data\": null,\n        \"address_verification\": null,\n        \"amount\": 19,\n        \"amount_requested\": 19,\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"currency\": \"USD\",\n        \"destination\": null,\n        \"externally_funded\": \"FALSE\",\n        \"failure_code\": null,\n        \"failure_message\": null,\n        \"fee\": 0,\n        \"fee_type\": \"CARD_BASIS_POINTS\",\n        \"idempotency_id\": null,\n        \"merchant_identity\": \"IDddHpRqwf2VsH2XB1fmLfhM\",\n        \"messages\": [],\n        \"raw\": null,\n        \"ready_to_settle_at\": \"2022-10-10T06:32:05.05Z\",\n        \"security_code_verification\": null,\n        \"source\": null,\n        \"state\": \"SUCCEEDED\",\n        \"statement_descriptor\": null,\n        \"subtype\": \"PLATFORM_FEE\",\n        \"tags\": {},\n        \"trace_id\": \"a79105c7-8b93-4c36-8734-83f02ca0686c\",\n        \"type\": \"FEE\",\n        \"_links\": {\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          },\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TR34MdY6eagpEqhtTaP8EBCR\"\n          },\n          \"merchant_identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDddHpRqwf2VsH2XB1fmLfhM\"\n          },\n          \"payment_instruments\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TR34MdY6eagpEqhtTaP8EBCR/payment_instruments\"\n          },\n          \"parent\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TR8bRJ22SBReMehVQMVAbRpr\"\n          },\n          \"fee_profile\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/transfers?offset=0&limit=20&sort=created_at,desc&sort=id,desc\"\n    },\n    \"next\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/transfers?offset=20&limit=20&sort=created_at,desc&sort=id,desc\"\n    },\n    \"last\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/transfers?offset=23980&limit=20&sort=created_at,desc&sort=id,desc\"\n    }\n  },\n  \"page\": {\n    \"limit\": 100,\n    \"next_cursor\": \"TRvynw5NU1Uo6TB5USyhbzCx\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "546bcb13-4f77-4880-8a23-b7b8ca9ed6bf",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "funding_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1874,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": false,\n        \"key_1\": false,\n        \"key_2\": false,\n        \"key_3\": true\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59a2cc0f-d15d-4b2f-9c4d-ae459e412318",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "funding_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 936,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "988e3ee2-9673-4d53-aae3-68267b525754",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "funding_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2110,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\"\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c008e2f-a3c7-4658-81d8-5ab40ed84f02",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "funding_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3709,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a357d15b-960d-4ed8-b922-a798f37a6916",
+          "name": "Delete Settlement Transfers",
+          "request": {
+            "name": "Delete Settlement Transfers",
+            "description": {
+              "content": "Remove a `Transfer` that makes up a `Settlement`.\n\nAs long as the `Settlement` hasn't been funded, you can remove the `Transfer` or an array of `Transfers`, along with its corresponding `fee` from the encompassing `Settlement`.\n- Funding `transfers` can't be deleted.\n\n\n> Per the JSON API for deleting a resource, our API doesn't have a response body when removing a `Transfer` from a `Settlement`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements",
+                ":settlement_id",
+                "transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlement_id",
+                  "description": "(Required) ID of `Settlement` object."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transfers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c121b2a0-4371-4380-b4e7-6106e8b66a6a",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f45a0b2c-496c-4207-8a2f-e63770ee0bc2",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1874,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": false,\n        \"key_1\": false,\n        \"key_2\": false,\n        \"key_3\": true\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85df681b-c537-46e5-b371-b056e3e8dd6b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 936,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6470595-c156-4577-be53-f30d6885d581",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2110,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\"\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b8d1a43-65be-4460-ba19-c02c62920321",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3709,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f6eccd2-59fd-42d0-b922-c31512d85b96",
+              "name": "Invalid field",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8044,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"string\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"INVALID_FIELD\",\n        \"field\": \"string\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cfd443c-760c-4e5e-acfd-e422c05846b3",
+          "name": "List all Transfers in a Settlement",
+          "request": {
+            "name": "List all Transfers in a Settlement",
+            "description": {
+              "content": "Retrieve a list of every `Transfer` in a `Settlement` that has `type` **DEBIT** or **REFUND**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements",
+                ":settlement_id",
+                "transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The numbers of items to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlement_id",
+                  "description": "(Required) ID of `Settlement` object."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0848336-2087-42c2-add6-d6a162e61f92",
+              "name": "List of Transfer objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "finix-apiuser-role",
+                  "value": "ROLE_ADMIN",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "A unique ID for this specific API request attempt.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_embedded\": {\n    \"transfers\": [\n      {\n        \"id\": \"TRvQN3v5mhA2Ttc78hzjLV3j\",\n        \"created_at\": \"2022-10-11T03:25:04.79Z\",\n        \"updated_at\": \"2022-10-11T03:25:04.79Z\",\n        \"additional_buyer_charges\": null,\n        \"additional_healthcare_data\": null,\n        \"address_verification\": null,\n        \"amount\": 13243,\n        \"amount_requested\": 13243,\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"currency\": \"USD\",\n        \"destination\": null,\n        \"externally_funded\": \"FALSE\",\n        \"failure_code\": null,\n        \"failure_message\": null,\n        \"fee\": 0,\n        \"fee_type\": \"CARD_BASIS_POINTS\",\n        \"idempotency_id\": null,\n        \"merchant_identity\": \"IDddHpRqwf2VsH2XB1fmLfhM\",\n        \"messages\": [],\n        \"raw\": null,\n        \"ready_to_settle_at\": \"2022-10-11T03:25:05.32Z\",\n        \"security_code_verification\": null,\n        \"source\": null,\n        \"state\": \"SUCCEEDED\",\n        \"statement_descriptor\": null,\n        \"subtype\": \"PLATFORM_FEE\",\n        \"tags\": {},\n        \"trace_id\": \"611dcc5f-0622-4ec7-8c8b-b08896456d62\",\n        \"type\": \"FEE\",\n        \"_links\": {\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          },\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TRvQN3v5mhA2Ttc78hzjLV3j\"\n          },\n          \"merchant_identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDddHpRqwf2VsH2XB1fmLfhM\"\n          },\n          \"payment_instruments\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TRvQN3v5mhA2Ttc78hzjLV3j/payment_instruments\"\n          },\n          \"parent\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TR61nQ89c8U5i7uAvwmSuLnv\"\n          },\n          \"fee_profile\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8\"\n          }\n        }\n      },\n      {\n        \"id\": \"TR34MdY6eagpEqhtTaP8EBCR\",\n        \"created_at\": \"2022-10-10T06:32:04.58Z\",\n        \"updated_at\": \"2022-10-10T06:32:04.58Z\",\n        \"additional_buyer_charges\": null,\n        \"additional_healthcare_data\": null,\n        \"address_verification\": null,\n        \"amount\": 19,\n        \"amount_requested\": 19,\n        \"application\": \"APgPDQrLD52TYvqazjHJJchM\",\n        \"currency\": \"USD\",\n        \"destination\": null,\n        \"externally_funded\": \"FALSE\",\n        \"failure_code\": null,\n        \"failure_message\": null,\n        \"fee\": 0,\n        \"fee_type\": \"CARD_BASIS_POINTS\",\n        \"idempotency_id\": null,\n        \"merchant_identity\": \"IDddHpRqwf2VsH2XB1fmLfhM\",\n        \"messages\": [],\n        \"raw\": null,\n        \"ready_to_settle_at\": \"2022-10-10T06:32:05.05Z\",\n        \"security_code_verification\": null,\n        \"source\": null,\n        \"state\": \"SUCCEEDED\",\n        \"statement_descriptor\": null,\n        \"subtype\": \"PLATFORM_FEE\",\n        \"tags\": {},\n        \"trace_id\": \"a79105c7-8b93-4c36-8734-83f02ca0686c\",\n        \"type\": \"FEE\",\n        \"_links\": {\n          \"application\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM\"\n          },\n          \"self\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TR34MdY6eagpEqhtTaP8EBCR\"\n          },\n          \"merchant_identity\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/identities/IDddHpRqwf2VsH2XB1fmLfhM\"\n          },\n          \"payment_instruments\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TR34MdY6eagpEqhtTaP8EBCR/payment_instruments\"\n          },\n          \"parent\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/transfers/TR8bRJ22SBReMehVQMVAbRpr\"\n          },\n          \"fee_profile\": {\n            \"href\": \"https://finix.sandbox-payments-api.com/fee_profiles/FPvCQUcnsueN3Bc3zR1qCBG8\"\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/transfers?offset=0&limit=20&sort=created_at,desc&sort=id,desc\"\n    },\n    \"next\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/transfers?offset=20&limit=20&sort=created_at,desc&sort=id,desc\"\n    },\n    \"last\": {\n      \"href\": \"https://finix.sandbox-payments-api.com/transfers?offset=23980&limit=20&sort=created_at,desc&sort=id,desc\"\n    }\n  },\n  \"page\": {\n    \"limit\": 100,\n    \"next_cursor\": \"TRvynw5NU1Uo6TB5USyhbzCx\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ef46499-bc92-436a-8cd2-61567aeaf38b",
+              "name": "Authentication information is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1874,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": false,\n        \"key_1\": false,\n        \"key_2\": false,\n        \"key_3\": true\n      },\n      {\n        \"code\": \"UNKNOWN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"self\": {\n            \"href\": \"string\"\n          },\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6c55fe4-8ebc-4fba-b631-d18c9b73586c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 936,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"FORBIDDEN\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "277d9f52-7d56-437a-b0ee-836ea503c9ec",
+              "name": "Object does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2110,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        },\n        \"key_0\": \"string\"\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ad1363e-628b-4fe6-8bc8-58683ec446e5",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlement_id",
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) ID of `Settlement` object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3709,\n  \"_embedded\": {\n    \"errors\": [\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      },\n      {\n        \"code\": \"NOT_FOUND\",\n        \"logref\": {\n          \"logref\": \"string\"\n        },\n        \"message\": \"string\",\n        \"_links\": {\n          \"source\": {\n            \"href\": \"string\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://finix.sandbox-payments-api.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e1cadc60-e1e6-46d4-b557-e45f001d8ac9",
+    "name": "Finix Authorizations Settlements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "[object Object]\n\nContact Support:\n Name: Finix\n Email: support@finixpayments.com",
+      "type": "text/plain"
+    }
+  }
+}

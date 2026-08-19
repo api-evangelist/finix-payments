@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Instrument Updates API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instrument Updates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Instrument Updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/instrument_updates",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "To update the card details of your customers, create an `instrument_updates` resource. Include the `Payment Instrument` IDs you want to update in a CSV."
+        },
+        {
+          "info": {
+            "name": "Download Instrument Updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/instrument_updates/:instrument_updates_id/download",
+            "params": [
+              {
+                "name": "instrument_updates_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the `instrument_updates` resource. This ID was returned when initially creating the `instrument_updates` object."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specify the format you'd like to download the response in (JSON is the only other format available for download)."
+              }
+            ]
+          },
+          "docs": "Fetch a previously created `instrument_updates` resource as a CSV. \n\nTo fetch the `instrument_updates` resource in JSON, add `?format=json` to the request endpoint."
+        },
+        {
+          "info": {
+            "name": "Fetch an Instrument Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/instrument_updates/:instrument_updates_id",
+            "params": [
+              {
+                "name": "instrument_updates_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the `instrument_update`."
+              }
+            ]
+          },
+          "docs": "Fetch a specific `instrument_update` from an `instrument_updates` resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

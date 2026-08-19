@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Devices API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch a Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/devices/:device_id",
+            "params": [
+              {
+                "name": "device_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `Device`."
+              },
+              {
+                "name": "include_connection",
+                "value": "",
+                "type": "query",
+                "description": "Specifies whether the connection information should be included."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of an existing `Device`."
+        },
+        {
+          "info": {
+            "name": "Initiate Action on Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://finix.sandbox-payments-api.com/devices/:device_id",
+            "headers": [
+              {
+                "name": "Finix-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "device_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `Device`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate an action on a `Device`. Actions that are available include:\n- Activating the `Device`\n- Rebooting the `Device`\n- Setting an idle message\n- Deactivating the `Device`\n\nYou can also use a PUT request to update the `configuration_details`, `description`, `name`, and `serial_number` of the `Device`."
+        },
+        {
+          "info": {
+            "name": "Check Device Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/devices/:device_id_connection",
+            "params": [
+              {
+                "name": "device_id_connection",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_connection",
+                "value": "",
+                "type": "query",
+                "description": "Specifies whether the connection information should be included."
+              }
+            ]
+          },
+          "docs": "To check the connection of the `Device`, include `?include_connection\\=true\\` at the end of the request endpoint."
+        },
+        {
+          "info": {
+            "name": "Create a Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://finix.sandbox-payments-api.com/merchants/:merchant_id/devices",
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the `Merchant` object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a `Device` under a `Merchant`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Finix Authorizations Split Transfers API",
+    "version": "2022-02-01"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Split Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch a Split Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/split_transfers/:split_transfer_id",
+            "params": [
+              {
+                "name": "split_transfer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch a `split_transfer` that was created from a split transaction.\n\nFor more information, see [Split a Transaction](/docs/guides/payments/modify/split-transactions/)."
+        },
+        {
+          "info": {
+            "name": "Fetch Split Transfer Fees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/split_transfers/:split_transfer_id/fees",
+            "params": [
+              {
+                "name": "split_transfer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch the fees associated with a `split_transfer`.\n\n\nFor more information, see [Split a Transaction](/docs/guides/payments/modify/split-transactions/)."
+        },
+        {
+          "info": {
+            "name": "List Split Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://finix.sandbox-payments-api.com/split_transfers",
+            "params": [
+              {
+                "name": "parent_transfer_id",
+                "value": "",
+                "type": "query",
+                "description": "**ID** of the parent `Transfer` that was split."
+              }
+            ]
+          },
+          "docs": "Retireve a list of `split_transfers` created for a specifc split `Transfer`.\n\nFor more information, see [Split a Transaction](/docs/guides/payments/modify/split-transactions/)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
