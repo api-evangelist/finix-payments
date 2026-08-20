@@ -116,6 +116,8 @@ apis:
   humanURL: https://finix.com/docs/api
   baseURL: https://finix.live-payments-api.com
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -196,6 +198,8 @@ apis:
   humanURL: https://finix.com/docs/api
   baseURL: https://finix.live-payments-api.com
   tags:
+  - Settlement
+  tags_raw:
   - Settlements
   properties:
   - type: OpenAPI
@@ -226,6 +230,8 @@ apis:
   humanURL: https://finix.com/docs/api
   baseURL: https://finix.live-payments-api.com
   tags:
+  - Verification
+  tags_raw:
   - Verifications
   properties:
   - type: OpenAPI
@@ -236,6 +242,8 @@ apis:
   humanURL: https://finix.com/docs/api
   baseURL: https://finix.live-payments-api.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
