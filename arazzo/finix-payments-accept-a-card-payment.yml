@@ -4,46 +4,52 @@ info:
   version: 1.0.0
   summary: Create a buyer Identity, tokenize a card, authorize, then capture into a Transfer.
 sourceDescriptions:
-  - name: finix
-    url: ../openapi/finix-payments-openapi-original.yml
-    type: openapi
+- name: authorizationsApi
+  url: ../openapi/finix-payments-authorizations-api-openapi.yml
+  type: openapi
+- name: identitiesApi
+  url: ../openapi/finix-payments-identities-api-openapi.yml
+  type: openapi
+- name: paymentInstrumentsApi
+  url: ../openapi/finix-payments-payment-instruments-api-openapi.yml
+  type: openapi
 workflows:
-  - workflowId: acceptCardPayment
-    summary: Authorize and capture a card payment.
-    description: >-
-      Full auth-and-capture flow. Requires HTTP Basic Auth and the Finix-Version 2022-02-01 header.
-      Seed amount from sandbox/finix-payments-sandbox.yml to run in test mode.
-    inputs:
-      type: object
-      properties:
-        merchant_id: {type: string}
-        amount: {type: integer}
-        currency: {type: string, default: USD}
-      required: [merchant_id, amount]
-    steps:
-      - stepId: createBuyer
-        operationId: createIdentity
-        outputs:
-          identity_id: $response.body#/id
-      - stepId: tokenizeCard
-        operationId: createPaymentInstrument
-        parameters:
-          - name: identity
-            in: query
-            value: $steps.createBuyer.outputs.identity_id
-        outputs:
-          instrument_id: $response.body#/id
-      - stepId: authorize
-        operationId: createAuthorization
-        outputs:
-          authorization_id: $response.body#/id
-      - stepId: capture
-        operationId: captureAuthorization
-        parameters:
-          - name: authorization_id
-            in: path
-            value: $steps.authorize.outputs.authorization_id
-        outputs:
-          transfer_id: $response.body#/transfer
+- workflowId: acceptCardPayment
+  summary: Authorize and capture a card payment.
+  description: >-
+    Full auth-and-capture flow. Requires HTTP Basic Auth and the Finix-Version 2022-02-01 header.
+    Seed amount from sandbox/finix-payments-sandbox.yml to run in test mode.
+  inputs:
+    type: object
+    properties:
+      merchant_id: {type: string}
+      amount: {type: integer}
+      currency: {type: string, default: USD}
+    required: [merchant_id, amount]
+  steps:
+  - stepId: createBuyer
+    operationId: createIdentity
     outputs:
-      transfer_id: $steps.capture.outputs.transfer_id
+      identity_id: $response.body#/id
+  - stepId: tokenizeCard
+    operationId: createPaymentInstrument
+    parameters:
+    - name: identity
+      in: query
+      value: $steps.createBuyer.outputs.identity_id
+    outputs:
+      instrument_id: $response.body#/id
+  - stepId: authorize
+    operationId: createAuthorization
+    outputs:
+      authorization_id: $response.body#/id
+  - stepId: capture
+    operationId: captureAuthorization
+    parameters:
+    - name: authorization_id
+      in: path
+      value: $steps.authorize.outputs.authorization_id
+    outputs:
+      transfer_id: $response.body#/transfer
+  outputs:
+    transfer_id: $steps.capture.outputs.transfer_id
