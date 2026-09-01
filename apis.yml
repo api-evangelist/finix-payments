@@ -242,7 +242,7 @@ apis:
   humanURL: https://finix.com/docs/api
   baseURL: https://finix.live-payments-api.com
   tags:
-  - Verifications
+  - Verification
   tags_raw:
   - Verifications
   properties:
