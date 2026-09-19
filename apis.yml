@@ -55,6 +55,17 @@ tags:
 - Payment Processing
 - Payment Facilitation
 - Embedded Finance
+- Marketplace
+- ACH
+- Card Acceptance
+- Fintech
+- PCI DSS
+tags_raw:
+- Company
+- Payments
+- Payment Processing
+- Payment Facilitation
+- Embedded Finance
 - Marketplaces
 - ACH
 - Card Acceptance
@@ -72,6 +83,8 @@ apis:
   humanURL: https://finix.com/docs/api
   baseURL: https://finix.live-payments-api.com
   tags:
+  - Authorization
+  tags_raw:
   - Authorizations
   properties:
   - type: OpenAPI
