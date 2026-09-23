@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Finix Authorizations Onboarding Forms API
+  title: Finix Onboarding Forms API
   description:
     $ref: api-descriptions/main.md
   contact:
@@ -123,6 +123,198 @@ paths:
       x-python-method-name: create_link
 components:
   schemas:
+    CreateOnboardingFormRequest:
+      type: object
+      x-examples: {}
+      title: CreateOnboardingFormRequest
+      properties:
+        onboarding_data:
+          $ref: '#/components/schemas/OnboardingFormOnboardingData'
+        merchant_processors:
+          type: array
+          description: An array of objects with the processors and gateways users will be onboarded to.
+          items:
+            type: object
+            properties:
+              processor:
+                type: string
+                description: The name of the processor you plan to onboard users to.
+        onboarding_link_details:
+          type: object
+          description: The information of the initial onboarding link. This is only provided when creating an `onboarding_form`.
+          properties:
+            expiration_in_minutes:
+              type: string
+              description: How long (in minutes) the link should be valid for. Defaults to 60 minutes.
+            expired_session_url:
+              type: string
+              description: The URL users get sent to if the bearer token expires.
+            fee_details_url:
+              type: string
+              description: The URL of the page where you display the fees related to processing payments (for more info, see [Displaying Processing Fees](/guides/onboarding/onboarding-form/#displaying-processing-fees)).
+            return_url:
+              type: string
+              description: The URL users get sent to after completing the onboarding flow.
+            terms_of_service_url:
+              type: string
+              description: Your Terms of Service URL. The URL is provided to users for consent along with [Finix's Terms of Service](https://finix-hosted-content.s3.amazonaws.com/flex/v2/finix-terms-of-service.html).
+        tags:
+          $ref: '#/components/schemas/Tags'
+    Error422InvalidFieldList:
+      type: object
+      description: Invalid field
+      title: ''
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - INVALID_FIELD
+                  field:
+                    type: string
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    CreateOnboardingFormLinkRequest:
+      type: object
+      x-examples: {}
+      title: CreateOnboardingFormLinkRequest
+      properties:
+        expiration_in_minutes:
+          type: integer
+          description: How long (in minutes) the link should be valid for. Defaults to 60 minutes.
+        expired_session_url:
+          type: string
+          description: The URL users get sent to if the bearer token expires.
+        fee_details_url:
+          type: string
+          description: The URL of the page where you display the fees related to processing payments (for more info, see [Displaying Processing Fees](/guides/onboarding/onboarding-form/#displaying-processing-fees)).
+        return_url:
+          type: string
+          description: The URL users get sent to after completing the onboarding flow.
+        terms_of_service_url:
+          type: string
+          description: Your Terms of Service URL. The URL is provided to users for consent along with Finix's Terms of Service.
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
     OnboardingForm:
       type: object
       x-examples: {}
@@ -164,7 +356,21 @@ components:
           - COMPLETED
         tags:
           $ref: '#/components/schemas/Tags'
-    Error406NotAcceptable:
+    OnboardingFormLink:
+      type: object
+      x-examples:
+        example-1:
+          expires_at: '2022-07-11T22:39:55.469Z'
+          link_url: https://sandbox.payments-dashboard.com/merchant-onboarding?formId=obf_bXQj8iSgYwXf432yJcWbKv&applicationId=APgPDQrLD52TYvqazjHJJchM&bearerToken=eyJhbGciOiJIUzUxMiJ9.eyJvbmJvYXJkaW5nX2Zvcm1faWQiOiJvYmZfYlhRajhpU2dZd1hmNDMyeUpjV2JLdiIsImZlZV9kZXRhaWxzX3VybCI6Imh0dHBzOi8vd3d3LmZpbml4LmNvbS9kb2NzIiwiZXhwaXJlZF9zZXNzaW9uX3VybCI6Imh0dHBzOi8vd3d3LmZpbml4LmNvbS8iLCJpc3MiOiJodHRwczovL3d3dy5maW5peC5jb20iLCJyZXR1cm5fdXJsIjoiaHR0cHM6Ly93d3cuZmluaXguY29tL2RvY3MiLCJleHAiOjE2NTc1NzkxOTUsImFwcGxpY2F0aW9uX2lkIjoiQVBnUERRckxENTJUWXZxYXpqSEpKY2hNIiwiaWF0IjoxNjU3NTc3Mzk1LCJtZXJjaGFudF9tYXhfdHJhbnNhY3Rpb25fYW1vdW50IjoxMDAwMDAsInRlcm1zX29mX3NlcnZpY2VfdXJsIjoiaHR0cHM6Ly93d3cuZmluaXguY29tL3Rlcm1zLWFuZC1wb2xpY2llcyJ9.uQvwqhOxSmpX4zMSVn891ClNB_cWHmXhLfyOzRiKRoyn7VAqVOWrO8dJiY-OvN4venPWnPOxM0r3NiIyfgQv6g
+      properties:
+        expires_at:
+          type: string
+          description: A UTC timestamp detailing when the onboarding form expires and will no longer be available via `link_url`. To generate a new link to the same form, see [Get an Onboarding Form URL](/guides/onboarding/onboarding-form/#get-an-onboarding-form-url).
+        link_url:
+          type: string
+          description: The URL of the user's Finix Onboarding Form. Users can use the `link_url` to return to the form at any time.
+      title: OnboardingFormLink
+    Error403ForbiddenList:
       type: object
       properties:
         total:
@@ -181,7 +387,7 @@ components:
                   code:
                     type: string
                     enum:
-                    - NOT_FOUND
+                    - FORBIDDEN
                   logref:
                     $ref: '#/components/schemas/LogRef'
                   message:
@@ -194,7 +400,34 @@ components:
                         properties:
                           href:
                             type: string
+      description: ''
       title: ''
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    Tags:
+      type:
+      - object
+      - 'null'
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
     OnboardingFormOnboardingData:
       title: OnboardingFormOnboardingData
       x-stoplight:
@@ -220,9 +453,10 @@ components:
               minLength: 1
               description: Description of this merchant's business (max 200 characters).
             card_volume_distribution:
-              type: object
+              type:
+              - object
+              - 'null'
               description: The distribution of the merchant's credit card volume The sum of `card_volume_distribution` must be 100.
-              nullable: true
               properties:
                 card_present_percentage:
                   type: integer
@@ -273,9 +507,10 @@ components:
               - WITHIN_30_DAYS
               - OTHER
             volume_distribution_by_business_type:
-              type: object
+              type:
+              - object
+              - 'null'
               description: Merchant's distribution of credit card volume by business type. Sum of `volume_distribution_by_business_type` must be 100.
-              nullable: true
               properties:
                 business_to_business_volume_percentage:
                   type: integer
@@ -303,9 +538,10 @@ components:
                 type: integer
                 description: The annual credit card sales (in cents) expected to be processed (max 19 characters).
               business_address:
-                type: object
+                type:
+                - object
+                - 'null'
                 description: The primary address for the legal entity.
-                nullable: true
                 properties:
                   city:
                     type: string
@@ -331,10 +567,11 @@ components:
                     minLength: 1
                     description: 2-letter state code.
               business_name:
-                type: string
+                type:
+                - string
+                - 'null'
                 minLength: 1
                 description: Abbreviated names of the business. If there are no abbreviated name, leave this field blank.
-                nullable: true
               business_phone:
                 type: string
                 minLength: 1
@@ -388,9 +625,10 @@ components:
                 type: boolean
                 description: Defaults to **false** if not passed.
               incorporation_date:
-                type: object
+                type:
+                - object
+                - 'null'
                 description: The date the company was founded and registered.
-                nullable: true
                 properties:
                   day:
                     type: integer
@@ -413,14 +651,15 @@ components:
                 minLength: 1
                 description: The Merchant Category Code ([MCC](http://www.dm.usda.gov/procurement/card/card\_x/mcc.pdf)) that this merchant will be classified under. For a list of approved MCCs, see [Approved Merchant Category Codes.](/docs/guides/business/security-and-compliance/approved-merchants/)
               ownership_type:
-                type: string
+                type:
+                - string
+                - 'null'
                 minLength: 1
                 description: 'Values can be either:
 
                   <ul><li><strong>PUBLIC</strong> to indicate a publicly-traded company.
 
                   <li><strong>PRIVATE</strong> for privately-held businesses.'
-                nullable: true
               personal_address:
                 type: object
                 description: The home address of the principal control owner. This field is used for identity verification purposes.
@@ -473,78 +712,93 @@ components:
           description: The `entity` information saved in the `Identity` of the user.
           properties:
             amex_mid:
-              type: integer
+              type:
+              - integer
+              - 'null'
               description: Assigned amexMid value. If a value is passed, it must be 10 or 11 digits.
-              nullable: true
             annual_card_volume:
-              type: integer
+              type:
+              - integer
+              - 'null'
               description: The annual credit card sales (in cents) expected to be processed by this seller (max 19 characters).
-              nullable: true
             business_address:
-              type: object
+              type:
+              - object
+              - 'null'
               description: The primary address for the legal entity.
-              nullable: true
               properties:
                 line1:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: First line of the address (max 35 characters).
-                  nullable: true
                 line2:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: Second line of the address (max 35 characters).
-                  nullable: true
                 city:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: City (max 20 characters).
-                  nullable: true
                 region:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: 2-letter state code.
-                  nullable: true
                 postal_code:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: Zip or Postal code (max 7 characters).
-                  nullable: true
                 country:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: 3-Letter Country code (e.g. USA).
-                  nullable: true
             business_name:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: The merchant's legal business name (max 120 characters).<ul><li>If <strong>INDIVIDUAL_SOLE_PROPRIETORSHIP</strong>, pass the owner's legal first name, last name and middle initial.
-              nullable: true
             business_phone:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: Customer service phone number where the seller can be reached (max 10 characters).
-              nullable: true
             business_tax_id_provided:
               type: boolean
               description: Details if the `business_tax_id` was provided.
             business_type:
               description: Include the value that best applies to the seller.
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
             default_statement_descriptor:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: The description of the seller that appears on the buyer's bank or card statement.
-              nullable: true
             discover_mid:
               description: Assigned discoverMid value.
-              type: integer
-              nullable: true
+              type:
+              - integer
+              - 'null'
             dob:
-              type: object
+              type:
+              - object
+              - 'null'
               description: The control owner's date of birth.
-              nullable: true
               properties:
                 day:
                   type: integer
@@ -559,27 +813,31 @@ components:
                   description: Year of birth (4-digit). Year must be greater than 1900.
                   minimum: 1900
             doing_business_as:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: Alternate names of the business. If there are no other names, pass the same value used for `business_name` (max 60 characters).
-              nullable: true
             email:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: The email address of the principal control owner where they can be reached (max 100 characters).
-              nullable: true
             first_name:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: The legal first name of the merchant's control owner (max 20 characters).
-              nullable: true
             has_accepted_credit_cards_previously:
               type: boolean
               description: Defaults to **false** if not passed.
             incorporation_date:
-              type: object
+              type:
+              - object
+              - 'null'
               description: The date the company was founded and registered with the US.
-              nullable: true
               properties:
                 day:
                   type: integer
@@ -591,92 +849,109 @@ components:
                   type: integer
                   description: Year business was incorporated (4-digit).
             last_name:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: The legal last name of the merchant's control owner (max 20 characters).
-              nullable: true
             max_transaction_amount:
-              type: integer
+              type:
+              - integer
+              - 'null'
               description: The maximum amount (in cents) that can be charged for a single transaction (max 12 characters).
-              nullable: true
             mcc:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: The Merchant Category Code ([MCC](http://www.dm.usda.gov/procurement/card/card\_x/mcc.pdf)) that this merchant will be classified under. For a list of approved MCCs, see [Approved Merchant Category Codes.](/docs/guides/business/security-and-compliance/approved-merchants/)
-              nullable: true
             ownership_type:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: 'Values can be either: <ul><li><strong>PUBLIC</strong> to indicate a publicly-traded company.<li><strong>PRIVATE</strong> for privately-held businesses.'
               enum:
               - PUBLIC
               - PRIVATE
-              nullable: true
             personal_address:
-              type: object
+              type:
+              - object
+              - 'null'
               description: The home address of the merchant's principal control owner. This field is used for identity verification purposes.
-              nullable: true
               properties:
                 line1:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: First line of the address (max 35 characters).
-                  nullable: true
                 line2:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: Second line of the address (max 35 characters).
-                  nullable: true
                 city:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: City (max 20 characters).
-                  nullable: true
                 region:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: 2-letter State code.
-                  nullable: true
                 postal_code:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: Zip or Postal code (max 7 characters).
-                  nullable: true
                 country:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   minLength: 1
                   description: 3-Letter country code (e.g. USA).
-                  nullable: true
             phone:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: The principal control owner's phone number (max 10 characters).
-              nullable: true
             principal_percentage_ownership:
-              type: integer
+              type:
+              - integer
+              - 'null'
               description: Percentage of the company owned by the principal control owner (min 0; max 100).
-              nullable: true
             short_business_name:
-              type: string
+              type:
+              - string
+              - 'null'
               description: Abbreviated names of the business. If there are no abbreviated name, leave this field blank.
-              nullable: true
             tax_authority:
-              type: string
+              type:
+              - string
+              - 'null'
               description: <ul><li>Only required when onboarding a seller with a <tt>MCC</tt> of <strong>9311</strong>.<li> The <tt>tax_authority</tt> is the tax gathering entity (e.g San Francisco Water Authority).
-              nullable: true
             tax_id_provided:
               type: boolean
               description: Details if the `tax_id` was provided.
             title:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: The corporate title of the control owner (e.g. Chief Executive Officer, CFO, etc. Max 60 characters).
-              nullable: true
             url:
-              type: string
+              type:
+              - string
+              - 'null'
               minLength: 1
               description: The URL of the merchant's public website.
-              nullable: true
         payment_instruments:
           type: object
           description: The `Payment Instrument` that'll be used to payout the seller. For more information, see [Payouts](/guides/payouts/).
@@ -711,245 +986,42 @@ components:
         max_transaction_amount:
           type: integer
           description: Maximum amount that can be transacted for a single transaction in cents (max 12 characters). Must be equal to or less than your `max_transaction_amount`.
-    OnboardingFormLink:
-      type: object
-      x-examples:
-        example-1:
-          expires_at: '2022-07-11T22:39:55.469Z'
-          link_url: https://sandbox.payments-dashboard.com/merchant-onboarding?formId=obf_bXQj8iSgYwXf432yJcWbKv&applicationId=APgPDQrLD52TYvqazjHJJchM&bearerToken=eyJhbGciOiJIUzUxMiJ9.eyJvbmJvYXJkaW5nX2Zvcm1faWQiOiJvYmZfYlhRajhpU2dZd1hmNDMyeUpjV2JLdiIsImZlZV9kZXRhaWxzX3VybCI6Imh0dHBzOi8vd3d3LmZpbml4LmNvbS9kb2NzIiwiZXhwaXJlZF9zZXNzaW9uX3VybCI6Imh0dHBzOi8vd3d3LmZpbml4LmNvbS8iLCJpc3MiOiJodHRwczovL3d3dy5maW5peC5jb20iLCJyZXR1cm5fdXJsIjoiaHR0cHM6Ly93d3cuZmluaXguY29tL2RvY3MiLCJleHAiOjE2NTc1NzkxOTUsImFwcGxpY2F0aW9uX2lkIjoiQVBnUERRckxENTJUWXZxYXpqSEpKY2hNIiwiaWF0IjoxNjU3NTc3Mzk1LCJtZXJjaGFudF9tYXhfdHJhbnNhY3Rpb25fYW1vdW50IjoxMDAwMDAsInRlcm1zX29mX3NlcnZpY2VfdXJsIjoiaHR0cHM6Ly93d3cuZmluaXguY29tL3Rlcm1zLWFuZC1wb2xpY2llcyJ9.uQvwqhOxSmpX4zMSVn891ClNB_cWHmXhLfyOzRiKRoyn7VAqVOWrO8dJiY-OvN4venPWnPOxM0r3NiIyfgQv6g
-      properties:
-        expires_at:
-          type: string
-          description: A UTC timestamp detailing when the onboarding form expires and will no longer be available via `link_url`. To generate a new link to the same form, see [Get an Onboarding Form URL](/guides/onboarding/onboarding-form/#get-an-onboarding-form-url).
-        link_url:
-          type: string
-          description: The URL of the user's Finix Onboarding Form. Users can use the `link_url` to return to the form at any time.
-      title: OnboardingFormLink
-    Error401Unauthorized:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    CreateOnboardingFormLinkRequest:
-      type: object
-      x-examples: {}
-      title: CreateOnboardingFormLinkRequest
-      properties:
-        expiration_in_minutes:
-          type: integer
-          description: How long (in minutes) the link should be valid for. Defaults to 60 minutes.
-        expired_session_url:
-          type: string
-          description: The URL users get sent to if the bearer token expires.
-        fee_details_url:
-          type: string
-          description: The URL of the page where you display the fees related to processing payments (for more info, see [Displaying Processing Fees](/guides/onboarding/onboarding-form/#displaying-processing-fees)).
-        return_url:
-          type: string
-          description: The URL users get sent to after completing the onboarding flow.
-        terms_of_service_url:
-          type: string
-          description: Your Terms of Service URL. The URL is provided to users for consent along with Finix's Terms of Service.
-    Tags:
-      type: object
-      title: tags
-      additionalProperties:
-        type: string
-      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
-
-        - Maximum character length for individual `keys` is 40.
-
-        - Maximum character length for individual **values** is 500.
-
-
-        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-      nullable: true
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
-      title: ''
-    CreateOnboardingFormRequest:
-      type: object
-      x-examples: {}
-      title: CreateOnboardingFormRequest
-      properties:
-        onboarding_data:
-          $ref: '#/components/schemas/OnboardingFormOnboardingData'
-        merchant_processors:
-          type: array
-          description: An array of objects with the processors and gateways users will be onboarded to.
-          items:
-            type: object
-            properties:
-              processor:
-                type: string
-                description: The name of the processor you plan to onboard users to.
-        onboarding_link_details:
-          type: object
-          description: The information of the initial onboarding link. This is only provided when creating an `onboarding_form`.
-          properties:
-            expiration_in_minutes:
-              type: string
-              description: How long (in minutes) the link should be valid for. Defaults to 60 minutes.
-            expired_session_url:
-              type: string
-              description: The URL users get sent to if the bearer token expires.
-            fee_details_url:
-              type: string
-              description: The URL of the page where you display the fees related to processing payments (for more info, see [Displaying Processing Fees](/guides/onboarding/onboarding-form/#displaying-processing-fees)).
-            return_url:
-              type: string
-              description: The URL users get sent to after completing the onboarding flow.
-            terms_of_service_url:
-              type: string
-              description: Your Terms of Service URL. The URL is provided to users for consent along with [Finix's Terms of Service](https://finix-hosted-content.s3.amazonaws.com/flex/v2/finix-terms-of-service.html).
-        tags:
-          $ref: '#/components/schemas/Tags'
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
-    Error422InvalidFieldList:
-      type: object
-      description: Invalid field
-      title: ''
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - INVALID_FIELD
-                  field:
-                    type: string
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    LogRef:
-      title: LogRef
-      type: object
-      properties:
-        logref:
-          type: string
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
   responses:
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
     Error422InvalidField:
       description: Invalid field
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error422InvalidFieldList'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    OnboardingFormLink:
+      description: A link for users to return to their `onboarding_form` at any time.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OnboardingFormLink'
+          examples:
+            Onboarding Form Link:
+              value:
+                expires_at: '2022-07-11T22:39:55.469Z'
+                link_url: https://sandbox.payments-dashboard.com/merchant-onboarding?formId=obf_bXQj8iSgYwXf432yJcWbKv&applicationId=APgPDQrLD52TYvqazjHJJchM&bearerToken=eyJhbGciOiJIUzUxMiJ9.eyJvbmJvYXJkaW5nX2Zvcm1faWQiOiJvYmZfYlhRajhpU2dZd1hmNDMyeUpjV2JLdiIsImZlZV9kZXRhaWxzX3VybCI6Imh0dHBzOi8vd3d3LmZpbml4LmNvbS9kb2NzIiwiZXhwaXJlZF9zZXNzaW9uX3VybCI6Imh0dHBzOi8vd3d3LmZpbml4LmNvbS8iLCJpc3MiOiJodHRwczovL3d3dy5maW5peC5jb20iLCJyZXR1cm5fdXJsIjoiaHR0cHM6Ly93d3cuZmluaXguY29tL2RvY3MiLCJleHAiOjE2NTc1NzkxOTUsImFwcGxpY2F0aW9uX2lkIjoiQVBnUERRckxENTJUWXZxYXpqSEpKY2hNIiwiaWF0IjoxNjU3NTc3Mzk1LCJtZXJjaGFudF9tYXhfdHJhbnNhY3Rpb25fYW1vdW50IjoxMDAwMDAsInRlcm1zX29mX3NlcnZpY2VfdXJsIjoiaHR0cHM6Ly93d3cuZmluaXguY29tL3Rlcm1zLWFuZC1wb2xpY2llcyJ9.uQvwqhOxSmpX4zMSVn891ClNB_cWHmXhLfyOzRiKRoyn7VAqVOWrO8dJiY-OvN4venPWnPOxM0r3NiIyfgQv6g
     Error406NotAcceptable:
       description: Not Acceptable
       content:
@@ -957,12 +1029,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error406NotAcceptable'
           examples: {}
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
     OnboardingForm:
       description: A single `onboarding_from` objext.
       content:
@@ -1072,29 +1138,6 @@ components:
                 created_at: '2023-03-30T19:16:28.377022Z'
                 updated_at: '2023-03-30T19:16:28.377022Z'
                 tags: {}
-    OnboardingFormLink:
-      description: A link for users to return to their `onboarding_form` at any time.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OnboardingFormLink'
-          examples:
-            Onboarding Form Link:
-              value:
-                expires_at: '2022-07-11T22:39:55.469Z'
-                link_url: https://sandbox.payments-dashboard.com/merchant-onboarding?formId=obf_bXQj8iSgYwXf432yJcWbKv&applicationId=APgPDQrLD52TYvqazjHJJchM&bearerToken=eyJhbGciOiJIUzUxMiJ9.eyJvbmJvYXJkaW5nX2Zvcm1faWQiOiJvYmZfYlhRajhpU2dZd1hmNDMyeUpjV2JLdiIsImZlZV9kZXRhaWxzX3VybCI6Imh0dHBzOi8vd3d3LmZpbml4LmNvbS9kb2NzIiwiZXhwaXJlZF9zZXNzaW9uX3VybCI6Imh0dHBzOi8vd3d3LmZpbml4LmNvbS8iLCJpc3MiOiJodHRwczovL3d3dy5maW5peC5jb20iLCJyZXR1cm5fdXJsIjoiaHR0cHM6Ly93d3cuZmluaXguY29tL2RvY3MiLCJleHAiOjE2NTc1NzkxOTUsImFwcGxpY2F0aW9uX2lkIjoiQVBnUERRckxENTJUWXZxYXpqSEpKY2hNIiwiaWF0IjoxNjU3NTc3Mzk1LCJtZXJjaGFudF9tYXhfdHJhbnNhY3Rpb25fYW1vdW50IjoxMDAwMDAsInRlcm1zX29mX3NlcnZpY2VfdXJsIjoiaHR0cHM6Ly93d3cuZmluaXguY29tL3Rlcm1zLWFuZC1wb2xpY2llcyJ9.uQvwqhOxSmpX4zMSVn891ClNB_cWHmXhLfyOzRiKRoyn7VAqVOWrO8dJiY-OvN4venPWnPOxM0r3NiIyfgQv6g
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-    ErrorUnauthorized:
-      description: Authentication information is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error401Unauthorized'
   requestBodies:
     CreateOnboardingFormLinkRequest:
       content:

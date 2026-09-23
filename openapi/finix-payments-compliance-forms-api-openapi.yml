@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Finix Authorizations Compliance Forms API
+  title: Finix Compliance Forms API
   description:
     $ref: api-descriptions/main.md
   contact:
@@ -72,7 +72,7 @@ paths:
       description: 'As part of onboarding your users, you''ll need to build a UI experience that allows users to complete the PCI `compliance_form` and download the form as a PDF if requested.
 
 
-        For more information, see [Managing Compliance Forms](/guides/security-and-compliance/pci-dss-compliance/managing-pci-compliance/#completing-compliance-forms).'
+        For more information, see Managing Compliance Forms.'
       tags:
       - Compliance Forms
       requestBody:
@@ -121,206 +121,6 @@ paths:
       x-returns-list: true
 components:
   schemas:
-    ComplianceForm:
-      type: object
-      x-examples: {}
-      properties:
-        id:
-          type: string
-          description: ID of the `compliance_form`.
-        created_at:
-          $ref: '#/components/schemas/CreatedAt'
-        updated_at:
-          $ref: '#/components/schemas/UpdatedAt'
-        application_id:
-          description: The ID of the `Application` the `compliance_form` was created under.
-          type: string
-          example: APdoThHn4jjYUSxQf76txAgg
-        compliance_form_template:
-          type: string
-          description: Template linked to this `compliance_form`.
-        due_at:
-          type: string
-          description: Timestamp of when the `compliance_form` must be completed by.
-          format: date-time
-        files:
-          type: object
-          description: Details about the `File` resoruce where the `compliance_form` was uploaded.
-          properties:
-            signed_file:
-              type: string
-              description: '<ul><li>Autofills to <strong>null</strong>.</li>
-
-                <li>When a <kbd>compliance_form</kbd> is attested, <kbd>signed_file</kbd> will contain a <kbd>File</kbd> corresponding to the signed version of the form.</li></ul>'
-              nullable: true
-            unsigned_file:
-              type: string
-              description: ID of the `File` resource that has the `compliance_form`.
-        linked_to:
-          type: string
-          description: The ID of the `merchant` linked to the `compliance_form`.
-        linked_type:
-          type: string
-          description: The type of resource this `compliance_form` is linked to.
-        pci_saq_a:
-          type: object
-          description: Details used to fille out the PCI Self-Assessment Questionnaire (SAQ).
-          properties:
-            ip_address:
-              type: string
-              description: IP address of the person attesting to this `compliance_form`.
-              nullable: true
-            is_accepted:
-              type: boolean
-              description: If all `pci_saq_a` fields are all submitted, `is_accepted` updates to **true**.
-              nullable: true
-            name:
-              type: string
-              description: Name of the person completing (aka attesting to) the `compliance_form`.
-              nullable: true
-            signed_at:
-              type: string
-              description: Timestamp of the person attesting to this `compliance_form`.
-              nullable: true
-            title:
-              type: string
-              description: Title or role of the person completing (aka attesting to) the `compliance_form`.
-              nullable: true
-            user_agent:
-              type: string
-              description: User agent of the person attesting to this `compliance_form`.
-              nullable: true
-        state:
-          type: string
-          description: The state of the `compliance_form`.
-          enum:
-          - PENDING
-          - COMPLETE
-          - INVALID
-          - INCOMPLETE
-          example: INCOMPLETE
-        tags:
-          $ref: '#/components/schemas/Tags'
-        type:
-          type: string
-          description: 'Type of `compliance_form`. There is one available value: **PCI_SAQ_A**.'
-          enum:
-          - PCI_SAQ_A
-        valid_from:
-          type: string
-          description: Timestamp of when the `compliance_form` becomes active and valid.
-          format: date-time
-        valid_until:
-          type: string
-          description: Timestamp of when the `compliance_form` is no longer active and valid.
-        version:
-          type: string
-          description: Details the version of the SAQ form. When `compliance_forms` are created, Finix automatically provides the most up-to-date SAQ form that's available.
-      title: ''
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
-    Error401Unauthorized:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    UpdateComplianceFormRequest:
-      type: object
-      x-examples: {}
-      properties:
-        pci_saq_a:
-          type: object
-          description: Details used to fille out the PCI Self-Assessment Questionnaire.
-          properties:
-            ip_address:
-              type: string
-              description: IP address of the person attesting to this `compliance_form`.
-            name:
-              type: string
-              description: Name of the person completing (aka attesting to) the `compliance_form`.
-            signed_at:
-              type: string
-              description: Timestamp of the person attesting to this `compliance_form`.
-            title:
-              type: string
-              description: "Title or role of the person completing (aka attesting to)\n                the `compliance_form`."
-            user_agent:
-              type: string
-              description: User agent of the person attesting to this `compliance_form`.
-    Tags:
-      type: object
-      title: tags
-      additionalProperties:
-        type: string
-      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
-
-        - Maximum character length for individual `keys` is 40.
-
-        - Maximum character length for individual **values** is 500.
-
-
-        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-      nullable: true
     PageCursor:
       title: PageCursor
       x-stoplight:
@@ -331,95 +131,11 @@ components:
           type: integer
           description: The number of entries to return.
         next_cursor:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The cursor to use for the next page of results.
-          nullable: true
       description: Details the page that's returned.
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
-      title: ''
-    ListLinks:
-      title: ListLinks
-      additionalProperties: true
-      type: object
-      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
-      properties:
-        next:
-          type: object
-          description: Link to the next page of entries.
-          properties:
-            href:
-              type: string
-        self:
-          type: object
-          description: Link to the resource that was used in the request.
-          properties:
-            href:
-              type: string
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
     Error422InvalidFieldList:
       type: object
       description: Invalid field
@@ -453,17 +169,6 @@ components:
                         properties:
                           href:
                             type: string
-    LogRef:
-      title: LogRef
-      type: object
-      properties:
-        logref:
-          type: string
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
     ComplianceFormList:
       type: object
       x-examples:
@@ -528,26 +233,327 @@ components:
           $ref: '#/components/schemas/ListLinks'
         page:
           $ref: '#/components/schemas/PageCursor'
-  responses:
-    Error422InvalidField:
-      description: Invalid field
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error422InvalidFieldList'
     Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdateComplianceFormRequest:
+      type: object
+      x-examples: {}
+      properties:
+        pci_saq_a:
+          type: object
+          description: Details used to fille out the PCI Self-Assessment Questionnaire.
+          properties:
+            ip_address:
+              type: string
+              description: IP address of the person attesting to this `compliance_form`.
+            name:
+              type: string
+              description: Name of the person completing (aka attesting to) the `compliance_form`.
+            signed_at:
+              type: string
+              description: Timestamp of the person attesting to this `compliance_form`.
+            title:
+              type: string
+              description: "Title or role of the person completing (aka attesting to)\n                the `compliance_form`."
+            user_agent:
+              type: string
+              description: User agent of the person attesting to this `compliance_form`.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    Tags:
+      type:
+      - object
+      - 'null'
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+    ComplianceForm:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+          description: ID of the `compliance_form`.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        application_id:
+          description: The ID of the `Application` the `compliance_form` was created under.
+          type: string
+          example: APdoThHn4jjYUSxQf76txAgg
+        compliance_form_template:
+          type: string
+          description: Template linked to this `compliance_form`.
+        due_at:
+          type: string
+          description: Timestamp of when the `compliance_form` must be completed by.
+          format: date-time
+        files:
+          type: object
+          description: Details about the `File` resoruce where the `compliance_form` was uploaded.
+          properties:
+            signed_file:
+              type:
+              - string
+              - 'null'
+              description: '<ul><li>Autofills to <strong>null</strong>.</li>
+
+                <li>When a <kbd>compliance_form</kbd> is attested, <kbd>signed_file</kbd> will contain a <kbd>File</kbd> corresponding to the signed version of the form.</li></ul>'
+            unsigned_file:
+              type: string
+              description: ID of the `File` resource that has the `compliance_form`.
+        linked_to:
+          type: string
+          description: The ID of the `merchant` linked to the `compliance_form`.
+        linked_type:
+          type: string
+          description: The type of resource this `compliance_form` is linked to.
+        pci_saq_a:
+          type: object
+          description: Details used to fille out the PCI Self-Assessment Questionnaire (SAQ).
+          properties:
+            ip_address:
+              type:
+              - string
+              - 'null'
+              description: IP address of the person attesting to this `compliance_form`.
+            is_accepted:
+              type:
+              - boolean
+              - 'null'
+              description: If all `pci_saq_a` fields are all submitted, `is_accepted` updates to **true**.
+            name:
+              type:
+              - string
+              - 'null'
+              description: Name of the person completing (aka attesting to) the `compliance_form`.
+            signed_at:
+              type:
+              - string
+              - 'null'
+              description: Timestamp of the person attesting to this `compliance_form`.
+            title:
+              type:
+              - string
+              - 'null'
+              description: Title or role of the person completing (aka attesting to) the `compliance_form`.
+            user_agent:
+              type:
+              - string
+              - 'null'
+              description: User agent of the person attesting to this `compliance_form`.
+        state:
+          type: string
+          description: The state of the `compliance_form`.
+          enum:
+          - PENDING
+          - COMPLETE
+          - INVALID
+          - INCOMPLETE
+          example: INCOMPLETE
+        tags:
+          $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          description: 'Type of `compliance_form`. There is one available value: **PCI_SAQ_A**.'
+          enum:
+          - PCI_SAQ_A
+        valid_from:
+          type: string
+          description: Timestamp of when the `compliance_form` becomes active and valid.
+          format: date-time
+        valid_until:
+          type: string
+          description: Timestamp of when the `compliance_form` is no longer active and valid.
+        version:
+          type: string
+          description: Details the version of the SAQ form. When `compliance_forms` are created, Finix automatically provides the most up-to-date SAQ form that's available.
+      title: ''
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+  headers:
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    date:
+      schema:
+        type: string
+  responses:
     ComplianceForm:
       description: Example response
       content:
@@ -614,6 +620,31 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
+    Error422InvalidField:
+      description: Invalid field
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error422InvalidFieldList'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
     ComplianceFormList:
       description: List of `Compliance Form` objects.
       content:
@@ -652,34 +683,12 @@ components:
                 page:
                   next_cursor: null
                   limit: 10
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
     ErrorUnauthorized:
       description: Authentication information is missing or invalid
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error401Unauthorized'
-  headers:
-    finix-apiuser-role:
-      schema:
-        type: string
-        enum:
-        - ROLE_ADMIN
-        - ROLE_PLATFORM
-        - ROLE_PARTNER
-        - ROLE_MERCHANT
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
-    date:
-      schema:
-        type: string
   requestBodies:
     UpdateComplianceForm:
       content:

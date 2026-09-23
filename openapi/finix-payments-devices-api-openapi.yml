@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Finix Authorizations Devices API
+  title: Finix Devices API
   description:
     $ref: api-descriptions/main.md
   contact:
@@ -172,38 +172,23 @@ paths:
           $ref: xcode/curl/devices/create-device.md
       x-python-method-name: create
 components:
+  headers:
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    date:
+      schema:
+        type: string
   schemas:
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
     CreateDevice:
       type: object
       title: CreateDevice
@@ -259,7 +244,7 @@ components:
             allow_debit: true
             prompt_signature: NEVER
             bypass_device_on_capture: true
-    Error401Unauthorized:
+    Error406NotAcceptable:
       type: object
       properties:
         total:
@@ -276,43 +261,7 @@ components:
                   code:
                     type: string
                     enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    ErrorGeneric:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
+                    - NOT_FOUND
                   logref:
                     $ref: '#/components/schemas/LogRef'
                   message:
@@ -325,82 +274,7 @@ components:
                         properties:
                           href:
                             type: string
-    Tags:
-      type: object
-      title: tags
-      additionalProperties:
-        type: string
-      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
-
-        - Maximum character length for individual `keys` is 40.
-
-        - Maximum character length for individual **values** is 500.
-
-
-        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-      nullable: true
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
       title: ''
-    UpdateDeviceRequest:
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - ACTIVATE
-          - CREATE_IDLE_MESSAGE
-          - DEACTIVATE
-          - REBOOT
-          description: The action you want to perform on the device. Use **DEACTIVATE** to deactivate the device.
-        tags:
-          $ref: '#/components/schemas/Tags'
-        activation_code:
-          type: string
-          description: Used when `action` is **ACTIVATE**. Provide the input code that shows up on the device screen.
-        idle_message:
-          type: string
-          description: Message to display on the idle screen.
-        configuration_details:
-          $ref: '#/components/schemas/ConfigurationDetails'
-        description:
-          type: string
-          description: Additional information about device (e.g. self serving terminal).
-        name:
-          type: string
-          description: Name of the `Device`.
-        serial_number:
-          type: string
-          description: Serial number of the `device`.
     Error404NotFoundList:
       type: object
       properties:
@@ -464,6 +338,104 @@ components:
       title: UpdatedAt
       format: date-time
       description: Timestamp of when the object was last updated.
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    UpdateDeviceRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - ACTIVATE
+          - CREATE_IDLE_MESSAGE
+          - DEACTIVATE
+          - REBOOT
+          description: The action you want to perform on the device. Use **DEACTIVATE** to deactivate the device.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        activation_code:
+          type: string
+          description: Used when `action` is **ACTIVATE**. Provide the input code that shows up on the device screen.
+        idle_message:
+          type: string
+          description: Message to display on the idle screen.
+        configuration_details:
+          $ref: '#/components/schemas/ConfigurationDetails'
+        description:
+          type: string
+          description: Additional information about device (e.g. self serving terminal).
+        name:
+          type: string
+          description: Name of the `Device`.
+        serial_number:
+          type: string
+          description: Serial number of the `device`.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
     Device:
       type: object
       title: Device
@@ -477,18 +449,20 @@ components:
         updated_at:
           $ref: '#/components/schemas/UpdatedAt'
         configuration_details:
-          type: object
+          type:
+          - object
+          - 'null'
           title: DeviceConfigDetails
           description: Information used to configure how the `Device` handles transactions.
-          nullable: true
           properties:
             allow_debit:
               type: boolean
               description: Allow transaction to be processed on Debit rails. If **false**, Debit card transactions will be processed on Credit rails.
             bypass_device_on_capture:
-              type: boolean
+              type:
+              - boolean
+              - 'null'
               description: Sets whether or not the device will be used to capture transactions. This field must be set to **true** (defaults to **false**).
-              nullable: true
             check_for_duplicate_transactions:
               type: boolean
               description: Sets whether the `Device` will check for duplicate transactions.
@@ -512,16 +486,18 @@ components:
           - OPEN
           - CLOSED
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Additional information about device (e.g. self serving terminal).
-          nullable: true
         enabled:
           type: boolean
           description: Details if the `Device` resource is enabled. Set to **false** to disable the `Device`.
         idle_message:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The message that diplays on the device after a period of inactivity.
-          nullable: true
         merchant:
           type: string
           example: MUxxxxxxxxxxxxxxxxxx
@@ -533,9 +509,10 @@ components:
           type: string
           description: Name of the `Device`.
         serial_number:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Serial number of the device.
-          nullable: true
         tags:
           $ref: '#/components/schemas/Tags'
         _links:
@@ -564,37 +541,63 @@ components:
               properties:
                 href:
                   type: string
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
     LogRef:
       title: LogRef
       type: object
       properties:
         logref:
           type: string
+    Tags:
+      type:
+      - object
+      - 'null'
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
     CreatedAt:
       type: string
       title: CreatedAt
       format: date-time
       description: Timestamp of when the object was created.
   responses:
-    ErrorUnprocessableEntity:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorGeneric'
-    Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
     Device:
       description: Single Device object
       content:
@@ -826,12 +829,31 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
     ErrorForbidden403:
       description: Forbidden
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error403ForbiddenList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
     ErrorUnauthorized:
       description: Authentication information is missing or invalid
       content:
@@ -885,22 +907,6 @@ components:
                 description: John Smith
                 model: MX915
                 name: 'Finix  triPOS #1'
-  headers:
-    finix-apiuser-role:
-      schema:
-        type: string
-        enum:
-        - ROLE_ADMIN
-        - ROLE_PLATFORM
-        - ROLE_PARTNER
-        - ROLE_MERCHANT
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
-    date:
-      schema:
-        type: string
   securitySchemes:
     BasicAuth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Finix Authorizations Balance Transfers API
+  title: Finix Balance Transfers API
   description:
     $ref: api-descriptions/main.md
   contact:
@@ -151,37 +151,6 @@ paths:
       x-python-method-name: get
 components:
   schemas:
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
     Currency:
       type: string
       description: ISO 4217 3 letter currency code.
@@ -365,7 +334,12 @@ components:
       - ZAR
       - ZMW
       - ZWL
-    Error401Unauthorized:
+    Amount:
+      type: integer
+      title: Amount
+      description: The total amount that will be debited in cents (e.g. 100 cents to debit $1.00).
+      format: int64
+    Error406NotAcceptable:
       type: object
       properties:
         total:
@@ -382,25 +356,68 @@ components:
                   code:
                     type: string
                     enum:
-                    - UNKNOWN
+                    - NOT_FOUND
                   logref:
                     $ref: '#/components/schemas/LogRef'
                   message:
                     type: string
                   _links:
                     type: object
-                    additionalProperties: true
                     properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
                       source:
                         type: object
                         properties:
                           href:
                             type: string
+      title: ''
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
     BalanceTransfer:
       type: object
       x-examples: {}
@@ -451,7 +468,43 @@ components:
           $ref: '#/components/schemas/Tags'
         _links:
           $ref: '#/components/schemas/ListLinks'
-    ErrorGeneric:
+    BalanceTransferList:
+      title: BalanceTransfersList
+      x-stoplight:
+        id: 0pxsokuo2ricq
+      type: object
+      description: List of `balance_transfer` resources.
+      properties:
+        page:
+          type: object
+          description: Details the page that's returned.
+          properties:
+            count:
+              type: integer
+              description: The number of entries returned.
+            limit:
+              type: integer
+              description: The number of entries to return.
+            offset:
+              type: integer
+              description: The number of items to skip before starting to collect the result set.
+        _embedded:
+          type: object
+          description: List of `balance_transfer` objects.
+          properties:
+            balance_transfers:
+              type: array
+              description: '`balance_transfer` objects.'
+              items:
+                $ref: '#/components/schemas/BalanceTransferList'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Error401Unauthorized:
       type: object
       properties:
         total:
@@ -468,38 +521,25 @@ components:
                   code:
                     type: string
                     enum:
-                    - FORBIDDEN
+                    - UNKNOWN
                   logref:
                     $ref: '#/components/schemas/LogRef'
                   message:
                     type: string
                   _links:
                     type: object
+                    additionalProperties: true
                     properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
                       source:
                         type: object
                         properties:
                           href:
                             type: string
-    Amount:
-      type: integer
-      title: Amount
-      description: The total amount that will be debited in cents (e.g. 100 cents to debit $1.00).
-      format: int64
-    Tags:
-      type: object
-      title: tags
-      additionalProperties:
-        type: string
-      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
-
-        - Maximum character length for individual `keys` is 40.
-
-        - Maximum character length for individual **values** is 500.
-
-
-        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-      nullable: true
     Error403ForbiddenList:
       type: object
       properties:
@@ -532,90 +572,6 @@ components:
                             type: string
       description: ''
       title: ''
-    ListLinks:
-      title: ListLinks
-      additionalProperties: true
-      type: object
-      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
-      properties:
-        next:
-          type: object
-          description: Link to the next page of entries.
-          properties:
-            href:
-              type: string
-        self:
-          type: object
-          description: Link to the resource that was used in the request.
-          properties:
-            href:
-              type: string
-    BalanceTransferList:
-      title: BalanceTransfersList
-      x-stoplight:
-        id: 0pxsokuo2ricq
-      type: object
-      description: List of `balance_transfer` resources.
-      properties:
-        page:
-          type: object
-          description: Details the page that's returned.
-          properties:
-            count:
-              type: integer
-              description: The number of entries returned.
-            limit:
-              type: integer
-              description: The number of entries to return.
-            offset:
-              type: integer
-              description: The number of items to skip before starting to collect the result set.
-        _embedded:
-          type: object
-          description: List of `balance_transfer` objects.
-          properties:
-            balance_transfers:
-              type: array
-              description: '`balance_transfer` objects.'
-              items:
-                $ref: '#/components/schemas/BalanceTransferList'
-        _links:
-          $ref: '#/components/schemas/ListLinks'
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
     CreateBalanceTransferRequest:
       title: CreateBalanceTransferRequest
       x-stoplight:
@@ -642,12 +598,13 @@ components:
           type: string
           description: Additional information about the `balance_transfer` (e.g. **Transferring funds for Holidays**).
         destination:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - FOR_BENEFIT_OF_ACCOUNT
           - OPERATING_ACCOUNT
           description: The account where funds get credited. For balance transfers, this is an aliased ID and will have the value of `FOR_BENEFIT_OF_ACCOUNT` or `OPERATING_ACCOUNT`.
-          nullable: true
         processor_type:
           type: string
           example: LITLE_V1
@@ -667,54 +624,79 @@ components:
       - destination
       - processor_type
       - source
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
     LogRef:
       title: LogRef
       type: object
       properties:
         logref:
           type: string
+    Tags:
+      type:
+      - object
+      - 'null'
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
     CreatedAt:
       type: string
       title: CreatedAt
       format: date-time
       description: Timestamp of when the object was created.
-  requestBodies:
-    CreateBalanceTransferRequest:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateBalanceTransferRequest'
-          examples:
-            Create a Balance Transfer:
-              value:
-                amount: 4000
-                currency: USD
-                description: Need to increase buffer given the high number of NSFs on merchant fee debits
-                destination: FOR_BENEFIT_OF_ACCOUNT
-                processor_type: LITLE_V1
-                source: OPERATING_ACCOUNT
-                tags:
-                  example: documentation tag
+  headers:
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    date:
+      schema:
+        type: string
   responses:
-    Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
-    ErrorUnprocessableEntity:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorGeneric'
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
     BalanceTransferList:
       description: List of balance_transfer objects
       content:
@@ -810,12 +792,31 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
     ErrorForbidden403:
       description: Forbidden
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error403ForbiddenList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
     ErrorUnauthorized:
       description: Authentication information is missing or invalid
       content:
@@ -823,39 +824,10 @@ components:
           schema:
             $ref: '#/components/schemas/Error401Unauthorized'
   parameters:
-    QueryUpdatedAtGteFilter:
-      description: Filter where `updated_at` is after the given date.
-      in: query
-      name: updated_at.gte
-      schema:
-        type: string
-      style: form
-    QueryIdempotencyIdFilter:
-      description: Filter by `idempotency_id`.
-      in: query
-      name: idempotency_id
-      schema:
-        type: string
-      style: form
     QueryCreatedAtGteFilter:
       description: Filter where `created_at` is after the given date.
       in: query
       name: created_at.gte
-      schema:
-        type: string
-        example: '2022-09-27T11:21:23'
-      style: form
-    QueryUpdatedAtLteFilter:
-      description: Filter where `updated_at` is before the given date.
-      in: query
-      name: updated_at.lte
-      schema:
-        type: string
-      style: form
-    QueryCreatedAtLteFilter:
-      description: Filter where `created_at` is before the given date.
-      in: query
-      name: created_at.lte
       schema:
         type: string
         example: '2022-09-27T11:21:23'
@@ -867,6 +839,13 @@ components:
       schema:
         type: integer
       style: form
+    QueryUpdatedAtLteFilter:
+      description: Filter where `updated_at` is before the given date.
+      in: query
+      name: updated_at.lte
+      schema:
+        type: string
+      style: form
     QueryLimit:
       description: The numbers of items to return.
       example: 10
@@ -875,22 +854,45 @@ components:
       schema:
         type: integer
       style: form
-  headers:
-    finix-apiuser-role:
+    QueryIdempotencyIdFilter:
+      description: Filter by `idempotency_id`.
+      in: query
+      name: idempotency_id
       schema:
         type: string
-        enum:
-        - ROLE_ADMIN
-        - ROLE_PLATFORM
-        - ROLE_PARTNER
-        - ROLE_MERCHANT
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
+      style: form
+    QueryUpdatedAtGteFilter:
+      description: Filter where `updated_at` is after the given date.
+      in: query
+      name: updated_at.gte
       schema:
         type: string
-    date:
+      style: form
+    QueryCreatedAtLteFilter:
+      description: Filter where `created_at` is before the given date.
+      in: query
+      name: created_at.lte
       schema:
         type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+  requestBodies:
+    CreateBalanceTransferRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateBalanceTransferRequest'
+          examples:
+            Create a Balance Transfer:
+              value:
+                amount: 4000
+                currency: USD
+                description: Need to increase buffer given the high number of NSFs on merchant fee debits
+                destination: FOR_BENEFIT_OF_ACCOUNT
+                processor_type: LITLE_V1
+                source: OPERATING_ACCOUNT
+                tags:
+                  example: documentation tag
   securitySchemes:
     BasicAuth:
       type: http
