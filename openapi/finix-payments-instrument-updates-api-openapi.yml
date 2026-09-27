@@ -122,32 +122,54 @@ paths:
         source: "curl \"https://finix.sandbox-payments-api.com/instrument_updates/IUp9oSWhWUF31DPrJ8CojQeQ/\" \\\n  -H \"Finix-Version: 2022-02-01\" \\\n  -u USsRhsHYZGBPnQw8CByJyEQW:8a14c2f9-d94b-4c72-8f5c-a62908e5b30e\n"
       x-python-method-name: get
 components:
-  headers:
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
-    finix-apiuser-role:
-      schema:
-        type: string
-        enum:
-        - ROLE_ADMIN
-        - ROLE_PLATFORM
-        - ROLE_PARTNER
-        - ROLE_MERCHANT
-    date:
-      schema:
-        type: string
-  parameters:
-    QueryFormat:
-      name: format
-      in: query
-      required: false
-      schema:
-        type: string
-        example: /download?format=json
-      description: Specify the format you'd like to download the response in (JSON is the only other format available for download).
   schemas:
+    CreateInstrumentUpdateRequest:
+      type: object
+      x-examples: {}
+      title: ''
+      properties:
+        file:
+          type: string
+          description: The binary contents of the file.
+          format: binary
+        request:
+          type: string
+          description: 'A JSON string of your request. The JSON object needs to contain the following two fields:
+
+            - `merchant`: ID of the `Merchant` object that you want to associate with the Account Updater batch for your own accounting purposes. You can only associate one `Merchant` to each.
+
+            - `idemopotency_id`: A randomly generated value that will be associated with this `instrument_update` resource.'
+          example: '{"merchant":"MUucec6fHeaWo3VHYoSkUySM",  "idempotency_id":"123xyz" }'
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
     Error406NotAcceptable:
       type: object
       properties:
@@ -178,109 +200,6 @@ components:
                         properties:
                           href:
                             type: string
-      title: ''
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
-    Error401Unauthorized:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
       title: ''
     InstrumentUpdate:
       title: InstrumentUpdates
@@ -326,7 +245,53 @@ components:
               properties:
                 href:
                   type: string
-    ErrorGeneric:
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Error403ForbiddenList:
       type: object
       properties:
         total:
@@ -356,77 +321,79 @@ components:
                         properties:
                           href:
                             type: string
-    LogRef:
-      title: LogRef
-      type: object
-      properties:
-        logref:
-          type: string
-    CreateInstrumentUpdateRequest:
-      type: object
-      x-examples: {}
-      title: ''
-      properties:
-        file:
-          type: string
-          description: The binary contents of the file.
-          format: binary
-        request:
-          type: string
-          description: 'A JSON string of your request. The JSON object needs to contain the following two fields:
-
-            - `merchant`: ID of the `Merchant` object that you want to associate with the Account Updater batch for your own accounting purposes. You can only associate one `Merchant` to each.
-
-            - `idemopotency_id`: A randomly generated value that will be associated with this `instrument_update` resource.'
-          example: '{"merchant":"MUucec6fHeaWo3VHYoSkUySM",  "idempotency_id":"123xyz" }'
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
-  requestBodies:
-    CreateInstrumentUpdateRequest:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/CreateInstrumentUpdateRequest'
-          examples:
-            Instrument Update Request:
-              value:
-                request: '{"merchant": "MUucec6fHeaWo3VHYoSkUySM","idempotency_id": "123xyz testing"}'
       description: ''
+      title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+  headers:
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
   responses:
-    ErrorUnprocessableEntity:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorGeneric'
     ErrorNotFound:
       description: Object does not exist
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error404NotFoundList'
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-    Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
     ErrorUnauthorized:
       description: Authentication information is missing or invalid
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error401Unauthorized'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
     InstrumentUpdate:
       description: Single instrument_update object
       content:
@@ -452,6 +419,39 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
+  parameters:
+    QueryFormat:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        example: /download?format=json
+      description: Specify the format you'd like to download the response in (JSON is the only other format available for download).
+  requestBodies:
+    CreateInstrumentUpdateRequest:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/CreateInstrumentUpdateRequest'
+          examples:
+            Instrument Update Request:
+              value:
+                request: '{"merchant": "MUucec6fHeaWo3VHYoSkUySM","idempotency_id": "123xyz testing"}'
+      description: ''
   securitySchemes:
     BasicAuth:
       type: http

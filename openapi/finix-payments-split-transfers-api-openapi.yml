@@ -146,6 +146,67 @@ paths:
       x-returns-list: true
 components:
   schemas:
+    AdditionalBuyerCharges:
+      title: AdditionalBuyerCharges
+      x-stoplight:
+        id: 8t8auxc19wmuw
+      type:
+      - object
+      - 'null'
+      description: Object detailing any [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/) that got included in the `Authorization`.
+      properties:
+        convenience_amount:
+          type:
+          - number
+          - 'null'
+          description: Include the convenience fee the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`.
+        rent_surcharge_amount:
+          type:
+          - number
+          - 'null'
+          description: Include the rent surcharge the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`.
+    Messages:
+      title: Messages
+      type:
+      - array
+      - 'null'
+      description: Message field that provides additional details. This field is typically **null**.
+      items:
+        type: string
+    Amount:
+      type: integer
+      title: Amount
+      description: The total amount that will be debited in cents (e.g. 100 cents to debit $1.00).
+      format: int64
+    AdditionalHealthcareData:
+      title: AdditionalHealthcareData
+      x-stoplight:
+        id: ibznc087ymmit
+      type:
+      - object
+      - 'null'
+      description: Optional object detailing [specific healthcare amounts](/guides/making-a-payment/hsa-fsa/).
+      properties:
+        clinic_amount:
+          type:
+          - integer
+          - 'null'
+          description: The amount used for clinic and office visits such as a copay amount.
+        dental_amount:
+          type:
+          - integer
+          - 'null'
+          description: The amount used for dental related expenses.
+        prescription_amount:
+          type:
+          - integer
+          - 'null'
+          description: The amount used to purchase perscriptions and medications.
+        vision_amount:
+          type:
+          - integer
+          - 'null'
+          description: The amount used for vision related expenses.
     PageCursor:
       title: PageCursor
       x-stoplight:
@@ -161,6 +222,115 @@ components:
           - 'null'
           description: The cursor to use for the next page of results.
       description: Details the page that's returned.
+    FailureCode:
+      title: FailureCode
+      x-stoplight:
+        id: lo8jqmipa7376
+      type:
+      - string
+      - 'null'
+      description: The code of the failure so the decline can be handled programmatically. For more info on how to handle the failure, see [Failure Codes](/guides/developers/errors/#failure-codes).
+    IdempotencyId:
+      title: IdempotencyId
+      type:
+      - string
+      - 'null'
+      description: Pass any randomly generated or internal ID to [idempotently](/api/overview/#section/Idempotency-Requests) identify `Transfers`, `Authorizations`, and refund requests.
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    SplitTransfersList:
+      type: object
+      x-examples:
+        example-1:
+          _embedded:
+            payout_profiles:
+            - id: PO6UbajkQrbFd5nAvs57dwyn
+              created_at: '2022-10-24T21:38:23.72Z'
+              updated_at: '2022-10-24T21:38:23.72Z'
+              tags: {}
+              linked_id: MU6TXYpA37uM9H4GwitQr8E3
+              linked_type: MERCHANT
+              type: GROSS
+              gross:
+                payouts:
+                  frequency: DAILY
+                  submission_delay_days: 1
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: STANDARD
+                fees:
+                  frequency: MONTHLY
+                  day_of_month: 1
+                  submission_delay_days: 3
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: STANDARD
+              _links:
+                self:
+                  href: https://finix.sandbox-payments-api.com/payout_profiles/PO6UbajkQrbFd5nAvs57dwyn
+            - id: POf5rP3c3XyRX7M6PuCvmgxf
+              created_at: '2022-10-20T19:43:18.02Z'
+              updated_at: '2022-10-20T19:43:18.02Z'
+              tags: {}
+              linked_id: MUfbbKm7vRmBX2bP92pKw9zZ
+              linked_type: MERCHANT
+              type: CUSTOM
+              custom: {}
+              _links:
+                self:
+                  href: https://finix.sandbox-payments-api.com/payout_profiles/POf5rP3c3XyRX7M6PuCvmgxf
+          _links:
+            self:
+              href: https://finix.sandbox-payments-api.com/payout_profiles
+            next:
+              href: https://finix.sandbox-payments-api.com/payout_profiles?after_cursor=POf5rP3c3XyRX7M6PuCvmgxf
+          page:
+            limit: 100
+            next_cursor: POf5rP3c3XyRX7M6PuCvmgxf
+      description: List of `Split Transferss` created for a split `Transfer`.
+      x-stoplight:
+        id: 11d3f3351214e
+      properties:
+        _embedded:
+          type: object
+          description: List of `Payout Profiles`.
+          properties:
+            split_transfers:
+              type: array
+              description: '`Payout Profile` objects.'
+              items:
+                $ref: '#/components/schemas/SplitTransfersList'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+        page:
+          $ref: '#/components/schemas/PageCursor'
     Currency:
       type: string
       description: ISO 4217 3 letter currency code.
@@ -344,19 +514,383 @@ components:
       - ZAR
       - ZMW
       - ZWL
-    Amount:
-      type: integer
-      title: Amount
-      description: The total amount that will be debited in cents (e.g. 100 cents to debit $1.00).
-      format: int64
-    FailureMessage:
-      title: FailureMessage
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    AdditionalPurchaseData:
+      title: AdditionalPurchaseData
       x-stoplight:
-        id: cgilf858039yi
+        id: e98e7635f242c
+      type: object
+      description: Additional information about the purchase. Used for [Level 2 and Level 3 Processing](/guides/payments/modify/level-2-and-level-3-processing/).
+      properties:
+        customer_reference_number:
+          type: string
+          description: The customer reference for the purchase (max 17 characters).
+          maxLength: 17
+        customs_duty_amount:
+          type: integer
+          description: The duty in cents on the total purchase amount for the order
+        destination_country_code:
+          type: string
+          description: The ISO country code of the order destination.
+        destination_postal_code:
+          type: string
+          description: The postal code of the order destination (10 characters)
+          maxLength: 10
+        discount_amount:
+          type: integer
+          description: The amount in cents of the discount for the order.
+        invoice_reference_number:
+          type: string
+          description: The order's invoice number (max 15 characters)
+          maxLength: 15
+        item_data:
+          type: array
+          description: Additional information about the transaction. Used for Level 2 and Level 3 Processing.
+          items:
+            type: object
+            properties:
+              amount_excluding_sales_tax:
+                type: integer
+                description: '- Total cost of the line item in cents, excluding tax.
+
+                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
+              amount_including_sales_tax:
+                type: integer
+                description: '- Total cost of the line item in cents, including tax.
+
+                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
+              commodity_code:
+                type: string
+                description: A commodity code is a numeric code representing a particular product or service as defined by the National Institute of Governmental Purchasing. The code can be 3, 5, 7, or 11 digits in length. The longer the code the more granular the description of the product/service. (max 12 characters).
+                maxLength: 12
+              cost_per_unit:
+                type: integer
+                description: The price in cents of one unit of the item purchased
+              item_description:
+                type: string
+                description: Required when `item_data` is supplied (max 25 characters)
+                maxLength: 25
+              item_discount_amount:
+                type: integer
+                description: 'Item discount amount in cents
+
+                  '
+              merchant_product_code:
+                type: string
+                description: Merchant defined product code (max 12 characters).
+                maxLength: 12
+              quantity:
+                type: integer
+                description: The number of items purchased. Must be greater than 0.
+                minimum: 1
+                maximum: 99
+              unit_of_measure:
+                type: string
+                description: The unit of measure of the purchased item (max 3 characters).
+                maxLength: 3
+        order_date:
+          type: object
+          properties:
+            day:
+              type: integer
+              description: Day of purchase (between 1 and 31)
+            month:
+              type: integer
+              description: Month of purchase (between 1 and 12)
+            year:
+              type: integer
+              description: Year of purchase (4-digit)
+              minimum: 1990
+        sales_tax:
+          type: integer
+          description: "- Total aggregate tax amount in cents for the entire purchase. Field is automatically calculated if you pass in the itemized tax amounts. \n- For non-taxable transactions either set `sales_tax` to 0 or omit from payload and also set `tax_exempt` to **True**.\n- Request must align so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`."
+        ship_from_postal_code:
+          type: string
+          description: The postal code from where order is shipped (10 characters)
+          maxLength: 10
+        shipping_amount:
+          type: integer
+          description: 'The shipping cost in cents for the order.
+
+            '
+        tax_exempt:
+          type: boolean
+          description: '- For tax exempt purchases set to **True**.
+
+            - If set to **True**, request can''t include `sales_tax`.'
+      required:
+      - customer_reference_number
+      - sales_tax
+    TransfersList:
+      type: object
+      description: ''
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `Transfer` objects.
+          properties:
+            transfers:
+              type: array
+              minItems: 0
+              uniqueItems: true
+              description: '`Transfer` objects.'
+              items:
+                $ref: '#/components/schemas/Transfer'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    FeeType:
+      title: FeeType
+      type: string
+      enum:
+      - APPLICATION_FEE
+      - ACH_BASIS_POINTS
+      - ACH_FIXED
+      - CARD_BASIS_POINTS
+      - CARD_FIXED
+      - CARD_INTERCHANGE
+      - VISA_BASIS_POINTS
+      - VISA_FIXED
+      - VISA_INTERCHANGE
+      - VISA_ASSESSMENT_BASIS_POINTS
+      - VISA_ACQUIRER_PROCESSING_FIXED
+      - VISA_CREDIT_VOUCHER_FIXED
+      - VISA_BASE_II_SYSTEM_FILE_TRANSMISSION_FIXED
+      - VISA_BASE_II_CREDIT_VOUCHER_FIXED
+      - VISA_KILOBYTE_ACCESS_FIXED
+      - DISCOVER_BASIS_POINTS
+      - DISCOVER_FIXED
+      - DISCOVER_INTERCHANGE
+      - DISCOVER_ASSESSMENT_BASIS_POINTS
+      - DISCOVER_DATA_USAGE_FIXED
+      - DISCOVER_NETWORK_AUTHORIZATION_FIXED
+      - DINERS_CLUB_BASIS_POINTS
+      - DINERS_CLUB_FIXED
+      - DINERS_CLUB_INTERCHANGE
+      - MASTERCARD_BASIS_POINTS
+      - MASTERCARD_FIXED
+      - MASTERCARD_INTERCHANGE
+      - MASTERCARD_ASSESSMENT_UNDER_1K_BASIS_POINTS
+      - MASTERCARD_ASSESSMENT_OVER_1K_BASIS_POINTS
+      - MASTERCARD_ACQUIRER_FEE_BASIS_POINTS
+      - JCB_BASIS_POINTS
+      - JCB_FIXED
+      - JCB_INTERCHANGE
+      - AMERICAN_EXPRESS_BASIS_POINTS
+      - AMERICAN_EXPRESS_FIXED
+      - AMERICAN_EXPRESS_INTERCHANGE
+      - AMERICAN_EXPRESS_ASSESSMENT_BASIS_POINTS
+      - DISPUTE_INQUIRY_FIXED_FEE
+      - DISPUTE_FIXED_FEE
+      - QUALIFIED_TIER_BASIS_POINTS_FEE
+      - QUALIFIED_TIER_FIXED_FEE
+      - CUSTOM
+      - ACH_DEBIT_RETURN_FIXED_FEE
+      - ACH_CREDIT_RETURN_FIXED_FEE
+      - ANCILLARY_FIXED_FEE_PRIMARY
+      - ANCILLARY_FIXED_FEE_SECONDARY
+      - SETTLEMENT_V2_TRANSFER
+      description: Details the type of fee if the `Transfer` includes a `fee`.
+    CardPresentDetails:
+      title: CardPresentDetails
+      x-stoplight:
+        id: jbenxkas8ukf2
       type:
-      - string
+      - object
       - 'null'
-      description: A human-readable description of why the transaction was declined. This will also include a suggestion on how to complete the payment.
+      description: Details needed to process card present transactions.
+      properties:
+        approval_code:
+          type:
+          - string
+          - 'null'
+          description: Unique ID used to identify the approval of the `Transfer`.
+        brand:
+          type:
+          - string
+          - 'null'
+          description: The brand of the card saved in the `Payment Instrument`.
+        emv_data:
+          type:
+          - object
+          - 'null'
+          description: Encrypted card data used to process the transaction.
+          properties:
+            application_identifier:
+              type: string
+              description: ID of the EMV application processing the transaction.
+            application_label:
+              type: string
+              description: EMV card label.
+            application_preferred_name:
+              type:
+              - string
+              - 'null'
+              description: Alternate EMV application name (if provided).
+            application_transaction_counter:
+              type: string
+              description: Transaction number for the EMV application.
+            cryptogram:
+              type: string
+              description: Encrypted card infromation used to process the transaction.
+            issuer_code_table_index:
+              type:
+              - string
+              - 'null'
+              description: The alphabet code table (according to ISO 8859) used by the EMV application (if provided).
+            pin_verified:
+              type: boolean
+              description: Details if the cardholder's PIN number was verified.
+            tags:
+              $ref: '#/components/schemas/Tags'
+        entry_mode:
+          type:
+          - string
+          - 'null'
+          description: Details how the card was entered to process the transaction.
+        masked_account_number:
+          type:
+          - string
+          - 'null'
+          description: Last four digits of the bank account number.
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the bank account or card owner.
+        payment_type:
+          type: string
+          description: The type of `Payment Instrument` used in the transaction (or the original payment).
+    Tags:
+      type:
+      - object
+      - 'null'
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+    SplitTransfer:
+      type: object
+      x-examples:
+        Example 1:
+          id: split_transfer_7i2gxncPcfkN5rJwuhrb3q
+          created_at: '2023-07-19T02:30:17.10Z'
+          updated_at: '2023-07-19T02:30:17.10Z'
+          amount: 600
+          fee: 0
+          currency: USD
+          parent_transfer_id: TR7h8NxhCDHunLFdJ1HCLp4r
+          ready_to_settle_at: '2023-07-19T02:30:18.04Z'
+          type: DEBIT
+          merchant_id: MU4jpoNGRkAyjBxumZhGa6Hc
+          identity_id: IDhCtMvcteDx37eD9m4rmdKd
+          fee_profile_id: FPbDSnEPtaT8Nttxj9NJk7eC
+          application_id: APgPDQrLD52TYvqazjHJJchM
+          tags:
+            key: value
+      properties:
+        id:
+          type: string
+          description: The ID of the `split_transfer` resource.
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        amount:
+          $ref: '#/components/schemas/Amount'
+        fee:
+          type: integer
+          description: "The minimum amount of the `Transfer` you'd like to collect as your fee in cents. Defaults to zero (must be less than or equal to the `amount`).\n- If the fees applied by the 'Fee Profile' are ***higher*** than the value passed in 'fee', 'fee' will not be applied and have no effect.\n- If the fees applied by the 'Fee Profile' are ***lower*** than the value passed in 'fee', an additional fee is be applied, in addition to the fees generated by the `Fee Profile`.\n    - The additional fee is equal to the difference between the value passed in 'fee' and the fees generated by the `Fee Profile`.\nfraud_session_id:"
+          format: int64
+        currency:
+          $ref: '#/components/schemas/Currency'
+        parent_transfer_id:
+          type: string
+          description: '**ID** of the original parent `Transfer` where the split was defined.'
+          example: TR7h8NxhCDHunLFdJ1HCLp4r
+          pattern: TRxxxxxxxxxxxxxxxxxxxxxx
+        ready_to_settle_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp of when the `Transfer` is ready to be settled at.
+        type:
+          type: string
+          description: Type of `split_transfer`.
+        merchant_id:
+          type: string
+          description: The ID of the `Merchant` resource the `split_transfer` was created for and will settle under.
+        identity_id:
+          type: string
+          description: The ID of `Identity` resource used by the `Merchant` the `split_transfer` was created for.
+        fee_profile_id:
+          type: string
+          description: The `fee_profile` associated to this `split_transfer`.
+        application_id:
+          type: string
+          description: The `application_id` associated to this `split_transfer`.
+        tags:
+          type: object
+          properties:
+            key:
+              type: string
+      description: The `split_transfer` resource that was created from a split transacion.
+    Raw:
+      title: Raw
+      description: Raw response from the processor.
+      x-examples: {}
+      type:
+      - object
+      - 'null'
     Transfer:
       type: object
       x-examples: {}
@@ -602,137 +1136,19 @@ components:
               properties:
                 href:
                   type: string
-    CardPresentDetails:
-      title: CardPresentDetails
+    FailureMessage:
+      title: FailureMessage
       x-stoplight:
-        id: jbenxkas8ukf2
+        id: cgilf858039yi
       type:
-      - object
+      - string
       - 'null'
-      description: Details needed to process card present transactions.
-      properties:
-        approval_code:
-          type:
-          - string
-          - 'null'
-          description: Unique ID used to identify the approval of the `Transfer`.
-        brand:
-          type:
-          - string
-          - 'null'
-          description: The brand of the card saved in the `Payment Instrument`.
-        emv_data:
-          type:
-          - object
-          - 'null'
-          description: Encrypted card data used to process the transaction.
-          properties:
-            application_identifier:
-              type: string
-              description: ID of the EMV application processing the transaction.
-            application_label:
-              type: string
-              description: EMV card label.
-            application_preferred_name:
-              type:
-              - string
-              - 'null'
-              description: Alternate EMV application name (if provided).
-            application_transaction_counter:
-              type: string
-              description: Transaction number for the EMV application.
-            cryptogram:
-              type: string
-              description: Encrypted card infromation used to process the transaction.
-            issuer_code_table_index:
-              type:
-              - string
-              - 'null'
-              description: The alphabet code table (according to ISO 8859) used by the EMV application (if provided).
-            pin_verified:
-              type: boolean
-              description: Details if the cardholder's PIN number was verified.
-            tags:
-              $ref: '#/components/schemas/Tags'
-        entry_mode:
-          type:
-          - string
-          - 'null'
-          description: Details how the card was entered to process the transaction.
-        masked_account_number:
-          type:
-          - string
-          - 'null'
-          description: Last four digits of the bank account number.
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the bank account or card owner.
-        payment_type:
-          type: string
-          description: The type of `Payment Instrument` used in the transaction (or the original payment).
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
+      description: A human-readable description of why the transaction was declined. This will also include a suggestion on how to complete the payment.
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
     ListLinks:
       title: ListLinks
       additionalProperties: true
@@ -751,165 +1167,38 @@ components:
           properties:
             href:
               type: string
-    AdditionalBuyerCharges:
-      title: AdditionalBuyerCharges
-      x-stoplight:
-        id: 8t8auxc19wmuw
-      type:
-      - object
-      - 'null'
-      description: Object detailing any [Buyer Charges](/guides/payments/making-a-payment/buyer-charges/) that got included in the `Authorization`.
-      properties:
-        convenience_amount:
-          type:
-          - number
-          - 'null'
-          description: Include the convenience fee the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`.
-        rent_surcharge_amount:
-          type:
-          - number
-          - 'null'
-          description: Include the rent surcharge the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`.
-    AdditionalPurchaseData:
-      title: AdditionalPurchaseData
-      x-stoplight:
-        id: e98e7635f242c
+    Error403ForbiddenList:
       type: object
-      description: Additional information about the purchase. Used for [Level 2 and Level 3 Processing](/guides/payments/modify/level-2-and-level-3-processing/).
       properties:
-        customer_reference_number:
-          type: string
-          description: The customer reference for the purchase (max 17 characters).
-          maxLength: 17
-        customs_duty_amount:
+        total:
           type: integer
-          description: The duty in cents on the total purchase amount for the order
-        destination_country_code:
-          type: string
-          description: The ISO country code of the order destination.
-        destination_postal_code:
-          type: string
-          description: The postal code of the order destination (10 characters)
-          maxLength: 10
-        discount_amount:
-          type: integer
-          description: The amount in cents of the discount for the order.
-        invoice_reference_number:
-          type: string
-          description: The order's invoice number (max 15 characters)
-          maxLength: 15
-        item_data:
-          type: array
-          description: Additional information about the transaction. Used for Level 2 and Level 3 Processing.
-          items:
-            type: object
-            properties:
-              amount_excluding_sales_tax:
-                type: integer
-                description: '- Total cost of the line item in cents, excluding tax.
-
-                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
-              amount_including_sales_tax:
-                type: integer
-                description: '- Total cost of the line item in cents, including tax.
-
-                  - Must align with `sales_tax` so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`.'
-              commodity_code:
-                type: string
-                description: A commodity code is a numeric code representing a particular product or service as defined by the National Institute of Governmental Purchasing. The code can be 3, 5, 7, or 11 digits in length. The longer the code the more granular the description of the product/service. (max 12 characters).
-                maxLength: 12
-              cost_per_unit:
-                type: integer
-                description: The price in cents of one unit of the item purchased
-              item_description:
-                type: string
-                description: Required when `item_data` is supplied (max 25 characters)
-                maxLength: 25
-              item_discount_amount:
-                type: integer
-                description: 'Item discount amount in cents
-
-                  '
-              merchant_product_code:
-                type: string
-                description: Merchant defined product code (max 12 characters).
-                maxLength: 12
-              quantity:
-                type: integer
-                description: The number of items purchased. Must be greater than 0.
-                minimum: 1
-                maximum: 99
-              unit_of_measure:
-                type: string
-                description: The unit of measure of the purchased item (max 3 characters).
-                maxLength: 3
-        order_date:
+        _embedded:
           type: object
           properties:
-            day:
-              type: integer
-              description: Day of purchase (between 1 and 31)
-            month:
-              type: integer
-              description: Month of purchase (between 1 and 12)
-            year:
-              type: integer
-              description: Year of purchase (4-digit)
-              minimum: 1990
-        sales_tax:
-          type: integer
-          description: "- Total aggregate tax amount in cents for the entire purchase. Field is automatically calculated if you pass in the itemized tax amounts. \n- For non-taxable transactions either set `sales_tax` to 0 or omit from payload and also set `tax_exempt` to **True**.\n- Request must align so `amount_excluding_sales_tax` + `sales_tax` = `amount_including_sales_tax`."
-        ship_from_postal_code:
-          type: string
-          description: The postal code from where order is shipped (10 characters)
-          maxLength: 10
-        shipping_amount:
-          type: integer
-          description: 'The shipping cost in cents for the order.
-
-            '
-        tax_exempt:
-          type: boolean
-          description: '- For tax exempt purchases set to **True**.
-
-            - If set to **True**, request can''t include `sales_tax`.'
-      required:
-      - customer_reference_number
-      - sales_tax
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
-    AdditionalHealthcareData:
-      title: AdditionalHealthcareData
-      x-stoplight:
-        id: ibznc087ymmit
-      type:
-      - object
-      - 'null'
-      description: Optional object detailing [specific healthcare amounts](/guides/making-a-payment/hsa-fsa/).
-      properties:
-        clinic_amount:
-          type:
-          - integer
-          - 'null'
-          description: The amount used for clinic and office visits such as a copay amount.
-        dental_amount:
-          type:
-          - integer
-          - 'null'
-          description: The amount used for dental related expenses.
-        prescription_amount:
-          type:
-          - integer
-          - 'null'
-          description: The amount used to purchase perscriptions and medications.
-        vision_amount:
-          type:
-          - integer
-          - 'null'
-          description: The amount used for vision related expenses.
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
     Error401Unauthorized:
       type: object
       properties:
@@ -946,311 +1235,6 @@ components:
                         properties:
                           href:
                             type: string
-    SplitTransfersList:
-      type: object
-      x-examples:
-        example-1:
-          _embedded:
-            payout_profiles:
-            - id: PO6UbajkQrbFd5nAvs57dwyn
-              created_at: '2022-10-24T21:38:23.72Z'
-              updated_at: '2022-10-24T21:38:23.72Z'
-              tags: {}
-              linked_id: MU6TXYpA37uM9H4GwitQr8E3
-              linked_type: MERCHANT
-              type: GROSS
-              gross:
-                payouts:
-                  frequency: DAILY
-                  submission_delay_days: 1
-                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
-                  rail: STANDARD
-                fees:
-                  frequency: MONTHLY
-                  day_of_month: 1
-                  submission_delay_days: 3
-                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
-                  rail: STANDARD
-              _links:
-                self:
-                  href: https://finix.sandbox-payments-api.com/payout_profiles/PO6UbajkQrbFd5nAvs57dwyn
-            - id: POf5rP3c3XyRX7M6PuCvmgxf
-              created_at: '2022-10-20T19:43:18.02Z'
-              updated_at: '2022-10-20T19:43:18.02Z'
-              tags: {}
-              linked_id: MUfbbKm7vRmBX2bP92pKw9zZ
-              linked_type: MERCHANT
-              type: CUSTOM
-              custom: {}
-              _links:
-                self:
-                  href: https://finix.sandbox-payments-api.com/payout_profiles/POf5rP3c3XyRX7M6PuCvmgxf
-          _links:
-            self:
-              href: https://finix.sandbox-payments-api.com/payout_profiles
-            next:
-              href: https://finix.sandbox-payments-api.com/payout_profiles?after_cursor=POf5rP3c3XyRX7M6PuCvmgxf
-          page:
-            limit: 100
-            next_cursor: POf5rP3c3XyRX7M6PuCvmgxf
-      description: List of `Split Transferss` created for a split `Transfer`.
-      x-stoplight:
-        id: 11d3f3351214e
-      properties:
-        _embedded:
-          type: object
-          description: List of `Payout Profiles`.
-          properties:
-            split_transfers:
-              type: array
-              description: '`Payout Profile` objects.'
-              items:
-                $ref: '#/components/schemas/SplitTransfersList'
-        _links:
-          $ref: '#/components/schemas/ListLinks'
-        page:
-          $ref: '#/components/schemas/PageCursor'
-    FeeType:
-      title: FeeType
-      type: string
-      enum:
-      - APPLICATION_FEE
-      - ACH_BASIS_POINTS
-      - ACH_FIXED
-      - CARD_BASIS_POINTS
-      - CARD_FIXED
-      - CARD_INTERCHANGE
-      - VISA_BASIS_POINTS
-      - VISA_FIXED
-      - VISA_INTERCHANGE
-      - VISA_ASSESSMENT_BASIS_POINTS
-      - VISA_ACQUIRER_PROCESSING_FIXED
-      - VISA_CREDIT_VOUCHER_FIXED
-      - VISA_BASE_II_SYSTEM_FILE_TRANSMISSION_FIXED
-      - VISA_BASE_II_CREDIT_VOUCHER_FIXED
-      - VISA_KILOBYTE_ACCESS_FIXED
-      - DISCOVER_BASIS_POINTS
-      - DISCOVER_FIXED
-      - DISCOVER_INTERCHANGE
-      - DISCOVER_ASSESSMENT_BASIS_POINTS
-      - DISCOVER_DATA_USAGE_FIXED
-      - DISCOVER_NETWORK_AUTHORIZATION_FIXED
-      - DINERS_CLUB_BASIS_POINTS
-      - DINERS_CLUB_FIXED
-      - DINERS_CLUB_INTERCHANGE
-      - MASTERCARD_BASIS_POINTS
-      - MASTERCARD_FIXED
-      - MASTERCARD_INTERCHANGE
-      - MASTERCARD_ASSESSMENT_UNDER_1K_BASIS_POINTS
-      - MASTERCARD_ASSESSMENT_OVER_1K_BASIS_POINTS
-      - MASTERCARD_ACQUIRER_FEE_BASIS_POINTS
-      - JCB_BASIS_POINTS
-      - JCB_FIXED
-      - JCB_INTERCHANGE
-      - AMERICAN_EXPRESS_BASIS_POINTS
-      - AMERICAN_EXPRESS_FIXED
-      - AMERICAN_EXPRESS_INTERCHANGE
-      - AMERICAN_EXPRESS_ASSESSMENT_BASIS_POINTS
-      - DISPUTE_INQUIRY_FIXED_FEE
-      - DISPUTE_FIXED_FEE
-      - QUALIFIED_TIER_BASIS_POINTS_FEE
-      - QUALIFIED_TIER_FIXED_FEE
-      - CUSTOM
-      - ACH_DEBIT_RETURN_FIXED_FEE
-      - ACH_CREDIT_RETURN_FIXED_FEE
-      - ANCILLARY_FIXED_FEE_PRIMARY
-      - ANCILLARY_FIXED_FEE_SECONDARY
-      - SETTLEMENT_V2_TRANSFER
-      description: Details the type of fee if the `Transfer` includes a `fee`.
-    IdempotencyId:
-      title: IdempotencyId
-      type:
-      - string
-      - 'null'
-      description: Pass any randomly generated or internal ID to [idempotently](/api/overview/#section/Idempotency-Requests) identify `Transfers`, `Authorizations`, and refund requests.
-    FailureCode:
-      title: FailureCode
-      x-stoplight:
-        id: lo8jqmipa7376
-      type:
-      - string
-      - 'null'
-      description: The code of the failure so the decline can be handled programmatically. For more info on how to handle the failure, see [Failure Codes](/guides/developers/errors/#failure-codes).
-    Messages:
-      title: Messages
-      type:
-      - array
-      - 'null'
-      description: Message field that provides additional details. This field is typically **null**.
-      items:
-        type: string
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
-      title: ''
-    LogRef:
-      title: LogRef
-      type: object
-      properties:
-        logref:
-          type: string
-    Tags:
-      type:
-      - object
-      - 'null'
-      title: tags
-      additionalProperties:
-        type: string
-      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
-
-        - Maximum character length for individual `keys` is 40.
-
-        - Maximum character length for individual **values** is 500.
-
-
-        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
-    Raw:
-      title: Raw
-      description: Raw response from the processor.
-      x-examples: {}
-      type:
-      - object
-      - 'null'
-    SplitTransfer:
-      type: object
-      x-examples:
-        Example 1:
-          id: split_transfer_7i2gxncPcfkN5rJwuhrb3q
-          created_at: '2023-07-19T02:30:17.10Z'
-          updated_at: '2023-07-19T02:30:17.10Z'
-          amount: 600
-          fee: 0
-          currency: USD
-          parent_transfer_id: TR7h8NxhCDHunLFdJ1HCLp4r
-          ready_to_settle_at: '2023-07-19T02:30:18.04Z'
-          type: DEBIT
-          merchant_id: MU4jpoNGRkAyjBxumZhGa6Hc
-          identity_id: IDhCtMvcteDx37eD9m4rmdKd
-          fee_profile_id: FPbDSnEPtaT8Nttxj9NJk7eC
-          application_id: APgPDQrLD52TYvqazjHJJchM
-          tags:
-            key: value
-      properties:
-        id:
-          type: string
-          description: The ID of the `split_transfer` resource.
-        created_at:
-          $ref: '#/components/schemas/CreatedAt'
-        updated_at:
-          $ref: '#/components/schemas/UpdatedAt'
-        amount:
-          $ref: '#/components/schemas/Amount'
-        fee:
-          type: integer
-          description: "The minimum amount of the `Transfer` you'd like to collect as your fee in cents. Defaults to zero (must be less than or equal to the `amount`).\n- If the fees applied by the 'Fee Profile' are ***higher*** than the value passed in 'fee', 'fee' will not be applied and have no effect.\n- If the fees applied by the 'Fee Profile' are ***lower*** than the value passed in 'fee', an additional fee is be applied, in addition to the fees generated by the `Fee Profile`.\n    - The additional fee is equal to the difference between the value passed in 'fee' and the fees generated by the `Fee Profile`.\nfraud_session_id:"
-          format: int64
-        currency:
-          $ref: '#/components/schemas/Currency'
-        parent_transfer_id:
-          type: string
-          description: '**ID** of the original parent `Transfer` where the split was defined.'
-          example: TR7h8NxhCDHunLFdJ1HCLp4r
-          pattern: TRxxxxxxxxxxxxxxxxxxxxxx
-        ready_to_settle_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Timestamp of when the `Transfer` is ready to be settled at.
-        type:
-          type: string
-          description: Type of `split_transfer`.
-        merchant_id:
-          type: string
-          description: The ID of the `Merchant` resource the `split_transfer` was created for and will settle under.
-        identity_id:
-          type: string
-          description: The ID of `Identity` resource used by the `Merchant` the `split_transfer` was created for.
-        fee_profile_id:
-          type: string
-          description: The `fee_profile` associated to this `split_transfer`.
-        application_id:
-          type: string
-          description: The `application_id` associated to this `split_transfer`.
-        tags:
-          type: object
-          properties:
-            key:
-              type: string
-      description: The `split_transfer` resource that was created from a split transacion.
-    TransfersList:
-      type: object
-      description: ''
-      properties:
-        page:
-          $ref: '#/components/schemas/PageCursor'
-        _embedded:
-          type: object
-          description: List of `Transfer` objects.
-          properties:
-            transfers:
-              type: array
-              minItems: 0
-              uniqueItems: true
-              description: '`Transfer` objects.'
-              items:
-                $ref: '#/components/schemas/Transfer'
-        _links:
-          $ref: '#/components/schemas/ListLinks'
-  headers:
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
-    finix-apiuser-role:
-      schema:
-        type: string
-        enum:
-        - ROLE_ADMIN
-        - ROLE_PLATFORM
-        - ROLE_PARTNER
-        - ROLE_MERCHANT
-    date:
-      schema:
-        type: string
   responses:
     TransfersList:
       description: List of Transfer objects
@@ -1705,6 +1689,24 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
     SplitTransfer:
       description: The `split_transfer` resource that was created from a split transacion.
       content:
@@ -1753,25 +1755,6 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-    Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
     SplitTransfersList:
       description: List of `split_transfers` created for a split `Transfer`.
       content:
@@ -1827,12 +1810,29 @@ components:
                 page:
                   limit: 3
                   next_cursor: split_transfer_xxx
-    ErrorUnauthorized:
-      description: Authentication information is missing or invalid
+    Error406NotAcceptable:
+      description: Not Acceptable
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error401Unauthorized'
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+  headers:
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
   securitySchemes:
     BasicAuth:
       type: http

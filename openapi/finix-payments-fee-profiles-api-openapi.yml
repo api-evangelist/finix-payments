@@ -105,21 +105,6 @@ paths:
       x-python-method-name: get
 components:
   schemas:
-    PageCursor:
-      title: PageCursor
-      x-stoplight:
-        id: 8v9on8n2939z2
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The number of entries to return.
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: The cursor to use for the next page of results.
-      description: Details the page that's returned.
     FeeProfile:
       type: object
       properties:
@@ -416,118 +401,6 @@ components:
               properties:
                 href:
                   type: string
-    Error422InvalidFieldList:
-      type: object
-      description: Invalid field
-      title: ''
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - INVALID_FIELD
-                  field:
-                    type: string
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    ListLinks:
-      title: ListLinks
-      additionalProperties: true
-      type: object
-      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
-      properties:
-        next:
-          type: object
-          description: Link to the next page of entries.
-          properties:
-            href:
-              type: string
-        self:
-          type: object
-          description: Link to the resource that was used in the request.
-          properties:
-            href:
-              type: string
     CreateFeeProfileRequest:
       title: FeeProfileCreate
       type: object
@@ -788,12 +661,22 @@ components:
           description: Charged on each authorization transaction submitted to Visa’s network for settlement.
       required:
       - application
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
-    Error401Unauthorized:
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: The cursor to use for the next page of results.
+      description: Details the page that's returned.
+    Error406NotAcceptable:
       type: object
       properties:
         total:
@@ -810,25 +693,117 @@ components:
                   code:
                     type: string
                     enum:
-                    - UNKNOWN
+                    - NOT_FOUND
                   logref:
                     $ref: '#/components/schemas/LogRef'
                   message:
                     type: string
                   _links:
                     type: object
-                    additionalProperties: true
                     properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
                       source:
                         type: object
                         properties:
                           href:
                             type: string
+      title: ''
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    Error422InvalidFieldList:
+      type: object
+      description: Invalid field
+      title: ''
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - INVALID_FIELD
+                  field:
+                    type: string
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
     FeeProfilesList:
       type: object
       properties:
@@ -879,20 +854,48 @@ components:
                             type: string
       description: ''
       title: ''
-    LogRef:
-      title: LogRef
+    Error401Unauthorized:
       type: object
       properties:
-        logref:
-          type: string
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
   headers:
     x-request-id:
       description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
       schema:
         type: string
     finix-apiuser-role:
@@ -903,33 +906,101 @@ components:
         - ROLE_PLATFORM
         - ROLE_PARTNER
         - ROLE_MERCHANT
-    date:
-      schema:
-        type: string
-  parameters:
-    QueryBeforeCursor:
-      name: before_cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Return every resource created before the cursor value.
-    QueryAfterCursor:
-      name: after_cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Return every resource created after the cursor value.
-    QueryLimit:
-      description: The numbers of items to return.
-      example: 10
-      in: query
-      name: limit
-      schema:
-        type: integer
-      style: form
   responses:
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    FeeProfile:
+      description: Fee profile
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FeeProfile'
+          examples:
+            Fee Profile:
+              value:
+                id: FPq6PQ9pHsab66fKMmjQ7jb5
+                created_at: '2022-01-27T07:37:38.66Z'
+                updated_at: '2022-01-27T07:37:38.66Z'
+                ach_basis_points: 300
+                ach_credit_return_fixed_fee: null
+                ach_debit_return_fixed_fee: null
+                ach_fixed_fee: 30
+                american_express_assessment_basis_points: null
+                american_express_basis_points: null
+                american_express_charge_interchange: null
+                american_express_externally_funded_basis_points: null
+                american_express_externally_funded_fixed_fee: null
+                american_express_fixed_fee: null
+                ancillary_fixed_fee_primary: null
+                ancillary_fixed_fee_secondary: null
+                application: APgPDQrLD52TYvqazjHJJchM
+                basis_points: 200
+                charge_interchange: false
+                diners_club_basis_points: null
+                diners_club_charge_interchange: null
+                diners_club_fixed_fee: null
+                discover_assessments_basis_points: null
+                discover_basis_points: null
+                discover_charge_interchange: null
+                discover_data_usage_fixed_fee: null
+                discover_externally_funded_basis_points: null
+                discover_externally_funded_fixed_fee: null
+                discover_fixed_fee: null
+                discover_network_authorization_fixed_fee: null
+                dispute_fixed_fee: null
+                dispute_inquiry_fixed_fee: null
+                externally_funded_basis_points: null
+                externally_funded_fixed_fee: null
+                fixed_fee: 100
+                jcb_basis_points: null
+                jcb_charge_interchange: null
+                jcb_fixed_fee: null
+                mastercard_acquirer_fees_basis_points: null
+                mastercard_assessments_over1k_basis_points: null
+                mastercard_assessments_under1k_basis_points: null
+                mastercard_basis_points: null
+                mastercard_charge_interchange: null
+                mastercard_fixed_fee: null
+                qualified_tiers: null
+                rounding_mode: TRANSACTION
+                tags: {}
+                visa_acquirer_processing_fixed_fee: null
+                visa_assessments_basis_points: null
+                visa_base_II_credit_voucher_fixed_fee: null
+                visa_base_II_system_file_transmission_fixed_fee: null
+                visa_basis_points: null
+                visa_charge_interchange: null
+                visa_credit_voucher_fixed_fee: null
+                visa_fixed_fee: null
+                visa_kilobyte_access_fixed_fee: null
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/fee_profiles/FPq6PQ9pHsab66fKMmjQ7jb5
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
     Error422InvalidField:
       description: Invalid field
       content:
@@ -1081,94 +1152,6 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-    FeeProfile:
-      description: Fee profile
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/FeeProfile'
-          examples:
-            Fee Profile:
-              value:
-                id: FPq6PQ9pHsab66fKMmjQ7jb5
-                created_at: '2022-01-27T07:37:38.66Z'
-                updated_at: '2022-01-27T07:37:38.66Z'
-                ach_basis_points: 300
-                ach_credit_return_fixed_fee: null
-                ach_debit_return_fixed_fee: null
-                ach_fixed_fee: 30
-                american_express_assessment_basis_points: null
-                american_express_basis_points: null
-                american_express_charge_interchange: null
-                american_express_externally_funded_basis_points: null
-                american_express_externally_funded_fixed_fee: null
-                american_express_fixed_fee: null
-                ancillary_fixed_fee_primary: null
-                ancillary_fixed_fee_secondary: null
-                application: APgPDQrLD52TYvqazjHJJchM
-                basis_points: 200
-                charge_interchange: false
-                diners_club_basis_points: null
-                diners_club_charge_interchange: null
-                diners_club_fixed_fee: null
-                discover_assessments_basis_points: null
-                discover_basis_points: null
-                discover_charge_interchange: null
-                discover_data_usage_fixed_fee: null
-                discover_externally_funded_basis_points: null
-                discover_externally_funded_fixed_fee: null
-                discover_fixed_fee: null
-                discover_network_authorization_fixed_fee: null
-                dispute_fixed_fee: null
-                dispute_inquiry_fixed_fee: null
-                externally_funded_basis_points: null
-                externally_funded_fixed_fee: null
-                fixed_fee: 100
-                jcb_basis_points: null
-                jcb_charge_interchange: null
-                jcb_fixed_fee: null
-                mastercard_acquirer_fees_basis_points: null
-                mastercard_assessments_over1k_basis_points: null
-                mastercard_assessments_under1k_basis_points: null
-                mastercard_basis_points: null
-                mastercard_charge_interchange: null
-                mastercard_fixed_fee: null
-                qualified_tiers: null
-                rounding_mode: TRANSACTION
-                tags: {}
-                visa_acquirer_processing_fixed_fee: null
-                visa_assessments_basis_points: null
-                visa_base_II_credit_voucher_fixed_fee: null
-                visa_base_II_system_file_transmission_fixed_fee: null
-                visa_basis_points: null
-                visa_charge_interchange: null
-                visa_credit_voucher_fixed_fee: null
-                visa_fixed_fee: null
-                visa_kilobyte_access_fixed_fee: null
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/fee_profiles/FPq6PQ9pHsab66fKMmjQ7jb5
-                  application:
-                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
-      headers:
-        finix-apiuser-role:
-          $ref: '#/components/headers/finix-apiuser-role'
-        date:
-          $ref: '#/components/headers/date'
-        x-request-id:
-          $ref: '#/components/headers/x-request-id'
     Error406NotAcceptable:
       description: Not Acceptable
       content:
@@ -1176,12 +1159,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error406NotAcceptable'
           examples: {}
-    ErrorUnauthorized:
-      description: Authentication information is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error401Unauthorized'
   requestBodies:
     CreateFeeProfileRequest:
       content:
@@ -1201,6 +1178,29 @@ components:
                 fixed_fee: 100
                 tags:
                   app pricing: sample
+  parameters:
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
   securitySchemes:
     BasicAuth:
       type: http

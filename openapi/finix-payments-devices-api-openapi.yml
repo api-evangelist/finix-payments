@@ -172,239 +172,8 @@ paths:
           $ref: xcode/curl/devices/create-device.md
       x-python-method-name: create
 components:
-  headers:
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
-    finix-apiuser-role:
-      schema:
-        type: string
-        enum:
-        - ROLE_ADMIN
-        - ROLE_PLATFORM
-        - ROLE_PARTNER
-        - ROLE_MERCHANT
-    date:
-      schema:
-        type: string
   schemas:
-    CreateDevice:
-      type: object
-      title: CreateDevice
-      description: ''
-      properties:
-        configuration:
-          $ref: '#/components/schemas/ConfigurationDetails'
-        description:
-          type: string
-          description: Additional information about device (e.g. self serving terminal).
-        model:
-          type: string
-          enum:
-          - BBPOS
-          - DESK_3500
-          - DESK_5000
-          - IPP320
-          - IPP350
-          - ISC250
-          - ISC480
-          - ISMP4
-          - LANE_3000
-          - LANE_5000
-          - LANE_7000
-          - LANE_8000
-          - LINK_2500
-          - MOVE_5000
-          - MX915
-          - MX925
-          - PAX_A30
-          - PAX_A35
-          - PAX_A60
-          - PAX_A77
-          - PAX_A920PRO
-          - PAX_ARIES6
-          - PAX_ARIES8
-          - PAX_IM30
-          description: The model type of the device.
-        name:
-          type: string
-          description: Name of the `Device`.
-        tags:
-          $ref: '#/components/schemas/Tags'
-      required:
-      - model
-      - name
-      x-examples:
-        example-1:
-          name: 'Finix  triPOS #1'
-          model: MX915
-          description: John Smith
-          configuration:
-            allow_debit: true
-            prompt_signature: NEVER
-            bypass_device_on_capture: true
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    ConfigurationDetails:
-      title: ConfigurationDetails
-      x-stoplight:
-        id: czqjwiv5qz0zl
-      type: object
-      description: Configure the details of the activated device.
-      properties:
-        allow_debit:
-          type: boolean
-          description: Allow transaction to be processed on Debit rails. If `false`, Debit card transactions will be processed on Credit rails.
-        bypass_device_on_capture:
-          type: boolean
-          description: Sets whether the device will be used to capture `Authorizations`. The device is required to be connected if `bypass_device_on_capture` is set to false. (defaults to true).
-        check_for_duplicate_transactions:
-          type: boolean
-          description: Sets whether the device will check for duplicate transactions.
-        prompt_amount_confirmation:
-          type: boolean
-          description: Sets if the card holder needs to confirm the amount they will pay (defaults to **true**).
-        prompt_manual_entry:
-          type: boolean
-          description: Sets if the device defaults to manual entry as the default card input method. (defaults to **false**).
-        prompt_signature:
-          type: string
-          description: 'Sets if the device will prompt the card holder for a signature by default. Available values include:<ul><li><strong>ALWAYS</strong><li><strong>NEVER</strong><li><strong>AMOUNT</strong>: Used in conjunction with `signature_threshold_amount` so when the threshold is reached the signature form appears on the device.'
-        signature_threshold_amount:
-          type: integer
-          description: The threshold to prompt a signature when `prompt_signature` is set to **AMOUNT** (defaults to 0).
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
-    Error401Unauthorized:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    UpdateDeviceRequest:
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - ACTIVATE
-          - CREATE_IDLE_MESSAGE
-          - DEACTIVATE
-          - REBOOT
-          description: The action you want to perform on the device. Use **DEACTIVATE** to deactivate the device.
-        tags:
-          $ref: '#/components/schemas/Tags'
-        activation_code:
-          type: string
-          description: Used when `action` is **ACTIVATE**. Provide the input code that shows up on the device screen.
-        idle_message:
-          type: string
-          description: Message to display on the idle screen.
-        configuration_details:
-          $ref: '#/components/schemas/ConfigurationDetails'
-        description:
-          type: string
-          description: Additional information about device (e.g. self serving terminal).
-        name:
-          type: string
-          description: Name of the `Device`.
-        serial_number:
-          type: string
-          description: Serial number of the `device`.
-    Error403ForbiddenList:
+    ErrorGeneric:
       type: object
       properties:
         total:
@@ -434,8 +203,6 @@ components:
                         properties:
                           href:
                             type: string
-      description: ''
-      title: ''
     Device:
       type: object
       title: Device
@@ -541,7 +308,7 @@ components:
               properties:
                 href:
                   type: string
-    ErrorGeneric:
+    Error406NotAcceptable:
       type: object
       properties:
         total:
@@ -558,7 +325,43 @@ components:
                   code:
                     type: string
                     enum:
-                    - FORBIDDEN
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
                   logref:
                     $ref: '#/components/schemas/LogRef'
                   message:
@@ -592,12 +395,274 @@ components:
 
 
         (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-    CreatedAt:
+    UpdateDeviceRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - ACTIVATE
+          - CREATE_IDLE_MESSAGE
+          - DEACTIVATE
+          - REBOOT
+          description: The action you want to perform on the device. Use **DEACTIVATE** to deactivate the device.
+        tags:
+          $ref: '#/components/schemas/Tags'
+        activation_code:
+          type: string
+          description: Used when `action` is **ACTIVATE**. Provide the input code that shows up on the device screen.
+        idle_message:
+          type: string
+          description: Message to display on the idle screen.
+        configuration_details:
+          $ref: '#/components/schemas/ConfigurationDetails'
+        description:
+          type: string
+          description: Additional information about device (e.g. self serving terminal).
+        name:
+          type: string
+          description: Name of the `Device`.
+        serial_number:
+          type: string
+          description: Serial number of the `device`.
+    ConfigurationDetails:
+      title: ConfigurationDetails
+      x-stoplight:
+        id: czqjwiv5qz0zl
+      type: object
+      description: Configure the details of the activated device.
+      properties:
+        allow_debit:
+          type: boolean
+          description: Allow transaction to be processed on Debit rails. If `false`, Debit card transactions will be processed on Credit rails.
+        bypass_device_on_capture:
+          type: boolean
+          description: Sets whether the device will be used to capture `Authorizations`. The device is required to be connected if `bypass_device_on_capture` is set to false. (defaults to true).
+        check_for_duplicate_transactions:
+          type: boolean
+          description: Sets whether the device will check for duplicate transactions.
+        prompt_amount_confirmation:
+          type: boolean
+          description: Sets if the card holder needs to confirm the amount they will pay (defaults to **true**).
+        prompt_manual_entry:
+          type: boolean
+          description: Sets if the device defaults to manual entry as the default card input method. (defaults to **false**).
+        prompt_signature:
+          type: string
+          description: 'Sets if the device will prompt the card holder for a signature by default. Available values include:<ul><li><strong>ALWAYS</strong><li><strong>NEVER</strong><li><strong>AMOUNT</strong>: Used in conjunction with `signature_threshold_amount` so when the threshold is reached the signature form appears on the device.'
+        signature_threshold_amount:
+          type: integer
+          description: The threshold to prompt a signature when `prompt_signature` is set to **AMOUNT** (defaults to 0).
+    CreateDevice:
+      type: object
+      title: CreateDevice
+      description: ''
+      properties:
+        configuration:
+          $ref: '#/components/schemas/ConfigurationDetails'
+        description:
+          type: string
+          description: Additional information about device (e.g. self serving terminal).
+        model:
+          type: string
+          enum:
+          - BBPOS
+          - DESK_3500
+          - DESK_5000
+          - IPP320
+          - IPP350
+          - ISC250
+          - ISC480
+          - ISMP4
+          - LANE_3000
+          - LANE_5000
+          - LANE_7000
+          - LANE_8000
+          - LINK_2500
+          - MOVE_5000
+          - MX915
+          - MX925
+          - PAX_A30
+          - PAX_A35
+          - PAX_A60
+          - PAX_A77
+          - PAX_A920PRO
+          - PAX_ARIES6
+          - PAX_ARIES8
+          - PAX_IM30
+          description: The model type of the device.
+        name:
+          type: string
+          description: Name of the `Device`.
+        tags:
+          $ref: '#/components/schemas/Tags'
+      required:
+      - model
+      - name
+      x-examples:
+        example-1:
+          name: 'Finix  triPOS #1'
+          model: MX915
+          description: John Smith
+          configuration:
+            allow_debit: true
+            prompt_signature: NEVER
+            bypass_device_on_capture: true
+    UpdatedAt:
       type: string
-      title: CreatedAt
+      title: UpdatedAt
       format: date-time
-      description: Timestamp of when the object was created.
+      description: Timestamp of when the object was last updated.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+  requestBodies:
+    UpdateDeviceRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateDeviceRequest'
+          examples:
+            Device - Activated (DATACAP_V1):
+              value:
+                action: ACTIVATE
+            Device - Activated (TRIPOS_CLOUD_V1):
+              value:
+                action: ACTIVATE
+                activation_code: '609732'
+            Reboot Device:
+              value:
+                action: REBOOT
+            Device - Idle Message Set:
+              value:
+                action: CREATE_IDLE_MESSAGE
+                idle_message: Finix Flowers
+            Device - Deactivated:
+              value:
+                action: DEACTIVATE
+            Device - Update Details:
+              value:
+                configuration:
+                  allow_debit: true
+                  bypass_device_on_capture: true
+                  prompt_signature: NEVER
+                description: Flowers
+                name: Finix Flowers - triPOS
+    CreateDeviceRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateDevice'
+          examples:
+            Create a Device:
+              value:
+                configuration:
+                  allow_debit: true
+                  bypass_device_on_capture: true
+                  prompt_signature: NEVER
+                description: John Smith
+                model: MX915
+                name: 'Finix  triPOS #1'
+  headers:
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    date:
+      schema:
+        type: string
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
   responses:
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
     Device:
       description: Single Device object
       content:
@@ -829,24 +894,6 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
-    ErrorUnprocessableEntity:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorGeneric'
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
     Error406NotAcceptable:
       description: Not Acceptable
       content:
@@ -854,59 +901,12 @@ components:
           schema:
             $ref: '#/components/schemas/Error406NotAcceptable'
           examples: {}
-    ErrorUnauthorized:
-      description: Authentication information is missing or invalid
+    ErrorUnprocessableEntity:
+      description: Error
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error401Unauthorized'
-  requestBodies:
-    UpdateDeviceRequest:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdateDeviceRequest'
-          examples:
-            Device - Activated (DATACAP_V1):
-              value:
-                action: ACTIVATE
-            Device - Activated (TRIPOS_CLOUD_V1):
-              value:
-                action: ACTIVATE
-                activation_code: '609732'
-            Reboot Device:
-              value:
-                action: REBOOT
-            Device - Idle Message Set:
-              value:
-                action: CREATE_IDLE_MESSAGE
-                idle_message: Finix Flowers
-            Device - Deactivated:
-              value:
-                action: DEACTIVATE
-            Device - Update Details:
-              value:
-                configuration:
-                  allow_debit: true
-                  bypass_device_on_capture: true
-                  prompt_signature: NEVER
-                description: Flowers
-                name: Finix Flowers - triPOS
-    CreateDeviceRequest:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateDevice'
-          examples:
-            Create a Device:
-              value:
-                configuration:
-                  allow_debit: true
-                  bypass_device_on_capture: true
-                  prompt_signature: NEVER
-                description: John Smith
-                model: MX915
-                name: 'Finix  triPOS #1'
+            $ref: '#/components/schemas/ErrorGeneric'
   securitySchemes:
     BasicAuth:
       type: http
