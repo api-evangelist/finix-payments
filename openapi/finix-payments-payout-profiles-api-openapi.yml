@@ -147,215 +147,7 @@ paths:
       - Payout Profiles
       x-python-method-name: get_by_merchant_id
 components:
-  responses:
-    PayoutProfile:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PayoutProfile'
-          examples:
-            Payout Profile - Gross:
-              value:
-                id: POmhJeq1AsfwetG8LwhA4S9U
-                created_at: '2022-10-25T16:54:08.20Z'
-                updated_at: '2022-10-25T16:54:08.20Z'
-                linked_id: MU6TXYpA37uM9H4GwitQr8E3
-                linked_type: MERCHANT
-                gross:
-                  payouts:
-                    frequency: DAILY
-                    submission_delay_days: 1
-                    payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
-                    rail: SAME_DAY_ACH
-                  fees:
-                    frequency: MONTHLY
-                    day_of_month: 1
-                    submission_delay_days: 3
-                    payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
-                    rail: SAME_DAY_ACH
-                tags: {}
-                type: GROSS
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/payout_profiles/POmhJeq1AsfwetG8LwhA4S9U
-            Payout Profile - Net:
-              value:
-                id: POhiPobG6PoUteNVKpUauWVP
-                created_at: '2022-10-25T07:20:34.37Z'
-                updated_at: '2022-10-25T07:20:34.37Z'
-                linked_id: MU6TXYpA37uM9H4GwitQr8E3
-                linked_type: MERCHANT
-                net:
-                  frequency: CONTINUOUS
-                  submission_delay_days: 1
-                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
-                  rail: STANDARD
-                tags: {}
-                type: NET
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/payout_profiles/POhiPobG6PoUteNVKpUauWVP
-      headers:
-        finix-apiuser-role:
-          $ref: '#/components/headers/finix-apiuser-role'
-        date:
-          $ref: '#/components/headers/date'
-        x-request-id:
-          $ref: '#/components/headers/x-request-id'
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
-    ErrorUnauthorized:
-      description: Authentication information is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error401Unauthorized'
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-    Error422InvalidField:
-      description: Invalid field
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error422InvalidFieldList'
-    Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
-    PayoutProfilesList:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PayoutProfilesList'
-          examples:
-            List of Payout Profiles:
-              value:
-                _embedded:
-                  payout_profiles:
-                  - id: PO6UbajkQrbFd5nAvs57dwyn
-                    created_at: '2022-10-24T21:38:23.72Z'
-                    updated_at: '2022-10-24T21:38:23.72Z'
-                    tags: {}
-                    linked_id: MU6TXYpA37uM9H4GwitQr8E3
-                    linked_type: MERCHANT
-                    type: GROSS
-                    gross:
-                      payouts:
-                        frequency: DAILY
-                        submission_delay_days: 1
-                        payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
-                        rail: SAME_DAY_ACH
-                      fees:
-                        frequency: MONTHLY
-                        day_of_month: 1
-                        submission_delay_days: 3
-                        payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
-                        rail: NEXT_DAY_ACH
-                    _links:
-                      self:
-                        href: https://finix.sandbox-payments-api.com/payout_profiles/PO6UbajkQrbFd5nAvs57dwyn
-                  - id: POf5rP3c3XyRX7M6PuCvmgxf
-                    created_at: '2022-10-20T19:43:18.02Z'
-                    updated_at: '2022-10-20T19:43:18.02Z'
-                    tags: {}
-                    linked_id: MUfbbKm7vRmBX2bP92pKw9zZ
-                    linked_type: MERCHANT
-                    type: CUSTOM
-                    custom: {}
-                    _links:
-                      self:
-                        href: https://finix.sandbox-payments-api.com/payout_profiles/POf5rP3c3XyRX7M6PuCvmgxf
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/payout_profiles
-                  next:
-                    href: https://finix.sandbox-payments-api.com/payout_profiles?after_cursor=POf5rP3c3XyRX7M6PuCvmgxf
-                page:
-                  limit: 100
-                  next_cursor: POf5rP3c3XyRX7M6PuCvmgxf
-      headers:
-        finix-apiuser-role:
-          $ref: '#/components/headers/finix-apiuser-role'
-        date:
-          $ref: '#/components/headers/date'
-        x-request-id:
-          $ref: '#/components/headers/x-request-id'
-  headers:
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
-    date:
-      schema:
-        type: string
-    finix-apiuser-role:
-      schema:
-        type: string
-        enum:
-        - ROLE_ADMIN
-        - ROLE_PLATFORM
-        - ROLE_PARTNER
-        - ROLE_MERCHANT
   schemas:
-    PageCursor:
-      title: PageCursor
-      x-stoplight:
-        id: 8v9on8n2939z2
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The number of entries to return.
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: The cursor to use for the next page of results.
-      description: Details the page that's returned.
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
     PayoutProfilesList:
       type: object
       x-examples:
@@ -418,6 +210,125 @@ components:
           $ref: '#/components/schemas/ListLinks'
         page:
           $ref: '#/components/schemas/PageCursor'
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: The cursor to use for the next page of results.
+      description: Details the page that's returned.
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
     UpdatePayoutProfileRequest:
       type: object
       properties:
@@ -510,44 +421,6 @@ components:
             submission_delay_days:
               type: integer
               description: Include a number of `submission_delay_days` to delay when `funding_transfers` for both payouts *and* fees get submitted (in days) to debit/credit the `payment_instrument_id`.
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
-    Error422InvalidFieldList:
-      type: object
-      description: Invalid field
-      title: ''
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - INVALID_FIELD
-                  field:
-                    type: string
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
     PayoutProfile:
       type: object
       properties:
@@ -693,12 +566,50 @@ components:
                         properties:
                           href:
                             type: string
+    Error422InvalidFieldList:
+      type: object
+      description: Invalid field
+      title: ''
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - INVALID_FIELD
+                  field:
+                    type: string
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
     LogRef:
       title: LogRef
       type: object
       properties:
         logref:
           type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
     Tags:
       type:
       - object
@@ -714,11 +625,6 @@ components:
 
 
         (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
     ListLinks:
       title: ListLinks
       additionalProperties: true
@@ -737,74 +643,168 @@ components:
           properties:
             href:
               type: string
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    date:
+      schema:
+        type: string
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+  responses:
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    PayoutProfile:
       description: ''
-      title: ''
-    Error401Unauthorized:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PayoutProfile'
+          examples:
+            Payout Profile - Gross:
+              value:
+                id: POmhJeq1AsfwetG8LwhA4S9U
+                created_at: '2022-10-25T16:54:08.20Z'
+                updated_at: '2022-10-25T16:54:08.20Z'
+                linked_id: MU6TXYpA37uM9H4GwitQr8E3
+                linked_type: MERCHANT
+                gross:
+                  payouts:
+                    frequency: DAILY
+                    submission_delay_days: 1
+                    payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                    rail: SAME_DAY_ACH
+                  fees:
+                    frequency: MONTHLY
+                    day_of_month: 1
+                    submission_delay_days: 3
+                    payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                    rail: SAME_DAY_ACH
+                tags: {}
+                type: GROSS
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payout_profiles/POmhJeq1AsfwetG8LwhA4S9U
+            Payout Profile - Net:
+              value:
+                id: POhiPobG6PoUteNVKpUauWVP
+                created_at: '2022-10-25T07:20:34.37Z'
+                updated_at: '2022-10-25T07:20:34.37Z'
+                linked_id: MU6TXYpA37uM9H4GwitQr8E3
+                linked_type: MERCHANT
+                net:
+                  frequency: CONTINUOUS
+                  submission_delay_days: 1
+                  payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                  rail: STANDARD
+                tags: {}
+                type: NET
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payout_profiles/POhiPobG6PoUteNVKpUauWVP
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    Error422InvalidField:
+      description: Invalid field
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error422InvalidFieldList'
+    PayoutProfilesList:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PayoutProfilesList'
+          examples:
+            List of Payout Profiles:
+              value:
+                _embedded:
+                  payout_profiles:
+                  - id: PO6UbajkQrbFd5nAvs57dwyn
+                    created_at: '2022-10-24T21:38:23.72Z'
+                    updated_at: '2022-10-24T21:38:23.72Z'
+                    tags: {}
+                    linked_id: MU6TXYpA37uM9H4GwitQr8E3
+                    linked_type: MERCHANT
+                    type: GROSS
+                    gross:
+                      payouts:
+                        frequency: DAILY
+                        submission_delay_days: 1
+                        payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                        rail: SAME_DAY_ACH
+                      fees:
+                        frequency: MONTHLY
+                        day_of_month: 1
+                        submission_delay_days: 3
+                        payment_instrument_id: PI2EmosKE8tvfSiF7Pd4SYE
+                        rail: NEXT_DAY_ACH
+                    _links:
                       self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
+                        href: https://finix.sandbox-payments-api.com/payout_profiles/PO6UbajkQrbFd5nAvs57dwyn
+                  - id: POf5rP3c3XyRX7M6PuCvmgxf
+                    created_at: '2022-10-20T19:43:18.02Z'
+                    updated_at: '2022-10-20T19:43:18.02Z'
+                    tags: {}
+                    linked_id: MUfbbKm7vRmBX2bP92pKw9zZ
+                    linked_type: MERCHANT
+                    type: CUSTOM
+                    custom: {}
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/payout_profiles/POf5rP3c3XyRX7M6PuCvmgxf
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/payout_profiles
+                  next:
+                    href: https://finix.sandbox-payments-api.com/payout_profiles?after_cursor=POf5rP3c3XyRX7M6PuCvmgxf
+                page:
+                  limit: 100
+                  next_cursor: POf5rP3c3XyRX7M6PuCvmgxf
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
   parameters:
     QueryAfterCursor:
       name: after_cursor

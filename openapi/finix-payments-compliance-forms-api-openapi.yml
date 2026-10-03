@@ -120,29 +120,7 @@ paths:
       x-python-method-name: list
       x-returns-list: true
 components:
-  requestBodies:
-    UpdateComplianceForm:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdateComplianceFormRequest'
-          examples:
-            Complete Compliance Form:
-              value:
-                pci_saq_a:
-                  ip_address: 42.1.1.113
-                  name: John Smith
-                  signed_at: '2022-03-18T16:42:55Z'
-                  title: CTO
-                  user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
   headers:
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
-    date:
-      schema:
-        type: string
     finix-apiuser-role:
       schema:
         type: string
@@ -151,143 +129,263 @@ components:
         - ROLE_PLATFORM
         - ROLE_PARTNER
         - ROLE_MERCHANT
-  responses:
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
-    ErrorUnauthorized:
-      description: Authentication information is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error401Unauthorized'
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-    Error422InvalidField:
-      description: Invalid field
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error422InvalidFieldList'
-    ComplianceForm:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ComplianceForm'
-          examples:
-            Blank Compliance Form:
-              value:
-                id: cf_fEojUGLjwUiqNTBp68JWq8
-                created_at: '2022-06-22T01:20:12.439149Z'
-                updated_at: '2022-07-06T17:32:00.328699Z'
-                application_id: APdoThHn4jjYUSxQf76txAgg
-                compliance_form_template: cft_wua8ua1yLAcHRK9mx2mF9K
-                due_at: '2022-09-20T01:20:12.430835Z'
-                files:
-                  signed_file: null
-                  unsigned_file: FILE_fFGMCY4sxGYTqpjnXh54kC
-                linked_to: MUfnskvHiiDgP7x3TVL2LkG3
-                linked_type: MERCHANT
-                pci_saq_a:
-                  ip_address: null
-                  is_accepted: false
-                  name: null
-                  signed_at: null
-                  title: null
-                  user_agent: null
-                state: INCOMPLETE
-                tags: {}
-                type: PCI_SAQ_A
-                valid_from: '2022-06-22T01:20:12.978825Z'
-                valid_until: '2023-06-22T01:20:12.97883Z'
-                version: '2018.5'
-            Complete Compliance Form:
-              value:
-                id: cf_pqJFvPD3DXAnut1w6iNFK
-                created_at: '2023-07-06T22:18:19.806288Z'
-                updated_at: '2023-07-06T22:26:41.003926Z'
-                linked_to: MUqXc76t2KiqtikLni1zrMmW
-                linked_type: MERCHANT
-                application: APgix2NcQ9ETSPpVoqwSYUHx
-                type: PCI_SAQ_A
-                version: '2018.10'
-                valid_from: '2023-07-06T22:18:25.775726Z'
-                valid_until: '2024-07-05T22:18:25.77573Z'
-                tags: {}
-                pci_saq_a:
-                  name: John Smith
-                  signed_at: '2022-03-18T16:42:55Z'
-                  user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
-                  ip_address: 42.1.1.113
-                  is_accepted: true
-                  title: CTO
-                due_at: '2023-10-04T22:18:19.790434Z'
-                compliance_form_template: cft_k6o6W33fdwnMXNxNhe4nfN
-                files:
-                  unsigned_file: FILE_AwHMYuDX7w2d8hobjkxKD
-                  signed_file: FILE_6E9ZpgGZJGmLcj2PiZzXHB
-                state: COMPLETE
-      headers:
-        finix-apiuser-role:
-          $ref: '#/components/headers/finix-apiuser-role'
-        date:
-          $ref: '#/components/headers/date'
-        x-request-id:
-          $ref: '#/components/headers/x-request-id'
-    ComplianceFormList:
-      description: List of `Compliance Form` objects.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ComplianceFormList'
-          examples:
-            List of Compliance Forms:
-              value:
-                _embedded:
-                  compliance_forms:
-                  - id: cf_pqJFvPD3DXAnut1w6iNFK
-                    created_at: '2023-07-06T22:18:19.806288Z'
-                    updated_at: '2023-07-06T22:26:41.003926Z'
-                    linked_to: MUqXc76t2KiqtikLni1zrMmW
-                    linked_type: MERCHANT
-                    application: APgix2NcQ9ETSPpVoqwSYUHx
-                    type: PCI_SAQ_A
-                    version: '2018.10'
-                    valid_from: '2023-07-06T22:18:25.775726Z'
-                    valid_until: '2024-07-05T22:18:25.77573Z'
-                    tags: {}
-                    pci_saq_a:
-                      name: John Smith
-                      signed_at: '2022-03-18T16:42:55Z'
-                      user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
-                      ip_address: 42.1.1.113
-                      is_accepted: true
-                      title: CTO
-                    due_at: '2023-10-04T22:18:19.790434Z'
-                    compliance_form_template: cft_k6o6W33fdwnMXNxNhe4nfN
-                    files:
-                      unsigned_file: FILE_AwHMYuDX7w2d8hobjkxKD
-                      signed_file: FILE_6E9ZpgGZJGmLcj2PiZzXHB
-                    state: COMPLETE
-                page:
-                  next_cursor: null
-                  limit: 10
-    Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
+    date:
+      schema:
+        type: string
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
   schemas:
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: The cursor to use for the next page of results.
+      description: Details the page that's returned.
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    UpdateComplianceFormRequest:
+      type: object
+      x-examples: {}
+      properties:
+        pci_saq_a:
+          type: object
+          description: Details used to fille out the PCI Self-Assessment Questionnaire.
+          properties:
+            ip_address:
+              type: string
+              description: IP address of the person attesting to this `compliance_form`.
+            name:
+              type: string
+              description: Name of the person completing (aka attesting to) the `compliance_form`.
+            signed_at:
+              type: string
+              description: Timestamp of the person attesting to this `compliance_form`.
+            title:
+              type: string
+              description: "Title or role of the person completing (aka attesting to)\n                the `compliance_form`."
+            user_agent:
+              type: string
+              description: User agent of the person attesting to this `compliance_form`.
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Error422InvalidFieldList:
+      type: object
+      description: Invalid field
+      title: ''
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - INVALID_FIELD
+                  field:
+                    type: string
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    Tags:
+      type:
+      - object
+      - 'null'
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
     ComplianceForm:
       type: object
       x-examples: {}
@@ -391,52 +489,6 @@ components:
           type: string
           description: Details the version of the SAQ form. When `compliance_forms` are created, Finix automatically provides the most up-to-date SAQ form that's available.
       title: ''
-    PageCursor:
-      title: PageCursor
-      x-stoplight:
-        id: 8v9on8n2939z2
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The number of entries to return.
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: The cursor to use for the next page of results.
-      description: Details the page that's returned.
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
     ComplianceFormList:
       type: object
       x-examples:
@@ -501,209 +553,157 @@ components:
           $ref: '#/components/schemas/ListLinks'
         page:
           $ref: '#/components/schemas/PageCursor'
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
-    Error422InvalidFieldList:
-      type: object
+  responses:
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    Error422InvalidField:
       description: Invalid field
-      title: ''
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - INVALID_FIELD
-                  field:
-                    type: string
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    LogRef:
-      title: LogRef
-      type: object
-      properties:
-        logref:
-          type: string
-    Tags:
-      type:
-      - object
-      - 'null'
-      title: tags
-      additionalProperties:
-        type: string
-      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
-
-        - Maximum character length for individual `keys` is 40.
-
-        - Maximum character length for individual **values** is 500.
-
-
-        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-    UpdateComplianceFormRequest:
-      type: object
-      x-examples: {}
-      properties:
-        pci_saq_a:
-          type: object
-          description: Details used to fille out the PCI Self-Assessment Questionnaire.
-          properties:
-            ip_address:
-              type: string
-              description: IP address of the person attesting to this `compliance_form`.
-            name:
-              type: string
-              description: Name of the person completing (aka attesting to) the `compliance_form`.
-            signed_at:
-              type: string
-              description: Timestamp of the person attesting to this `compliance_form`.
-            title:
-              type: string
-              description: "Title or role of the person completing (aka attesting to)\n                the `compliance_form`."
-            user_agent:
-              type: string
-              description: User agent of the person attesting to this `compliance_form`.
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
-    ListLinks:
-      title: ListLinks
-      additionalProperties: true
-      type: object
-      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
-      properties:
-        next:
-          type: object
-          description: Link to the next page of entries.
-          properties:
-            href:
-              type: string
-        self:
-          type: object
-          description: Link to the resource that was used in the request.
-          properties:
-            href:
-              type: string
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
-      title: ''
-    Error401Unauthorized:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error422InvalidFieldList'
+    ComplianceForm:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ComplianceForm'
+          examples:
+            Blank Compliance Form:
+              value:
+                id: cf_fEojUGLjwUiqNTBp68JWq8
+                created_at: '2022-06-22T01:20:12.439149Z'
+                updated_at: '2022-07-06T17:32:00.328699Z'
+                application_id: APdoThHn4jjYUSxQf76txAgg
+                compliance_form_template: cft_wua8ua1yLAcHRK9mx2mF9K
+                due_at: '2022-09-20T01:20:12.430835Z'
+                files:
+                  signed_file: null
+                  unsigned_file: FILE_fFGMCY4sxGYTqpjnXh54kC
+                linked_to: MUfnskvHiiDgP7x3TVL2LkG3
+                linked_type: MERCHANT
+                pci_saq_a:
+                  ip_address: null
+                  is_accepted: false
+                  name: null
+                  signed_at: null
+                  title: null
+                  user_agent: null
+                state: INCOMPLETE
+                tags: {}
+                type: PCI_SAQ_A
+                valid_from: '2022-06-22T01:20:12.978825Z'
+                valid_until: '2023-06-22T01:20:12.97883Z'
+                version: '2018.5'
+            Complete Compliance Form:
+              value:
+                id: cf_pqJFvPD3DXAnut1w6iNFK
+                created_at: '2023-07-06T22:18:19.806288Z'
+                updated_at: '2023-07-06T22:26:41.003926Z'
+                linked_to: MUqXc76t2KiqtikLni1zrMmW
+                linked_type: MERCHANT
+                application: APgix2NcQ9ETSPpVoqwSYUHx
+                type: PCI_SAQ_A
+                version: '2018.10'
+                valid_from: '2023-07-06T22:18:25.775726Z'
+                valid_until: '2024-07-05T22:18:25.77573Z'
+                tags: {}
+                pci_saq_a:
+                  name: John Smith
+                  signed_at: '2022-03-18T16:42:55Z'
+                  user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
+                  ip_address: 42.1.1.113
+                  is_accepted: true
+                  title: CTO
+                due_at: '2023-10-04T22:18:19.790434Z'
+                compliance_form_template: cft_k6o6W33fdwnMXNxNhe4nfN
+                files:
+                  unsigned_file: FILE_AwHMYuDX7w2d8hobjkxKD
+                  signed_file: FILE_6E9ZpgGZJGmLcj2PiZzXHB
+                state: COMPLETE
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    ComplianceFormList:
+      description: List of `Compliance Form` objects.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ComplianceFormList'
+          examples:
+            List of Compliance Forms:
+              value:
+                _embedded:
+                  compliance_forms:
+                  - id: cf_pqJFvPD3DXAnut1w6iNFK
+                    created_at: '2023-07-06T22:18:19.806288Z'
+                    updated_at: '2023-07-06T22:26:41.003926Z'
+                    linked_to: MUqXc76t2KiqtikLni1zrMmW
+                    linked_type: MERCHANT
+                    application: APgix2NcQ9ETSPpVoqwSYUHx
+                    type: PCI_SAQ_A
+                    version: '2018.10'
+                    valid_from: '2023-07-06T22:18:25.775726Z'
+                    valid_until: '2024-07-05T22:18:25.77573Z'
+                    tags: {}
+                    pci_saq_a:
+                      name: John Smith
+                      signed_at: '2022-03-18T16:42:55Z'
+                      user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
+                      ip_address: 42.1.1.113
+                      is_accepted: true
+                      title: CTO
+                    due_at: '2023-10-04T22:18:19.790434Z'
+                    compliance_form_template: cft_k6o6W33fdwnMXNxNhe4nfN
+                    files:
+                      unsigned_file: FILE_AwHMYuDX7w2d8hobjkxKD
+                      signed_file: FILE_6E9ZpgGZJGmLcj2PiZzXHB
+                    state: COMPLETE
+                page:
+                  next_cursor: null
+                  limit: 10
+  requestBodies:
+    UpdateComplianceForm:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateComplianceFormRequest'
+          examples:
+            Complete Compliance Form:
+              value:
+                pci_saq_a:
+                  ip_address: 42.1.1.113
+                  name: John Smith
+                  signed_at: '2022-03-18T16:42:55Z'
+                  title: CTO
+                  user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
   securitySchemes:
     BasicAuth:
       type: http

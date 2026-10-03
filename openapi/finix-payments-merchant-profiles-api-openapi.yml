@@ -104,29 +104,38 @@ paths:
       x-internal: false
       x-python-method-name: update
 components:
-  headers:
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
-    date:
-      schema:
-        type: string
-    finix-apiuser-role:
-      schema:
-        type: string
-        enum:
-        - ROLE_ADMIN
-        - ROLE_PLATFORM
-        - ROLE_PARTNER
-        - ROLE_MERCHANT
   responses:
-    ErrorNotFound:
-      description: Object does not exist
+    MerchantProfile:
+      description: Single merchant profile object
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
+            $ref: '#/components/schemas/MerchantProfile'
+          examples:
+            Merchant Profile:
+              value:
+                id: MPsdo8WPP5erWzfPwMjYjVy3
+                created_at: '2022-08-15T21:37:47.26Z'
+                updated_at: '2022-08-15T21:38:24.02Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                fee_profile: null
+                payout_profile: null
+                risk_profile: RPwAziDZginXDWuuiDSaA3wr
+                tags: {}
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MPsdo8WPP5erWzfPwMjYjVy3
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  risk_profile:
+                    href: https://finix.sandbox-payments-api.com/risk_profiles/RPwAziDZginXDWuuiDSaA3wr
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
     ErrorUnauthorized:
       description: Authentication information is missing or invalid
       content:
@@ -185,43 +194,6 @@ components:
                   offset: 0
                   limit: 20
                   count: 1671
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-    MerchantProfile:
-      description: Single merchant profile object
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/MerchantProfile'
-          examples:
-            Merchant Profile:
-              value:
-                id: MPsdo8WPP5erWzfPwMjYjVy3
-                created_at: '2022-08-15T21:37:47.26Z'
-                updated_at: '2022-08-15T21:38:24.02Z'
-                application: APgPDQrLD52TYvqazjHJJchM
-                fee_profile: null
-                payout_profile: null
-                risk_profile: RPwAziDZginXDWuuiDSaA3wr
-                tags: {}
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MPsdo8WPP5erWzfPwMjYjVy3
-                  application:
-                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
-                  risk_profile:
-                    href: https://finix.sandbox-payments-api.com/risk_profiles/RPwAziDZginXDWuuiDSaA3wr
-      headers:
-        finix-apiuser-role:
-          $ref: '#/components/headers/finix-apiuser-role'
-        date:
-          $ref: '#/components/headers/date'
-        x-request-id:
-          $ref: '#/components/headers/x-request-id'
     Error406NotAcceptable:
       description: Not Acceptable
       content:
@@ -229,6 +201,34 @@ components:
           schema:
             $ref: '#/components/schemas/Error406NotAcceptable'
           examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+  headers:
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
+    date:
+      schema:
+        type: string
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
   schemas:
     PageCursor:
       title: PageCursor
@@ -245,6 +245,95 @@ components:
           - 'null'
           description: The cursor to use for the next page of results.
       description: Details the page that's returned.
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    MerchantProfilesList:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `merchant_profile` objects.
+          properties:
+            merchant_profiles:
+              type: array
+              description: '`merchant_profile` objects.'
+              items:
+                $ref: '#/components/schemas/MerchantProfile'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
     Error406NotAcceptable:
       type: object
       properties:
@@ -276,27 +365,6 @@ components:
                           href:
                             type: string
       title: ''
-    MerchantProfilesList:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/PageCursor'
-        _embedded:
-          type: object
-          description: List of `merchant_profile` objects.
-          properties:
-            merchant_profiles:
-              type: array
-              description: '`merchant_profile` objects.'
-              items:
-                $ref: '#/components/schemas/MerchantProfile'
-        _links:
-          $ref: '#/components/schemas/ListLinks'
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
     Error404NotFoundList:
       type: object
       properties:
@@ -327,12 +395,34 @@ components:
                         properties:
                           href:
                             type: string
+    UpdateMerchantProfileRequest:
+      title: UpdateMerchantProfileRequest
+      x-stoplight:
+        id: 9cuj94a54fwqp
+      type: object
+      properties:
+        fee_profile:
+          type: string
+          description: ID of the `fee_profile`.
+        payout_profile:
+          type: string
+          description: ID of the `payout_profile`.
+        risk_profile:
+          type: string
+          description: ID of the `risk_profile`.
+        tags:
+          $ref: '#/components/schemas/Tags'
     LogRef:
       title: LogRef
       type: object
       properties:
         logref:
           type: string
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
     Tags:
       type:
       - object
@@ -348,6 +438,24 @@ components:
 
 
         (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
     MerchantProfile:
       type: object
       description: ''
@@ -425,114 +533,6 @@ components:
               properties:
                 href:
                   type: string
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
-    UpdateMerchantProfileRequest:
-      title: UpdateMerchantProfileRequest
-      x-stoplight:
-        id: 9cuj94a54fwqp
-      type: object
-      properties:
-        fee_profile:
-          type: string
-          description: ID of the `fee_profile`.
-        payout_profile:
-          type: string
-          description: ID of the `payout_profile`.
-        risk_profile:
-          type: string
-          description: ID of the `risk_profile`.
-        tags:
-          $ref: '#/components/schemas/Tags'
-    ListLinks:
-      title: ListLinks
-      additionalProperties: true
-      type: object
-      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
-      properties:
-        next:
-          type: object
-          description: Link to the next page of entries.
-          properties:
-            href:
-              type: string
-        self:
-          type: object
-          description: Link to the resource that was used in the request.
-          properties:
-            href:
-              type: string
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
-      title: ''
-    Error401Unauthorized:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
   parameters:
     QueryAfterCursor:
       name: after_cursor
@@ -541,12 +541,13 @@ components:
       schema:
         type: string
       description: Return every resource created after the cursor value.
-    QueryIdFilter:
-      description: Filter by `id`.
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
       in: query
-      name: id
+      name: limit
       schema:
-        type: string
+        type: integer
       style: form
     QueryBeforeCursor:
       name: before_cursor
@@ -555,13 +556,12 @@ components:
       schema:
         type: string
       description: Return every resource created before the cursor value.
-    QueryLimit:
-      description: The numbers of items to return.
-      example: 10
+    QueryIdFilter:
+      description: Filter by `id`.
       in: query
-      name: limit
+      name: id
       schema:
-        type: integer
+        type: string
       style: form
   requestBodies:
     UpdateMerchantProfileRequest:
