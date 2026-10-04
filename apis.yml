@@ -49,6 +49,9 @@ x-tier-reason: openapi-and-docs-harvested
 specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-19'
+x-docs-platform: redocly
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-10-03
 tags:
 - Company
 - Payments
@@ -278,6 +281,9 @@ apis:
   - type: OpenAPI
     url: openapi/finix-payments-webhooks-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/finix-payments-capability-edges.yml
+  name: Finix Payments Business Capability Map
 - type: Overlay
   url: overlays/finix-payments-openapi-overlay.yaml
 - type: PostmanWorkspace
