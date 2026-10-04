@@ -173,6 +173,13 @@ paths:
       x-python-method-name: create
 components:
   headers:
+    date:
+      schema:
+        type: string
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
     finix-apiuser-role:
       schema:
         type: string
@@ -181,14 +188,61 @@ components:
         - ROLE_PLATFORM
         - ROLE_PARTNER
         - ROLE_MERCHANT
-    date:
-      schema:
-        type: string
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
   schemas:
+    ConfigurationDetails:
+      title: ConfigurationDetails
+      x-stoplight:
+        id: czqjwiv5qz0zl
+      type: object
+      description: Configure the details of the activated device.
+      properties:
+        allow_debit:
+          type: boolean
+          description: Allow transaction to be processed on Debit rails. If `false`, Debit card transactions will be processed on Credit rails.
+        bypass_device_on_capture:
+          type: boolean
+          description: Sets whether the device will be used to capture `Authorizations`. The device is required to be connected if `bypass_device_on_capture` is set to false. (defaults to true).
+        check_for_duplicate_transactions:
+          type: boolean
+          description: Sets whether the device will check for duplicate transactions.
+        prompt_amount_confirmation:
+          type: boolean
+          description: Sets if the card holder needs to confirm the amount they will pay (defaults to **true**).
+        prompt_manual_entry:
+          type: boolean
+          description: Sets if the device defaults to manual entry as the default card input method. (defaults to **false**).
+        prompt_signature:
+          type: string
+          description: 'Sets if the device will prompt the card holder for a signature by default. Available values include:<ul><li><strong>ALWAYS</strong><li><strong>NEVER</strong><li><strong>AMOUNT</strong>: Used in conjunction with `signature_threshold_amount` so when the threshold is reached the signature form appears on the device.'
+        signature_threshold_amount:
+          type: integer
+          description: The threshold to prompt a signature when `prompt_signature` is set to **AMOUNT** (defaults to 0).
+    Tags:
+      type:
+      - object
+      - 'null'
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
     UpdateDeviceRequest:
       type: object
       properties:
@@ -224,68 +278,6 @@ components:
       title: CreatedAt
       format: date-time
       description: Timestamp of when the object was created.
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
-      title: ''
-    ErrorGeneric:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
     Device:
       type: object
       title: Device
@@ -391,7 +383,7 @@ components:
               properties:
                 href:
                   type: string
-    Error401Unauthorized:
+    Error403ForbiddenList:
       type: object
       properties:
         total:
@@ -408,25 +400,21 @@ components:
                   code:
                     type: string
                     enum:
-                    - UNKNOWN
+                    - FORBIDDEN
                   logref:
                     $ref: '#/components/schemas/LogRef'
                   message:
                     type: string
                   _links:
                     type: object
-                    additionalProperties: true
                     properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
                       source:
                         type: object
                         properties:
                           href:
                             type: string
+      description: ''
+      title: ''
     CreateDevice:
       type: object
       title: CreateDevice
@@ -513,6 +501,42 @@ components:
                           href:
                             type: string
       title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
     Error404NotFoundList:
       type: object
       properties:
@@ -543,61 +567,109 @@ components:
                         properties:
                           href:
                             type: string
-    LogRef:
-      title: LogRef
+    ErrorGeneric:
       type: object
       properties:
-        logref:
-          type: string
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
-    Tags:
-      type:
-      - object
-      - 'null'
-      title: tags
-      additionalProperties:
-        type: string
-      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
-
-        - Maximum character length for individual `keys` is 40.
-
-        - Maximum character length for individual **values** is 500.
-
-
-        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-    ConfigurationDetails:
-      title: ConfigurationDetails
-      x-stoplight:
-        id: czqjwiv5qz0zl
-      type: object
-      description: Configure the details of the activated device.
-      properties:
-        allow_debit:
-          type: boolean
-          description: Allow transaction to be processed on Debit rails. If `false`, Debit card transactions will be processed on Credit rails.
-        bypass_device_on_capture:
-          type: boolean
-          description: Sets whether the device will be used to capture `Authorizations`. The device is required to be connected if `bypass_device_on_capture` is set to false. (defaults to true).
-        check_for_duplicate_transactions:
-          type: boolean
-          description: Sets whether the device will check for duplicate transactions.
-        prompt_amount_confirmation:
-          type: boolean
-          description: Sets if the card holder needs to confirm the amount they will pay (defaults to **true**).
-        prompt_manual_entry:
-          type: boolean
-          description: Sets if the device defaults to manual entry as the default card input method. (defaults to **false**).
-        prompt_signature:
-          type: string
-          description: 'Sets if the device will prompt the card holder for a signature by default. Available values include:<ul><li><strong>ALWAYS</strong><li><strong>NEVER</strong><li><strong>AMOUNT</strong>: Used in conjunction with `signature_threshold_amount` so when the threshold is reached the signature form appears on the device.'
-        signature_threshold_amount:
+        total:
           type: integer
-          description: The threshold to prompt a signature when `prompt_signature` is set to **AMOUNT** (defaults to 0).
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+  requestBodies:
+    CreateDeviceRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateDevice'
+          examples:
+            Create a Device:
+              value:
+                configuration:
+                  allow_debit: true
+                  bypass_device_on_capture: true
+                  prompt_signature: NEVER
+                description: John Smith
+                model: MX915
+                name: 'Finix  triPOS #1'
+    UpdateDeviceRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateDeviceRequest'
+          examples:
+            Device - Activated (DATACAP_V1):
+              value:
+                action: ACTIVATE
+            Device - Activated (TRIPOS_CLOUD_V1):
+              value:
+                action: ACTIVATE
+                activation_code: '609732'
+            Reboot Device:
+              value:
+                action: REBOOT
+            Device - Idle Message Set:
+              value:
+                action: CREATE_IDLE_MESSAGE
+                idle_message: Finix Flowers
+            Device - Deactivated:
+              value:
+                action: DEACTIVATE
+            Device - Update Details:
+              value:
+                configuration:
+                  allow_debit: true
+                  bypass_device_on_capture: true
+                  prompt_signature: NEVER
+                description: Flowers
+                name: Finix Flowers - triPOS
   responses:
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
     ErrorUnauthorized:
       description: Authentication information is missing or invalid
       content:
@@ -835,78 +907,6 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
-    ErrorUnprocessableEntity:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorGeneric'
-    Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-  requestBodies:
-    UpdateDeviceRequest:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdateDeviceRequest'
-          examples:
-            Device - Activated (DATACAP_V1):
-              value:
-                action: ACTIVATE
-            Device - Activated (TRIPOS_CLOUD_V1):
-              value:
-                action: ACTIVATE
-                activation_code: '609732'
-            Reboot Device:
-              value:
-                action: REBOOT
-            Device - Idle Message Set:
-              value:
-                action: CREATE_IDLE_MESSAGE
-                idle_message: Finix Flowers
-            Device - Deactivated:
-              value:
-                action: DEACTIVATE
-            Device - Update Details:
-              value:
-                configuration:
-                  allow_debit: true
-                  bypass_device_on_capture: true
-                  prompt_signature: NEVER
-                description: Flowers
-                name: Finix Flowers - triPOS
-    CreateDeviceRequest:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateDevice'
-          examples:
-            Create a Device:
-              value:
-                configuration:
-                  allow_debit: true
-                  bypass_device_on_capture: true
-                  prompt_signature: NEVER
-                description: John Smith
-                model: MX915
-                name: 'Finix  triPOS #1'
   securitySchemes:
     BasicAuth:
       type: http

@@ -211,6 +211,13 @@ paths:
       x-python-method-name: create_merchant_verification
 components:
   headers:
+    date:
+      schema:
+        type: string
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
     finix-apiuser-role:
       schema:
         type: string
@@ -219,96 +226,7 @@ components:
         - ROLE_PLATFORM
         - ROLE_PARTNER
         - ROLE_MERCHANT
-    date:
-      schema:
-        type: string
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
   schemas:
-    PageCursor:
-      title: PageCursor
-      x-stoplight:
-        id: 8v9on8n2939z2
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The number of entries to return.
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: The cursor to use for the next page of results.
-      description: Details the page that's returned.
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
-      title: ''
-    ErrorGeneric:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
     MerchantsList:
       type: object
       properties:
@@ -327,515 +245,6 @@ components:
                 $ref: '#/components/schemas/Merchant'
         _links:
           $ref: '#/components/schemas/ListLinks'
-    Error401Unauthorized:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
-    Raw:
-      title: Raw
-      description: Raw response from the processor.
-      x-examples: {}
-      type:
-      - object
-      - 'null'
-    Address:
-      title: Address
-      type:
-      - object
-      - 'null'
-      description: Address of the account owner.
-      properties:
-        city:
-          type:
-          - string
-          - 'null'
-          description: City (max 20 characters).
-        country:
-          $ref: '#/components/schemas/Country'
-        line1:
-          type:
-          - string
-          - 'null'
-          description: First line of the address (max 35 characters).
-        line2:
-          type:
-          - string
-          - 'null'
-          description: Second line of the address (max 35 characters).
-        postal_code:
-          type:
-          - string
-          - 'null'
-          description: Zip or Postal code (max 7 characters).
-        region:
-          type:
-          - string
-          - 'null'
-          description: 2-letter State code.
-    Currency:
-      type: string
-      description: ISO 4217 3 letter currency code.
-      enum:
-      - AED
-      - AFN
-      - ALL
-      - AMD
-      - ANG
-      - AOA
-      - ARS
-      - AUD
-      - AWG
-      - AZN
-      - BAM
-      - BBD
-      - BDT
-      - BGN
-      - BHD
-      - BIF
-      - BMD
-      - BND
-      - BOB
-      - BOV
-      - BRL
-      - BSD
-      - BTN
-      - BWP
-      - BYR
-      - BZD
-      - CAD
-      - CDF
-      - CHE
-      - CHF
-      - CHW
-      - CLF
-      - CLP
-      - CNY
-      - COP
-      - COU
-      - CRC
-      - CUC
-      - CUP
-      - CVE
-      - CZK
-      - DJF
-      - DKK
-      - DOP
-      - DZD
-      - EGP
-      - ERN
-      - ETB
-      - EUR
-      - FJD
-      - FKP
-      - GBP
-      - GEL
-      - GHS
-      - GIP
-      - GMD
-      - GNF
-      - GTQ
-      - GYD
-      - HKD
-      - HNL
-      - HRK
-      - HTG
-      - HUF
-      - IDR
-      - ILS
-      - INR
-      - IQD
-      - IRR
-      - ISK
-      - JMD
-      - JOD
-      - JPY
-      - KES
-      - KGS
-      - KHR
-      - KMF
-      - KPW
-      - KRW
-      - KWD
-      - KYD
-      - KZT
-      - LAK
-      - LBP
-      - LKR
-      - LRD
-      - LSL
-      - LTL
-      - LYD
-      - MAD
-      - MDL
-      - MGA
-      - MKD
-      - MMK
-      - MNT
-      - MOP
-      - MRO
-      - MUR
-      - MVR
-      - MWK
-      - MXN
-      - MXV
-      - MYR
-      - MZN
-      - NAD
-      - NGN
-      - NIO
-      - NOK
-      - NPR
-      - NZD
-      - OMR
-      - PAB
-      - PEN
-      - PGK
-      - PHP
-      - PKR
-      - PLN
-      - PYG
-      - QAR
-      - RON
-      - RSD
-      - RUB
-      - RWF
-      - SAR
-      - SBD
-      - SCR
-      - SDG
-      - SEK
-      - SGD
-      - SHP
-      - SLL
-      - SOS
-      - SRD
-      - SSP
-      - STD
-      - SVC
-      - SYP
-      - SZL
-      - THB
-      - TJS
-      - TMT
-      - TND
-      - TOP
-      - TRY
-      - TTD
-      - TWD
-      - TZS
-      - UAH
-      - UGX
-      - USD
-      - USN
-      - UYI
-      - UYU
-      - UZS
-      - VEF
-      - VND
-      - VUV
-      - WST
-      - XAF
-      - XAG
-      - XAU
-      - XBA
-      - XBB
-      - XBC
-      - XBD
-      - XCD
-      - XDR
-      - XOF
-      - XPD
-      - XPF
-      - XPT
-      - XSU
-      - XTS
-      - XUA
-      - XXX
-      - YER
-      - ZAR
-      - ZMW
-      - ZWL
-    Verification:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the `Verification` attempt (begins with `VIXXX`).
-        created_at:
-          $ref: '#/components/schemas/CreatedAt'
-        updated_at:
-          $ref: '#/components/schemas/UpdatedAt'
-        application:
-          type: string
-          description: ID of the `Application` the `Merchant` was created under.
-        identity:
-          type:
-          - string
-          - 'null'
-          description: ID of the `Identity` that created the `Merchant`.
-        merchant:
-          type:
-          - string
-          - 'null'
-          description: ID of the `Merchant` resource.
-        merchant_identity:
-          type:
-          - string
-          - 'null'
-          description: ID of the `Identity` associated with the `Merchant`.
-        messages:
-          type: array
-          description: Provides additional details about the verification (e.g why it failed). This field is usually **null**.
-          items:
-            type: object
-        payment_instrument:
-          type:
-          - string
-          - 'null'
-          description: The `Payment Instrument` that's used to settle the `Merchant's` processed funds.
-        payment_instrument_verification_details:
-          type: object
-          description: Details the verification results of `Payment Instruments`.
-          properties:
-            push_to_card_domestic:
-              type: string
-              description: Details if the `Payment Instrument` supports push and pull from card, domestically. For more details, see [Push to Card](/guides/push-pull/).
-              enum:
-              - FAST_FUNDS
-              - NON_FAST_FUNDS
-              - NOT_SUPPORTED
-              - UNKNOWN
-            push_to_card_cross_border:
-              type: string
-              description: Details if the `Payment Instrument` supports push and pull from card, cross-border. For more details, see [Push to Card](/guides/push-pull/).
-              enum:
-              - FAST_FUNDS
-              - NON_FAST_FUNDS
-              - NOT_SUPPORTED
-              - UNKNOWN
-            card_type:
-              type: string
-              description: The type of card. Same value as `Payment Instrument#type`.
-              enum:
-              - CREDIT
-              - DEBIT
-              - HSA_FSA
-              - NON_RELOADABLE_PREPAID
-              - RELOADABLE_PREPAID
-              - UNKNOWN
-            billing_currency:
-              $ref: '#/components/schemas/Currency'
-            issuer_country:
-              $ref: '#/components/schemas/Country'
-        processor:
-          type: string
-          description: Name of the verification processor.
-        raw:
-          $ref: '#/components/schemas/Raw'
-        state:
-          type: string
-          description: The status of the `Verification` request.
-          enum:
-          - PENDING
-          - SUCCEEDED
-          - FAILED
-        tags:
-          $ref: '#/components/schemas/Tags'
-        trace_id:
-          type: string
-          description: Trace ID of the `Verification`. The processor sends back the `trace_id` so you can track the verification end-to-end.
-        _links:
-          type: object
-          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
-          properties:
-            self:
-              type: object
-              description: Link to the resource that was used in the request.
-              properties:
-                href:
-                  type: string
-            merchant:
-              type: object
-              description: Link to the `Merchant` that was used in the request.
-              properties:
-                href:
-                  type: string
-            application:
-              type: object
-              description: Link to the `Application` that was used in the request.
-              properties:
-                href:
-                  type: string
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    CreateVerificationRequest:
-      type: object
-      properties:
-        merchant:
-          type: string
-          description: '- The ID of the `Merchant`.
-
-            - Must be included when `verify_payment_card` is set to **true**.'
-        processor:
-          type: string
-          enum:
-          - DUMMY_V1
-          - MASTERCARD_V1
-          - VISA_V1
-          default: DUMMY_V1
-          description: 'Set the acquiring processor. Avalible values include: <ul><li><strong>DUMMY_V1</strong></li><li><strong>MASTERCARD_V1</strong></li><li><strong>VISA_V1</strong></li></ul>Use <strong>DUMMY_V1</strong> or  <strong>null</strong> to use your sandbox. For more details on which processor to use, reach out to your Finix point of contact or email <a href="/guides/getting-started/support-at-finix/">Finix Support</a>.'
-        security_code:
-          type: string
-          description: The ID of the `Merchant`.
-        verify_payment_card:
-          type: boolean
-          description: '- Set to **true** to verify card details with the card issuer.
-
-            - Must be set to **true** to update the CVV or security code of a card.
-
-            - When set to **true**, `merchant` must also be included with your request.'
-        tags:
-          $ref: '#/components/schemas/Tags'
-        address:
-          $ref: '#/components/schemas/Address'
-        identity:
-          type: string
-          description: ID of the `Identity` resource associated with the `Merchant`.
-    LogRef:
-      title: LogRef
-      type: object
-      properties:
-        logref:
-          type: string
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
-    Tags:
-      type:
-      - object
-      - 'null'
-      title: tags
-      additionalProperties:
-        type: string
-      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
-
-        - Maximum character length for individual `keys` is 40.
-
-        - Maximum character length for individual **values** is 500.
-
-
-        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-    ListLinks:
-      title: ListLinks
-      additionalProperties: true
-      type: object
-      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
-      properties:
-        next:
-          type: object
-          description: Link to the next page of entries.
-          properties:
-            href:
-              type: string
-        self:
-          type: object
-          description: Link to the resource that was used in the request.
-          properties:
-            href:
-              type: string
     Merchant:
       type: object
       x-examples:
@@ -1041,6 +450,139 @@ components:
               properties:
                 href:
                   type: string
+    Verification:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the `Verification` attempt (begins with `VIXXX`).
+        created_at:
+          $ref: '#/components/schemas/CreatedAt'
+        updated_at:
+          $ref: '#/components/schemas/UpdatedAt'
+        application:
+          type: string
+          description: ID of the `Application` the `Merchant` was created under.
+        identity:
+          type:
+          - string
+          - 'null'
+          description: ID of the `Identity` that created the `Merchant`.
+        merchant:
+          type:
+          - string
+          - 'null'
+          description: ID of the `Merchant` resource.
+        merchant_identity:
+          type:
+          - string
+          - 'null'
+          description: ID of the `Identity` associated with the `Merchant`.
+        messages:
+          type: array
+          description: Provides additional details about the verification (e.g why it failed). This field is usually **null**.
+          items:
+            type: object
+        payment_instrument:
+          type:
+          - string
+          - 'null'
+          description: The `Payment Instrument` that's used to settle the `Merchant's` processed funds.
+        payment_instrument_verification_details:
+          type: object
+          description: Details the verification results of `Payment Instruments`.
+          properties:
+            push_to_card_domestic:
+              type: string
+              description: Details if the `Payment Instrument` supports push and pull from card, domestically. For more details, see [Push to Card](/guides/push-pull/).
+              enum:
+              - FAST_FUNDS
+              - NON_FAST_FUNDS
+              - NOT_SUPPORTED
+              - UNKNOWN
+            push_to_card_cross_border:
+              type: string
+              description: Details if the `Payment Instrument` supports push and pull from card, cross-border. For more details, see [Push to Card](/guides/push-pull/).
+              enum:
+              - FAST_FUNDS
+              - NON_FAST_FUNDS
+              - NOT_SUPPORTED
+              - UNKNOWN
+            card_type:
+              type: string
+              description: The type of card. Same value as `Payment Instrument#type`.
+              enum:
+              - CREDIT
+              - DEBIT
+              - HSA_FSA
+              - NON_RELOADABLE_PREPAID
+              - RELOADABLE_PREPAID
+              - UNKNOWN
+            billing_currency:
+              $ref: '#/components/schemas/Currency'
+            issuer_country:
+              $ref: '#/components/schemas/Country'
+        processor:
+          type: string
+          description: Name of the verification processor.
+        raw:
+          $ref: '#/components/schemas/Raw'
+        state:
+          type: string
+          description: The status of the `Verification` request.
+          enum:
+          - PENDING
+          - SUCCEEDED
+          - FAILED
+        tags:
+          $ref: '#/components/schemas/Tags'
+        trace_id:
+          type: string
+          description: Trace ID of the `Verification`. The processor sends back the `trace_id` so you can track the verification end-to-end.
+        _links:
+          type: object
+          description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+          properties:
+            self:
+              type: object
+              description: Link to the resource that was used in the request.
+              properties:
+                href:
+                  type: string
+            merchant:
+              type: object
+              description: Link to the `Merchant` that was used in the request.
+              properties:
+                href:
+                  type: string
+            application:
+              type: object
+              description: Link to the `Application` that was used in the request.
+              properties:
+                href:
+                  type: string
+    Raw:
+      title: Raw
+      description: Raw response from the processor.
+      x-examples: {}
+      type:
+      - object
+      - 'null'
+    Tags:
+      type:
+      - object
+      - 'null'
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
     Country:
       title: Country
       type:
@@ -1358,6 +900,22 @@ components:
         surcharge_fees_enabled:
           type: boolean
           description: Set to **true** if you want to enable a `Merchant` to accept surcharge fees.
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
     CreateMerchantUnderwritingRequest:
       type: object
       title: MerchantUnderwritingCreate
@@ -1375,6 +933,288 @@ components:
           $ref: '#/components/schemas/Tags'
       required:
       - processor
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    Address:
+      title: Address
+      type:
+      - object
+      - 'null'
+      description: Address of the account owner.
+      properties:
+        city:
+          type:
+          - string
+          - 'null'
+          description: City (max 20 characters).
+        country:
+          $ref: '#/components/schemas/Country'
+        line1:
+          type:
+          - string
+          - 'null'
+          description: First line of the address (max 35 characters).
+        line2:
+          type:
+          - string
+          - 'null'
+          description: Second line of the address (max 35 characters).
+        postal_code:
+          type:
+          - string
+          - 'null'
+          description: Zip or Postal code (max 7 characters).
+        region:
+          type:
+          - string
+          - 'null'
+          description: 2-letter State code.
+    Currency:
+      type: string
+      description: ISO 4217 3 letter currency code.
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: The cursor to use for the next page of results.
+      description: Details the page that's returned.
     ProcessorRequest:
       description: 'Set the acquiring processor. Avalible values include: <ul><li><strong>DUMMY_V1</strong></li><li><strong>LITLE_V1</strong></li><li><strong>MASTERCARD_V1</strong></li><li><strong>VISA_V1</strong></li><li><strong>NMI_V1</strong></li><li><strong>VANTIV_V1</strong></li></ul>Use <strong>DUMMY_V1</strong> or  <strong>null</strong> to use your sandbox. For more details on which processor to use, reach out to your Finix point of contact or email <a href="/guides/getting-started/support-at-finix/">Finix Support</a>.'
       type:
@@ -1382,7 +1222,468 @@ components:
       - 'null'
       x-examples: {}
       title: ''
+    CreateVerificationRequest:
+      type: object
+      properties:
+        merchant:
+          type: string
+          description: '- The ID of the `Merchant`.
+
+            - Must be included when `verify_payment_card` is set to **true**.'
+        processor:
+          type: string
+          enum:
+          - DUMMY_V1
+          - MASTERCARD_V1
+          - VISA_V1
+          default: DUMMY_V1
+          description: 'Set the acquiring processor. Avalible values include: <ul><li><strong>DUMMY_V1</strong></li><li><strong>MASTERCARD_V1</strong></li><li><strong>VISA_V1</strong></li></ul>Use <strong>DUMMY_V1</strong> or  <strong>null</strong> to use your sandbox. For more details on which processor to use, reach out to your Finix point of contact or email <a href="/guides/getting-started/support-at-finix/">Finix Support</a>.'
+        security_code:
+          type: string
+          description: The ID of the `Merchant`.
+        verify_payment_card:
+          type: boolean
+          description: '- Set to **true** to verify card details with the card issuer.
+
+            - Must be set to **true** to update the CVV or security code of a card.
+
+            - When set to **true**, `merchant` must also be included with your request.'
+        tags:
+          $ref: '#/components/schemas/Tags'
+        address:
+          $ref: '#/components/schemas/Address'
+        identity:
+          type: string
+          description: ID of the `Identity` resource associated with the `Merchant`.
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+  parameters:
+    QueryUpdatedAtGteFilter:
+      description: Filter where `updated_at` is after the given date.
+      in: query
+      name: updated_at.gte
+      schema:
+        type: string
+      style: form
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+    QueryUpdatedAtLteFilter:
+      description: Filter where `updated_at` is before the given date.
+      in: query
+      name: updated_at.lte
+      schema:
+        type: string
+      style: form
+    QueryCreatedAtGteFilter:
+      description: Filter where `created_at` is after the given date.
+      in: query
+      name: created_at.gte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryCreatedAtLteFilter:
+      description: Filter where `created_at` is before the given date.
+      in: query
+      name: created_at.lte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryIdFilter:
+      description: Filter by `id`.
+      in: query
+      name: id
+      schema:
+        type: string
+      style: form
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
   responses:
+    Verification:
+      description: Single Verification object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Verification'
+          examples:
+            Payment Instrument - Verify a Card’s CVV:
+              value:
+                id: VIvZKP8XKzxyJaxJsfAEHbw6
+                created_at: '2022-10-11T00:46:48.68Z'
+                updated_at: '2022-10-11T00:46:48.72Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                identity: null
+                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
+                merchant_identity: ID2CGJmjqyYaQAu6qyuvGeWK
+                messages: []
+                payment_instrument: PIwWisLuZNwPBoLbCgQVTCoY
+                payment_instrument_verification_details:
+                  push_to_card_domestic: NOT_SUPPORTED
+                  push_to_card_cross_border: NOT_SUPPORTED
+                  card_type: CREDIT
+                  billing_currency: USD
+                  issuer_country: USA
+                processor: DUMMY_V1
+                raw: RawDummyMerchantUnderwriteResult
+                state: SUCCEEDED
+                tags:
+                  card_name: Personal Card
+                trace_id: a7355d05-95b0-4b44-938d-bf0a99f19c17
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/verifications/VIvZKP8XKzxyJaxJsfAEHbw6
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUgWbPVvtKbzjKNNGKqdQYV7
+            Payment Instrument - Verify a Card’s Address:
+              value:
+                id: VI46ua15as1tnsWgZCFmdF9F
+                created_at: '2023-02-25T20:00:33.94Z'
+                updated_at: '2023-02-25T20:01:22.34Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                identity: null
+                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
+                merchant_identity: ID2CGJmjqyYaQAu6qyuvGeWK
+                messages: []
+                payment_instrument: PIwWisLuZNwPBoLbCgQVTCoY
+                payment_instrument_verification_details:
+                  push_to_card_domestic: NOT_SUPPORTED
+                  push_to_card_cross_border: NOT_SUPPORTED
+                  card_type: CREDIT
+                  billing_currency: USD
+                  issuer_country: USA
+                processor: DUMMY_V1
+                raw: RawDummyMerchantUnderwriteResult
+                state: SUCCEEDED
+                tags:
+                  card_name: Personal Card
+                trace_id: 3374bc71-d43b-4af4-b1f8-7719a2a9e320
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/verifications/VI46ua15as1tnsWgZCFmdF9F
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUgWbPVvtKbzjKNNGKqdQYV7
+            Payment Instrument - Verify Push-to-Card Eligibility:
+              value:
+                id: VI8fgzLc9BnY1A996vPcWnu1
+                created_at: '2023-01-01T10:51:06.18Z'
+                updated_at: '2023-01-01T10:52:15.97Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                identity: null
+                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
+                merchant_identity: ID2CGJmjqyYaQAu6qyuvGeWK
+                messages: []
+                payment_instrument: PIwWisLuZNwPBoLbCgQVTCoY
+                payment_instrument_verification_details:
+                  push_to_card_domestic: FAST_FUNDS
+                  push_to_card_cross_border: NOT_SUPPORTED
+                  card_type: CREDIT
+                  billing_currency: USD
+                  issuer_country: USA
+                processor: DUMMY_V1
+                raw: RawDummyMerchantUnderwriteResult
+                state: SUCCEEDED
+                tags:
+                  card_name: Personal Card
+                trace_id: 05886388-bcb3-479f-ac31-e5404a92e1ab
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/verifications/VI8fgzLc9BnY1A996vPcWnu1
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  merchant:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUgWbPVvtKbzjKNNGKqdQYV7
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    Merchant:
+      description: Single Merchant object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Merchant'
+          examples:
+            Merchant:
+              value:
+                id: MUucec6fHeaWo3VHYoSkUySM
+                created_at: '2022-01-27T07:36:58.19Z'
+                updated_at: '2022-10-06T20:25:24.06Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                card_cvv_required: false
+                card_expiration_date_required: true
+                convenience_charges_enabled: false
+                creating_transfer_from_report_enabled: true
+                default_partial_authorization_enabled: false
+                fee_ready_to_settle_upon: RECONCILIATION
+                gross_settlement_enabled: false
+                identity: IDpYDM7J9n57q849o9E9yNrG
+                level_two_level_three_data_enabled: false
+                mcc: '4900'
+                merchant_name: Bobs Burgers
+                merchant_profile: MPzW2oRPtkLxK3fymcMACFi
+                mid: FNXh6htoPnfwmgGdvaG4L67Q1
+                onboarding_state: APPROVED
+                processing_enabled: true
+                processor: DUMMY_V1
+                processor_details:
+                  mid: FNXh6htoPnfwmgGdvaG4L67Q1
+                  api_key: secretValue
+                ready_to_settle_upon: RECONCILIATION
+                rent_surcharges_enabled: false
+                settlement_enabled: true
+                settlement_funding_identifier: UNSET
+                surcharges_enabled: false
+                tags:
+                  key_2: value_2
+                verification: VIxfDrRKZZzkCDDbeCT15oDN
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUht1bsAEcihT9HA55Tet5dk
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDoZy2xjNQyWCkN5nKZbVp6x
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUht1bsAEcihT9HA55Tet5dk/verifications
+                  merchant_profile:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MPh4vD8hWCtqHeJ8JgG4Tsva
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                  verification:
+                    href: https://finix.sandbox-payments-api.com/verifications/VIr27e4C5AWxgvLnyGJmdZQe
+            Merchant - Card Present Enabled:
+              value:
+                id: MUu56ZGx3Xb6U9gAqKfgNisd
+                created_at: '2019-03-01T01:57:19.95Z'
+                updated_at: '2019-05-15T18:10:03.00Z'
+                application: APeUbTUjvYb1CdPXvNcwW1wP
+                card_cvv_required: false
+                card_expiration_date_required: true
+                convenience_charges_enabled: false
+                creating_transfer_from_report_enabled: false
+                default_partial_authorization_enabled: false
+                fee_ready_to_settle_upon: RECONCILIATION
+                gross_settlement_enabled: false
+                identity: IDsbTBawhnLBAVeinRb84vFR
+                level_two_level_three_data_enabled: false
+                mcc: '4900'
+                merchant_name: Finix Flowers
+                merchant_profile: MPcMKhfF9rhWT2JWeUKzQVy2
+                mid: '4445029863321'
+                onboarding_state: REJECTED
+                processing_enabled: true
+                processor: VANTIV_V1
+                processor_details:
+                  acceptor_id: '874767464'
+                  default_terminal_id: X6600507601
+                  mid: '4445029863321'
+                  account_token: 811D0B76DEC8CCD1903D2772B68DA0CACA84BF56B5A6EE61EC05FE126EA63EF1B979A401
+                  account_id: '1056772'
+                  merchant_ident_string: '4445029863321'
+                  id: '193448212'
+                  vantiv_merchant_id: '4445029863321'
+                ready_to_settle_upon: RECONCILIATION
+                rent_surcharges_enabled: false
+                settlement_enabled: true
+                settlement_funding_identifier: UNSET
+                surcharges_enabled: false
+                tags:
+                  key_2: value_2
+                verification: VImHURoSqEvAf9haPD6zeHJx
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd
+                  identity:
+                    href: https://finix.sandbox-payments-api.com/identities/IDsbTBawhnLBAVeinRb84vFR
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd/verifications
+                  merchant_profile:
+                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MPcMKhfF9rhWT2JWeUKzQVy2
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APeUbTUjvYb1CdPXvNcwW1wP
+                  verification:
+                    href: https://finix.sandbox-payments-api.com/verifications/VImHURoSqEvAf9haPD6zeHJx
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
     MerchantUpdated:
       description: Single Merchant object
       content:
@@ -1536,12 +1837,6 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
-    ErrorUnauthorized:
-      description: Authentication information is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error401Unauthorized'
     MerchantsList:
       description: List of Merchants objects
       content:
@@ -1659,341 +1954,13 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
-    Merchant:
-      description: Single Merchant object
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Merchant'
-          examples:
-            Merchant:
-              value:
-                id: MUucec6fHeaWo3VHYoSkUySM
-                created_at: '2022-01-27T07:36:58.19Z'
-                updated_at: '2022-10-06T20:25:24.06Z'
-                application: APgPDQrLD52TYvqazjHJJchM
-                card_cvv_required: false
-                card_expiration_date_required: true
-                convenience_charges_enabled: false
-                creating_transfer_from_report_enabled: true
-                default_partial_authorization_enabled: false
-                fee_ready_to_settle_upon: RECONCILIATION
-                gross_settlement_enabled: false
-                identity: IDpYDM7J9n57q849o9E9yNrG
-                level_two_level_three_data_enabled: false
-                mcc: '4900'
-                merchant_name: Bobs Burgers
-                merchant_profile: MPzW2oRPtkLxK3fymcMACFi
-                mid: FNXh6htoPnfwmgGdvaG4L67Q1
-                onboarding_state: APPROVED
-                processing_enabled: true
-                processor: DUMMY_V1
-                processor_details:
-                  mid: FNXh6htoPnfwmgGdvaG4L67Q1
-                  api_key: secretValue
-                ready_to_settle_upon: RECONCILIATION
-                rent_surcharges_enabled: false
-                settlement_enabled: true
-                settlement_funding_identifier: UNSET
-                surcharges_enabled: false
-                tags:
-                  key_2: value_2
-                verification: VIxfDrRKZZzkCDDbeCT15oDN
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/merchants/MUht1bsAEcihT9HA55Tet5dk
-                  identity:
-                    href: https://finix.sandbox-payments-api.com/identities/IDoZy2xjNQyWCkN5nKZbVp6x
-                  verifications:
-                    href: https://finix.sandbox-payments-api.com/merchants/MUht1bsAEcihT9HA55Tet5dk/verifications
-                  merchant_profile:
-                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MPh4vD8hWCtqHeJ8JgG4Tsva
-                  application:
-                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
-                  verification:
-                    href: https://finix.sandbox-payments-api.com/verifications/VIr27e4C5AWxgvLnyGJmdZQe
-            Merchant - Card Present Enabled:
-              value:
-                id: MUu56ZGx3Xb6U9gAqKfgNisd
-                created_at: '2019-03-01T01:57:19.95Z'
-                updated_at: '2019-05-15T18:10:03.00Z'
-                application: APeUbTUjvYb1CdPXvNcwW1wP
-                card_cvv_required: false
-                card_expiration_date_required: true
-                convenience_charges_enabled: false
-                creating_transfer_from_report_enabled: false
-                default_partial_authorization_enabled: false
-                fee_ready_to_settle_upon: RECONCILIATION
-                gross_settlement_enabled: false
-                identity: IDsbTBawhnLBAVeinRb84vFR
-                level_two_level_three_data_enabled: false
-                mcc: '4900'
-                merchant_name: Finix Flowers
-                merchant_profile: MPcMKhfF9rhWT2JWeUKzQVy2
-                mid: '4445029863321'
-                onboarding_state: REJECTED
-                processing_enabled: true
-                processor: VANTIV_V1
-                processor_details:
-                  acceptor_id: '874767464'
-                  default_terminal_id: X6600507601
-                  mid: '4445029863321'
-                  account_token: 811D0B76DEC8CCD1903D2772B68DA0CACA84BF56B5A6EE61EC05FE126EA63EF1B979A401
-                  account_id: '1056772'
-                  merchant_ident_string: '4445029863321'
-                  id: '193448212'
-                  vantiv_merchant_id: '4445029863321'
-                ready_to_settle_upon: RECONCILIATION
-                rent_surcharges_enabled: false
-                settlement_enabled: true
-                settlement_funding_identifier: UNSET
-                surcharges_enabled: false
-                tags:
-                  key_2: value_2
-                verification: VImHURoSqEvAf9haPD6zeHJx
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd
-                  identity:
-                    href: https://finix.sandbox-payments-api.com/identities/IDsbTBawhnLBAVeinRb84vFR
-                  verifications:
-                    href: https://finix.sandbox-payments-api.com/merchants/MUu56ZGx3Xb6U9gAqKfgNisd/verifications
-                  merchant_profile:
-                    href: https://finix.sandbox-payments-api.com/merchant_profiles/MPcMKhfF9rhWT2JWeUKzQVy2
-                  application:
-                    href: https://finix.sandbox-payments-api.com/applications/APeUbTUjvYb1CdPXvNcwW1wP
-                  verification:
-                    href: https://finix.sandbox-payments-api.com/verifications/VImHURoSqEvAf9haPD6zeHJx
-      headers:
-        finix-apiuser-role:
-          $ref: '#/components/headers/finix-apiuser-role'
-        date:
-          $ref: '#/components/headers/date'
-        x-request-id:
-          $ref: '#/components/headers/x-request-id'
     ErrorUnprocessableEntity:
       description: Error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorGeneric'
-    Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-    Verification:
-      description: Single Verification object
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Verification'
-          examples:
-            Payment Instrument - Verify a Card’s CVV:
-              value:
-                id: VIvZKP8XKzxyJaxJsfAEHbw6
-                created_at: '2022-10-11T00:46:48.68Z'
-                updated_at: '2022-10-11T00:46:48.72Z'
-                application: APgPDQrLD52TYvqazjHJJchM
-                identity: null
-                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
-                merchant_identity: ID2CGJmjqyYaQAu6qyuvGeWK
-                messages: []
-                payment_instrument: PIwWisLuZNwPBoLbCgQVTCoY
-                payment_instrument_verification_details:
-                  push_to_card_domestic: NOT_SUPPORTED
-                  push_to_card_cross_border: NOT_SUPPORTED
-                  card_type: CREDIT
-                  billing_currency: USD
-                  issuer_country: USA
-                processor: DUMMY_V1
-                raw: RawDummyMerchantUnderwriteResult
-                state: SUCCEEDED
-                tags:
-                  card_name: Personal Card
-                trace_id: a7355d05-95b0-4b44-938d-bf0a99f19c17
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/verifications/VIvZKP8XKzxyJaxJsfAEHbw6
-                  application:
-                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
-                  merchant:
-                    href: https://finix.sandbox-payments-api.com/merchants/MUgWbPVvtKbzjKNNGKqdQYV7
-            Payment Instrument - Verify a Card’s Address:
-              value:
-                id: VI46ua15as1tnsWgZCFmdF9F
-                created_at: '2023-02-25T20:00:33.94Z'
-                updated_at: '2023-02-25T20:01:22.34Z'
-                application: APgPDQrLD52TYvqazjHJJchM
-                identity: null
-                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
-                merchant_identity: ID2CGJmjqyYaQAu6qyuvGeWK
-                messages: []
-                payment_instrument: PIwWisLuZNwPBoLbCgQVTCoY
-                payment_instrument_verification_details:
-                  push_to_card_domestic: NOT_SUPPORTED
-                  push_to_card_cross_border: NOT_SUPPORTED
-                  card_type: CREDIT
-                  billing_currency: USD
-                  issuer_country: USA
-                processor: DUMMY_V1
-                raw: RawDummyMerchantUnderwriteResult
-                state: SUCCEEDED
-                tags:
-                  card_name: Personal Card
-                trace_id: 3374bc71-d43b-4af4-b1f8-7719a2a9e320
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/verifications/VI46ua15as1tnsWgZCFmdF9F
-                  application:
-                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
-                  merchant:
-                    href: https://finix.sandbox-payments-api.com/merchants/MUgWbPVvtKbzjKNNGKqdQYV7
-            Payment Instrument - Verify Push-to-Card Eligibility:
-              value:
-                id: VI8fgzLc9BnY1A996vPcWnu1
-                created_at: '2023-01-01T10:51:06.18Z'
-                updated_at: '2023-01-01T10:52:15.97Z'
-                application: APgPDQrLD52TYvqazjHJJchM
-                identity: null
-                merchant: MUgWbPVvtKbzjKNNGKqdQYV7
-                merchant_identity: ID2CGJmjqyYaQAu6qyuvGeWK
-                messages: []
-                payment_instrument: PIwWisLuZNwPBoLbCgQVTCoY
-                payment_instrument_verification_details:
-                  push_to_card_domestic: FAST_FUNDS
-                  push_to_card_cross_border: NOT_SUPPORTED
-                  card_type: CREDIT
-                  billing_currency: USD
-                  issuer_country: USA
-                processor: DUMMY_V1
-                raw: RawDummyMerchantUnderwriteResult
-                state: SUCCEEDED
-                tags:
-                  card_name: Personal Card
-                trace_id: 05886388-bcb3-479f-ac31-e5404a92e1ab
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/verifications/VI8fgzLc9BnY1A996vPcWnu1
-                  application:
-                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
-                  merchant:
-                    href: https://finix.sandbox-payments-api.com/merchants/MUgWbPVvtKbzjKNNGKqdQYV7
-      headers:
-        finix-apiuser-role:
-          $ref: '#/components/headers/finix-apiuser-role'
-        date:
-          $ref: '#/components/headers/date'
-        x-request-id:
-          $ref: '#/components/headers/x-request-id'
-  parameters:
-    QueryUpdatedAtGteFilter:
-      description: Filter where `updated_at` is after the given date.
-      in: query
-      name: updated_at.gte
-      schema:
-        type: string
-      style: form
-    QueryAfterCursor:
-      name: after_cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Return every resource created after the cursor value.
-    QueryCreatedAtGteFilter:
-      description: Filter where `created_at` is after the given date.
-      in: query
-      name: created_at.gte
-      schema:
-        type: string
-        example: '2022-09-27T11:21:23'
-      style: form
-    QueryLimit:
-      description: The numbers of items to return.
-      example: 10
-      in: query
-      name: limit
-      schema:
-        type: integer
-      style: form
-    QueryBeforeCursor:
-      name: before_cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Return every resource created before the cursor value.
-    QueryIdFilter:
-      description: Filter by `id`.
-      in: query
-      name: id
-      schema:
-        type: string
-      style: form
-    QueryCreatedAtLteFilter:
-      description: Filter where `created_at` is before the given date.
-      in: query
-      name: created_at.lte
-      schema:
-        type: string
-        example: '2022-09-27T11:21:23'
-      style: form
-    QueryUpdatedAtLteFilter:
-      description: Filter where `updated_at` is before the given date.
-      in: query
-      name: updated_at.lte
-      schema:
-        type: string
-      style: form
   requestBodies:
-    UpdateMerchantRequest:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdateMerchantRequest'
-          examples:
-            Merchant - Level 2/3 Processing:
-              value:
-                level_two_level_three_data_enabled: true
-            Merchant - Buyer Charges:
-              value:
-                convenience_charges_enabled: true
-                rent_surcharges_enabled: true
-            Merchant - Disable a Merchant:
-              value:
-                processing_enabled: false
-    CreateMerchantUnderwritingRequest:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateMerchantUnderwritingRequest'
-          examples:
-            Merchant:
-              value:
-                processor: DUMMY_V1
-                tags:
-                  key_2: value_2
-            Merchant - Card Present Enabled:
-              value:
-                gateway: TRIPOS_CLOUD_V1
-                processor: VANTIV_V1
-                tags:
-                  key_2: value_2
     CreateVerificationRequest:
       content:
         application/json:
@@ -2021,6 +1988,39 @@ components:
                 merchant: MUgWbPVvtKbzjKNNGKqdQYV7
                 tags:
                   card_name: Business_Card
+    CreateMerchantUnderwritingRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateMerchantUnderwritingRequest'
+          examples:
+            Merchant:
+              value:
+                processor: DUMMY_V1
+                tags:
+                  key_2: value_2
+            Merchant - Card Present Enabled:
+              value:
+                gateway: TRIPOS_CLOUD_V1
+                processor: VANTIV_V1
+                tags:
+                  key_2: value_2
+    UpdateMerchantRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateMerchantRequest'
+          examples:
+            Merchant - Level 2/3 Processing:
+              value:
+                level_two_level_three_data_enabled: true
+            Merchant - Buyer Charges:
+              value:
+                convenience_charges_enabled: true
+                rent_surcharges_enabled: true
+            Merchant - Disable a Merchant:
+              value:
+                processing_enabled: false
   securitySchemes:
     BasicAuth:
       type: http

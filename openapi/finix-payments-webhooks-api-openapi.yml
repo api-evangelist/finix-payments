@@ -145,6 +145,13 @@ paths:
       x-python-method-name: update
 components:
   headers:
+    date:
+      schema:
+        type: string
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
     finix-apiuser-role:
       schema:
         type: string
@@ -153,210 +160,7 @@ components:
         - ROLE_PLATFORM
         - ROLE_PARTNER
         - ROLE_MERCHANT
-    date:
-      schema:
-        type: string
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
   schemas:
-    PageCursor:
-      title: PageCursor
-      x-stoplight:
-        id: 8v9on8n2939z2
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The number of entries to return.
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: The cursor to use for the next page of results.
-      description: Details the page that's returned.
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
-      title: ''
-    WebhookEnabledEvents:
-      title: WebhookEnabledEvents
-      x-stoplight:
-        id: ux7v2p72v0shw
-      type: array
-      description: A list of events the [webhook is explicitly enabled for](/guides/developers/webhooks/#webhook-event-filtering).
-      items:
-        type: object
-        properties:
-          entity:
-            type: string
-            description: The entity type for the enabled event. There can only be one enabled event object for a given entity.
-          types:
-            type: array
-            description: A list of event types you want to receive for the specified `entity`.
-            items:
-              type: string
-    ErrorGeneric:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    Error401Unauthorized:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
     Error422InvalidFieldList:
       type: object
       description: Invalid field
@@ -390,17 +194,6 @@ components:
                         properties:
                           href:
                             type: string
-    LogRef:
-      title: LogRef
-      type: object
-      properties:
-        logref:
-          type: string
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
     UpdateWebhookRequest:
       title: UpdateWebhookRequest
       x-stoplight:
@@ -415,23 +208,22 @@ components:
         url:
           type: string
           description: The HTTP or HTTPS url where the callbacks will be sent via POST request (max 120 characters).
-    ListLinks:
-      title: ListLinks
-      additionalProperties: true
-      type: object
-      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
-      properties:
-        next:
-          type: object
-          description: Link to the next page of entries.
-          properties:
-            href:
-              type: string
-        self:
-          type: object
-          description: Link to the resource that was used in the request.
-          properties:
-            href:
+    WebhookEnabledEvents:
+      title: WebhookEnabledEvents
+      x-stoplight:
+        id: ux7v2p72v0shw
+      type: array
+      description: A list of events the [webhook is explicitly enabled for](/guides/developers/webhooks/#webhook-event-filtering).
+      items:
+        type: object
+        properties:
+          entity:
+            type: string
+            description: The entity type for the enabled event. There can only be one enabled event object for a given entity.
+          types:
+            type: array
+            description: A list of event types you want to receive for the specified `entity`.
+            items:
               type: string
     CreateWebhookRequest:
       title: WebhookCreate
@@ -483,6 +275,106 @@ components:
           example: https://example.com/event_handler
       required:
       - url
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    WebhooksList:
+      type: object
+      description: '`Webhook` resource.'
+      properties:
+        page:
+          $ref: '#/components/schemas/PageCursor'
+        _embedded:
+          type: object
+          description: List of `Webhook` objects.
+          properties:
+            webhooks:
+              type: array
+              minItems: 0
+              uniqueItems: true
+              description: '`Webhook` objects.'
+              items:
+                $ref: '#/components/schemas/Webhook'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: The cursor to use for the next page of results.
+      description: Details the page that's returned.
     Webhook:
       type: object
       properties:
@@ -548,32 +440,157 @@ components:
               properties:
                 href:
                   type: string
-    WebhooksList:
+    Error406NotAcceptable:
       type: object
-      description: '`Webhook` resource.'
       properties:
-        page:
-          $ref: '#/components/schemas/PageCursor'
+        total:
+          type: integer
         _embedded:
           type: object
-          description: List of `Webhook` objects.
           properties:
-            webhooks:
+            errors:
               type: array
-              minItems: 0
-              uniqueItems: true
-              description: '`Webhook` objects.'
               items:
-                $ref: '#/components/schemas/Webhook'
-        _links:
-          $ref: '#/components/schemas/ListLinks'
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+  parameters:
+    QueryLimit:
+      description: The numbers of items to return.
+      example: 10
+      in: query
+      name: limit
+      schema:
+        type: integer
+      style: form
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
   responses:
-    ErrorUnauthorized:
-      description: Authentication information is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error401Unauthorized'
     Webhook:
       description: Single Webhook object
       content:
@@ -630,6 +647,31 @@ components:
           $ref: '#/components/headers/date'
         x-request-id:
           $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
     Error422InvalidField:
       description: Invalid field
       content:
@@ -701,69 +743,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorGeneric'
-    Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-  parameters:
-    QueryAfterCursor:
-      name: after_cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Return every resource created after the cursor value.
-    QueryLimit:
-      description: The numbers of items to return.
-      example: 10
-      in: query
-      name: limit
-      schema:
-        type: integer
-      style: form
-    QueryBeforeCursor:
-      name: before_cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Return every resource created before the cursor value.
   requestBodies:
-    UpdateWebhookRequest:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdateWebhookRequest'
-          examples:
-            Update Webhook:
-              value:
-                enabled: true
-                url: https://eohzjuj2prziycz.m.pipedream.net
-            Filter Webhook Events:
-              value:
-                enabled_events:
-                - entity: merchant
-                  types:
-                  - created
-                  - underwritten
-                - entity: transfer
-                  types:
-                  - created
     CreateWebhookRequest:
       content:
         application/json:
@@ -791,6 +771,26 @@ components:
                     token: U3VwZXIgc2VjcmV0IGVuY29kZWQgdG9rZW4=
                 enabled: true
                 url: https://example.com/event_handler
+    UpdateWebhookRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateWebhookRequest'
+          examples:
+            Update Webhook:
+              value:
+                enabled: true
+                url: https://eohzjuj2prziycz.m.pipedream.net
+            Filter Webhook Events:
+              value:
+                enabled_events:
+                - entity: merchant
+                  types:
+                  - created
+                  - underwritten
+                - entity: transfer
+                  types:
+                  - created
   securitySchemes:
     BasicAuth:
       type: http

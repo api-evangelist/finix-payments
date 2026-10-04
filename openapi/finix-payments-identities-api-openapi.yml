@@ -231,51 +231,23 @@ paths:
       x-python-method-name: list_associated_identities
       x-returns-list: true
 components:
+  headers:
+    date:
+      schema:
+        type: string
+    x-request-id:
+      description: A unique ID for this specific API request attempt.
+      schema:
+        type: string
+    finix-apiuser-role:
+      schema:
+        type: string
+        enum:
+        - ROLE_ADMIN
+        - ROLE_PLATFORM
+        - ROLE_PARTNER
+        - ROLE_MERCHANT
   parameters:
-    QueryBusinessName:
-      name: business_name
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Filter by the full business name. Partial business names are not supported.
-    QueryTitle:
-      name: title
-      in: query
-      required: false
-      schema:
-        type: string
-        example: ceo
-      description: Filter by the title if available.
-    QueryBusinessType:
-      name: business_type
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Filter by the business type. Partial business types are not supported.
-    QueryCreatedAtGteFilter:
-      description: Filter where `created_at` is after the given date.
-      in: query
-      name: created_at.gte
-      schema:
-        type: string
-        example: '2022-09-27T11:21:23'
-      style: form
-    QueryAfterCursor:
-      name: after_cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Return every resource created after the cursor value.
-    TagsValue:
-      name: tags.value
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags).
     TagsKey:
       name: tags.key
       in: query
@@ -291,28 +263,20 @@ components:
       schema:
         type: integer
       style: form
-    QueryBeforeCursor:
-      name: before_cursor
+    TagsValue:
+      name: tags.value
       in: query
       required: false
       schema:
         type: string
-      description: Return every resource created before the cursor value.
-    QueryDefaultStatementDescriptorFilter:
-      description: Filter by the `default_statement_descriptor`.
-      in: query
-      name: default_statement_descriptor
-      schema:
-        type: string
-      style: form
-    QueryLastName:
-      name: last_name
+      description: Filter by the [value of a `Tag`](https://finix.com/docs/api/overview/#section/Tags).
+    QueryBusinessName:
+      name: business_name
       in: query
       required: false
       schema:
         type: string
-        example: kline
-      description: Filter by the last name of the person associated to the `Identity`.
+      description: Filter by the full business name. Partial business names are not supported.
     QueryEmail:
       name: email
       in: query
@@ -321,13 +285,36 @@ components:
         type: string
         example: user@example.org
       description: Filter by the email address or email domain. Partial emails are not supported.
-    QueryIdFilter:
-      description: Filter by `id`.
+    QueryTitle:
+      name: title
       in: query
-      name: id
+      required: false
+      schema:
+        type: string
+        example: ceo
+      description: Filter by the title if available.
+    QueryCreatedAtGteFilter:
+      description: Filter where `created_at` is after the given date.
+      in: query
+      name: created_at.gte
+      schema:
+        type: string
+        example: '2022-09-27T11:21:23'
+      style: form
+    QueryDefaultStatementDescriptorFilter:
+      description: Filter by the `default_statement_descriptor`.
+      in: query
+      name: default_statement_descriptor
       schema:
         type: string
       style: form
+    QueryBusinessType:
+      name: business_type
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by the business type. Partial business types are not supported.
     QueryCreatedAtLteFilter:
       description: Filter where `created_at` is before the given date.
       in: query
@@ -336,6 +323,35 @@ components:
         type: string
         example: '2022-09-27T11:21:23'
       style: form
+    QueryIdFilter:
+      description: Filter by `id`.
+      in: query
+      name: id
+      schema:
+        type: string
+      style: form
+    QueryAfterCursor:
+      name: after_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created after the cursor value.
+    QueryLastName:
+      name: last_name
+      in: query
+      required: false
+      schema:
+        type: string
+        example: kline
+      description: Filter by the last name of the person associated to the `Identity`.
+    QueryBeforeCursor:
+      name: before_cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Return every resource created before the cursor value.
     QueryFirstName:
       name: first_name
       in: query
@@ -344,534 +360,39 @@ components:
         type: string
         example: Daphne
       description: Filter by the first name of the person associated to the `Identity`.
-  responses:
-    Identity:
-      description: Single Identity object
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Identity'
-          examples:
-            Identity - Merchant:
-              value:
-                id: IDezsbY5qYujV7ecdrn8psrh
-                created_at: '2022-10-11T00:37:03.02Z'
-                updated_at: '2022-10-11T00:37:03.02Z'
-                additional_underwriting_data:
-                  annual_ach_volume: 200000
-                  average_ach_transfer_amount: 200000
-                  average_card_transfer_amount: 200000
-                  business_description: SB3 vegan cafe
-                  card_volume_distribution:
-                    card_present_percentage: 30
-                    ecommerce_percentage: 60
-                    mail_order_telephone_order_percentage: 10
-                  credit_check_allowed: true
-                  credit_check_ip_address: 42.1.1.113
-                  credit_check_timestamp: '2021-04-28T16:42:55Z'
-                  credit_check_user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
-                  merchant_agreement_accepted: true
-                  merchant_agreement_ip_address: 42.1.1.113
-                  merchant_agreement_timestamp: '2021-04-28T16:42:55Z'
-                  merchant_agreement_user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6)
-                  refund_policy: MERCHANDISE_EXCHANGE_ONLY
-                  volume_distribution_by_business_type:
-                    business_to_business_volume_percentage: 100
-                    business_to_consumer_volume_percentage: 0
-                    consumer_to_consumer_volume_percentage: 0
-                    other_volume_percentage: 0
-                    person_to_person_volume_percentage: 0
-                application: APgPDQrLD52TYvqazjHJJchM
-                entity:
-                  amex_mid: null
-                  annual_card_volume: 12000000
-                  business_address:
-                    line1: 741 Douglass St
-                    line2: Apartment 8
-                    city: San Mateo
-                    region: CA
-                    postal_code: '94114'
-                    country: USA
-                  business_name: Finix Flowers
-                  business_phone: +1 (408) 756-4497
-                  business_tax_id_provided: true
-                  business_type: INDIVIDUAL_SOLE_PROPRIETORSHIP
-                  default_statement_descriptor: Finix Flowers
-                  discover_mid: null
-                  dob:
-                    day: 27
-                    month: 6
-                    year: 1978
-                  doing_business_as: Finix Flowers
-                  email: user@example.org
-                  first_name: John
-                  has_accepted_credit_cards_previously: true
-                  incorporation_date:
-                    day: 27
-                    month: 6
-                    year: 1978
-                  last_name: Smith
-                  max_transaction_amount: 12000000
-                  mcc: '4900'
-                  ownership_type: PRIVATE
-                  personal_address:
-                    line1: 741 Douglass St
-                    line2: Apartment 7
-                    city: San Mateo
-                    region: CA
-                    postal_code: '94114'
-                    country: USA
-                  phone: '14158885080'
-                  principal_percentage_ownership: 50
-                  short_business_name: null
-                  tax_authority: null
-                  tax_id_provided: true
-                  title: CEO
-                  url: https://www.finix.com
-                tags:
-                  Studio Rating: '4.7'
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh
-                  verifications:
-                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/verifications
-                  merchants:
-                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/merchants
-                  settlements:
-                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/settlements
-                  authorizations:
-                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/authorizations
-                  transfers:
-                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/transfers
-                  payment_instruments:
-                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/payment_instruments
-                  associated_identities:
-                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/associated_identities
-                  disputes:
-                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/disputes
-                  application:
-                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
-            Identity - Buyer:
-              value:
-                id: IDpcMZ7ceTy4iinCH7etmg1M
-                created_at: '2022-10-11T00:36:12.34Z'
-                updated_at: '2022-10-11T00:36:12.34Z'
-                application: APgPDQrLD52TYvqazjHJJchM
-                entity:
-                  amex_mid: null
-                  annual_card_volume: 0
-                  business_address: null
-                  business_name: null
-                  business_phone: null
-                  business_tax_id_provided: false
-                  business_type: null
-                  default_statement_descriptor: null
-                  discover_mid: null
-                  dob: null
-                  doing_business_as: null
-                  email: finix_example@finix.com
-                  first_name: John
-                  has_accepted_credit_cards_previously: false
-                  incorporation_date: null
-                  last_name: Smith
-                  max_transaction_amount: 0
-                  mcc: null
-                  ownership_type: null
-                  personal_address:
-                    line1: 741 Douglass St
-                    line2: Apartment 7
-                    city: San Mateo
-                    region: CA
-                    postal_code: '94114'
-                    country: USA
-                  phone: '7145677613'
-                  principal_percentage_ownership: null
-                  short_business_name: null
-                  tax_authority: null
-                  tax_id_provided: false
-                  title: null
-                  url: null
-                tags:
-                  key: value
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M
-                  verifications:
-                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/verifications
-                  merchants:
-                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/merchants
-                  settlements:
-                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/settlements
-                  authorizations:
-                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/authorizations
-                  transfers:
-                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/transfers
-                  payment_instruments:
-                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/payment_instruments
-                  associated_identities:
-                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/associated_identities
-                  disputes:
-                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/disputes
-                  application:
-                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
-            Associated Identity:
-              value:
-                id: ID8v1JtSq1mVoQRcaAb3SWHQ
-                created_at: '2023-01-13T07:02:49.68Z'
-                updated_at: '2023-01-13T07:02:49.68Z'
-                application: APgPDQrLD52TYvqazjHJJchM
-                entity:
-                  amex_mid: null
-                  annual_card_volume: 0
-                  business_address: null
-                  business_name: null
-                  business_phone: null
-                  business_tax_id_provided: false
-                  business_type: null
-                  default_statement_descriptor: null
-                  discover_mid: null
-                  dob: null
-                  doing_business_as: null
-                  email: null
-                  first_name: null
-                  has_accepted_credit_cards_previously: false
-                  incorporation_date: null
-                  last_name: null
-                  max_transaction_amount: 0
-                  mcc: null
-                  ownership_type: null
-                  personal_address: null
-                  phone: null
-                  principal_percentage_ownership: 25
-                  short_business_name: null
-                  tax_authority: null
-                  tax_id_provided: false
-                  title: null
-                  url: null
-                tags: {}
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ
-                  verifications:
-                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/verifications
-                  merchants:
-                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/merchants
-                  settlements:
-                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/settlements
-                  authorizations:
-                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/authorizations
-                  transfers:
-                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/transfers
-                  payment_instruments:
-                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/payment_instruments
-                  associated_identities:
-                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/associated_identities
-                  disputes:
-                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/disputes
-                  application:
-                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
-      headers:
-        finix-apiuser-role:
-          $ref: '#/components/headers/finix-apiuser-role'
-        date:
-          $ref: '#/components/headers/date'
-        x-request-id:
-          $ref: '#/components/headers/x-request-id'
-    ErrorUnauthorized:
-      description: Authentication information is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error401Unauthorized'
-    IdentitiesList:
-      description: List of Identity objects
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IdentitiesList'
-          examples:
-            List of Identities:
-              value:
-                _embedded:
-                  identities:
-                  - id: IDrNRsZ2miEQcmGHCpo4rBQr
-                    created_at: '2022-08-16T18:44:27.46Z'
-                    updated_at: '2022-08-16T18:44:27.46Z'
-                    application: APgPDQrLD52TYvqazjHJJchM
-                    entity:
-                      amex_mid: null
-                      annual_card_volume: 12000000
-                      business_address:
-                        line1: 741 Douglass St
-                        line2: Apartment 8
-                        city: San Mateo
-                        region: CA
-                        postal_code: '94114'
-                        country: USA
-                      business_name: Petes Coffee
-                      business_phone: +1 (408) 756-4497
-                      business_tax_id_provided: true
-                      business_type: INDIVIDUAL_SOLE_PROPRIETORSHIP
-                      default_statement_descriptor: Petes Coffee
-                      discover_mid: null
-                      dob:
-                        day: 27
-                        month: 6
-                        year: 1978
-                      doing_business_as: Petes Coffee
-                      email: user@example.org
-                      first_name: dwayne
-                      has_accepted_credit_cards_previously: true
-                      incorporation_date:
-                        day: 27
-                        month: 6
-                        year: 1978
-                      last_name: xbc
-                      max_transaction_amount: 12000000
-                      mcc: '4900'
-                      ownership_type: PRIVATE
-                      personal_address:
-                        line1: 741 Douglass St
-                        line2: Apartment 7
-                        city: San Mateo
-                        region: CA
-                        postal_code: '94114'
-                        country: USA
-                      phone: '14158885080'
-                      principal_percentage_ownership: 50
-                      short_business_name: null
-                      tax_authority: null
-                      tax_id_provided: true
-                      title: CEO
-                      url: www.PetesCoffee.com
-                    tags:
-                      test_key_103: test_val_103
-                    _links:
-                      self:
-                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr
-                      verifications:
-                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/verifications
-                      merchants:
-                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/merchants
-                      settlements:
-                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/settlements
-                      authorizations:
-                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/authorizations
-                      transfers:
-                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/transfers
-                      payment_instruments:
-                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/payment_instruments
-                      associated_identities:
-                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/associated_identities
-                      disputes:
-                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/disputes
-                      application:
-                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
-                _links:
-                  self:
-                    href: https://finix.sandbox-payments-api.com/identities/IDf33pdVaTZGXVFNccdKvaPu/associated_identities?offset=0&limit=20&sort=created_at,desc&sort=id,desc
-                page:
-                  offset: 0
-                  limit: 20
-                  count: 1
-      headers:
-        finix-apiuser-role:
-          $ref: '#/components/headers/finix-apiuser-role'
-        date:
-          $ref: '#/components/headers/date'
-        x-request-id:
-          $ref: '#/components/headers/x-request-id'
-    ErrorUnprocessableEntity:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorGeneric'
-    Error406NotAcceptable:
-      description: Not Acceptable
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error406NotAcceptable'
-          examples: {}
-    ErrorNotFound:
-      description: Object does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404NotFoundList'
-    ErrorForbidden403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403ForbiddenList'
-  headers:
-    finix-apiuser-role:
-      schema:
-        type: string
-        enum:
-        - ROLE_ADMIN
-        - ROLE_PLATFORM
-        - ROLE_PARTNER
-        - ROLE_MERCHANT
-    date:
-      schema:
-        type: string
-    x-request-id:
-      description: A unique ID for this specific API request attempt.
-      schema:
-        type: string
   schemas:
-    PageCursor:
-      title: PageCursor
-      x-stoplight:
-        id: 8v9on8n2939z2
+    Tags:
+      type:
+      - object
+      - 'null'
+      title: tags
+      additionalProperties:
+        type: string
+      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
+
+        - Maximum character length for individual `keys` is 40.
+
+        - Maximum character length for individual **values** is 500.
+
+
+        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
+    IdentitiesList:
       type: object
       properties:
-        limit:
-          type: integer
-          description: The number of entries to return.
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: The cursor to use for the next page of results.
-      description: Details the page that's returned.
-    CreatedAt:
-      type: string
-      title: CreatedAt
-      format: date-time
-      description: Timestamp of when the object was created.
-    Error403ForbiddenList:
-      type: object
-      properties:
-        total:
-          type: integer
+        page:
+          $ref: '#/components/schemas/PageCursor'
         _embedded:
           type: object
+          description: List of `Identity` resources.
           properties:
-            errors:
+            identities:
               type: array
+              uniqueItems: true
+              description: An `Identity` resource represents either a person or business in Finix.
               items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      description: ''
-      title: ''
-    ErrorGeneric:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - FORBIDDEN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    Error401Unauthorized:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - UNKNOWN
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    additionalProperties: true
-                    properties:
-                      self:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    Error406NotAcceptable:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-      title: ''
+                $ref: '#/components/schemas/Identity'
+        _links:
+          $ref: '#/components/schemas/ListLinks'
     CreateAssociatedIdentityRequest:
       x-examples: {}
       type: object
@@ -1055,395 +576,6 @@ components:
               description: The URL of the `Identity` owner's public website.
         tags:
           $ref: '#/components/schemas/Tags'
-    Error404NotFoundList:
-      type: object
-      properties:
-        total:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  code:
-                    type: string
-                    enum:
-                    - NOT_FOUND
-                  logref:
-                    $ref: '#/components/schemas/LogRef'
-                  message:
-                    type: string
-                  _links:
-                    type: object
-                    properties:
-                      source:
-                        type: object
-                        properties:
-                          href:
-                            type: string
-    LogRef:
-      title: LogRef
-      type: object
-      properties:
-        logref:
-          type: string
-    CreateIdentityRequest:
-      type: object
-      properties:
-        additional_underwriting_data:
-          type:
-          - object
-          - 'null'
-          description: "- Additional underwriting details required to verify `Identities`. \n- Required for any `Merchants` onboarded by Finix Flex customers. If you have any questions, please contact [Finix Support](/guides/business/support-at-finix/)."
-          properties:
-            annual_ach_volume:
-              type: integer
-              description: The approximate annual ACH sales expected to be processed (in cents) by this merchant (max 10 characters).
-            average_ach_transfer_amount:
-              type: integer
-              description: The approximate average ACH sale amount (in cents) for this merchant.
-            average_card_transfer_amount:
-              type: integer
-              description: The average credit card sale amount (in cents) for this merchant.
-            business_description:
-              type: string
-              description: Description of this merchant's business (max 200 characters).
-            card_volume_distribution:
-              type: object
-              description: The distribution of the merchant's credit card volume The sum of `card_volume_distribution` must be 100.
-              properties:
-                card_present_percentage:
-                  type: integer
-                  description: The percentage of the merchant's volume that's card present (between 0 and 100).
-                mail_order_telephone_order_percentage:
-                  type: integer
-                  description: The percentage of the merchant's business that is a mail order or telephone order (between 0 and 100).
-                ecommerce_percentage:
-                  type: integer
-                  description: The percentage of the merchant's business that is eCommerce (between 0 and 100).
-            credit_check_allowed:
-              type: boolean
-              description: Sets if this merchant has consented and accepted to a credit check.
-            credit_check_ip_address:
-              type: string
-              description: The IP address of the merchant when they consented to a credit check (e.g., 42.1.1.113 ).
-              minLength: 1
-            credit_check_timestamp:
-              type: string
-              minLength: 1
-              description: A timestamp of when this merchant consented to a credit check (e.g., 2021-04-28T16:42:55Z).
-            credit_check_user_agent:
-              type: string
-              minLength: 1
-              description: The details of the browser that was used when this merchant consented to a credit check (e.g., Mozilla 5.0 (Macintosh; Intel Mac OS X 10 _14_6)).
-            merchant_agreement_accepted:
-              type: boolean
-              description: Sets whether this merchant has accepted the terms and conditions of the merchant agreement.
-            merchant_agreement_ip_address:
-              type: string
-              description: IP address of the merchant when this merchant accepted the merchant agreement (e.g., 42.1.1.113).
-              minLength: 1
-            merchant_agreement_timestamp:
-              type: string
-              minLength: 1
-              description: Sets if this merchant has consented and accepted to a credit check.
-            merchant_agreement_user_agent:
-              type: string
-              description: The details of the browser that was used when this merchant accepted Finix's Terms of Service (e.g., Mozilla 5.0 (Macintosh; Intel Mac OS X 10 _14_6)).
-              minLength: 1
-            refund_policy:
-              type: string
-              description: The details of the browser that was used when this merchant consented to a credit check (e.g., Mozilla 5.0 (Macintosh; Intel Mac OS X 10 _14_6)).
-              enum:
-              - NO_REFUNDS
-              - MERCHANDISE_EXCHANGE_ONLY
-              - 30_DAYS
-              - OTHER
-            volume_distribution_by_business_type:
-              type: object
-              description: IP address of the merchant when this merchant accepted the merchant agreement (e.g., 42.1.1.113).
-              properties:
-                other_volume_percentage:
-                  type: integer
-                  description: The percentage of the merchant's volume that isn't represented by the previous fields (between 0 and 100).
-                consumer_to_consumer_volume_percentage:
-                  type: integer
-                  description: Merchant's percentage of volume that is consumer to consumer (between 0 and 100).
-                business_to_consumer_volume_percentage:
-                  type: integer
-                  description: The percentage of the merchant's volume that's business to consumer (between 0 and 100).
-                business_to_business_volume_percentage:
-                  type: integer
-                  description: The percentage of the merchant's volume that's business to business (between 0 and 100).
-                person_to_person_volume_percentage:
-                  type: integer
-                  description: The percentage of the merchant's volume that's person to person (between 0 and 100).
-        entity:
-          type: object
-          description: The underwriting details required to verify `Identities`.
-          properties:
-            annual_card_volume:
-              type: integer
-              description: The annual credit card sales (in cents) expected to be processed (max 19 characters).
-            business_address:
-              type:
-              - object
-              - 'null'
-              description: The primary address for the legal entity.
-              required:
-              - city
-              - country
-              - region
-              - line1
-              - postal_code
-              properties:
-                city:
-                  type: string
-                  minLength: 1
-                  description: City (max 20 characters).
-                country:
-                  type: string
-                  minLength: 1
-                  description: 3-Letter Country code (e.g. USA).
-                region:
-                  type: string
-                  minLength: 1
-                  description: 2-letter state code.
-                line2:
-                  type: string
-                  minLength: 1
-                  description: Second line of the address (max 35 characters).
-                line1:
-                  type: string
-                  minLength: 1
-                  description: First line of the address (max 35 characters).
-                postal_code:
-                  type: string
-                  minLength: 1
-                  description: Zip or Postal code (max 7 characters).
-            business_name:
-              type:
-              - string
-              - 'null'
-              description: The merchant's legal business name (max 120 characters).<ul><li>If **INDIVIDUAL_SOLE_PROPRIETORSHIP**, pass the owner's legal first name, last name and middle initial.</li><li>Special characters (e.g., <code>.</code><code>,</code><code>_</code><code>-</code><code>?</code><code>+</code><code>*</code> or <code>/</code>.) are not allowed.</li></ul>
-            business_phone:
-              type: string
-              description: Customer service phone number where the merchant can be reached (max 10 characters).
-            business_tax_id:
-              type: string
-              description: Nine digit Tax Identification Number (TIN), Employer Identification Number (EIN). If the `business_type` is **INDIVIDUAL\_SOLE\_PROPRIETORSHIP** and they do not have an EIN, use the sole proprietor's Social Security Number (SSN).
-            business_type:
-              type: string
-              description: The business entity type of the Merchant.
-              enum:
-              - INDIVIDUAL_SOLE_PROPRIETORSHIP
-              - CORPORATION
-              - LIMITED_LIABILITY_COMPANY
-              - PARTNERSHIP
-              - ASSOCIATION_ESTATE_TRUST
-              - TAX_EXEMPT_ORGANIZATION
-              - INTERNATIONAL_ORGANIZATION
-              - GOVERNMENT_AGENCY
-            default_statement_descriptor:
-              type: string
-              description: The description of the merchant that appears on the buyer's bank or card statement.
-            dob:
-              type: object
-              description: The control owner's date of birth.
-              required:
-              - day
-              - month
-              - year
-              properties:
-                day:
-                  type: integer
-                  description: Day of birth (between 1 and 31).
-                month:
-                  type: integer
-                  description: Month of birth (between 1 and 12).
-                year:
-                  type: integer
-                  description: Year of birth (4-digit). Year must be greater than 1900
-            doing_business_as:
-              type: string
-              description: Alternate names of the business. If there are no other names, pass the same value used for `business_name` (max 60 characters).
-            email:
-              type: string
-              description: The email address of the buyer where they can be reached (max 100 characters).
-            first_name:
-              type: string
-              description: The legal first name of the buyer (max 20 characters).
-            has_accepted_credit_cards_previously:
-              type: boolean
-              description: Defaults to **false** if not passed.
-            incorporation_date:
-              type:
-              - object
-              - 'null'
-              description: The date the company was founded and registered.
-              required:
-              - day
-              - month
-              - year
-              properties:
-                day:
-                  type: integer
-                  description: Day business was incorporated (between 1 and 31).
-                month:
-                  type: integer
-                  description: Month business was incorporated (between 1 and 12).
-                year:
-                  type: integer
-                  description: Year business was incorporated (4-digit).
-            last_name:
-              type: string
-              description: The legal last name of the buyer (max 20 characters).
-            max_transaction_amount:
-              type: integer
-              description: The maximum amount (in cents) that can be charged for a single transaction (max 12 characters).
-            ach_max_transaction_amount:
-              type: integer
-              description: The maximum amount (in cents) that can be charged for a single ACH transaction (max 12 characters).
-            mcc:
-              type: string
-              description: The Merchant Category Code ([MCC](http://www.dm.usda.gov/procurement/card/card\_x/mcc.pdf)) that this merchant will be classified under. For a list of approved MCCs, see [Approved Merchant Category Codes.](/docs/guides/business/security-and-compliance/approved-merchants/)
-            ownership_type:
-              type:
-              - string
-              - 'null'
-              description: "Avalible values include: <ul><li><strong>PUBLIC</strong> to indicate a publicly-traded company.<li><strong>PRIVATE</strong> for privately-held businesses.\n\nFor `business_type` of **GOVERNMENT_AGENCY** and **TAX_EXEMPT_ORGANIZATION** the `ownership_type` should be set to **PUBLIC**. \nFor `business_type` **INDIVIDUAL_SOLE_PROPRIETORSHIP**, the `ownership_type` should be set to **PRIVATE**."
-              enum:
-              - PUBLIC
-              - PRIVATE
-            personal_address:
-              type: object
-              description: The billing address of the buyer. This field is used for identity verification purposes.
-              required:
-              - city
-              - country
-              - line1
-              - postal_code
-              - region
-              properties:
-                city:
-                  type: string
-                  description: City (max 20 characters).
-                country:
-                  type: string
-                  description: 3-Letter country code (e.g. USA).
-                line1:
-                  type: string
-                  description: First line of the address (max 35 characters).
-                line2:
-                  type: string
-                  description: Second line of the address (max 35 characters).
-                postal_code:
-                  type: string
-                  description: Zip or Postal code (max 7 characters).
-                region:
-                  type: string
-                  description: 2-letter State code.
-            phone:
-              type: string
-              description: Phone number where the buyer can be reached.
-            principal_percentage_ownership:
-              type: integer
-              description: Percentage of the company owned by the principal control owner (min 0; max 100).
-            tax_id:
-              type: string
-              description: Pass one of the following values (nine digits):<ul><li>Social Security Number (SSN)<li>Tax Identification Number (TIN)<li>Individual Taxpayer Identification Number (ITIN)</ul>
-            title:
-              type: string
-              description: The corporate title of the control owner (e.g. Chief Executive Officer, CFO, etc. Max 60 characters).
-            url:
-              type: string
-              description: The URL of the merchant's public website.
-          required:
-          - annual_card_volume
-          - business_address
-          - business_name
-          - business_phone
-          - business_tax_id
-          - business_type
-          - default_statement_descriptor
-          - dob
-          - doing_business_as
-          - email
-          - first_name
-          - has_accepted_credit_cards_previously
-          - incorporation_date
-          - last_name
-          - max_transaction_amount
-          - ach_max_transaction_amount
-          - mcc
-          - ownership_type
-          - personal_address
-          - phone
-          - principal_percentage_ownership
-          - tax_id
-          - title
-          - url
-        tags:
-          $ref: '#/components/schemas/Tags'
-    IdentitiesList:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/PageCursor'
-        _embedded:
-          type: object
-          description: List of `Identity` resources.
-          properties:
-            identities:
-              type: array
-              uniqueItems: true
-              description: An `Identity` resource represents either a person or business in Finix.
-              items:
-                $ref: '#/components/schemas/Identity'
-        _links:
-          $ref: '#/components/schemas/ListLinks'
-    UpdatedAt:
-      type: string
-      title: UpdatedAt
-      format: date-time
-      description: Timestamp of when the object was last updated.
-    Tags:
-      type:
-      - object
-      - 'null'
-      title: tags
-      additionalProperties:
-        type: string
-      description: 'Include up to 50 `key`: **value** pairs to annotate requests with custom metadata.
-
-        - Maximum character length for individual `keys` is 40.
-
-        - Maximum character length for individual **values** is 500.
-
-
-        (e.g., `order number`: **25**, `item_type`: **produce**, `department`: **sales**, etc.)'
-    ListLinks:
-      title: ListLinks
-      additionalProperties: true
-      type: object
-      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
-      properties:
-        next:
-          type: object
-          description: Link to the next page of entries.
-          properties:
-            href:
-              type: string
-        self:
-          type: object
-          description: Link to the resource that was used in the request.
-          properties:
-            href:
-              type: string
     Identity:
       description: ''
       x-examples:
@@ -2247,6 +1379,874 @@ components:
               description: The URL of the `Identity` owner's public website.
         tags:
           $ref: '#/components/schemas/Tags'
+    UpdatedAt:
+      type: string
+      title: UpdatedAt
+      format: date-time
+      description: Timestamp of when the object was last updated.
+    LogRef:
+      title: LogRef
+      type: object
+      properties:
+        logref:
+          type: string
+    CreateIdentityRequest:
+      type: object
+      properties:
+        additional_underwriting_data:
+          type:
+          - object
+          - 'null'
+          description: "- Additional underwriting details required to verify `Identities`. \n- Required for any `Merchants` onboarded by Finix Flex customers. If you have any questions, please contact [Finix Support](/guides/business/support-at-finix/)."
+          properties:
+            annual_ach_volume:
+              type: integer
+              description: The approximate annual ACH sales expected to be processed (in cents) by this merchant (max 10 characters).
+            average_ach_transfer_amount:
+              type: integer
+              description: The approximate average ACH sale amount (in cents) for this merchant.
+            average_card_transfer_amount:
+              type: integer
+              description: The average credit card sale amount (in cents) for this merchant.
+            business_description:
+              type: string
+              description: Description of this merchant's business (max 200 characters).
+            card_volume_distribution:
+              type: object
+              description: The distribution of the merchant's credit card volume The sum of `card_volume_distribution` must be 100.
+              properties:
+                card_present_percentage:
+                  type: integer
+                  description: The percentage of the merchant's volume that's card present (between 0 and 100).
+                mail_order_telephone_order_percentage:
+                  type: integer
+                  description: The percentage of the merchant's business that is a mail order or telephone order (between 0 and 100).
+                ecommerce_percentage:
+                  type: integer
+                  description: The percentage of the merchant's business that is eCommerce (between 0 and 100).
+            credit_check_allowed:
+              type: boolean
+              description: Sets if this merchant has consented and accepted to a credit check.
+            credit_check_ip_address:
+              type: string
+              description: The IP address of the merchant when they consented to a credit check (e.g., 42.1.1.113 ).
+              minLength: 1
+            credit_check_timestamp:
+              type: string
+              minLength: 1
+              description: A timestamp of when this merchant consented to a credit check (e.g., 2021-04-28T16:42:55Z).
+            credit_check_user_agent:
+              type: string
+              minLength: 1
+              description: The details of the browser that was used when this merchant consented to a credit check (e.g., Mozilla 5.0 (Macintosh; Intel Mac OS X 10 _14_6)).
+            merchant_agreement_accepted:
+              type: boolean
+              description: Sets whether this merchant has accepted the terms and conditions of the merchant agreement.
+            merchant_agreement_ip_address:
+              type: string
+              description: IP address of the merchant when this merchant accepted the merchant agreement (e.g., 42.1.1.113).
+              minLength: 1
+            merchant_agreement_timestamp:
+              type: string
+              minLength: 1
+              description: Sets if this merchant has consented and accepted to a credit check.
+            merchant_agreement_user_agent:
+              type: string
+              description: The details of the browser that was used when this merchant accepted Finix's Terms of Service (e.g., Mozilla 5.0 (Macintosh; Intel Mac OS X 10 _14_6)).
+              minLength: 1
+            refund_policy:
+              type: string
+              description: The details of the browser that was used when this merchant consented to a credit check (e.g., Mozilla 5.0 (Macintosh; Intel Mac OS X 10 _14_6)).
+              enum:
+              - NO_REFUNDS
+              - MERCHANDISE_EXCHANGE_ONLY
+              - 30_DAYS
+              - OTHER
+            volume_distribution_by_business_type:
+              type: object
+              description: IP address of the merchant when this merchant accepted the merchant agreement (e.g., 42.1.1.113).
+              properties:
+                other_volume_percentage:
+                  type: integer
+                  description: The percentage of the merchant's volume that isn't represented by the previous fields (between 0 and 100).
+                consumer_to_consumer_volume_percentage:
+                  type: integer
+                  description: Merchant's percentage of volume that is consumer to consumer (between 0 and 100).
+                business_to_consumer_volume_percentage:
+                  type: integer
+                  description: The percentage of the merchant's volume that's business to consumer (between 0 and 100).
+                business_to_business_volume_percentage:
+                  type: integer
+                  description: The percentage of the merchant's volume that's business to business (between 0 and 100).
+                person_to_person_volume_percentage:
+                  type: integer
+                  description: The percentage of the merchant's volume that's person to person (between 0 and 100).
+        entity:
+          type: object
+          description: The underwriting details required to verify `Identities`.
+          properties:
+            annual_card_volume:
+              type: integer
+              description: The annual credit card sales (in cents) expected to be processed (max 19 characters).
+            business_address:
+              type:
+              - object
+              - 'null'
+              description: The primary address for the legal entity.
+              required:
+              - city
+              - country
+              - region
+              - line1
+              - postal_code
+              properties:
+                city:
+                  type: string
+                  minLength: 1
+                  description: City (max 20 characters).
+                country:
+                  type: string
+                  minLength: 1
+                  description: 3-Letter Country code (e.g. USA).
+                region:
+                  type: string
+                  minLength: 1
+                  description: 2-letter state code.
+                line2:
+                  type: string
+                  minLength: 1
+                  description: Second line of the address (max 35 characters).
+                line1:
+                  type: string
+                  minLength: 1
+                  description: First line of the address (max 35 characters).
+                postal_code:
+                  type: string
+                  minLength: 1
+                  description: Zip or Postal code (max 7 characters).
+            business_name:
+              type:
+              - string
+              - 'null'
+              description: The merchant's legal business name (max 120 characters).<ul><li>If **INDIVIDUAL_SOLE_PROPRIETORSHIP**, pass the owner's legal first name, last name and middle initial.</li><li>Special characters (e.g., <code>.</code><code>,</code><code>_</code><code>-</code><code>?</code><code>+</code><code>*</code> or <code>/</code>.) are not allowed.</li></ul>
+            business_phone:
+              type: string
+              description: Customer service phone number where the merchant can be reached (max 10 characters).
+            business_tax_id:
+              type: string
+              description: Nine digit Tax Identification Number (TIN), Employer Identification Number (EIN). If the `business_type` is **INDIVIDUAL\_SOLE\_PROPRIETORSHIP** and they do not have an EIN, use the sole proprietor's Social Security Number (SSN).
+            business_type:
+              type: string
+              description: The business entity type of the Merchant.
+              enum:
+              - INDIVIDUAL_SOLE_PROPRIETORSHIP
+              - CORPORATION
+              - LIMITED_LIABILITY_COMPANY
+              - PARTNERSHIP
+              - ASSOCIATION_ESTATE_TRUST
+              - TAX_EXEMPT_ORGANIZATION
+              - INTERNATIONAL_ORGANIZATION
+              - GOVERNMENT_AGENCY
+            default_statement_descriptor:
+              type: string
+              description: The description of the merchant that appears on the buyer's bank or card statement.
+            dob:
+              type: object
+              description: The control owner's date of birth.
+              required:
+              - day
+              - month
+              - year
+              properties:
+                day:
+                  type: integer
+                  description: Day of birth (between 1 and 31).
+                month:
+                  type: integer
+                  description: Month of birth (between 1 and 12).
+                year:
+                  type: integer
+                  description: Year of birth (4-digit). Year must be greater than 1900
+            doing_business_as:
+              type: string
+              description: Alternate names of the business. If there are no other names, pass the same value used for `business_name` (max 60 characters).
+            email:
+              type: string
+              description: The email address of the buyer where they can be reached (max 100 characters).
+            first_name:
+              type: string
+              description: The legal first name of the buyer (max 20 characters).
+            has_accepted_credit_cards_previously:
+              type: boolean
+              description: Defaults to **false** if not passed.
+            incorporation_date:
+              type:
+              - object
+              - 'null'
+              description: The date the company was founded and registered.
+              required:
+              - day
+              - month
+              - year
+              properties:
+                day:
+                  type: integer
+                  description: Day business was incorporated (between 1 and 31).
+                month:
+                  type: integer
+                  description: Month business was incorporated (between 1 and 12).
+                year:
+                  type: integer
+                  description: Year business was incorporated (4-digit).
+            last_name:
+              type: string
+              description: The legal last name of the buyer (max 20 characters).
+            max_transaction_amount:
+              type: integer
+              description: The maximum amount (in cents) that can be charged for a single transaction (max 12 characters).
+            ach_max_transaction_amount:
+              type: integer
+              description: The maximum amount (in cents) that can be charged for a single ACH transaction (max 12 characters).
+            mcc:
+              type: string
+              description: The Merchant Category Code ([MCC](http://www.dm.usda.gov/procurement/card/card\_x/mcc.pdf)) that this merchant will be classified under. For a list of approved MCCs, see [Approved Merchant Category Codes.](/docs/guides/business/security-and-compliance/approved-merchants/)
+            ownership_type:
+              type:
+              - string
+              - 'null'
+              description: "Avalible values include: <ul><li><strong>PUBLIC</strong> to indicate a publicly-traded company.<li><strong>PRIVATE</strong> for privately-held businesses.\n\nFor `business_type` of **GOVERNMENT_AGENCY** and **TAX_EXEMPT_ORGANIZATION** the `ownership_type` should be set to **PUBLIC**. \nFor `business_type` **INDIVIDUAL_SOLE_PROPRIETORSHIP**, the `ownership_type` should be set to **PRIVATE**."
+              enum:
+              - PUBLIC
+              - PRIVATE
+            personal_address:
+              type: object
+              description: The billing address of the buyer. This field is used for identity verification purposes.
+              required:
+              - city
+              - country
+              - line1
+              - postal_code
+              - region
+              properties:
+                city:
+                  type: string
+                  description: City (max 20 characters).
+                country:
+                  type: string
+                  description: 3-Letter country code (e.g. USA).
+                line1:
+                  type: string
+                  description: First line of the address (max 35 characters).
+                line2:
+                  type: string
+                  description: Second line of the address (max 35 characters).
+                postal_code:
+                  type: string
+                  description: Zip or Postal code (max 7 characters).
+                region:
+                  type: string
+                  description: 2-letter State code.
+            phone:
+              type: string
+              description: Phone number where the buyer can be reached.
+            principal_percentage_ownership:
+              type: integer
+              description: Percentage of the company owned by the principal control owner (min 0; max 100).
+            tax_id:
+              type: string
+              description: Pass one of the following values (nine digits):<ul><li>Social Security Number (SSN)<li>Tax Identification Number (TIN)<li>Individual Taxpayer Identification Number (ITIN)</ul>
+            title:
+              type: string
+              description: The corporate title of the control owner (e.g. Chief Executive Officer, CFO, etc. Max 60 characters).
+            url:
+              type: string
+              description: The URL of the merchant's public website.
+          required:
+          - annual_card_volume
+          - business_address
+          - business_name
+          - business_phone
+          - business_tax_id
+          - business_type
+          - default_statement_descriptor
+          - dob
+          - doing_business_as
+          - email
+          - first_name
+          - has_accepted_credit_cards_previously
+          - incorporation_date
+          - last_name
+          - max_transaction_amount
+          - ach_max_transaction_amount
+          - mcc
+          - ownership_type
+          - personal_address
+          - phone
+          - principal_percentage_ownership
+          - tax_id
+          - title
+          - url
+        tags:
+          $ref: '#/components/schemas/Tags'
+    CreatedAt:
+      type: string
+      title: CreatedAt
+      format: date-time
+      description: Timestamp of when the object was created.
+    ListLinks:
+      title: ListLinks
+      additionalProperties: true
+      type: object
+      description: For your convenience, every response includes several URLs which link to resources relevant to the request. You can use these `_links` to make your follow-up requests and quickly access relevant IDs.
+      properties:
+        next:
+          type: object
+          description: Link to the next page of entries.
+          properties:
+            href:
+              type: string
+        self:
+          type: object
+          description: Link to the resource that was used in the request.
+          properties:
+            href:
+              type: string
+    Error403ForbiddenList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: ''
+      title: ''
+    PageCursor:
+      title: PageCursor
+      x-stoplight:
+        id: 8v9on8n2939z2
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The number of entries to return.
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: The cursor to use for the next page of results.
+      description: Details the page that's returned.
+    Error406NotAcceptable:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      title: ''
+    Error401Unauthorized:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - UNKNOWN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    Error404NotFoundList:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - NOT_FOUND
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+    ErrorGeneric:
+      type: object
+      properties:
+        total:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - FORBIDDEN
+                  logref:
+                    $ref: '#/components/schemas/LogRef'
+                  message:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      source:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+  responses:
+    Identity:
+      description: Single Identity object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Identity'
+          examples:
+            Identity - Merchant:
+              value:
+                id: IDezsbY5qYujV7ecdrn8psrh
+                created_at: '2022-10-11T00:37:03.02Z'
+                updated_at: '2022-10-11T00:37:03.02Z'
+                additional_underwriting_data:
+                  annual_ach_volume: 200000
+                  average_ach_transfer_amount: 200000
+                  average_card_transfer_amount: 200000
+                  business_description: SB3 vegan cafe
+                  card_volume_distribution:
+                    card_present_percentage: 30
+                    ecommerce_percentage: 60
+                    mail_order_telephone_order_percentage: 10
+                  credit_check_allowed: true
+                  credit_check_ip_address: 42.1.1.113
+                  credit_check_timestamp: '2021-04-28T16:42:55Z'
+                  credit_check_user_agent: Mozilla 5.0(Macintosh; IntelMac OS X 10 _14_6)
+                  merchant_agreement_accepted: true
+                  merchant_agreement_ip_address: 42.1.1.113
+                  merchant_agreement_timestamp: '2021-04-28T16:42:55Z'
+                  merchant_agreement_user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6)
+                  refund_policy: MERCHANDISE_EXCHANGE_ONLY
+                  volume_distribution_by_business_type:
+                    business_to_business_volume_percentage: 100
+                    business_to_consumer_volume_percentage: 0
+                    consumer_to_consumer_volume_percentage: 0
+                    other_volume_percentage: 0
+                    person_to_person_volume_percentage: 0
+                application: APgPDQrLD52TYvqazjHJJchM
+                entity:
+                  amex_mid: null
+                  annual_card_volume: 12000000
+                  business_address:
+                    line1: 741 Douglass St
+                    line2: Apartment 8
+                    city: San Mateo
+                    region: CA
+                    postal_code: '94114'
+                    country: USA
+                  business_name: Finix Flowers
+                  business_phone: +1 (408) 756-4497
+                  business_tax_id_provided: true
+                  business_type: INDIVIDUAL_SOLE_PROPRIETORSHIP
+                  default_statement_descriptor: Finix Flowers
+                  discover_mid: null
+                  dob:
+                    day: 27
+                    month: 6
+                    year: 1978
+                  doing_business_as: Finix Flowers
+                  email: user@example.org
+                  first_name: John
+                  has_accepted_credit_cards_previously: true
+                  incorporation_date:
+                    day: 27
+                    month: 6
+                    year: 1978
+                  last_name: Smith
+                  max_transaction_amount: 12000000
+                  mcc: '4900'
+                  ownership_type: PRIVATE
+                  personal_address:
+                    line1: 741 Douglass St
+                    line2: Apartment 7
+                    city: San Mateo
+                    region: CA
+                    postal_code: '94114'
+                    country: USA
+                  phone: '14158885080'
+                  principal_percentage_ownership: 50
+                  short_business_name: null
+                  tax_authority: null
+                  tax_id_provided: true
+                  title: CEO
+                  url: https://www.finix.com
+                tags:
+                  Studio Rating: '4.7'
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/verifications
+                  merchants:
+                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/merchants
+                  settlements:
+                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/settlements
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/transfers
+                  payment_instruments:
+                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/payment_instruments
+                  associated_identities:
+                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/associated_identities
+                  disputes:
+                    href: https://finix.sandbox-payments-api.com/identities/IDezsbY5qYujV7ecdrn8psrh/disputes
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+            Identity - Buyer:
+              value:
+                id: IDpcMZ7ceTy4iinCH7etmg1M
+                created_at: '2022-10-11T00:36:12.34Z'
+                updated_at: '2022-10-11T00:36:12.34Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                entity:
+                  amex_mid: null
+                  annual_card_volume: 0
+                  business_address: null
+                  business_name: null
+                  business_phone: null
+                  business_tax_id_provided: false
+                  business_type: null
+                  default_statement_descriptor: null
+                  discover_mid: null
+                  dob: null
+                  doing_business_as: null
+                  email: finix_example@finix.com
+                  first_name: John
+                  has_accepted_credit_cards_previously: false
+                  incorporation_date: null
+                  last_name: Smith
+                  max_transaction_amount: 0
+                  mcc: null
+                  ownership_type: null
+                  personal_address:
+                    line1: 741 Douglass St
+                    line2: Apartment 7
+                    city: San Mateo
+                    region: CA
+                    postal_code: '94114'
+                    country: USA
+                  phone: '7145677613'
+                  principal_percentage_ownership: null
+                  short_business_name: null
+                  tax_authority: null
+                  tax_id_provided: false
+                  title: null
+                  url: null
+                tags:
+                  key: value
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/verifications
+                  merchants:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/merchants
+                  settlements:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/settlements
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/transfers
+                  payment_instruments:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/payment_instruments
+                  associated_identities:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/associated_identities
+                  disputes:
+                    href: https://finix.sandbox-payments-api.com/identities/IDpcMZ7ceTy4iinCH7etmg1M/disputes
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+            Associated Identity:
+              value:
+                id: ID8v1JtSq1mVoQRcaAb3SWHQ
+                created_at: '2023-01-13T07:02:49.68Z'
+                updated_at: '2023-01-13T07:02:49.68Z'
+                application: APgPDQrLD52TYvqazjHJJchM
+                entity:
+                  amex_mid: null
+                  annual_card_volume: 0
+                  business_address: null
+                  business_name: null
+                  business_phone: null
+                  business_tax_id_provided: false
+                  business_type: null
+                  default_statement_descriptor: null
+                  discover_mid: null
+                  dob: null
+                  doing_business_as: null
+                  email: null
+                  first_name: null
+                  has_accepted_credit_cards_previously: false
+                  incorporation_date: null
+                  last_name: null
+                  max_transaction_amount: 0
+                  mcc: null
+                  ownership_type: null
+                  personal_address: null
+                  phone: null
+                  principal_percentage_ownership: 25
+                  short_business_name: null
+                  tax_authority: null
+                  tax_id_provided: false
+                  title: null
+                  url: null
+                tags: {}
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ
+                  verifications:
+                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/verifications
+                  merchants:
+                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/merchants
+                  settlements:
+                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/settlements
+                  authorizations:
+                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/authorizations
+                  transfers:
+                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/transfers
+                  payment_instruments:
+                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/payment_instruments
+                  associated_identities:
+                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/associated_identities
+                  disputes:
+                    href: https://finix.sandbox-payments-api.com/identities/ID8v1JtSq1mVoQRcaAb3SWHQ/disputes
+                  application:
+                    href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorForbidden403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403ForbiddenList'
+    Error406NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406NotAcceptable'
+          examples: {}
+    ErrorNotFound:
+      description: Object does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFoundList'
+    ErrorUnauthorized:
+      description: Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    IdentitiesList:
+      description: List of Identity objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentitiesList'
+          examples:
+            List of Identities:
+              value:
+                _embedded:
+                  identities:
+                  - id: IDrNRsZ2miEQcmGHCpo4rBQr
+                    created_at: '2022-08-16T18:44:27.46Z'
+                    updated_at: '2022-08-16T18:44:27.46Z'
+                    application: APgPDQrLD52TYvqazjHJJchM
+                    entity:
+                      amex_mid: null
+                      annual_card_volume: 12000000
+                      business_address:
+                        line1: 741 Douglass St
+                        line2: Apartment 8
+                        city: San Mateo
+                        region: CA
+                        postal_code: '94114'
+                        country: USA
+                      business_name: Petes Coffee
+                      business_phone: +1 (408) 756-4497
+                      business_tax_id_provided: true
+                      business_type: INDIVIDUAL_SOLE_PROPRIETORSHIP
+                      default_statement_descriptor: Petes Coffee
+                      discover_mid: null
+                      dob:
+                        day: 27
+                        month: 6
+                        year: 1978
+                      doing_business_as: Petes Coffee
+                      email: user@example.org
+                      first_name: dwayne
+                      has_accepted_credit_cards_previously: true
+                      incorporation_date:
+                        day: 27
+                        month: 6
+                        year: 1978
+                      last_name: xbc
+                      max_transaction_amount: 12000000
+                      mcc: '4900'
+                      ownership_type: PRIVATE
+                      personal_address:
+                        line1: 741 Douglass St
+                        line2: Apartment 7
+                        city: San Mateo
+                        region: CA
+                        postal_code: '94114'
+                        country: USA
+                      phone: '14158885080'
+                      principal_percentage_ownership: 50
+                      short_business_name: null
+                      tax_authority: null
+                      tax_id_provided: true
+                      title: CEO
+                      url: www.PetesCoffee.com
+                    tags:
+                      test_key_103: test_val_103
+                    _links:
+                      self:
+                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr
+                      verifications:
+                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/verifications
+                      merchants:
+                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/merchants
+                      settlements:
+                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/settlements
+                      authorizations:
+                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/authorizations
+                      transfers:
+                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/transfers
+                      payment_instruments:
+                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/payment_instruments
+                      associated_identities:
+                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/associated_identities
+                      disputes:
+                        href: https://finix.sandbox-payments-api.com/identities/IDrNRsZ2miEQcmGHCpo4rBQr/disputes
+                      application:
+                        href: https://finix.sandbox-payments-api.com/applications/APgPDQrLD52TYvqazjHJJchM
+                _links:
+                  self:
+                    href: https://finix.sandbox-payments-api.com/identities/IDf33pdVaTZGXVFNccdKvaPu/associated_identities?offset=0&limit=20&sort=created_at,desc&sort=id,desc
+                page:
+                  offset: 0
+                  limit: 20
+                  count: 1
+      headers:
+        finix-apiuser-role:
+          $ref: '#/components/headers/finix-apiuser-role'
+        date:
+          $ref: '#/components/headers/date'
+        x-request-id:
+          $ref: '#/components/headers/x-request-id'
+    ErrorUnprocessableEntity:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorGeneric'
   requestBodies:
     UpdateIdentityRequest:
       content:
@@ -2261,32 +2261,6 @@ components:
                   first_name: John
                   last_name: Smith
                   phone: '7145677613'
-    CreateAssociatedIdentityRequest:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateAssociatedIdentityRequest'
-          examples:
-            Create an Associated Identity:
-              value:
-                entity:
-                  dob:
-                    day: 1
-                    month: 1
-                    year: 2013
-                  email: john.smith@company1.com
-                  first_name: John
-                  last_name: Smith
-                  personal_address:
-                    city: San Francisco
-                    country: USA
-                    line1: 123 Main Street
-                    postal_code: '90650'
-                    region: CA
-                  phone: '14158885080'
-                  principal_percentage_ownership: 25
-                  tax_id: '123456789'
-                  title: Founder
     CreateIdentityRequest:
       content:
         application/json:
@@ -2381,6 +2355,32 @@ components:
                 tags:
                   key: value
       description: ''
+    CreateAssociatedIdentityRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateAssociatedIdentityRequest'
+          examples:
+            Create an Associated Identity:
+              value:
+                entity:
+                  dob:
+                    day: 1
+                    month: 1
+                    year: 2013
+                  email: john.smith@company1.com
+                  first_name: John
+                  last_name: Smith
+                  personal_address:
+                    city: San Francisco
+                    country: USA
+                    line1: 123 Main Street
+                    postal_code: '90650'
+                    region: CA
+                  phone: '14158885080'
+                  principal_percentage_ownership: 25
+                  tax_id: '123456789'
+                  title: Founder
   securitySchemes:
     BasicAuth:
       type: http
